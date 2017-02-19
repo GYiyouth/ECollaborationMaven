@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - ECollaborationWeb@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="ECollaborationWeb">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="Alliance"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="performance_schema"/>
+    <schema id="6" name="sampledb"/>
+    <schema id="7" name="sys"/>
+    <schema id="8" name="TestDB"/>
+    <table id="9" parent="1" name="application"/>
+    <table id="10" parent="1" name="code"/>
+    <table id="11" parent="1" name="ecfile"/>
+    <table id="12" parent="1" name="manager"/>
+    <table id="13" parent="1" name="message"/>
+    <table id="14" parent="1" name="message_receiver"/>
+    <table id="15" parent="1" name="notice"/>
+    <table id="16" parent="1" name="notice_receiver"/>
+    <table id="17" parent="1" name="plan"/>
+    <table id="18" parent="1" name="project">
+      <comment>??????&#xd;
+ ????&#xd;
+ ????&#xd;
+&#xd;
+ ??????????????????????????????????????&#xd;
+&#xd;
+?????????????&#xd;
+????  ????????????????&#xd;
+</comment>
+    </table>
+    <table id="19" parent="1" name="project_task"/>
+    <table id="20" parent="1" name="student"/>
+    <table id="21" parent="1" name="student_team"/>
+    <table id="22" parent="1" name="student_team_project_file"/>
+    <table id="23" parent="1" name="student_team_project_plan"/>
+    <table id="24" parent="1" name="task"/>
+    <table id="25" parent="1" name="teacher"/>
+    <table id="26" parent="1" name="teacher_project"/>
+    <table id="27" parent="1" name="team"/>
+    <table id="28" parent="1" name="team_project"/>
+    <table id="29" parent="1" name="team_project_access"/>
+    <table id="30" parent="1" name="user"/>
+    <column id="31" parent="9" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="32" parent="9" name="type">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="33" parent="9" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="34" parent="9" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="35" parent="9" name="handlerId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="36" parent="9" name="affectedId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="37" parent="9" name="createdTime">
+      <data-type>time|0</data-type>
+    </column>
+    <column id="38" parent="9" name="handleTime">
+      <data-type>time|0</data-type>
+    </column>
+    <column id="39" parent="9" name="result">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="40" parent="9" name="messageId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="41" parent="9" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="42" parent="10" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="43" parent="10" name="fileName">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="44" parent="10" name="codeRows">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="45" parent="10" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="46" parent="10" name="deadDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="47" parent="10" name="downLoadTimes">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="48" parent="10" name="studentId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="49" parent="10" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="50" parent="10" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="51" parent="10" name="path">
+      <comment>后期迭代吧  没讨论出到底需要不需要</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="52" parent="10" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="53" parent="11" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="54" parent="11" name="fileName">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="55" parent="11" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="56" parent="11" name="deadDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="57" parent="11" name="downLoadTimes">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="58" parent="11" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="59" parent="11" name="path">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="60" parent="11" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="61" parent="12" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="62" parent="12" name="mRole">
+      <comment>0:超级管理员</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="63" parent="12" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="64" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="65" parent="13" name="title">
+      <comment>标题</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="66" parent="13" name="content">
+      <comment>内容</comment>
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="67" parent="13" name="createTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="68" parent="13" name="senderId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="69" parent="13" name="readFlag">
+      <comment>针对发件人 类似手机的传达</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="70" parent="13" name="deadDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="71" parent="13" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="72" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="73" parent="14" name="messageId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="74" parent="14" name="receiverId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="75" parent="14" name="readFlag">
+      <comment>针对收件人</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="76" parent="14" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <trigger id="77" parent="14" name="t_afterinsert_on_message_receiver">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <trigger id="78" parent="14" name="t_afterupdate_on_message_receiver">
+      <trig-events>U</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="79" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="80" parent="15" name="title">
+      <comment>标题</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="81" parent="15" name="content">
+      <comment>内容</comment>
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="82" parent="15" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="83" parent="15" name="publishId">
+      <comment>上传者id</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="84" parent="15" name="createTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="85" parent="15" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="86" parent="16" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="87" parent="16" name="noticeId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="88" parent="16" name="receiverId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="89" parent="16" name="readFlag">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="90" parent="16" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="91" parent="17" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="92" parent="17" name="title">
+      <comment>标题</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="93" parent="17" name="content">
+      <comment>内容</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="94" parent="17" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="95" parent="17" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="96" parent="17" name="finishDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="97" parent="17" name="beginDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="98" parent="17" name="targetDate">
+      <comment>目标完成时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="99" parent="17" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="100" parent="18" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="101" parent="18" name="name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="102" parent="18" name="applyBeforeDate">
+      <comment>选题截止时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="103" parent="18" name="finishDate">
+      <comment>项目完成时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="104" parent="18" name="survivalDate">
+      <comment>存货时间-针对学生自建项目没人选的话删除时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="105" parent="18" name="teamNumber">
+      <comment>当前多少个队在做</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="106" parent="18" name="teamMax">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="107" parent="18" name="memberMax">
+      <comment>小队人数上限</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="108" parent="18" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="109" parent="18" name="grade">
+      <comment>年份</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="110" parent="18" name="keyWord">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="111" parent="18" name="info">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="112" parent="18" name="requirement">
+      <comment>要求技能</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="113" parent="18" name="gain">
+      <comment>获得技能</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="114" parent="18" name="priority">
+      <comment>区分是那种项目 0：工程实践 1：个人兴趣 2比赛</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="115" parent="18" name="status">
+      <comment>状态 0：失效 1：申请 2：执行 3：完成</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="116" parent="18" name="creatorId">
+      <data-type>int(255)|0</data-type>
+    </column>
+    <column id="117" parent="18" name="teacherId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="118" parent="18" name="teacherId">
+      <columns>teacherId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="119" parent="18" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="120" parent="18" name="project_ibfk_1">
+      <columns>teacherId</columns>
+      <ref-key>~.teacher.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="121" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="122" parent="19" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="123" parent="19" name="taskId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="124" parent="19" name="planId">
+      <columns>taskId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="125" parent="19" name="projectId">
+      <columns>projectId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="126" parent="19" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="127" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="128" parent="20" name="grade">
+      <comment>年级</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="129" parent="20" name="isOnProject">
+      <comment>1:在做 0:没做</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="130" parent="20" name="isNeedProject">
+      <comment>1：需要 0：不需要</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="131" parent="20" name="graduatedSchool">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="132" parent="20" name="tecKeyWord">
+      <comment>技术关键词 前台</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="133" parent="20" name="homePageUrl">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="134" parent="20" name="codeScore1">
+      <comment>上半学期分数</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="135" parent="20" name="codeScore2">
+      <comment>下半学期的分数</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="136" parent="20" name="presentationScore">
+      <comment>表现分</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="137" parent="20" name="finalScore">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="138" parent="20" name="id_UNIQUE">
+      <columns>id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="139" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="140" parent="20" name="id_UNIQUE">
+      <columns>id</columns>
+      <underlying-index>id_UNIQUE</underlying-index>
+    </key>
+    <column id="141" parent="21" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="142" parent="21" name="studentId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="143" parent="21" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="144" parent="21" name="leaderFlag">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="145" parent="21" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="146" parent="22" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="147" parent="22" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="148" parent="22" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="149" parent="22" name="fileId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="150" parent="22" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="151" parent="22" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="152" parent="23" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="153" parent="23" name="studentId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="154" parent="23" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="155" parent="23" name="planId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="156" parent="23" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="157" parent="23" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="158" parent="24" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="159" parent="24" name="title">
+      <comment>??</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="160" parent="24" name="content">
+      <comment>??</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="161" parent="24" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="162" parent="24" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="163" parent="24" name="modifyDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="164" parent="24" name="beginDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="165" parent="24" name="targetDate">
+      <comment>目标时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="166" parent="24" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="167" parent="25" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="168" parent="25" name="homePageUrl">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="169" parent="25" name="needStudentsFlag">
+      <comment>1:需要</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="170" parent="25" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="171" parent="26" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="172" parent="26" name="teacherId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="173" parent="26" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="174" parent="26" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="175" parent="27" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="176" parent="27" name="teamName">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="177" parent="27" name="creatorId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="178" parent="27" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="179" parent="27" name="memberMax">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="180" parent="27" name="description">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="181" parent="27" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="182" parent="28" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="183" parent="28" name="teamId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="184" parent="28" name="projectId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="185" parent="28" name="showUrl">
+      <comment>????</comment>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="186" parent="28" name="score">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="187" parent="28" name="applyFlag">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="188" parent="28" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="189" parent="29" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="190" parent="29" name="team_project_id">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="191" parent="29" name="taskId">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="192" parent="29" name="access">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="193" parent="29" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="194" parent="30" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(32)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="195" parent="30" name="schoolId">
+      <comment>学工号</comment>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="196" parent="30" name="name">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="197" parent="30" name="sex">
+      <comment>1：男</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="198" parent="30" name="role">
+      <comment>1.管理员 2.老师 3.学生</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="199" parent="30" name="email">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="200" parent="30" name="phoneNumber">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="201" parent="30" name="logName">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="202" parent="30" name="passWord">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="203" parent="30" name="createDate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="204" parent="30" name="photo">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="205" parent="30" name="lastLogTime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="206" parent="30" name="activeBefore">
+      <comment>有效期</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="207" parent="30" name="newsFlag">
+      <comment>1：有未读消息</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <key id="208" parent="30" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
