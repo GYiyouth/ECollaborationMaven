@@ -1,0 +1,35 @@
+2017/02/19
+项目重启
+
+葛尧：
+    配置完VO的domain层，以后，第一次部署，hibernate做了如下的事儿
+    Hibernate: alter table application add column handledTime varchar(255)
+    Hibernate: alter table code add column codeName varchar(255)
+    Hibernate: alter table code add column row integer
+    Hibernate: alter table code add column score integer
+    Hibernate: alter table user add column newFlag integer not null
+    Hibernate: alter table application add constraint FKk4id1rehqpdn878e8u29um1gd foreign key (affectedId) references user (id)
+    Hibernate: alter table application add constraint FKoelm617iuji4r0hsq0rppmk6x foreign key (handlerId) references user (id)
+    Hibernate: alter table application add constraint FKqgsjmywdw9r374opr6e7j2qiy foreign key (projectId) references project (id)
+    Hibernate: alter table application add constraint FKlfr6mf7sc29ds2kfinvhg4tbo foreign key (teamId) references team (id)
+    Hibernate: alter table code add constraint FK2yugv58ncb7r0msvfu9onq8yy foreign key (projectId) references project (id)
+    Hibernate: alter table code add constraint FKeohm1lcf3c9ce50muhms0bfl6 foreign key (studentId) references student (id)
+    Hibernate: alter table code add constraint FK1p4j4mr22qgseeepsoct4tfgd foreign key (teamId) references team (id)
+    Hibernate: alter table manager add constraint FK31laakchgoo3qohp4cqgcgada foreign key (id) references user (id)
+    Hibernate: alter table message add constraint FKtftdnurlvl7cb91bmxt1lcxy2 foreign key (senderId) references user (id)
+    Hibernate: alter table notice add constraint FK1xgxorjc9ygrqy5y6oh4a87vd foreign key (creatorId) references user (id)
+    Hibernate: alter table notice add constraint FK6j85pykynnamxympycw2cefvc foreign key (publishId) references user (id)
+    Hibernate: alter table plan add constraint FK18qpk30w4ljueeaupdyna8u47 foreign key (creatorId) references student (id)
+    Hibernate: alter table project add constraint FK5jmm1qh8iv6bijat9efglwefv foreign key (creatorId) references user (id)
+    Hibernate: alter table project add constraint FK9jc7rps8ilfym0emytqqi1ldg foreign key (teacherId) references teacher (id)
+    Hibernate: alter table student add constraint FKqytew32213tbnj8u0er377k3q foreign key (id) references user (id)
+    Hibernate: alter table task add constraint FKnhshs3ns6p7h8dyj9o1e92eds foreign key (creatorId) references teacher (id)
+    Hibernate: alter table teacher add constraint FKlicv62vmu1ydw117bbxqhkof1 foreign key (id) references user (id)
+    Hibernate: alter table team add constraint FK156gyagdumedo0io0ndbdhivv foreign key (creatorId) references student (id)
+    Hibernate: alter table code add constraint FKeohm1lcf3c9ce50muhms0bfl6 foreign key (studentId) references student (id)
+    Hibernate: alter table manager add constraint FK31laakchgoo3qohp4cqgcgada foreign key (id) references user (id)
+    Hibernate: alter table message add constraint FKtftdnurlvl7cb91bmxt1lcxy2 foreign key (senderId) references user (id)
+    Hibernate: alter table student add constraint FKqytew32213tbnj8u0er377k3q foreign key (id) references user (id)
+    Hibernate: alter table task add constraint FKnhshs3ns6p7h8dyj9o1e92eds foreign key (creatorId) references teacher (id)
+    Hibernate: alter table team add constraint FK156gyagdumedo0io0ndbdhivv foreign key (creatorId) references student (id)
+    完成了domian的VO的持久化配置，加了一堆外键，我把所有的外键的约束关系，都改成了 级联

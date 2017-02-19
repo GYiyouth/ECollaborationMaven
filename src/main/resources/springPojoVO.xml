@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="applicationVO" class="pojo.valueObject.domain.ApplicationVO">
+        <property name="teamVO" ref="teamVO"/>
+        <property name="projectVO" ref="projectVO"/>
+        <property name="handlerUserVO" ref="userVO"/>
+        <property name="affectedUserVO" ref="userVO"/>
+    </bean>
+    <bean id="codeVO" class="pojo.valueObject.domain.CodeVO">
+        <property name="projectVO" ref="projectVO"/>
+        <property name="teamVO" ref="teamVO"/>
+    </bean>
+    <bean id="ecFileVO" class="pojo.valueObject.domain.ECFileVO">
+        <property name="creatorUserVO" ref="userVO"/>
+    </bean>
+    <bean id="managerVO" class="pojo.valueObject.domain.ManagerVO"/>
+    <bean id="messageVO" class="pojo.valueObject.domain.MessageVO"/>
+    <bean id="noticeVO" class="pojo.valueObject.domain.NoticeVO">
+        <property name="creatorUserVO" ref="userVO"/>
+        <property name="publishUserVO" ref="userVO"/>
+    </bean>
+    <bean id="planVO" class="pojo.valueObject.domain.PlanVO">
+        <property name="studentVO" ref="studentVO"/>
+    </bean>
+    <bean id="projectVO" class="pojo.valueObject.domain.ProjectVO">
+        <property name="creatorUserVO" ref="userVO"/>
+        <property name="teacherVO" ref="teacherVO"/>
+    </bean>
+    <bean id="studentVO" class="pojo.valueObject.domain.StudentVO"/>
+    <bean id="taskVO" class="pojo.valueObject.domain.TaskVO">
+        <property name="creatorTeacherVO" ref="teacherVO"/>
+    </bean>
+    <bean id="teacherVO" class="pojo.valueObject.domain.TeacherVO"/>
+    <bean id="teamVO" class="pojo.valueObject.domain.TeamVO">
+        <property name="creatorStudentVO" ref="studentVO"/>
+    </bean>
+    <bean id="userVO" class="pojo.valueObject.domain.UserVO"/>
+
+</beans>
