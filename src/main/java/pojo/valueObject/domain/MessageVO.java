@@ -2,10 +2,12 @@ package pojo.valueObject.domain;
 
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+import pojo.valueObject.assist.MessageReceiverVO;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "message")
@@ -23,8 +25,14 @@ public class MessageVO {
 
     private Integer readFlag;//是否收件人都阅读了
     private String deadDate;
-
-
+    //这里如果加上了@Cascade(CascadeType.ALL) 那么添加消息的时候会多出一些垃圾记录，在user表中
+    @ManyToMany(targetEntity = UserVO.class)
+    @JoinTable(name = "message_receiver",
+        joinColumns = @JoinColumn(name = "messageId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "receiverId", referencedColumnName = "id")
+    )
+    @Cascade(CascadeType.ALL)
+    private Set<UserVO> receiverUserVOSet;
 
     public MessageVO() {
         super();
@@ -37,10 +45,27 @@ public class MessageVO {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime='" + createTime + '\'' +
-                ", senderUserVO=" + senderUserVO +
+                ", senderUserVO=" + senderUserVO.getId() +
                 ", readFlag=" + readFlag +
                 ", deadDate='" + deadDate + '\'' +
+                ", receiverUserVOSet=" + receiverUserVOSet +
                 '}';
+    }
+
+    public UserVO getSenderUserVO() {
+        return senderUserVO;
+    }
+
+    public void setSenderUserVO(UserVO senderUserVO) {
+        this.senderUserVO = senderUserVO;
+    }
+
+    public Set<UserVO> getReceiverUserVOSetSet() {
+        return receiverUserVOSet;
+    }
+
+    public void setReceiverUserVOSetSet(Set<UserVO> userVOSet) {
+        this.receiverUserVOSet = userVOSet;
     }
 
     public Integer getId() {

@@ -34,6 +34,12 @@
                 <value>pojo.valueObject.domain.TeamVO</value>
                 <value>pojo.valueObject.domain.UserVO</value>
                 <value>pojo.valueObject.domain.Test</value>
+
+                <value>pojo.valueObject.assist.MessageReceiverVO</value>
+                <value>pojo.valueObject.assist.NoticeReceiverVO</value>
+                <value>pojo.valueObject.assist.StudentTeamProjectFileVO</value>
+                <value>pojo.valueObject.assist.StudentTeamProjectPlanVO</value>
+                <value>pojo.valueObject.assist.StudentTeamVO</value>
             </list>
         </property>
         <property name="hibernateProperties">

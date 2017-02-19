@@ -6,18 +6,18 @@ import javax.persistence.*;
  * Created by geyao on 2017/2/19.
  */
 @Entity
-@Table(name = "student_team_project_plan")
-public class StudentTeamProjectPlanVO {
+@Table(name = "student_team_project_file")
+public class StudentTeamProjectFileVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public StudentTeamProjectPlanVO() {
+    public StudentTeamProjectFileVO() {
     }
 
     @Override
     public String toString() {
-        return "StudentTeamProjectPlanVO{" +
+        return "StudentTeamProjectFileVO{" +
                 "id=" + id +
                 '}';
     }

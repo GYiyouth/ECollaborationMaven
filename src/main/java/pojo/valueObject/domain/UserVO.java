@@ -1,6 +1,9 @@
 package pojo.valueObject.domain;
 
+import pojo.valueObject.assist.MessageReceiverVO;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -22,6 +25,14 @@ public class UserVO {
     private String lastLogTime;
     private String activeBefore;
     private int newFlag;
+    // toString needed
+    @ManyToMany(targetEntity = MessageVO.class)
+    @JoinTable(name = "message_receiver",
+            joinColumns = @JoinColumn(name = "receiverId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "messageId", referencedColumnName = "id")
+    )
+    private Set<MessageVO> messageVOSet;
+
 
     public UserVO() {
         super();
@@ -45,6 +56,14 @@ public class UserVO {
                 ", activeBefore='" + activeBefore + '\'' +
                 ", newFlag=" + newFlag +
                 '}';
+    }
+
+    public Set<MessageVO> getMessageVOSet() {
+        return messageVOSet;
+    }
+
+    public void setMessageVOSet(Set<MessageVO> messageVOSet) {
+        this.messageVOSet = messageVOSet;
     }
 
     public Integer getId() {

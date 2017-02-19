@@ -3,48 +3,55 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--domian层的主要VO们-->
-    <bean id="applicationVO" class="pojo.valueObject.domain.ApplicationVO">
+    <!--domain层的主要VO们-->
+    <bean id="applicationVO" class="pojo.valueObject.domain.ApplicationVO" scope="prototype">
         <property name="teamVO" ref="teamVO"/>
         <property name="projectVO" ref="projectVO"/>
         <property name="handlerUserVO" ref="userVO"/>
         <property name="affectedUserVO" ref="userVO"/>
     </bean>
 
-    <bean id="codeVO" class="pojo.valueObject.domain.CodeVO">
+    <bean id="codeVO" class="pojo.valueObject.domain.CodeVO" scope="prototype">
         <property name="projectVO" ref="projectVO"/>
         <property name="teamVO" ref="teamVO"/>
     </bean>
 
-    <bean id="ecFileVO" class="pojo.valueObject.domain.ECFileVO">
+    <bean id="ecFileVO" class="pojo.valueObject.domain.ECFileVO" scope="prototype">
         <property name="creatorUserVO" ref="userVO"/>
     </bean>
 
-    <bean id="managerVO" class="pojo.valueObject.domain.ManagerVO"/>
+    <bean id="managerVO" class="pojo.valueObject.domain.ManagerVO" scope="prototype"/>
 
-    <bean id="messageVO" class="pojo.valueObject.domain.MessageVO"/>
+    <bean id="messageVO" class="pojo.valueObject.domain.MessageVO" scope="prototype">
+        <property name="senderUserVO" ref="userVO"/>
+        <property name="receiverUserVOSetSet">
+            <set>
+                <!--<ref bean="userVO"/>-->
+            </set>
+        </property>
+    </bean>
 
-    <bean id="noticeVO" class="pojo.valueObject.domain.NoticeVO">
+    <bean id="noticeVO" class="pojo.valueObject.domain.NoticeVO" scope="prototype">
         <property name="creatorUserVO" ref="userVO"/>
         <property name="publishUserVO" ref="userVO"/>
     </bean>
 
-    <bean id="planVO" class="pojo.valueObject.domain.PlanVO">
+    <bean id="planVO" class="pojo.valueObject.domain.PlanVO" scope="prototype">
         <property name="studentVO" ref="studentVO"/>
     </bean>
 
-    <bean id="projectVO" class="pojo.valueObject.domain.ProjectVO">
+    <bean id="projectVO" class="pojo.valueObject.domain.ProjectVO" scope="prototype">
         <property name="creatorUserVO" ref="userVO"/>
         <property name="teacherVO" ref="teacherVO"/>
     </bean>
 
-    <bean id="studentVO" class="pojo.valueObject.domain.StudentVO"/>
+    <bean id="studentVO" class="pojo.valueObject.domain.StudentVO" scope="prototype"/>
 
-    <bean id="taskVO" class="pojo.valueObject.domain.TaskVO">
+    <bean id="taskVO" class="pojo.valueObject.domain.TaskVO" scope="prototype">
         <property name="creatorTeacherVO" ref="teacherVO"/>
     </bean>
 
-    <bean id="teacherVO" class="pojo.valueObject.domain.TeacherVO">
+    <bean id="teacherVO" class="pojo.valueObject.domain.TeacherVO" scope="prototype">
         <property name="projectVOSet">
             <set>
                 <ref bean="projectVO"/>
@@ -52,14 +59,42 @@
         </property>
     </bean>
 
-    <bean id="teamVO" class="pojo.valueObject.domain.TeamVO">
+    <bean id="teamVO" class="pojo.valueObject.domain.TeamVO" scope="prototype">
         <property name="creatorStudentVO" ref="studentVO"/>
     </bean>
 
-    <bean id="userVO" class="pojo.valueObject.domain.UserVO"/>
+    <bean id="userVO" class="pojo.valueObject.domain.UserVO" scope="prototype">
+        <property name="messageVOSet">
+            <set>
+
+            </set>
+        </property>
+    </bean>
 
     <bean id="test" class="pojo.valueObject.domain.Test">
         <property name="studentVO" ref="studentVO"/>
     </bean>
 
+
+    <!--assist层的VO们-->
+    <bean id="messageReceiver" class="pojo.valueObject.assist.MessageReceiverVO" scope="prototype">
+        <property name="messageVO" ref="messageVO"/>
+        <property name="receiverUserVO" ref="userVO"/>
+    </bean>
+
+    <bean id="noticeReceiverVO" class="pojo.valueObject.assist.NoticeReceiverVO" scope="prototype">
+
+    </bean>
+
+    <bean id="studentTeamProjectFileVO" class="pojo.valueObject.assist.StudentTeamProjectFileVO" scope="prototype">
+
+    </bean>
+
+    <bean id="studentTeamProjectPlanVO" class="pojo.valueObject.assist.StudentTeamProjectPlanVO" scope="prototype">
+
+    </bean>
+
+    <bean id="studentTeamVO" class="pojo.valueObject.assist.StudentTeamVO" scope="prototype">
+
+    </bean>
 </beans>

@@ -34,6 +34,12 @@
     Hibernate: alter table team add constraint FK156gyagdumedo0io0ndbdhivv foreign key (creatorId) references student (id)
     完成了domian的VO的持久化配置，加了一堆外键，我把所有的外键的约束关系，都改成了 级联
 
-    message_receiver表的readFlag被我改成了boolean类型
+    message_receiver表的readFlag被我改成了boolean类型，默认是FALSE
+    message和receiver的关系做成双向N-N，关系实体再ManyToOne分别映射到这两个实体上，注意spring配置里，set那里要放空
+        不然会产生循环依赖。
+    目前所有的bean均为scope="prototype"
     删除了teacher_project这张表，总结一下级联，顶层类的删除会影响下层类，任意层非主键的修改会影响其他层。
+    teacher和project的关系改造完成
+
+    student_Team这个表可以把leaderFlag去掉，这样就可以做成纯粹的双向N-N关系表
 
