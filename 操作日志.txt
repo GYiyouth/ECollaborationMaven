@@ -35,4 +35,5 @@
     完成了domian的VO的持久化配置，加了一堆外键，我把所有的外键的约束关系，都改成了 级联
 
     message_receiver表的readFlag被我改成了boolean类型
-    删除了teacher_project这张表
+    删除了teacher_project这张表，总结一下级联，顶层类的删除会影响下层类，任意层非主键的修改会影响其他层。
+
