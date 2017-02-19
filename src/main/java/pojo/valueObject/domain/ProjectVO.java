@@ -33,12 +33,12 @@ public class ProjectVO {
 	private Integer priority = null;
 	private Integer status = null;
     @ManyToOne(targetEntity = UserVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
 	private UserVO creatorUserVO;
+
 	@ManyToOne(targetEntity = TeacherVO.class)
-    @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "teacherId", referencedColumnName = "id")
+    @JoinColumn(name = "teacherId",
+        referencedColumnName = "id")
 	private TeacherVO teacherVO;
 
 	public ProjectVO(){
@@ -64,10 +64,12 @@ public class ProjectVO {
                 ", gain='" + gain + '\'' +
                 ", priority=" + priority +
                 ", status=" + status +
-                ", creatorUserVO=" + creatorUserVO +
-                ", teacherVO=" + teacherVO +
+                ", creatorUserVO=" + creatorUserVO.getId() +
+                ", teacherVO=" + teacherVO.getId() +
                 '}';
     }
+
+
 
     public UserVO getCreatorUserVO() {
         return creatorUserVO;

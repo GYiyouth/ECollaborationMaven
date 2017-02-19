@@ -1,7 +1,7 @@
 package pojo.valueObject.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "teacher")
@@ -9,6 +9,10 @@ public class TeacherVO extends UserVO {
 
 	private String homePageUrl = null;
 	private Integer needStudentsFlag = null;
+
+	@OneToMany(targetEntity = ProjectVO.class,
+        mappedBy = "teacherVO")
+    private Set<ProjectVO> projectVOSet;
 
     public TeacherVO() {
         super();
@@ -20,7 +24,16 @@ public class TeacherVO extends UserVO {
         return "TeacherVO{" +
                 "homePageUrl='" + homePageUrl + '\'' +
                 ", needStudentsFlag=" + needStudentsFlag +
+                ", projectVOSet=" + projectVOSet +
                 '}';
+    }
+
+    public Set<ProjectVO> getProjectVOSet() {
+        return projectVOSet;
+    }
+
+    public void setProjectVOSet(Set<ProjectVO> projectVOSet) {
+        this.projectVOSet = projectVOSet;
     }
 
     public String getHomePageUrl() {

@@ -33,3 +33,6 @@
     Hibernate: alter table task add constraint FKnhshs3ns6p7h8dyj9o1e92eds foreign key (creatorId) references teacher (id)
     Hibernate: alter table team add constraint FK156gyagdumedo0io0ndbdhivv foreign key (creatorId) references student (id)
     完成了domian的VO的持久化配置，加了一堆外键，我把所有的外键的约束关系，都改成了 级联
+
+    message_receiver表的readFlag被我改成了boolean类型
+    删除了teacher_project这张表

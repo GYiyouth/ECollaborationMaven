@@ -20,7 +20,6 @@
         <!--annotatedClass用来列出所有的持久化类-->
         <property name="annotatedClasses">
             <list>
-
                 <value>pojo.valueObject.domain.ApplicationVO</value>
                 <value>pojo.valueObject.domain.CodeVO</value>
                 <value>pojo.valueObject.domain.ECFileVO</value>
@@ -34,6 +33,7 @@
                 <value>pojo.valueObject.domain.TeacherVO</value>
                 <value>pojo.valueObject.domain.TeamVO</value>
                 <value>pojo.valueObject.domain.UserVO</value>
+                <value>pojo.valueObject.domain.Test</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -47,8 +47,5 @@
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
-
     </bean>
-
-
 </beans>

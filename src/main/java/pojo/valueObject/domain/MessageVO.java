@@ -25,6 +25,7 @@ public class MessageVO {
     private String deadDate;
 
 
+
     public MessageVO() {
         super();
     }
