@@ -21,19 +21,19 @@ public class Test {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
 
-        //我取1号老师，新建一个任务，然后加给项目123
-        TeacherVO teacherVO = session.get(TeacherVO.class, 1);
-        TaskVO taskVO = context.getBean("taskVO", TaskVO.class);
-        taskVO.setTitle("testTask");
-        taskVO.setContent("我取1号老师，新建一个任务，然后加给项目123");
-        taskVO.setCreatorTeacherVO(teacherVO);
+        //我用2号学生新建一个team，然后让这个team承接第1，2号project
+
+        StudentVO userVO = session.get(StudentVO.class, 2);
+        TeamVO teamVO = context.getBean("teamVO", TeamVO.class);
+        teamVO.setCreatorStudentVO(userVO);
         ProjectVO projectVO1 = session.get(ProjectVO.class, 1);
         ProjectVO projectVO2 = session.get(ProjectVO.class, 2);
-        ProjectVO projectVO3 = session.get(ProjectVO.class, 3);
-        taskVO.getProjectVOSet().add(projectVO1);
-        taskVO.getProjectVOSet().add(projectVO2);
-        taskVO.getProjectVOSet().add(projectVO3);
-        session.save(taskVO);
+
+        teamVO.getProjectVOSet().add(projectVO1);
+        teamVO.getProjectVOSet().add(projectVO2);
+
+        session.save(teamVO);
+        //通过测试
         transaction.commit();
         session.close();
         sf.close();

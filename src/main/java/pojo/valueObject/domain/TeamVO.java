@@ -6,6 +6,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
 /**
  * 团队bean
@@ -26,6 +27,13 @@ public class TeamVO {
 	private Integer memberMax;
 	private String description;
 
+    @ManyToMany(targetEntity = ProjectVO.class)
+    @JoinTable(name = "team_project",
+            joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id")
+    )
+    private Set<ProjectVO> projectVOSet;
+
     public TeamVO() {
         super();
     }
@@ -40,6 +48,14 @@ public class TeamVO {
                 ", memberMax=" + memberMax +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public Set<ProjectVO> getProjectVOSet() {
+        return projectVOSet;
+    }
+
+    public void setProjectVOSet(Set<ProjectVO> projectVOSet) {
+        this.projectVOSet = projectVOSet;
     }
 
     public Integer getMemberMax() {

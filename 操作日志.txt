@@ -45,5 +45,7 @@
     teacher和project的关系改造完成
     project与task的设计，只能是单端映射，task依赖于project，不然的话就会发生循环依赖：project-task-teacher-project
         注意，task从spring context拿取后，一定要指明创建老师，不然存储的时候会向user表，teacher 表插入空白记录
-    student_Team这个表可以把leaderFlag去掉，这样就可以做成纯粹的双向N-N关系表
+    team与project双向N-N映射完成。但这个关系表还是要实例化
+
+
 

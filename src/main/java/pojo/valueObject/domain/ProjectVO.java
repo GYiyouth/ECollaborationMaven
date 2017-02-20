@@ -6,6 +6,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
 /**
  * Created by geyao on 2016/11/7.
@@ -41,6 +42,14 @@ public class ProjectVO {
         referencedColumnName = "id")
 	private TeacherVO teacherVO;
 
+    @ManyToMany(targetEntity = TeamVO.class)
+    @JoinTable(name = "team_project",
+            joinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id")
+    )
+    private Set<TeamVO> teamVOSet;
+
+
 	public ProjectVO(){
 		super();
 	}
@@ -69,7 +78,13 @@ public class ProjectVO {
                 '}';
     }
 
+    public Set<TeamVO> getTeamVOSet() {
+        return teamVOSet;
+    }
 
+    public void setTeamVOSet(Set<TeamVO> teamVOSet) {
+        this.teamVOSet = teamVOSet;
+    }
 
     public UserVO getCreatorUserVO() {
         return creatorUserVO;
