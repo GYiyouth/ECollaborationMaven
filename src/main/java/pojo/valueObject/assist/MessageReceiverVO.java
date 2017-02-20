@@ -27,13 +27,13 @@ public class MessageReceiverVO {
     @ManyToOne(targetEntity = MessageVO.class)
     @JoinColumn(name = "messageId",
         referencedColumnName = "id")
-
+    @Cascade(CascadeType.ALL)
     private MessageVO messageVO;
 
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "receiverId",
         referencedColumnName = "id")
-
+    @Cascade(CascadeType.ALL)
     private UserVO receiverUserVO;
 
     private boolean readFlag;

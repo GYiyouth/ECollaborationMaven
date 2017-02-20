@@ -4,6 +4,7 @@ import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pojo.valueObject.assist.MessageReceiverVO;
+import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
 
 import java.util.List;
@@ -21,18 +22,11 @@ public class Test {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
 
-        //我用2号学生新建一个team，然后让这个team承接第1，2号project
+        //从team和project的关系表拿取数据，打印，然后修改38号团队的名字
 
-        StudentVO userVO = session.get(StudentVO.class, 2);
-        TeamVO teamVO = context.getBean("teamVO", TeamVO.class);
-        teamVO.setCreatorStudentVO(userVO);
-        ProjectVO projectVO1 = session.get(ProjectVO.class, 1);
-        ProjectVO projectVO2 = session.get(ProjectVO.class, 2);
-
-        teamVO.getProjectVOSet().add(projectVO1);
-        teamVO.getProjectVOSet().add(projectVO2);
-
-        session.save(teamVO);
+        TeamProjectVO teamProjectVO = session.get(TeamProjectVO.class, 1);
+        session.persist(teamProjectVO);
+        teamProjectVO.getTeamVO().setTeamName("第38号啦的三反五反");
         //通过测试
         transaction.commit();
         session.close();

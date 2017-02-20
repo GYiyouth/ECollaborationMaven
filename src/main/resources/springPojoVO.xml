@@ -87,8 +87,9 @@
         <property name="receiverUserVO" ref="userVO"/>
     </bean>
 
-    <bean id="noticeReceiverVO" class="pojo.valueObject.assist.NoticeReceiverVO" scope="prototype">
-
+    <bean id="teamProjectVO" class="pojo.valueObject.assist.TeamProjectVO" scope="prototype">
+        <property name="projectVO" ref="projectVO"/>
+        <property name="teamVO" ref="teamVO"/>
     </bean>
 
     <bean id="studentTeamProjectFileVO" class="pojo.valueObject.assist.StudentTeamProjectFileVO" scope="prototype">

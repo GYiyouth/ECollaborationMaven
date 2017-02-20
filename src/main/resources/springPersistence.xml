@@ -7,7 +7,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close"
           p:driverClass="com.mysql.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/ECollaborationWeb?useSSL=false"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/ECollaborationWeb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
           p:user="root"
           p:password="686995"
           p:maxPoolSize="40"
@@ -36,10 +36,10 @@
                 <value>pojo.valueObject.domain.Test</value>
 
                 <value>pojo.valueObject.assist.MessageReceiverVO</value>
-                <value>pojo.valueObject.assist.NoticeReceiverVO</value>
                 <value>pojo.valueObject.assist.StudentTeamProjectFileVO</value>
                 <value>pojo.valueObject.assist.StudentTeamProjectPlanVO</value>
                 <value>pojo.valueObject.assist.StudentTeamVO</value>
+                <value>pojo.valueObject.assist.TeamProjectVO</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -53,5 +53,6 @@
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
+        
     </bean>
 </beans>

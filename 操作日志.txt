@@ -46,6 +46,8 @@
     project与task的设计，只能是单端映射，task依赖于project，不然的话就会发生循环依赖：project-task-teacher-project
         注意，task从spring context拿取后，一定要指明创建老师，不然存储的时候会向user表，teacher 表插入空白记录
     team与project双向N-N映射完成。但这个关系表还是要实例化
+        关系表实例化完成
+    原本没有配置utf-8，后来在链接后面加上 &amp;useUnicode=true&amp;characterEncoding=UTF-8 完成
 
 
 
