@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Created by GR on 2016/12/5.
+ *
+ * Created by geyao on 2017/02/18.
  */
 @Entity
 @Table(name = "notice")

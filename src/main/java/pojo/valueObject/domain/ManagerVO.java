@@ -3,6 +3,9 @@ package pojo.valueObject.domain;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * Created by geyao on 2017/02/18.
+ */
 @Entity
 @Table(name = "manager")
 public class ManagerVO extends UserVO {

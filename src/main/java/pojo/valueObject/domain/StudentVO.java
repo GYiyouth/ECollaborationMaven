@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Created by GR on 2016/12/4.
+ * Created by geyao on 2017/02/18.
  */
 @Entity
 @Table(name = "student")

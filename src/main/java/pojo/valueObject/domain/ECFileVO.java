@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * 约定优先级，工程实践1，比赛2，个人兴趣3，头像等信息4
- * Created by geyao on 2016/11/8.
+ * Created by geyao on 2017/02/18.
  */
 @Entity
 @Table(name = "ecfile")

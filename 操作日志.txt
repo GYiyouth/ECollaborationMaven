@@ -43,6 +43,7 @@
     目前所有的bean均为scope="prototype"
     删除了teacher_project这张表，总结一下级联，顶层类的删除会影响下层类，任意层非主键的修改会影响其他层。
     teacher和project的关系改造完成
-
+    project与task的设计，只能是单端映射，task依赖于project，不然的话就会发生循环依赖：project-task-teacher-project
+        注意，task从spring context拿取后，一定要指明创建老师，不然存储的时候会向user表，teacher 表插入空白记录
     student_Team这个表可以把leaderFlag去掉，这样就可以做成纯粹的双向N-N关系表
 

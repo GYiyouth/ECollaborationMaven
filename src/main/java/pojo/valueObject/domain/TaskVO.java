@@ -6,9 +6,12 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
 /**
- * Created by geyao on 2016/11/7.
+ * 单端N-N，依赖于projectVO
+ * 依赖于teacherVO，注意如果新建一个task，一定要指明创建人，不然会往数据库里加入新的teacher
+ * Created by geyao on 2017/02/18.
  */
 @Entity
 @Table(name = "task")
@@ -28,6 +31,14 @@ public class TaskVO {
 	private String beginDate = null;
 	private String targetDate = null;
 
+    @ManyToMany(targetEntity = ProjectVO.class)
+    @JoinTable( name = "project_task",
+            joinColumns = @JoinColumn(name = "taskId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id")
+    )
+    @Cascade(CascadeType.ALL)
+    private Set<ProjectVO> projectVOSet;
+
 	public TaskVO() {
 		super();
 	}
@@ -38,12 +49,21 @@ public class TaskVO {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", creatorTeacherVO=" + creatorTeacherVO +
+                ", creatorTeacherVO=" + creatorTeacherVO.getId() +
                 ", createDate='" + createDate + '\'' +
                 ", modifyDate='" + modifyDate + '\'' +
                 ", beginDate='" + beginDate + '\'' +
                 ", targetDate='" + targetDate + '\'' +
+                ", projectVOSet=" + projectVOSet +
                 '}';
+    }
+
+    public Set<ProjectVO> getProjectVOSet() {
+        return projectVOSet;
+    }
+
+    public void setProjectVOSet(Set<ProjectVO> projectVOSet) {
+        this.projectVOSet = projectVOSet;
     }
 
     public Integer getId() {

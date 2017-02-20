@@ -47,12 +47,14 @@
 
     <bean id="taskVO" class="pojo.valueObject.domain.TaskVO" scope="prototype">
         <property name="creatorTeacherVO" ref="teacherVO"/>
+        <property name="projectVOSet">
+            <set/>
+        </property>
     </bean>
 
     <bean id="teacherVO" class="pojo.valueObject.domain.TeacherVO" scope="prototype">
         <property name="projectVOSet">
             <set>
-                <ref bean="projectVO"/>
             </set>
         </property>
     </bean>
