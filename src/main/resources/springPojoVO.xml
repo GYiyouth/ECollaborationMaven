@@ -24,11 +24,9 @@
 
     <bean id="messageVO" class="pojo.valueObject.domain.MessageVO" scope="prototype">
         <property name="senderUserVO" ref="userVO"/>
-        <property name="receiverUserVOSetSet">
-            <set>
-                <!--<ref bean="userVO"/>-->
-            </set>
-        </property>
+        <!--<property name="receiverUserVOSetSet">-->
+            <!--<set/>-->
+        <!--</property>-->
     </bean>
 
     <bean id="noticeVO" class="pojo.valueObject.domain.NoticeVO" scope="prototype">
@@ -63,7 +61,7 @@
         <property name="creatorStudentVO" ref="studentVO"/>
     </bean>
 
-    <bean id="userVO" class="pojo.valueObject.domain.UserVO" scope="prototype">
+    <bean id="userVO" class="pojo.valueObject.domain.UserVO">
         <property name="messageVOSet">
             <set>
             </set>

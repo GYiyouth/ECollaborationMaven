@@ -19,18 +19,13 @@ public class Test {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
 
-        UserVO userVO1 = session.get(UserVO.class, 1);
-        UserVO userVO2 = session.get(UserVO.class, 2);
-        UserVO userVO17 = session.get(UserVO.class, 17);
-        MessageVO messageVO = context.getBean(MessageVO.class);
+        MessageReceiverVO messageReceiverVO = session.get(MessageReceiverVO.class, 11);
+        MessageVO messageVO = session.get(MessageVO.class, 6);
+        UserVO userVO = session.get(UserVO.class, 13);
 
-        messageVO.setSenderUserVO(userVO2);
-        messageVO.getReceiverUserVOSetSet().add(userVO1);
-        messageVO.getReceiverUserVOSetSet().add(userVO17);
-//        UserVO userVO = context.getBean(UserVO.class);
-        UserVO userVO3 = context.getBean("userVO", UserVO.class);
-        UserVO userVO4 = context.getBean("userVO", UserVO.class);
-        session.save(messageVO);
+        userVO.getMessageVOSet().add(messageVO);
+        System.out.println(messageReceiverVO);
+        //这里其实不需要session.save什么的，就可以保存到连接表中了。
 //        System.out.println(session.createCriteria(MessageReceiverVO.class).list());
 //        session.createFilter(MessageReceiverVO.class).list()
         transaction.commit();

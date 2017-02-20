@@ -37,6 +37,9 @@
     message_receiver表的readFlag被我改成了boolean类型，默认是FALSE
     message和receiver的关系做成双向N-N，关系实体再ManyToOne分别映射到这两个实体上，注意spring配置里，set那里要放空
         不然会产生循环依赖。
+        现在的解决方式是，USerVO单端N-N映射到message，基于连接表。在操作时，只需要一个持久态的UserVO与MessageVO
+        userVO.getMessageVOSet().add(messageVO);
+        提交事务，连接表就会更新
     目前所有的bean均为scope="prototype"
     删除了teacher_project这张表，总结一下级联，顶层类的删除会影响下层类，任意层非主键的修改会影响其他层。
     teacher和project的关系改造完成
