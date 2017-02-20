@@ -66,7 +66,6 @@
     <bean id="userVO" class="pojo.valueObject.domain.UserVO" scope="prototype">
         <property name="messageVOSet">
             <set>
-
             </set>
         </property>
     </bean>
