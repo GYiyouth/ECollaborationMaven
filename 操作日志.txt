@@ -58,4 +58,5 @@
             NullPointerException
 
 
-
+耿：
+    记录日志功能，debug、info、warn、error分别放置tomcat下的logs的四个文件夹下面
