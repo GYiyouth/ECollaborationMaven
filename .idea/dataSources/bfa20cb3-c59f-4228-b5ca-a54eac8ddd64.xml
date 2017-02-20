@@ -645,7 +645,7 @@
       <data-type>int(11)|0</data-type>
     </column>
     <column id="180" parent="20" name="leaderFlag">
-      <data-type>int(11)|0</data-type>
+      <data-type>tinyint(1)|0</data-type>
     </column>
     <key id="181" parent="20" name="PRIMARY">
       <columns>id</columns>

@@ -2,6 +2,7 @@ package pojo.valueObject.domain;
 
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+import pojo.valueObject.assist.StudentTeamVO;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -20,7 +21,6 @@ public class TeamVO {
 	private Integer id = null;
 	private String teamName = null;
     @ManyToOne(targetEntity = StudentVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
 	private StudentVO creatorStudentVO;
 	private String createDate = null;
@@ -34,6 +34,14 @@ public class TeamVO {
             inverseJoinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id")
     )
     private Set<ProjectVO> projectVOSet;
+
+    @ManyToMany(targetEntity = StudentVO.class)
+    @Cascade(CascadeType.ALL)
+    @JoinTable(name = "student_team",
+            joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "id")
+    )
+    private Set<StudentVO> studentVOSet;
 
     public TeamVO() {
         super();
@@ -49,6 +57,16 @@ public class TeamVO {
                 ", memberMax=" + memberMax +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+
+
+    public Set<StudentVO> getStudentVOSet() {
+        return studentVOSet;
+    }
+
+    public void setStudentVOSet(Set<StudentVO> studentVOSet) {
+        this.studentVOSet = studentVOSet;
     }
 
     public Set<ProjectVO> getProjectVOSet() {

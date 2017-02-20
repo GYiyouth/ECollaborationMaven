@@ -1,5 +1,8 @@
 package pojo.valueObject.assist;
 
+import pojo.valueObject.domain.StudentVO;
+import pojo.valueObject.domain.TeamVO;
+
 import javax.persistence.*;
 
 /**
@@ -12,7 +15,19 @@ public class StudentTeamVO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
+    @ManyToOne(targetEntity = StudentVO.class)
+    @JoinColumn(name = "studentId", referencedColumnName = "id")
+    private StudentVO studentVO;
+
+    @ManyToOne(targetEntity = TeamVO.class)
+    @JoinColumn(name = "teamId", referencedColumnName = "id")
+    private TeamVO teamVO;
+
+    private Boolean leaderFlag;
+
     public StudentTeamVO() {
+        super();
     }
 
 
@@ -23,6 +38,29 @@ public class StudentTeamVO {
                 '}';
     }
 
+    public StudentVO getStudentVO() {
+        return studentVO;
+    }
+
+    public void setStudentVO(StudentVO studentVO) {
+        this.studentVO = studentVO;
+    }
+
+    public TeamVO getTeamVO() {
+        return teamVO;
+    }
+
+    public void setTeamVO(TeamVO teamVO) {
+        this.teamVO = teamVO;
+    }
+
+    public Boolean getLeaderFlag() {
+        return leaderFlag;
+    }
+
+    public void setLeaderFlag(Boolean leaderFlag) {
+        this.leaderFlag = leaderFlag;
+    }
 
     public int getId() {
         return id;

@@ -49,5 +49,13 @@
         关系表实例化完成
     原本没有配置utf-8，后来在链接后面加上 &amp;useUnicode=true&amp;characterEncoding=UTF-8 完成
 
+    team与student的关系，team单向N-N依赖于student，双向1-N依赖于StudentTeamVO(取消，这种依赖完全没必要)
+        StudentTeamVO单向N-1依赖于student与team
+        将student_team的leaderFlag设置为了BOOLEAN类型(
+            数据库会自动转换为tinyInt，存储-128～127之间的数，但只有1是true，只有0是false
+            )
+        如果student_team指向的id对应的不是学生或团队，那么这个对象就会是null，编程时应当注意
+            NullPointerException
+
 
 

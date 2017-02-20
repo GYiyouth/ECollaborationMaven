@@ -67,6 +67,9 @@
         <property name="projectVOSet">
             <set/>
         </property>
+        <property name="studentVOSet">
+            <set/>
+        </property>
     </bean>
 
     <bean id="userVO" class="pojo.valueObject.domain.UserVO">
@@ -101,6 +104,7 @@
     </bean>
 
     <bean id="studentTeamVO" class="pojo.valueObject.assist.StudentTeamVO" scope="prototype">
-
+        <property name="studentVO" ref="studentVO"/>
+        <property name="teamVO" ref="teamVO"/>
     </bean>
 </beans>
