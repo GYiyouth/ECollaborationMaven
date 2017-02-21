@@ -40,6 +40,7 @@
                 <value>pojo.valueObject.assist.StudentTeamProjectPlanVO</value>
                 <value>pojo.valueObject.assist.StudentTeamVO</value>
                 <value>pojo.valueObject.assist.TeamProjectVO</value>
+                <value>pojo.valueObject.assist.TeamProjectAccessVO</value>
             </list>
         </property>
         <property name="hibernateProperties">

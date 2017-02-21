@@ -107,4 +107,10 @@
         <property name="studentVO" ref="studentVO"/>
         <property name="teamVO" ref="teamVO"/>
     </bean>
+
+    <bean id="teamProjectAccessVO" class="pojo.valueObject.assist.TeamProjectAccessVO" scope="prototype">
+        <property name="taskVO" ref="taskVO"/>
+        <!--<property name="teamProjectVO" ref="teamProjectVO"/>-->
+    </bean>
+
 </beans>
