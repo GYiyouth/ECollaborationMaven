@@ -3,10 +3,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pojo.valueObject.assist.MessageReceiverVO;
-import pojo.valueObject.assist.StudentTeamVO;
-import pojo.valueObject.assist.TeamProjectAccessVO;
-import pojo.valueObject.assist.TeamProjectVO;
+import pojo.valueObject.assist.*;
 import pojo.valueObject.domain.*;
 
 import java.util.List;
@@ -24,9 +21,21 @@ public class Test {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
 
-        //从team_project_access的关系表拿取数据1，打印
-        TeamProjectAccessVO teamProjectAccessVO = session.get(TeamProjectAccessVO.class, 1);
-        System.out.println(teamProjectAccessVO);
+        //测试，新建一个plan，然后加给1项目，2学生
+        StudentVO studentVO = session.get(StudentVO.class, 2);
+        PlanVO planVO = context.getBean("planVO", PlanVO.class);
+        planVO.setTitle("这是一个测试的计划");
+        planVO.setContent("测试，新建一个plan，然后加给1项目，2学生");
+        planVO.setStudentVO(studentVO);
+        session.save(planVO);
+        ProjectVO projectVO = session.get(ProjectVO.class, 1);
+        StudentProjectPlanVO studentProjectPlanVO = context.getBean("studentProjectPlanVO", StudentProjectPlanVO.class);
+        studentProjectPlanVO.setStudentVO(studentVO);
+        studentProjectPlanVO.setPlanVO(planVO);
+        studentProjectPlanVO.setProjectVO(projectVO);
+
+        session.save(studentProjectPlanVO);
+
         //通过测试
         transaction.commit();
         session.close();

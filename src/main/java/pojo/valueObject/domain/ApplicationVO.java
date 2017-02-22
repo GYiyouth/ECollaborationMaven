@@ -19,7 +19,6 @@ public class ApplicationVO {
 
     private String type;
     @ManyToOne(targetEntity = TeamVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "teamId", referencedColumnName = "id")
     private TeamVO teamVO;
     @ManyToOne(targetEntity = ProjectVO.class)
@@ -31,7 +30,6 @@ public class ApplicationVO {
     @JoinColumn(name = "handlerId", referencedColumnName = "id")
     private UserVO handlerUserVO;
     @ManyToOne(targetEntity = UserVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "affectedId", referencedColumnName = "id")
     private UserVO affectedUserVO;
     private String createdTime;

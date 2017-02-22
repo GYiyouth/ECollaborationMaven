@@ -95,12 +95,14 @@
         <property name="teamVO" ref="teamVO"/>
     </bean>
 
-    <bean id="studentTeamProjectFileVO" class="pojo.valueObject.assist.StudentTeamProjectFileVO" scope="prototype">
+    <bean id="studentProjectFileVO" class="pojo.valueObject.assist.StudentProjectFileVO" scope="prototype">
 
     </bean>
 
-    <bean id="studentTeamProjectPlanVO" class="pojo.valueObject.assist.StudentTeamProjectPlanVO" scope="prototype">
-
+    <bean id="studentProjectPlanVO" class="pojo.valueObject.assist.StudentProjectPlanVO" scope="prototype">
+        <!--<property name="planVO" ref="planVO"/>-->
+        <!--<property name="projectVO" ref="projectVO"/>-->
+        <!--<property name="studentVO" ref="studentVO"/>-->
     </bean>
 
     <bean id="studentTeamVO" class="pojo.valueObject.assist.StudentTeamVO" scope="prototype">

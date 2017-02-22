@@ -37,3 +37,13 @@
         映射到teamProjectVO失败，好像涉及到复合主键的映射，无奈我只能采用Integer形式。
 
     另外maven默认的language level是5，即将过期，你把它改成8
+
+会议记录：
+    plan只能自己给自己设置，targetDate取消
+        排的顺序：先未完成，按照开始时间排。后已完成，按照完成时间排序。
+    兴趣项目不接受老师加入。
+
+2017/02/22
+葛尧：
+    完成student_project_plan, student_project_file的映射
+        没有在配置表中添加依赖，因为我希望获取到这个bean时，里面的就是空的。
