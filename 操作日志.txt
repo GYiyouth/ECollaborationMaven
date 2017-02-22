@@ -47,3 +47,23 @@
 葛尧：
     完成student_project_plan, student_project_file的映射
         没有在配置表中添加依赖，因为我希望获取到这个bean时，里面的就是空的。
+
+    新增了一张表：
+        CREATE TABLE ECollaborationWeb.student_score_record
+        (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            typeId INT,
+            studentId INT,
+            score INT
+        );
+    但是type也是要存储的，那么再次新建一张表
+        CREATE TABLE ECollaborationWeb.project_type
+        (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            projectId INT,
+            type VARCHAR(45)
+        );
+
+        思路是，每个项目都有自己的评价学生的方式，然后student_score_record
+            通过指向typeId可以确定唯一的project，打分。
+    暂时没有删除学生表中的字段。
