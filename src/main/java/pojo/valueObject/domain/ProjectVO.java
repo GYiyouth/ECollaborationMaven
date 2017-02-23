@@ -55,31 +55,32 @@ public class ProjectVO {
 		super();
 	}
 
-    @Override
-    public String toString() {
-        return "ProjectVO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", applyBeforeDate='" + applyBeforeDate + '\'' +
-                ", finishDate='" + finishDate + '\'' +
-                ", survivalDate='" + survivalDate + '\'' +
-                ", teamNumber=" + teamNumber +
-                ", teamMax=" + teamMax +
-                ", memberMax=" + memberMax +
-                ", createDate='" + createDate + '\'' +
-                ", grade=" + grade +
-                ", keyWord='" + keyWord + '\'' +
-                ", info='" + info + '\'' +
-                ", requirement='" + requirement + '\'' +
-                ", gain='" + gain + '\'' +
-                ", priority=" + priority +
-                ", status=" + status +
-                ", creatorUserVO=" + creatorUserVO.getId() +
-                ", teacherVO=" + teacherVO.getId() +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "ProjectVO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", applyBeforeDate='" + applyBeforeDate + '\'' +
+				", finishDate='" + finishDate + '\'' +
+				", survivalDate='" + survivalDate + '\'' +
+				", teamNumber=" + teamNumber +
+				", teamMax=" + teamMax +
+				", memberMax=" + memberMax +
+				", createDate='" + createDate + '\'' +
+				", grade=" + grade +
+				", keyWord='" + keyWord + '\'' +
+				", info='" + info + '\'' +
+				", requirement='" + requirement + '\'' +
+				", gain='" + gain + '\'' +
+				", priority=" + priority +
+				", status=" + status +
+				", creatorUserVO=" + creatorUserVO.getId() +
+				", teacherVO=" + teacherVO.getId() +
+				", teamVOSet=" + teamVOSet.size() +
+				'}';
+	}
 
-    public Set<TeamVO> getTeamVOSet() {
+	public Set<TeamVO> getTeamVOSet() {
         return teamVOSet;
     }
 

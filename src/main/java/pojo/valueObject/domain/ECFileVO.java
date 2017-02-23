@@ -48,7 +48,7 @@ public class ECFileVO {
                 ", deadDate='" + deadDate + '\'' +
                 ", downLoadTimes=" + downLoadTimes +
                 ", priority=" + priority +
-                ", userVO=" + creatorUserVO +
+                ", creatorUserVO=" + creatorUserVO.getId() +
                 ", path='" + path + '\'' +
                 '}';
     }

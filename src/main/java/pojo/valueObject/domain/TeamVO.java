@@ -50,14 +50,14 @@ public class TeamVO {
         return "TeamVO{" +
                 "id=" + id +
                 ", teamName='" + teamName + '\'' +
-                ", creatorStudentVO=" + creatorStudentVO +
+                ", creatorStudentVO=" + creatorStudentVO.getId() +
                 ", createDate='" + createDate + '\'' +
                 ", memberMax=" + memberMax +
                 ", description='" + description + '\'' +
+                ", projectVOSet=" + projectVOSet.size() +
+                ", studentVOSet=" + studentVOSet.size() +
                 '}';
     }
-
-
 
     public Set<StudentVO> getStudentVOSet() {
         return studentVOSet;

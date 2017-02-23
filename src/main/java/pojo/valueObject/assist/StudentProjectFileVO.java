@@ -35,6 +35,9 @@ public class StudentProjectFileVO {
     public String toString() {
         return "StudentProjectFileVO{" +
                 "id=" + id +
+                ", userVO=" + userVO.getId() +
+                ", projectVO=" + projectVO.getId() +
+                ", fileVO=" + fileVO.getId() +
                 '}';
     }
 

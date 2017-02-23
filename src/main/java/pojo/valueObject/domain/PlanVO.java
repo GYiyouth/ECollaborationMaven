@@ -38,7 +38,7 @@ public class PlanVO {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", studentVO=" + studentVO +
+                ", studentVO=" + studentVO.getId() +
                 ", createDate='" + createDate + '\'' +
                 ", finishDate='" + finishDate + '\'' +
                 ", beginDate='" + beginDate + '\'' +

@@ -36,6 +36,9 @@ public class StudentProjectPlanVO {
     public String toString() {
         return "StudentProjectPlanVO{" +
                 "id=" + id +
+                ", studentVO=" + studentVO.getId() +
+                ", projectVO=" + projectVO.getId() +
+                ", planVO=" + planVO.getId() +
                 '}';
     }
 

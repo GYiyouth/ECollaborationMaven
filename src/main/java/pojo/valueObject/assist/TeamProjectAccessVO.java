@@ -32,6 +32,16 @@ public class TeamProjectAccessVO {
         super();
     }
 
+    @Override
+    public String toString() {
+        return "TeamProjectAccessVO{" +
+                "id=" + id +
+                ", team_project_id=" + team_project_id +
+                ", taskVO=" + taskVO.getId() +
+                ", access=" + access +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

@@ -34,6 +34,19 @@ public class TeamProjectVO {
     private Boolean applyFlag;
 
     public TeamProjectVO() {
+        super();
+    }
+
+    @Override
+    public String toString() {
+        return "TeamProjectVO{" +
+                "id=" + id +
+                ", teamVO=" + teamVO.getId() +
+                ", projectVO=" + projectVO.getId() +
+                ", showUrl='" + showUrl + '\'' +
+                ", score=" + score +
+                ", applyFlag=" + applyFlag +
+                '}';
     }
 
     public int getId() {

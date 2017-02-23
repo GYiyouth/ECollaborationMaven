@@ -55,9 +55,9 @@ public class CodeVO {
                 ", downLoadTimes=" + downLoadTimes +
                 ", score=" + score +
                 ", path='" + path + '\'' +
-                ", studentVO=" + studentVO +
-                ", teamVO=" + teamVO +
-                ", projectVO=" + projectVO +
+                ", studentVO=" + studentVO.toString() +
+                ", teamVO=" + teamVO.toString() +
+                ", projectVO=" + projectVO.toString() +
                 '}';
     }
 

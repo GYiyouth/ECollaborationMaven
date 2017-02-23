@@ -43,22 +43,22 @@ public class TaskVO {
 		super();
 	}
 
-    @Override
-    public String toString() {
-        return "TaskVO{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", creatorTeacherVO=" + creatorTeacherVO.getId() +
-                ", createDate='" + createDate + '\'' +
-                ", modifyDate='" + modifyDate + '\'' +
-                ", beginDate='" + beginDate + '\'' +
-                ", targetDate='" + targetDate + '\'' +
-                ", projectVOSet=" + projectVOSet +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "TaskVO{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", content='" + content + '\'' +
+				", creatorTeacherVO=" + creatorTeacherVO.getId() +
+				", createDate='" + createDate + '\'' +
+				", modifyDate='" + modifyDate + '\'' +
+				", beginDate='" + beginDate + '\'' +
+				", targetDate='" + targetDate + '\'' +
+				", projectVOSet=" + projectVOSet +
+				'}';
+	}
 
-    public Set<ProjectVO> getProjectVOSet() {
+	public Set<ProjectVO> getProjectVOSet() {
         return projectVOSet;
     }
 

@@ -19,7 +19,6 @@ public class MessageVO {
     private String content;
     private String createTime;
     @ManyToOne(targetEntity = UserVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "senderId", referencedColumnName = "id")
     private UserVO senderUserVO;
 
@@ -45,10 +44,9 @@ public class MessageVO {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime='" + createTime + '\'' +
-                ", senderUserVO=" + senderUserVO.getId() +
+                ", senderUserVO=" + senderUserVO.toString() +
                 ", readFlag=" + readFlag +
                 ", deadDate='" + deadDate + '\'' +
-//                ", receiverUserVOSet=" + receiverUserVOSet +
                 '}';
     }
 

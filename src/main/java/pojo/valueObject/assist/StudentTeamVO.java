@@ -35,6 +35,9 @@ public class StudentTeamVO {
     public String toString() {
         return "StudentTeamVO{" +
                 "id=" + id +
+                ", studentVO=" + studentVO.getId() +
+                ", teamVO=" + teamVO.getId() +
+                ", leaderFlag=" + leaderFlag +
                 '}';
     }
 

@@ -23,6 +23,15 @@ public class ProjectAccessTypeVO {
     public ProjectAccessTypeVO() {
     }
 
+    @Override
+    public String toString() {
+        return "ProjectAccessTypeVO{" +
+                "id=" + id +
+                ", projectVO=" + projectVO.getId() +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

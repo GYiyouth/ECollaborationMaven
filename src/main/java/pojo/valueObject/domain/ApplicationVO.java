@@ -44,10 +44,10 @@ public class ApplicationVO {
         return "ApplicationVO{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", teamVO=" + teamVO +
-                ", projectVO=" + projectVO +
-                ", handlerUserVO=" + handlerUserVO +
-                ", affectedUserVO=" + affectedUserVO +
+                ", teamVO=" + teamVO.getId() +
+                ", projectVO=" + projectVO.getId() +
+                ", handlerUserVO=" + handlerUserVO.getId() +
+                ", affectedUserVO=" + affectedUserVO.getId() +
                 ", createdTime='" + createdTime + '\'' +
                 ", handledTime='" + handledTime + '\'' +
                 ", result='" + result + '\'' +

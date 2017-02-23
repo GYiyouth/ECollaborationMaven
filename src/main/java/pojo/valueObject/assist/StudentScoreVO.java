@@ -32,6 +32,16 @@ public class StudentScoreVO {
         super();
     }
 
+    @Override
+    public String toString() {
+        return "StudentScoreVO{" +
+                "id=" + id +
+                ", projectAccessTypeVO=" + projectAccessTypeVO.getId() +
+                ", studentVO=" + studentVO.getId() +
+                ", score=" + score +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

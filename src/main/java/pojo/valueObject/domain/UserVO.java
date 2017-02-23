@@ -58,8 +58,10 @@ public class UserVO {
                 ", lastLogTime='" + lastLogTime + '\'' +
                 ", activeBefore='" + activeBefore + '\'' +
                 ", newFlag=" + newFlag +
+                ", messageVOSet=" + messageVOSet.size() +
                 '}';
     }
+
 
     public Set<MessageVO> getMessageVOSet() {
         return messageVOSet;

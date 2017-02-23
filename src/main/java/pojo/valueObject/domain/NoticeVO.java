@@ -41,12 +41,11 @@ public class NoticeVO {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", creatorUserVO=" + creatorUserVO +
-                ", publishUserVO=" + publishUserVO +
+                ", creatorUserVO=" + creatorUserVO.getId() +
+                ", publishUserVO=" + publishUserVO.getId() +
                 ", createTime='" + createTime + '\'' +
                 '}';
     }
-
 
     public Integer getId() {
         return id;

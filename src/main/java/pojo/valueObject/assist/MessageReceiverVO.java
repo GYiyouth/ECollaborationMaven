@@ -47,7 +47,7 @@ public class MessageReceiverVO {
         return "MessageReceiverVO{" +
                 "id=" + id +
                 ", messageVO=" + messageVO.getId() +
-                ", userVO=" + receiverUserVO.getId() +
+                ", receiverUserVO=" + receiverUserVO.getId() +
                 ", readFlag=" + readFlag +
                 '}';
     }
