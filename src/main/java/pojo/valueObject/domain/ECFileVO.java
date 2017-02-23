@@ -31,6 +31,7 @@ public class ECFileVO {
 	private UserVO creatorUserVO;
 	private String path = null;
 
+
 	public ECFileVO() {
 		super();
 //		Time time = new TimeImpl();
