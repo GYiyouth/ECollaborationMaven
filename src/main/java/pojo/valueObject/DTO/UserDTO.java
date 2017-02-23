@@ -1,24 +1,17 @@
-package pojo.valueObject.domain;
+package pojo.valueObject.DTO;
 
-import pojo.valueObject.assist.MessageReceiverVO;
-
-import javax.persistence.*;
-import java.util.Set;
+import pojo.valueObject.domain.UserVO;
 
 /**
- * Created by geyao on 2017/02/18.
+ * Created by geyao on 2017/2/23.
  */
-@Entity
-@Table(name = "user")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class UserVO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
+
     private Integer id;
     private String schoolId;
     private String name;
     private Integer sex;	//1:男 0：女
-    private String role;//1管理员，2教师，3学生
+    private String role;// 这里还是直接用字符串清晰明了
     private String email;
     private String phoneNumber;
     private String logName;
@@ -28,70 +21,39 @@ public class UserVO {
     private String lastLogTime;
     private String activeBefore;
     private int newFlag;
-    // toString needed
-    @ManyToMany(targetEntity = MessageVO.class)
-    @JoinTable(name = "message_receiver",
-            joinColumns = @JoinColumn(name = "receiverId", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "messageId", referencedColumnName = "id")
-    )
-    private Set<MessageVO> messageVOSet;
 
-
-    public UserVO() {
+    public UserDTO() {
         super();
-    }
-
-    @Override
-    public String toString() {
-        return "UserVO{" +
-                "id=" + id +
-                ", schoolId='" + schoolId + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", role=" + role +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", logName='" + logName + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", photo='" + photo + '\'' +
-                ", lastLogTime='" + lastLogTime + '\'' +
-                ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newFlag +
-                ", messageVOSet=" + messageVOSet.size() +
-                '}';
-    }
-
-
-    public Set<MessageVO> getMessageVOSet() {
-        return messageVOSet;
-    }
-
-    public void setMessageVOSet(Set<MessageVO> messageVOSet) {
-        this.messageVOSet = messageVOSet;
     }
 
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getSchoolId() {
         return schoolId;
     }
+
     public void setSchoolId(String schoolId) {
         this.schoolId = schoolId;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getSex() {
         return sex;
     }
+
     public void setSex(Integer sex) {
         this.sex = sex;
     }
@@ -107,57 +69,76 @@ public class UserVO {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     public String getLogName() {
         return logName;
     }
+
     public void setLogName(String logName) {
         this.logName = logName;
     }
+
     public String getPassWord() {
         return passWord;
     }
+
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
+
     public String getCreateDate() {
         return createDate;
     }
+
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
+
     public String getPhoto() {
         return photo;
     }
+
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
     public String getLastLogTime() {
         return lastLogTime;
     }
+
     public void setLastLogTime(String lastLogTime) {
         this.lastLogTime = lastLogTime;
     }
+
     public String getActiveBefore() {
         return activeBefore;
     }
+
     public void setActiveBefore(String activeBefore) {
         this.activeBefore = activeBefore;
     }
+
     public int getNewFlag() {
         return newFlag;
     }
+
     public void setNewFlag(int newFlag) {
         this.newFlag = newFlag;
     }
 
-
+    public void clone(UserVO userVO){
+        //这里代码等下讲
+    }
 }

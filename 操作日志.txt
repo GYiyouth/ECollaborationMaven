@@ -71,3 +71,5 @@
 2017/02/23
 葛尧：
     更新了VO们的toString方法
+    写了一个UserDTO作为示范
+    把User表的role字段改成了VARCHAR 45
