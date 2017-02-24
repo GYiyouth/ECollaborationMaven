@@ -24,7 +24,7 @@ public class TeacherVO extends UserVO {
 
     @Override
     public String toString() {
-        return "TeacherVO{" +
+        return "TeacherVO{" + super.toString() +
                 "homePageUrl='" + homePageUrl + '\'' +
                 ", needStudentsFlag=" + needStudentsFlag +
                 ", projectVOSet=" + projectVOSet.size() +

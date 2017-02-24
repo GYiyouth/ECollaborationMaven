@@ -121,4 +121,9 @@
 
     </bean>
 
+
+    <!-- DTO的VO -->
+    <bean id="UserDTO" class="pojo.valueObject.DTO.UserDTO" scope="prototype"/>
+    <bean id="StudentDTO" class="pojo.valueObject.DTO.StudentDTO" scope="prototype"/>
+    <bean id="TeacherDTO" class="pojo.valueObject.DTO.TeacherDTO" scope="prototype"/>
 </beans>

@@ -1,6 +1,10 @@
 package pojo.valueObject.DTO;
 
+import pojo.valueObject.domain.MessageVO;
 import pojo.valueObject.domain.UserVO;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by geyao on 2017/2/23.
@@ -21,6 +25,65 @@ public class UserDTO {
     private String lastLogTime;
     private String activeBefore;
     private int newFlag;
+    private Set<Integer> messageVOIdSet;
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "id=" + id +
+                ", schoolId='" + schoolId + '\'' +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", logName='" + logName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", photo='" + photo + '\'' +
+                ", lastLogTime='" + lastLogTime + '\'' +
+                ", activeBefore='" + activeBefore + '\'' +
+                ", newFlag=" + newFlag +
+                ", messageVOIdSet=" + messageVOIdSet.size() +
+                '}';
+    }
+
+
+    public void clone(UserVO userVO){
+        System.out.println("userDTO clone");
+        if(userVO!=null){
+
+            //基本属性
+            this.setId(userVO.getId());
+            this.setSchoolId(userVO.getSchoolId());
+            this.setName(userVO.getName());
+            this.setSex(userVO.getSex());
+            this.setRole(userVO.getRole());
+            this.setEmail(userVO.getEmail());
+            this.setPhoneNumber(userVO.getPhoneNumber());
+            this.setLogName(userVO.getLogName());
+            this.setPassWord(userVO.getPassWord());
+            this.setCreateDate(userVO.getCreateDate());
+            this.setPhoto(userVO.getPhoto());
+            this.setLastLogTime(userVO.getLastLogTime());
+            this.setActiveBefore(userVO.getActiveBefore());
+
+            //集合的id值
+            //空 则初始化messageVOIdSet
+            if(!userVO.getMessageVOSet().isEmpty()) {
+                Set<MessageVO> messageVOSet = userVO.getMessageVOSet();
+                Set<Integer> messageVOIdSet = new HashSet<>();
+                for (MessageVO messageVO: messageVOSet) {
+                    messageVOIdSet.add(messageVO.getId());
+                }
+                this.setMessageVOIdSet(messageVOIdSet);
+            }else{
+                this.messageVOIdSet = new HashSet<>();
+            }
+        }else{
+            System.out.println("userVO is null");
+        }
+    }
 
     public UserDTO() {
         super();
@@ -138,7 +201,11 @@ public class UserDTO {
         this.newFlag = newFlag;
     }
 
-    public void clone(UserVO userVO){
-        //这里代码等下讲
+    public Set<Integer> getMessageVOIdSet() {
+        return messageVOIdSet;
+    }
+
+    public void setMessageVOIdSet(Set<Integer> messageVOIdSet) {
+        this.messageVOIdSet = messageVOIdSet;
     }
 }
