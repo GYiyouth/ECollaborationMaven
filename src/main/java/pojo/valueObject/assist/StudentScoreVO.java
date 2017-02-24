@@ -74,5 +74,4 @@ public class StudentScoreVO {
         this.score = score;
     }
 
-    private
 }
