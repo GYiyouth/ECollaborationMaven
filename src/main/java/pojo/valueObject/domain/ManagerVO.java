@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "manager")
 public class ManagerVO extends UserVO {
 
-    private Integer mRole;  //0：超级管理员 1：普通管理员
+    private String mRole;  //0：超级管理员 1：普通管理员
 
 
     public ManagerVO() {
@@ -25,11 +25,11 @@ public class ManagerVO extends UserVO {
     }
 
 
-    public Integer getmRole() {
+    public String getmRole() {
         return mRole;
     }
 
-    public void setmRole(Integer mRole) {
+    public void setmRole(String mRole) {
         this.mRole = mRole;
     }
 }
