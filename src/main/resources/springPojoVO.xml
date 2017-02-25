@@ -123,7 +123,17 @@
 
 
     <!-- DTO的VO -->
-    <bean id="UserDTO" class="pojo.valueObject.DTO.UserDTO" scope="prototype"/>
-    <bean id="StudentDTO" class="pojo.valueObject.DTO.StudentDTO" scope="prototype"/>
-    <bean id="TeacherDTO" class="pojo.valueObject.DTO.TeacherDTO" scope="prototype"/>
+    <bean id="userDTO" class="pojo.valueObject.DTO.UserDTO" scope="prototype"/>
+    <bean id="studentDTO" class="pojo.valueObject.DTO.StudentDTO" scope="prototype"/>
+    <bean id="teacherDTO" class="pojo.valueObject.DTO.TeacherDTO" scope="prototype"/>
+    <bean id="managerDTO" class="pojo.valueObject.DTO.ManagerDTO" scope="prototype"/>
+    <bean id="teamDTO" class="pojo.valueObject.DTO.TeamDTO" scope="prototype"/>
+    <bean id="applicationDTO" class="pojo.valueObject.DTO.ApplicationDTO" scope="prototype"/>
+    <bean id="codeDTO" class="pojo.valueObject.DTO.CodeDTO" scope="prototype"/>
+    <bean id="ecFileDTO" class="pojo.valueObject.DTO.ECFileDTO" scope="prototype"/>
+    <bean id="messageDTO" class="pojo.valueObject.DTO.MessageDTO" scope="prototype"/>
+    <bean id="noticeDTO" class="pojo.valueObject.DTO.NoticeDTO" scope="prototype"/>
+    <bean id="planDTO" class="pojo.valueObject.DTO.PlanDTO" scope="prototype"/>
+    <bean id="projectDTO" class="pojo.valueObject.DTO.ProjectDTO" scope="prototype"/>
+    <bean id="taskDTO" class="pojo.valueObject.DTO.TaskDTO" scope="prototype"/>
 </beans>

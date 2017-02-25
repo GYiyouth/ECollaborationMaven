@@ -27,30 +27,7 @@ public class UserDTO {
     private int newFlag;
     private Set<Integer> messageVOIdSet;
 
-    @Override
-    public String toString() {
-        return "UserVO{" +
-                "id=" + id +
-                ", schoolId='" + schoolId + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", role=" + role +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", logName='" + logName + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", photo='" + photo + '\'' +
-                ", lastLogTime='" + lastLogTime + '\'' +
-                ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newFlag +
-                ", messageVOIdSet=" + messageVOIdSet.size() +
-                '}';
-    }
-
-
     public void clone(UserVO userVO){
-        System.out.println("userDTO clone");
         if(userVO!=null){
 
             //基本属性
@@ -83,6 +60,27 @@ public class UserDTO {
         }else{
             System.out.println("userVO is null");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", schoolId='" + schoolId + '\'' +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", logName='" + logName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", photo='" + photo + '\'' +
+                ", lastLogTime='" + lastLogTime + '\'' +
+                ", activeBefore='" + activeBefore + '\'' +
+                ", newFlag=" + newFlag +
+                ", messageVOIdSet=" + messageVOIdSet.size() +
+                '}';
     }
 
     public UserDTO() {
