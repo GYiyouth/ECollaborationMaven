@@ -74,5 +74,7 @@
     写了一个UserDTO作为示范
     把User表的role字段改成了VARCHAR 45
 
-耿
-    userDTO、TeacherDTO、StudentDTO
+2017/02/25
+葛尧：
+    添加了一些针对tomcat部署的依赖
+    将日志放置的地方放在了logs文件夹里的ECollaboration文件夹里
