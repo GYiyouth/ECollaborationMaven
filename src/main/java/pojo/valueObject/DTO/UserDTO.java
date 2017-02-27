@@ -24,7 +24,7 @@ public class UserDTO {
     private String photo; //路径，默认放在web.upload.headPhotos下
     private String lastLogTime;
     private String activeBefore;
-    private int newFlag;
+    private int newsFlag;
     private Set<Integer> messageVOIdSet;
 
     public void clone(UserVO userVO){
@@ -44,7 +44,7 @@ public class UserDTO {
             this.setPhoto(userVO.getPhoto());
             this.setLastLogTime(userVO.getLastLogTime());
             this.setActiveBefore(userVO.getActiveBefore());
-
+            this.setNewsFlag(userVO.getNewsFlag());
             //集合的id值
             //空 则初始化messageVOIdSet
             if(!userVO.getMessageVOSet().isEmpty()) {
@@ -78,7 +78,7 @@ public class UserDTO {
                 ", photo='" + photo + '\'' +
                 ", lastLogTime='" + lastLogTime + '\'' +
                 ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newFlag +
+                ", newsFlag=" + newsFlag +
                 ", messageVOIdSet=" + messageVOIdSet.size() +
                 '}';
     }
@@ -191,12 +191,12 @@ public class UserDTO {
         this.activeBefore = activeBefore;
     }
 
-    public int getNewFlag() {
-        return newFlag;
+    public int getNewsFlag() {
+        return newsFlag;
     }
 
-    public void setNewFlag(int newFlag) {
-        this.newFlag = newFlag;
+    public void setNewsFlag(int newsFlag) {
+        this.newsFlag = newsFlag;
     }
 
     public Set<Integer> getMessageVOIdSet() {

@@ -84,42 +84,7 @@
     </bean>
 
 
-    <!--assist层的VO们-->
-    <bean id="messageReceiver" class="pojo.valueObject.assist.MessageReceiverVO" scope="prototype">
-        <!--<property name="messageVO" ref="messageVO"/>-->
-        <!--<property name="receiverUserVO" ref="userVO"/>-->
-    </bean>
 
-    <bean id="teamProjectVO" class="pojo.valueObject.assist.TeamProjectVO" scope="prototype">
-        <!--<property name="projectVO" ref="projectVO"/>-->
-        <!--<property name="teamVO" ref="teamVO"/>-->
-    </bean>
-
-    <bean id="studentProjectFileVO" class="pojo.valueObject.assist.StudentProjectFileVO" scope="prototype">
-
-    </bean>
-
-    <bean id="studentProjectPlanVO" class="pojo.valueObject.assist.StudentProjectPlanVO" scope="prototype">
-        <!--<property name="planVO" ref="planVO"/>-->
-        <!--<property name="projectVO" ref="projectVO"/>-->
-        <!--<property name="studentVO" ref="studentVO"/>-->
-    </bean>
-
-    <bean id="studentTeamVO" class="pojo.valueObject.assist.StudentTeamVO" scope="prototype">
-        <!--<property name="studentVO" ref="studentVO"/>-->
-        <!--<property name="teamVO" ref="teamVO"/>-->
-    </bean>
-
-    <bean id="teamProjectAccessVO" class="pojo.valueObject.assist.TeamProjectAccessVO" scope="prototype">
-        <!--<property name="taskVO" ref="taskVO"/>-->
-        <!--<property name="teamProjectVO" ref="teamProjectVO"/>-->
-    </bean>
-
-    <bean id="studentScoreVO" class="pojo.valueObject.assist.StudentScoreVO"/>
-
-    <bean id="projectAccessTypeVO" class="pojo.valueObject.assist.ProjectAccessTypeVO">
-
-    </bean>
 
 
     <!-- DTO的VO -->
@@ -136,4 +101,7 @@
     <bean id="planDTO" class="pojo.valueObject.DTO.PlanDTO" scope="prototype"/>
     <bean id="projectDTO" class="pojo.valueObject.DTO.ProjectDTO" scope="prototype"/>
     <bean id="taskDTO" class="pojo.valueObject.DTO.TaskDTO" scope="prototype"/>
+
+    <!--JSONObject-->
+    <bean id="jsonObject" class="net.sf.json.JSONObject" scope="prototype"/>
 </beans>

@@ -26,4 +26,21 @@ public class TeacherDAO {
             return session.get(TeacherVO.class, id);
         }
     }
+
+    /**
+     * 更新教师信息
+     * @param teacherVO
+     * @return
+     */
+    public TeacherVO updateTeacherInfo(TeacherVO teacherVO) throws Exception{
+        try {
+            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.update(teacherVO);
+            return session.get(TeacherVO.class, teacherVO.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

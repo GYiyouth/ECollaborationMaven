@@ -15,8 +15,9 @@ public class TeacherDTO extends UserDTO {
     private Set<Integer> projectVOIdSet;
 
     public void clone(TeacherVO teacherVO) {
-        super.clone(teacherVO);
+
         if(teacherVO!=null){
+            super.clone(teacherVO);
             this.setHomePageUrl(teacherVO.getHomePageUrl());
             this.setNeedStudentsFlag(teacherVO.getNeedStudentsFlag());
             if(!teacherVO.getProjectVOSet().isEmpty()){

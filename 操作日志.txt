@@ -82,5 +82,7 @@
 2017/02/27
 葛尧：
     更新了ApplicationVO，加入了对message对依赖
+    BeanFactory做了一些小改动
+    增加了2个JSONHandler等一些工具，修改了UserDTO，TeacherDTO，新增了TeacherBO与修改老师资料的action
 耿：
     实现登录登出功能，创建团队，以及申请加入团队的功能

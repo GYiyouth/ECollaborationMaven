@@ -1,7 +1,5 @@
 package pojo.valueObject.domain;
 
-import pojo.valueObject.assist.MessageReceiverVO;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -27,7 +25,7 @@ public class UserVO {
     private String photo; //路径，默认放在web.upload.headPhotos下
     private String lastLogTime;
     private String activeBefore;
-    private int newFlag;
+    private int newsFlag;
     // toString needed
     @ManyToMany(targetEntity = MessageVO.class)
     @JoinTable(name = "message_receiver",
@@ -57,7 +55,7 @@ public class UserVO {
                 ", photo='" + photo + '\'' +
                 ", lastLogTime='" + lastLogTime + '\'' +
                 ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newFlag +
+                ", newFlag=" + newsFlag +
                 ", messageVOSet=" + messageVOSet.size() +
                 '}';
     }
@@ -152,11 +150,11 @@ public class UserVO {
     public void setActiveBefore(String activeBefore) {
         this.activeBefore = activeBefore;
     }
-    public int getNewFlag() {
-        return newFlag;
+    public int getNewsFlag() {
+        return newsFlag;
     }
-    public void setNewFlag(int newFlag) {
-        this.newFlag = newFlag;
+    public void setNewsFlag(int newFlag) {
+        this.newsFlag = newFlag;
     }
 
 

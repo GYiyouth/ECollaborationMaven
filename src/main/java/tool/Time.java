@@ -18,60 +18,60 @@ public class Time {
         return sdf.format(new Date());
     }
 
-    public String getYear(){
+    public static String getYear(){
         Date date = new Date();
         String year = String.format("%tY", date);
         return year;
     }
 
-    public String getMonth() {
+    public static String getMonth() {
         Date date = new Date();
         String month = String.format("%tm", date);
         return month;
     }
 
-    public String getDay() {
+    public static String getDay() {
         Date date = new Date();
         String day = String.format("%td", date);
         return day;
     }
 
-    public String getHour() {
+    public static String getHour() {
         Date date = new Date();
         String hour = String.format("%tH", date);
         return hour;
     }
 
-    public String getMinute() {
+    public static String getMinute() {
         Date date = new Date();
         String minute = String.format("%tM", date);
         return minute;
     }
 
-    public String getDateStr() {
+    public static String getDateStr() {
 
         Time time = new Time();
         return (time.getYear()+time.getMonth()+ time.getDay());
 
     }
 
-    public Date getDate() {
+    public static Date getDate() {
         return new Date();
     }
 
-    public String getDeadTime() {
+    public static String getDeadTime() {
         String year = getYear();
         int deadYear = Integer.parseInt(year) + 10;
         return (deadYear + "-" + getMonth() + "-" + getDay() + " " +  getHour() + ":" + getMinute() + ":" + getSecond());
     }
 
-    public String getSecond() {
+    public static String getSecond() {
         Date date = new Date();
         String second = String.format("%tS", date);
         return second;
     }
 
-    public String getTime() {
+    public static String getTime() {
 //		Date date = new Date();
 //		String time = String.format("%tY-%tm-%td %tH:%tM:%tS", date,date,date,date,date,date);
 //		return time;

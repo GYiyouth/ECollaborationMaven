@@ -905,183 +905,179 @@
       <comment>1：有未读消息</comment>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="246" parent="26" name="newFlag">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-    </column>
-    <key id="247" parent="26" name="PRIMARY">
+    <key id="246" parent="26" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="248" parent="27" name="id">
+    <column id="247" parent="27" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <key id="249" parent="27" name="PRIMARY">
+    <key id="248" parent="27" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="250" parent="27" name="FKtcesg5q2jaa5yyu9hy8php34l">
+    <foreign-key id="249" parent="27" name="FKtcesg5q2jaa5yyu9hy8php34l">
       <columns>id</columns>
       <ref-key>~.student.id_UNIQUE</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="251" parent="28" name="id">
+    <column id="250" parent="28" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="252" parent="28" name="creatorId">
+    <column id="251" parent="28" name="creatorId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="253" parent="28" name="projectId">
+    <column id="252" parent="28" name="projectId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="254" parent="28" name="fileId">
+    <column id="253" parent="28" name="fileId">
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="255" parent="28" name="FK658vocdamg5cbgv55ecaeltbe">
+    <index id="254" parent="28" name="FK658vocdamg5cbgv55ecaeltbe">
       <columns>fileId</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="256" parent="28" name="FKafx5pxg2afi2ggooo7sgtbhx5">
+    <index id="255" parent="28" name="FKafx5pxg2afi2ggooo7sgtbhx5">
       <columns>creatorId</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="257" parent="28" name="FKk9pf9ihmxvvr36j5197gnlj29">
+    <index id="256" parent="28" name="FKk9pf9ihmxvvr36j5197gnlj29">
       <columns>projectId</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="258" parent="28" name="PRIMARY">
+    <key id="257" parent="28" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="259" parent="28" name="FKafx5pxg2afi2ggooo7sgtbhx5">
+    <foreign-key id="258" parent="28" name="FKafx5pxg2afi2ggooo7sgtbhx5">
       <columns>creatorId</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="260" parent="28" name="FKk9pf9ihmxvvr36j5197gnlj29">
+    <foreign-key id="259" parent="28" name="FKk9pf9ihmxvvr36j5197gnlj29">
       <columns>projectId</columns>
       <ref-key>~.project.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="261" parent="28" name="FK658vocdamg5cbgv55ecaeltbe">
+    <foreign-key id="260" parent="28" name="FK658vocdamg5cbgv55ecaeltbe">
       <columns>fileId</columns>
       <ref-key>~.ecfile.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="262" parent="29" name="id">
+    <column id="261" parent="29" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="263" parent="29" name="studentId">
+    <column id="262" parent="29" name="studentId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="264" parent="29" name="projectId">
+    <column id="263" parent="29" name="projectId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="265" parent="29" name="planId">
+    <column id="264" parent="29" name="planId">
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="266" parent="29" name="FK28nptad4608k8p6bpq2kq5uv8">
+    <index id="265" parent="29" name="FK28nptad4608k8p6bpq2kq5uv8">
       <columns>studentId</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="267" parent="29" name="FK3qqs8va22efxkm88kwn109kap">
+    <index id="266" parent="29" name="FK3qqs8va22efxkm88kwn109kap">
       <columns>planId</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="268" parent="29" name="FKb3gxxtggfo7xacejhhod94mde">
+    <index id="267" parent="29" name="FKb3gxxtggfo7xacejhhod94mde">
       <columns>projectId</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="269" parent="29" name="PRIMARY">
+    <key id="268" parent="29" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="270" parent="29" name="FK28nptad4608k8p6bpq2kq5uv8">
+    <foreign-key id="269" parent="29" name="FK28nptad4608k8p6bpq2kq5uv8">
       <columns>studentId</columns>
       <ref-key>~.student.id_UNIQUE</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="271" parent="29" name="FKb3gxxtggfo7xacejhhod94mde">
+    <foreign-key id="270" parent="29" name="FKb3gxxtggfo7xacejhhod94mde">
       <columns>projectId</columns>
       <ref-key>~.project.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="272" parent="29" name="FK3qqs8va22efxkm88kwn109kap">
+    <foreign-key id="271" parent="29" name="FK3qqs8va22efxkm88kwn109kap">
       <columns>planId</columns>
       <ref-key>~.plan.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="273" parent="30" name="id">
+    <column id="272" parent="30" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="274" parent="30" name="typeId">
+    <column id="273" parent="30" name="typeId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="275" parent="30" name="studentId">
+    <column id="274" parent="30" name="studentId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="276" parent="30" name="score">
+    <column id="275" parent="30" name="score">
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="277" parent="30" name="FK5yqobei147ao3volt1ffnqhfw">
+    <index id="276" parent="30" name="FK5yqobei147ao3volt1ffnqhfw">
       <columns>studentId</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="278" parent="30" name="FKb3fo7ky7r55628cm52u6ofc8e">
+    <index id="277" parent="30" name="FKb3fo7ky7r55628cm52u6ofc8e">
       <columns>typeId</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="279" parent="30" name="PRIMARY">
+    <key id="278" parent="30" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="280" parent="30" name="FKb3fo7ky7r55628cm52u6ofc8e">
+    <foreign-key id="279" parent="30" name="FKb3fo7ky7r55628cm52u6ofc8e">
       <columns>typeId</columns>
       <ref-key>~.project_accessType.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="281" parent="30" name="FK5yqobei147ao3volt1ffnqhfw">
+    <foreign-key id="280" parent="30" name="FK5yqobei147ao3volt1ffnqhfw">
       <columns>studentId</columns>
       <ref-key>~.student.id_UNIQUE</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="282" parent="31" name="id">
+    <column id="281" parent="31" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="283" parent="31" name="projectId">
+    <column id="282" parent="31" name="projectId">
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="284" parent="31" name="type">
+    <column id="283" parent="31" name="type">
       <data-type>varchar(45)|0</data-type>
     </column>
-    <index id="285" parent="31" name="FKt456bcu81xjyfulubxngscrkk">
+    <index id="284" parent="31" name="FKt456bcu81xjyfulubxngscrkk">
       <columns>projectId</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="286" parent="31" name="PRIMARY">
+    <key id="285" parent="31" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="287" parent="31" name="FKt456bcu81xjyfulubxngscrkk">
+    <foreign-key id="286" parent="31" name="FKt456bcu81xjyfulubxngscrkk">
       <columns>projectId</columns>
       <ref-key>~.project.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
