@@ -36,6 +36,8 @@ public class ApplicationVO {
     @JoinColumn(name = "messageId", referencedColumnName = "id")
     private MessageVO messageVO;
 
+    private String handleTime;
+
     public ApplicationVO() {
     }
 
@@ -51,6 +53,14 @@ public class ApplicationVO {
                 ", createdTime='" + createdTime + '\'' +
                 ", result='" + result + '\'' +
                 '}';
+    }
+
+    public String getHandleTime() {
+        return handleTime;
+    }
+
+    public void setHandleTime(String handleTime) {
+        this.handleTime = handleTime;
     }
 
     public MessageVO getMessageVO() {
