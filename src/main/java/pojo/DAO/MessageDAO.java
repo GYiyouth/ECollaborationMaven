@@ -1,4 +1,4 @@
-package pojo.valueObject.DAO;
+package pojo.DAO;
 
 /**
  * Created by GR on 2017/2/27.

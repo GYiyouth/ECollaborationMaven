@@ -1,7 +1,7 @@
-package pojo.valueObject.BO;
+package pojo.businessObject;
 
 import org.springframework.context.ApplicationContext;
-import pojo.valueObject.DAO.TeamDAO;
+import pojo.DAO.TeamDAO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeamVO;
 import pojo.valueObject.domain.UserVO;

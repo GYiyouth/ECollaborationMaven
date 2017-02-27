@@ -1,4 +1,4 @@
-package pojo.valueObject.DAO;
+package pojo.DAO;
 
 import org.apache.struts2.components.Bean;
 import org.hibernate.Session;

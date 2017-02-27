@@ -3,7 +3,7 @@ package action.com.logIn;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.ApplicationContext;
-import pojo.valueObject.BO.UserBO;
+import pojo.businessObject.UserBO;
 import tool.BeanFactory;
 
 import java.util.Map;

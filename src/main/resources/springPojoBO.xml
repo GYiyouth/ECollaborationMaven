@@ -3,19 +3,19 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>
-    <bean id="teamBO" class="pojo.valueObject.BO.TeamBO" scope="prototype"/>
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
-    <!--<bean id="userBO" class="pojo.valueObject.BO.UserBO" scope="prototype"/>-->
+    <bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>
+    <bean id="teamBO" class="pojo.businessObject.TeamBO" scope="prototype"/>
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
 
 
 </beans>

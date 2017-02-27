@@ -5,7 +5,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.ApplicationContext;
-import pojo.valueObject.BO.UserBO;
+import pojo.businessObject.UserBO;
 import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 

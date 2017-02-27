@@ -1,4 +1,4 @@
-package pojo.valueObject.DAO;
+package pojo.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
