@@ -22,19 +22,19 @@ public class ApplicationVO {
     @JoinColumn(name = "teamId", referencedColumnName = "id")
     private TeamVO teamVO;
     @ManyToOne(targetEntity = ProjectVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectId", referencedColumnName = "id")
     private ProjectVO projectVO;
     @ManyToOne(targetEntity = UserVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "handlerId", referencedColumnName = "id")
     private UserVO handlerUserVO;
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "affectedId", referencedColumnName = "id")
     private UserVO affectedUserVO;
     private String createdTime;
-    private String handledTime;
     private String result;
+    @OneToOne(targetEntity = MessageVO.class)
+    @JoinColumn(name = "messageId", referencedColumnName = "id")
+    private MessageVO messageVO;
 
     public ApplicationVO() {
     }
@@ -49,9 +49,16 @@ public class ApplicationVO {
                 ", handlerUserVO=" + handlerUserVO.getId() +
                 ", affectedUserVO=" + affectedUserVO.getId() +
                 ", createdTime='" + createdTime + '\'' +
-                ", handledTime='" + handledTime + '\'' +
                 ", result='" + result + '\'' +
                 '}';
+    }
+
+    public MessageVO getMessageVO() {
+        return messageVO;
+    }
+
+    public void setMessageVO(MessageVO messageVO) {
+        this.messageVO = messageVO;
     }
 
     public int getId() {
@@ -108,14 +115,6 @@ public class ApplicationVO {
 
     public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
-    }
-
-    public String getHandledTime() {
-        return handledTime;
-    }
-
-    public void setHandledTime(String handledTime) {
-        this.handledTime = handledTime;
     }
 
     public String getResult() {

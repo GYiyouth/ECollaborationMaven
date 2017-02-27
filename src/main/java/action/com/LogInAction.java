@@ -11,6 +11,7 @@ public class LogInAction {
 
     public String execute() throws Exception {
         System.out.println(1);
+
         logger.error("This is info message.");
         System.out.println(2);
         return "success";

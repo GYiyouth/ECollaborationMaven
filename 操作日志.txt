@@ -78,3 +78,7 @@
 葛尧：
     添加了一些针对tomcat部署的依赖
     将日志放置的地方放在了logs文件夹里的ECollaboration文件夹里
+
+2017/02/27
+葛尧：
+    更新了ApplicationVO，加入了对message对依赖
