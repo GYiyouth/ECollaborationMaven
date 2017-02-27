@@ -13,5 +13,8 @@
     <import resource="springPojoVO.xml"/>
     <!--导入DAO 的配置文件-->
     <import resource="springPojoDAO.xml"/>
-
+    <!--导入tool 的配置文件-->
+    <import resource="springPojoTool.xml"/>
+    <!--导入 assist 的配置文件-->
+    <import resource="springPojoAssist.xml"/>
 </beans>

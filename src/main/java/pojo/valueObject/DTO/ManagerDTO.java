@@ -7,12 +7,12 @@ import pojo.valueObject.domain.UserVO;
  * Created by GR on 2017/2/24.
  */
 public class ManagerDTO extends UserDTO{
-    private Integer mRole;  //0：超级管理员 1：普通管理员
+    private String mRole;  //0：超级管理员 1：普通管理员
 
     public void clone(ManagerVO managerVO) {
         super.clone(managerVO);
         if(managerVO!=null){
-//            this.setmRole(managerVO.getmRole());
+            this.setmRole(managerVO.getmRole());
         }else{
             System.out.println("managerVO is null!!");
         }
@@ -26,11 +26,11 @@ public class ManagerDTO extends UserDTO{
                 '}';
     }
 
-    public Integer getmRole() {
+    public String getmRole() {
         return mRole;
     }
 
-    public void setmRole(Integer mRole) {
+    public void setmRole(String mRole) {
         this.mRole = mRole;
     }
 }

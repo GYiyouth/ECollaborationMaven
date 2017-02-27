@@ -7,8 +7,24 @@
 <struts>
 
     <package name="logIn" extends="struts-default">
-        <action name="logIn" class="action.com.LogInAction" method="execute">
-            <result name="success">index.jsp</result>
+
+        <action name="logIn" class="action.com.logIn.LogInAction">
+            <result name="teacher">teacher.jsp</result>
+            <result name="manager">manager.jsp</result>
+            <result name="student">student.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="logOut" class="action.com.logIn.LogOutAction">
+            <result name="success">success.jsp</result>
+        </action>
+
+        <action name="createTeam" class="action.com.team.CreateTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="applyJoinTeamAction" class="action.com.team.ApplyJoinTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
     </package>
 

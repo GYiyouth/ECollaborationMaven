@@ -13,7 +13,7 @@ public class ApplicationDTO {
     private int handlerId;
     private int affectedId;
     private String createdTime;
-    private String handledTime;
+    private String handleTime;
     private String result;
 
     public void clone(ApplicationVO applicationVO){
@@ -30,7 +30,7 @@ public class ApplicationDTO {
                 this.setAffectedId(applicationVO.getAffectedUserVO().getId());
             }
             this.setCreatedTime(applicationVO.getCreatedTime());
-            this.setHandledTime(applicationVO.getHandledTime());
+            this.setHandleTime(applicationVO.getHandleTime());
             this.setResult(applicationVO.getResult());
         }else{
             System.out.println("applicationVO is null!!");
@@ -46,7 +46,7 @@ public class ApplicationDTO {
                 ",handlerId=" + handlerId +
                 ",affectedId=" + affectedId +
                 ",createdTime=" + createdTime +
-                ",handledTime=" + handledTime +
+                ",handleTime=" + handleTime +
                 ",result=" + result +
                 "}";
     }
@@ -99,12 +99,12 @@ public class ApplicationDTO {
         this.createdTime = createdTime;
     }
 
-    public String getHandledTime() {
-        return handledTime;
+    public String getHandleTime() {
+        return handleTime;
     }
 
-    public void setHandledTime(String handledTime) {
-        this.handledTime = handledTime;
+    public void setHandleTime(String handleTime) {
+        this.handleTime = handleTime;
     }
 
     public String getResult() {
