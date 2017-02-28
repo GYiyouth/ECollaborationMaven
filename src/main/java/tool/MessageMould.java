@@ -23,7 +23,7 @@ public class MessageMould {
             MessageVO messageVO = context.getBean("messageVO",MessageVO.class);
             //设置消息内容
             messageVO.setTitle("加入团队申请！");
-            messageVO.setContent("又有新人社区宁加入您的团队！");
+            messageVO.setContent("又有新人申请加入您的团队！");
             messageVO.setCreateTime(Time.getCurrentTime());
             messageVO.setSenderUserVO(userVO);
             messageVO.setDeadDate("1999-01-01 00:00:00");

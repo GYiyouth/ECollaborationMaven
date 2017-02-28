@@ -20,6 +20,7 @@
     </package>
 
     <package name="team" extends="struts-default">
+
         <action name="createTeam" class="action.com.team.CreateTeamAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
@@ -29,6 +30,18 @@
             <result name="fail">fail.jsp</result>
         </action>
         <action name="getMyJoinTeams" class="action.com.team.GetMyJoinTeamsAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getTeamInfo" class="action.com.team.GetTeamInfoAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="acceptJoinApplication" class="action.com.team.AcceptJoinApplicationAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="refuseJoinApplication" class="action.com.team.RefuseJoinApplicationAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>

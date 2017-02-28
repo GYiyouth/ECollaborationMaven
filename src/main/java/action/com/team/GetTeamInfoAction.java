@@ -2,11 +2,9 @@ package action.com.team;
 
 import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
-import org.apache.struts2.components.Bean;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
-import pojo.businessObject.TeacherBO;
 import pojo.businessObject.TeamBO;
 import tool.BeanFactory;
 import tool.JSONHandler;
@@ -17,24 +15,27 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * 获取我加入的所有团队信息
+ * 根据teamId获取team信息
  * Created by GR on 2017/2/28.
+ * return JSONObject：jsonObject{teamBean:teamDTO、result:success/fail}
  */
-public class GetMyJoinTeamsAction extends ActionSupport implements ServletRequestAware, ServletResponseAware,SessionAware {
+public class GetTeamInfoAction extends ActionSupport implements ServletRequestAware, ServletResponseAware,SessionAware {
 
-    //不需要jsp提供数据
+    //jsp获取
+    private int teamId;
 
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
+
     private JSONObject jsonObject;
 
     @Override
     public String execute() throws Exception {
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
-        jsonObject = teamBO.getMyJoinTeams(session);
+        jsonObject = teamBO.getTeamInfoByTeamId(teamId);
         if(jsonObject==null){
-            System.out.println("ERROR:jsonObject==null---"+this.getClass()+"----execute()");
+            System.out.println("ERROR:jsonObject==null----"+this.getClass()+"---execute()");
             return "fail";
         }else{
             JSONHandler.sendJSON(jsonObject, response);
@@ -58,9 +59,16 @@ public class GetMyJoinTeamsAction extends ActionSupport implements ServletReques
         this.response.setCharacterEncoding("UTF-8");
     }
 
-    @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     public JSONObject getJsonObject() {

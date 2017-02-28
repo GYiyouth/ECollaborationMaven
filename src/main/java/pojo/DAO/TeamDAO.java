@@ -102,6 +102,7 @@ public class TeamDAO {
             Session session = sessionFactory.openSession();
             TeamVO teamVO = session.get(TeamVO.class, teamId);
             if(teamVO==null){
+                System.out.println("ERROR:teamVO is null---"+this.getClass()+"---getTeamVOByTeamId()");
                 return null;
             }else{
                 return teamVO;
@@ -135,7 +136,7 @@ public class TeamDAO {
     }
 
     /**
-     * 根据id获取某人加入的所有团队
+     * 根据userId获取某人加入的所有团队
      * @param id
      * @return ArrayList<TeamVO>:teamVOS / null(其中没查到返回非null，arrayList.size()==0)
      */
@@ -159,4 +160,89 @@ public class TeamDAO {
         }
     }
 
+    /**
+     * 接受申请加入团队请求
+     * @param applicationId
+     * @return
+     */
+    public String acceptJoinApplication(Integer applicationId) throws Exception{
+        if(applicationId==null||applicationId.equals("")){
+            System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---acceptJoinApplication()");
+            return "fail";
+        }else{
+            StudentTeamVO studentTeamVO = BeanFactory.getApplicationContext().getBean("studentTeamVO",StudentTeamVO.class);
+            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            try{
+                ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
+                if(applicationVO==null){
+                    System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---acceptJoinApplication()");
+                    return "fail";
+                }else{
+                    UserDAO userDAO = BeanFactory.getApplicationContext().getBean("userDAO",UserDAO.class);
+                    StudentVO studentVO = userDAO.getStudentVOByUserVO(applicationVO.getAffectedUserVO());
+                    TeamVO teamVO = applicationVO.getTeamVO();
+                    if(studentVO == null||teamVO == null){
+                        System.out.println("ERROR:studentVO/teamVO is null!!!---"+this.getClass()+"---acceptJoinApplication()");
+                        return "fail";
+                    }else {
+                        applicationVO.setResult("已处理");
+                        applicationVO.setHandleTime(Time.getCurrentTime());
+                        session.update(applicationVO);
+                        studentTeamVO.setStudentVO(studentVO);
+                        studentTeamVO.setTeamVO(teamVO);
+                        studentTeamVO.setLeaderFlag(false);
+                        session.save(studentTeamVO);
+                        transaction.commit();
+                        return "success";
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("??????????????????");
+                transaction.rollback();
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * 拒绝加入团队请求
+     * @param applicationId
+     * @return
+     */
+    public String refuseJoinApplication(Integer applicationId){
+        if(applicationId==null||applicationId.equals("")){
+            System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
+            return "fail";
+        }else{
+            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            try{
+                ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
+                if(applicationVO==null){
+                    System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
+                    return "fail";
+                }else{
+                    TeamVO teamVO = applicationVO.getTeamVO();
+                    if(teamVO == null){
+                        System.out.println("ERROR:teamVO is null!!!---"+this.getClass()+"---refuseJoinApplication()");
+                        return "fail";
+                    }else {
+                        applicationVO.setResult("已处理");
+                        applicationVO.setHandleTime(Time.getCurrentTime());
+                        session.update(applicationVO);
+                        transaction.commit();
+                        return "success";
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                transaction.rollback();
+                return "fail";
+            }
+        }
+    }
 }
