@@ -36,7 +36,7 @@ public class CreateTeamAction extends ActionSupport implements ServletRequestAwa
         TeamBO teamBO = context.getBean("teamBO",TeamBO.class);
         TeamVO teamVO = teamBO.createTeam(teamName,description,memberMax,session);
         if(teamVO==null){
-            System.out.println("创建团队返回失败---action/CreateTeamAction/createTeam()");
+            System.out.println("创建团队返回失败---"+this.getClass()+"---createTeam()");
             return "fail";
         }else{
             this.setTeamVO(teamVO);

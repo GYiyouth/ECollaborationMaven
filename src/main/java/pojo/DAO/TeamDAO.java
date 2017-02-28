@@ -13,6 +13,7 @@ import tool.BeanFactory;
 import tool.MessageMould;
 import tool.Time;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -93,7 +94,7 @@ public class TeamDAO {
      */
     public TeamVO getTeamVOByTeamId(Integer teamId){
         if(teamId==null||teamId.equals("")){
-            System.out.println("teamId is null---DAO/TeamDAO/getTeamVOByTeamId()");
+            System.out.println("teamId is null---"+this.getClass()+"---getTeamVOByTeamId()");
             return null;
         }else{
             ApplicationContext context = BeanFactory.getApplicationContext();
@@ -115,10 +116,9 @@ public class TeamDAO {
      */
     public StudentVO getLeaderStudentVOByTeamId(Integer teamId){
         if(teamId==null||teamId.equals("")){
-            System.out.println("teamId is null---DAO/TeamDAO/getLeaderStudentVOByTeamId()");
+            System.out.println("teamId is null---"+this.getClass()+"---getLeaderStudentVOByTeamId()");
             return null;
         }else {
-            ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
             Session session = sf.openSession();
             String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true";
@@ -128,9 +128,34 @@ public class TeamDAO {
                 StudentVO studentVO = (StudentVO)iterator.next();
                 return studentVO;
             }else{
-                System.out.println("没找到studentVO---DAO/TeamDAO/getLeaderStudentVOByTeamId()");
+                System.out.println("没找到studentVO---"+this.getClass()+"---getLeaderStudentVOByTeamId()");
                 return null;
             }
+        }
+    }
+
+    /**
+     * 根据id获取某人加入的所有团队
+     * @param id
+     * @return ArrayList<TeamVO>:teamVOS / null(其中没查到返回非null，arrayList.size()==0)
+     */
+    public ArrayList<TeamVO> getMyJoinTeamsByStudentId(Integer id){
+        if(id==null||id.equals("")){
+            System.out.println("id is null---"+this.getClass()+"---getMyJoinTeamsByStudentId()");
+            return null;
+        }else {
+            ArrayList<TeamVO> teamVOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            String hql = "select teamVO from StudentTeamVO as st where st.studentVO.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id",id);
+            Iterator iterator = query.list().iterator();
+            while (iterator.hasNext()){
+                TeamVO teamVO = (TeamVO) iterator.next();
+                teamVOS.add(teamVO);
+            }
+            return teamVOS;
         }
     }
 

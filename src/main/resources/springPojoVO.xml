@@ -104,4 +104,7 @@
 
     <!--JSONObject-->
     <bean id="jsonObject" class="net.sf.json.JSONObject" scope="prototype"/>
+
+    <!-- 集合 -->
+    <bean id="arrayList" class="java.util.ArrayList" scope="prototype"/>
 </beans>

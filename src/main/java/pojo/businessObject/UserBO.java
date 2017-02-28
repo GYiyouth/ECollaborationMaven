@@ -27,14 +27,14 @@ public class UserBO {
      */
     public String logIn(String logName, String passWord, Map<String , Object> session){
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
-            System.out.println("用户名或者密码为空---BO/UserBO");
+            System.out.println("用户名或者密码为空---"+this.getClass()+"logIn()");
             return "fail";
         }else {
             ApplicationContext context = BeanFactory.getApplicationContext();
             UserDAO userDAO = context.getBean("userDAO", UserDAO.class);
             UserVO userVO = userDAO.getUserInfo(logName,passWord);
             if(userVO==null){
-                System.out.println("没有这个用户user---BO/UserBO");
+                System.out.println("没有这个用户user---"+this.getClass()+"logIn()");
                 return "fail";
             }else{
                 session.clear();
@@ -46,7 +46,7 @@ public class UserBO {
                         session.put("managerVO", managerVO);
                         return "manager";
                     }else{
-                        System.out.println("获取管理员的信息为空---BO/UserBO");
+                        System.out.println("获取管理员的信息为空---"+this.getClass()+"logIn()");
                         return "fail";
                     }
                 }else if(userVO.getRole().equals("teacher")){
@@ -56,7 +56,7 @@ public class UserBO {
                         session.put("teacherVO", teacherVO);
                         return "teacher";
                     }else{
-                        System.out.println("获取老师的信息为空---BO/UserBO");
+                        System.out.println("获取老师的信息为空---"+this.getClass()+"logIn()");
                         return "fail";
                     }
                 }else if(userVO.getRole().equals("student")){
@@ -66,11 +66,11 @@ public class UserBO {
                         session.put("studentVO", studentVO);
                         return "student";
                     }else{
-                        System.out.println("获取学生的信息为空---BO/UserBO");
+                        System.out.println("获取学生的信息为空---"+this.getClass()+"logIn()");
                         return "fail";
                     }
                 }else{
-                    System.out.println("没有这种角色---BO/UserBO");
+                    System.out.println("没有这种角色---"+this.getClass()+"logIn()");
                     return "fail";
                 }
             }

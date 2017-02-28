@@ -23,10 +23,9 @@ public class UserDAO {
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
             return null;
         }else {
-            ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
+            Session session = sf.openSession();
             try{
-                Session session = sf.openSession();
                 String hql = "from UserVO as user where user.logName = :logName and passWord = :passWord";
                 Query query = session.createQuery(hql);
                 query.setParameter("logName",logName);

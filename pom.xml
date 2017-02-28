@@ -84,12 +84,6 @@
           <version>1.7.22</version>
       </dependency>
 
-      <dependency>
-          <groupId>javassist</groupId>
-          <artifactId>javassist</artifactId>
-          <version>3.12.1.GA</version>
-      </dependency>
-
       <!-- 添加Spring依赖 -->
       <dependency>
           <groupId>org.springframework</groupId>

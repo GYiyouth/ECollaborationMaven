@@ -22,7 +22,7 @@ public class StudentDAO {
      */
     public StudentVO getStudentInfoByStudentId(Integer studentId) {
         if (studentId == null || studentId.equals("")) {
-            System.out.println("studentId is null---DAO/StudentDAO/getStudentInfoByStudentId()" );
+            System.out.println("studentId is null---"+this.getClass()+"---getStudentInfoByStudentId()" );
             return null;
         } else {
             ApplicationContext context = BeanFactory.getApplicationContext();

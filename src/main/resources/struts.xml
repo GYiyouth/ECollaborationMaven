@@ -17,17 +17,22 @@
         <action name="logOut" class="action.com.logIn.LogOutAction">
             <result name="success">success.jsp</result>
         </action>
+    </package>
 
+    <package name="team" extends="struts-default">
         <action name="createTeam" class="action.com.team.CreateTeamAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
-        <action name="applyJoinTeamAction" class="action.com.team.ApplyJoinTeamAction">
+        <action name="applyJoinTeam" class="action.com.team.ApplyJoinTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getMyJoinTeams" class="action.com.team.GetMyJoinTeamsAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
     </package>
-    
     
 
 </struts>

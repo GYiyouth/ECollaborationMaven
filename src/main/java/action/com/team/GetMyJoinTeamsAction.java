@@ -1,12 +1,15 @@
 package action.com.team;
 
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
+import org.apache.struts2.components.Bean;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
-import org.springframework.context.ApplicationContext;
+import pojo.businessObject.TeacherBO;
 import pojo.businessObject.TeamBO;
 import tool.BeanFactory;
+import tool.JSONHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,23 +17,29 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * 申请加入团队
- * Created by GR on 2017/2/27.
+ * 获取我加入的所有团队信息
+ * Created by GR on 2017/2/28.
  */
-public class ApplyJoinTeamAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, SessionAware {
+public class GetMyJoinTeamsAction extends ActionSupport implements ServletRequestAware, ServletResponseAware,SessionAware {
 
-    //jsp获取：
-    private Integer teamId;
+    //不需要jsp提供数据
 
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
+    private JSONObject jsonObject;
 
     @Override
     public String execute() throws Exception {
-        ApplicationContext context = BeanFactory.getApplicationContext();
-        TeamBO teamBO = context.getBean("teamBO",TeamBO.class);
-        return teamBO.applyJoinTeam(teamId,session);
+        TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
+        jsonObject = teamBO.getMyJoinTeams(session);
+        if(jsonObject==null){
+            System.out.println("ERROR:jsonObject==null---"+this.getClass()+"---execute()");
+            return "fail";
+        }else{
+            JSONHandler.sendJSON(jsonObject, response);
+            return "success";
+        }
     }
 
     @Override
@@ -54,11 +63,11 @@ public class ApplyJoinTeamAction extends ActionSupport implements ServletRequest
         this.session = session;
     }
 
-    public Integer getTeamId() {
-        return teamId;
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 
-    public void setTeamId(Integer teamId) {
-        this.teamId = teamId;
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }
