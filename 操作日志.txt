@@ -101,3 +101,6 @@
     修改之前的代码：1.层层throw Exception，最后在action中可以分清异常的类别
                     2.封装成json
 
+2017/03/02
+葛尧：
+    删去PlanVO中studentVO的@Cascade注释

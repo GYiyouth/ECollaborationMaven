@@ -26,12 +26,13 @@ public class PlanDAO {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         try {
+
+            session.save(planVO);
             StudentProjectPlanVO sppVO = BeanFactory.getBean("studentProjectPlanVO", StudentProjectPlanVO.class);
 
             sppVO.setPlanVO(planVO);
             sppVO.setStudentVO(planVO.getStudentVO());
             sppVO.setProjectVO(projectVO);
-            session.save(planVO);
             session.save(sppVO);
             transaction.commit();
             return planVO;

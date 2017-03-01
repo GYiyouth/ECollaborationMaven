@@ -45,6 +45,7 @@
                 <value>pojo.valueObject.assist.ProjectAccessTypeVO</value>
             </list>
         </property>
+
         <property name="hibernateProperties">
             <props>
                 <!--执行数据库连接方言-->
