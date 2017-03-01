@@ -1,10 +1,15 @@
 package pojo.businessObject;
 
+import net.sf.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import pojo.DAO.ManagerDAO;
 import pojo.DAO.StudentDAO;
 import pojo.DAO.TeacherDAO;
 import pojo.DAO.UserDAO;
+import pojo.valueObject.DTO.ManagerDTO;
+import pojo.valueObject.DTO.StudentDTO;
+import pojo.valueObject.DTO.TeacherDTO;
+import pojo.valueObject.DTO.UserDTO;
 import pojo.valueObject.domain.ManagerVO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeacherVO;
@@ -25,53 +30,65 @@ public class UserBO {
      * @param session
      * @return student、manager、teacher、fail
      */
-    public String logIn(String logName, String passWord, Map<String , Object> session){
+    public JSONObject logIn(String logName, String passWord, Map<String , Object> session) throws Exception{
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
             System.out.println("用户名或者密码为空---"+this.getClass()+"logIn()");
-            return "fail";
+            return null;
         }else {
-            ApplicationContext context = BeanFactory.getApplicationContext();
-            UserDAO userDAO = context.getBean("userDAO", UserDAO.class);
+            JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
+            UserDAO userDAO = BeanFactory.getApplicationContext().getBean("userDAO", UserDAO.class);
+            UserDTO userDTO = BeanFactory.getApplicationContext().getBean("userDTO",UserDTO.class);
             UserVO userVO = userDAO.getUserInfo(logName,passWord);
             if(userVO==null){
                 System.out.println("没有这个用户user---"+this.getClass()+"logIn()");
-                return "fail";
+                return null;
             }else{
                 session.clear();
+                userDTO.clone(userVO);
                 session.put("userVO", userVO);
+                jsonObject.put("userBean",userDTO);
                 if(userVO.getRole().equals("manager")){
-                    ManagerDAO managerDAO = context.getBean("managerDAO",ManagerDAO.class);
+                    ManagerDAO managerDAO = BeanFactory.getApplicationContext().getBean("managerDAO",ManagerDAO.class);
                     ManagerVO managerVO = managerDAO.getManagerInfo(userVO.getId());
                     if(managerVO != null) {
+                        ManagerDTO managerDTO = BeanFactory.getApplicationContext().getBean("managerDTO",ManagerDTO.class);
+                        managerDTO.clone(managerVO);
                         session.put("managerVO", managerVO);
-                        return "manager";
+                        jsonObject.put("managerBean", managerDTO);
+                        return jsonObject;
                     }else{
                         System.out.println("获取管理员的信息为空---"+this.getClass()+"logIn()");
-                        return "fail";
+                        return null;
                     }
                 }else if(userVO.getRole().equals("teacher")){
-                    TeacherDAO teacherDAO = context.getBean("teacherDAO",TeacherDAO.class);
+                    TeacherDAO teacherDAO = BeanFactory.getApplicationContext().getBean("teacherDAO",TeacherDAO.class);
                     TeacherVO teacherVO = teacherDAO.getTeacherInfo(userVO.getId());
                     if(teacherVO != null) {
+                        TeacherDTO teacherDTO = BeanFactory.getApplicationContext().getBean("teacherDTO",TeacherDTO.class);
+                        teacherDTO.clone(teacherVO);
                         session.put("teacherVO", teacherVO);
-                        return "teacher";
+                        jsonObject.put("teacherBean", teacherDTO);
+                        return jsonObject;
                     }else{
                         System.out.println("获取老师的信息为空---"+this.getClass()+"logIn()");
-                        return "fail";
+                        return null;
                     }
                 }else if(userVO.getRole().equals("student")){
-                    StudentDAO studentDAO = context.getBean("studentDAO",StudentDAO.class);
+                    StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
                     StudentVO studentVO = studentDAO.getStudentInfoByStudentId(userVO.getId());
                     if(studentVO != null) {
+                        StudentDTO studentDTO = BeanFactory.getApplicationContext().getBean("studentDTO",StudentDTO.class);
+                        studentDTO.clone(studentVO);
                         session.put("studentVO", studentVO);
-                        return "student";
+                        jsonObject.put("studentBean",studentDTO);
+                        return jsonObject;
                     }else{
                         System.out.println("获取学生的信息为空---"+this.getClass()+"logIn()");
-                        return "fail";
+                        return null;
                     }
                 }else{
                     System.out.println("没有这种角色---"+this.getClass()+"logIn()");
-                    return "fail";
+                    return null;
                 }
             }
         }
@@ -82,8 +99,14 @@ public class UserBO {
      * @param session
      * @return
      */
-    public String logOut(Map<String, Object> session){
+    public JSONObject logOut(Map<String, Object> session){
+        JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject",JSONObject.class);
         session.clear();
-        return "success";
+        if(session.isEmpty()){
+            jsonObject.put("result","success");
+            return jsonObject;
+        }else{
+            return null;
+        }
     }
 }

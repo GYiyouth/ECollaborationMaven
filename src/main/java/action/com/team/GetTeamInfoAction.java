@@ -33,13 +33,15 @@ public class GetTeamInfoAction extends ActionSupport implements ServletRequestAw
     @Override
     public String execute() throws Exception {
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
-        jsonObject = teamBO.getTeamInfoByTeamId(teamId);
-        if(jsonObject==null){
-            System.out.println("ERROR:jsonObject==null----"+this.getClass()+"---execute()");
-            return "fail";
-        }else{
+        try {
+            jsonObject = teamBO.getTeamInfoByTeamId(teamId);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
         }
     }
 

@@ -1,6 +1,7 @@
 package action.com.logIn;
 
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -8,11 +9,13 @@ import org.springframework.context.ApplicationContext;
 import pojo.businessObject.UserBO;
 import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
+import tool.JSONHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.logging.Handler;
 
 /**
  * 登录
@@ -27,14 +30,23 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
-    private UserVO userVO;
+
+    private JSONObject jsonObject;
 
     @Override
     public String execute() throws Exception {
         ApplicationContext context = BeanFactory.getApplicationContext();
         UserBO userBO = context.getBean("userBO",UserBO.class);
-        String result = userBO.logIn(userName,passWord,session);
-        return result;
+        try {
+            jsonObject = userBO.logIn(userName, passWord, session);
+            JSONHandler.sendJSON(jsonObject,response);
+            return "success";
+        }catch(Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
+        }
     }
 
 
@@ -52,14 +64,6 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
-    }
-
-    public UserVO getUserVO() {
-        return userVO;
-    }
-
-    public void setUserVO(UserVO userVO) {
-        this.userVO = userVO;
     }
 
     @Override

@@ -1,12 +1,14 @@
 package action.com.team;
 
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.ApplicationContext;
 import pojo.businessObject.TeamBO;
 import tool.BeanFactory;
+import tool.JSONHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,12 +28,24 @@ public class ApplyJoinTeamAction extends ActionSupport implements ServletRequest
     private HttpServletResponse response;
     private Map<String, Object> session;
 
+    private JSONObject jsonObject;
+
     @Override
     public String execute() throws Exception {
         ApplicationContext context = BeanFactory.getApplicationContext();
         TeamBO teamBO = context.getBean("teamBO",TeamBO.class);
-        return teamBO.applyJoinTeam(teamId,session);
+        try {
+            jsonObject = teamBO.applyJoinTeam(teamId, session);
+            JSONHandler.sendJSON(jsonObject,response);
+            return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
+        }
     }
+
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
@@ -60,5 +74,13 @@ public class ApplyJoinTeamAction extends ActionSupport implements ServletRequest
 
     public void setTeamId(Integer teamId) {
         this.teamId = teamId;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }

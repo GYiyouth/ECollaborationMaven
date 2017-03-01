@@ -1,6 +1,7 @@
 package action.com.team;
 
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -8,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import pojo.businessObject.TeamBO;
 import pojo.valueObject.domain.TeamVO;
 import tool.BeanFactory;
+import tool.JSONHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,19 +30,21 @@ public class CreateTeamAction extends ActionSupport implements ServletRequestAwa
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
-    private TeamVO teamVO;
+
+    private JSONObject jsonObject;
 
     @Override
     public String execute() throws Exception {
-        ApplicationContext context = BeanFactory.getApplicationContext();
-        TeamBO teamBO = context.getBean("teamBO",TeamBO.class);
-        TeamVO teamVO = teamBO.createTeam(teamName,description,memberMax,session);
-        if(teamVO==null){
-            System.out.println("创建团队返回失败---"+this.getClass()+"---createTeam()");
-            return "fail";
-        }else{
-            this.setTeamVO(teamVO);
+        TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
+        try {
+            jsonObject = teamBO.createTeam(teamName, description, memberMax, session);
+            JSONHandler.sendJSON(jsonObject,response);
             return "success";
+        }catch(Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
         }
     }
 
@@ -68,14 +72,6 @@ public class CreateTeamAction extends ActionSupport implements ServletRequestAwa
         this.memberMax = memberMax;
     }
 
-    public TeamVO getTeamVO() {
-        return teamVO;
-    }
-
-    public void setTeamVO(TeamVO teamVO) {
-        this.teamVO = teamVO;
-    }
-
     @Override
     public void setServletRequest(HttpServletRequest request) {
         this.request = request;
@@ -95,5 +91,13 @@ public class CreateTeamAction extends ActionSupport implements ServletRequestAwa
     @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }

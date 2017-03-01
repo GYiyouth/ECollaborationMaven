@@ -26,7 +26,7 @@ public class TeamDAO {
      * @param teamVO
      * @return TeamVO/null
      */
-    public TeamVO createTeam(TeamVO teamVO, StudentVO studentVO){
+    public TeamVO createTeam(TeamVO teamVO, StudentVO studentVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -39,12 +39,13 @@ public class TeamDAO {
             studentTeamVO.setLeaderFlag(true);
             session.save(studentTeamVO);
             transaction.commit();
+            teamVO = session.get(TeamVO.class,teamVO.getId());
+            return teamVO;
         }catch(Exception e){
             e.printStackTrace();
             transaction.rollback();
-            return null;
+            throw e;
         }
-        return teamVO;
     }
 
     /**
@@ -54,7 +55,7 @@ public class TeamDAO {
      * @param teamVO
      * @return success/fail
      */
-    public String applyJoinTeam(UserVO senderUserVO, UserVO receiverUserVO, TeamVO teamVO){
+    public String applyJoinTeam(UserVO senderUserVO, UserVO receiverUserVO, TeamVO teamVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -83,7 +84,7 @@ public class TeamDAO {
         }catch(Exception e){
             e.printStackTrace();
             transaction.rollback();
-            return "fail";
+            throw e;
         }
     }
 
@@ -92,7 +93,7 @@ public class TeamDAO {
      * @param teamId
      * @return teamVO/null
      */
-    public TeamVO getTeamVOByTeamId(Integer teamId){
+    public TeamVO getTeamVOByTeamId(Integer teamId) throws Exception{
         if(teamId==null||teamId.equals("")){
             System.out.println("teamId is null---"+this.getClass()+"---getTeamVOByTeamId()");
             return null;
@@ -100,12 +101,17 @@ public class TeamDAO {
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
             Session session = sessionFactory.openSession();
-            TeamVO teamVO = session.get(TeamVO.class, teamId);
-            if(teamVO==null){
-                System.out.println("ERROR:teamVO is null---"+this.getClass()+"---getTeamVOByTeamId()");
-                return null;
-            }else{
-                return teamVO;
+            try {
+                TeamVO teamVO = session.get(TeamVO.class, teamId);
+                if (teamVO == null) {
+                    System.out.println("ERROR:teamVO is null---" + this.getClass() + "---getTeamVOByTeamId()");
+                    return null;
+                } else {
+                    return teamVO;
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                throw e;
             }
         }
     }
@@ -115,22 +121,27 @@ public class TeamDAO {
      * @param teamId
      * @return studentVO/null
      */
-    public StudentVO getLeaderStudentVOByTeamId(Integer teamId){
+    public StudentVO getLeaderStudentVOByTeamId(Integer teamId) throws Exception{
         if(teamId==null||teamId.equals("")){
             System.out.println("teamId is null---"+this.getClass()+"---getLeaderStudentVOByTeamId()");
             return null;
         }else {
             SessionFactory sf = BeanFactory.getSessionFactory();
             Session session = sf.openSession();
-            String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true";
-            Query query = session.createQuery(hql);
-            Iterator iterator = query.iterate();
-            if (iterator.hasNext()){
-                StudentVO studentVO = (StudentVO)iterator.next();
-                return studentVO;
-            }else{
-                System.out.println("没找到studentVO---"+this.getClass()+"---getLeaderStudentVOByTeamId()");
-                return null;
+            try {
+                String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true";
+                Query query = session.createQuery(hql);
+                Iterator iterator = query.iterate();
+                if (iterator.hasNext()) {
+                    StudentVO studentVO = (StudentVO) iterator.next();
+                    return studentVO;
+                } else {
+                    System.out.println("没找到studentVO---" + this.getClass() + "---getLeaderStudentVOByTeamId()");
+                    return null;
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                throw e;
             }
         }
     }
@@ -140,7 +151,7 @@ public class TeamDAO {
      * @param id
      * @return ArrayList<TeamVO>:teamVOS / null(其中没查到返回非null，arrayList.size()==0)
      */
-    public ArrayList<TeamVO> getMyJoinTeamsByStudentId(Integer id){
+    public ArrayList<TeamVO> getMyJoinTeamsByStudentId(Integer id) throws Exception{
         if(id==null||id.equals("")){
             System.out.println("id is null---"+this.getClass()+"---getMyJoinTeamsByStudentId()");
             return null;
@@ -148,15 +159,20 @@ public class TeamDAO {
             ArrayList<TeamVO> teamVOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
             Session session = sessionFactory.openSession();
-            String hql = "select teamVO from StudentTeamVO as st where st.studentVO.id = :id";
-            Query query = session.createQuery(hql);
-            query.setParameter("id",id);
-            Iterator iterator = query.list().iterator();
-            while (iterator.hasNext()){
-                TeamVO teamVO = (TeamVO) iterator.next();
-                teamVOS.add(teamVO);
+            try {
+                String hql = "select teamVO from StudentTeamVO as st where st.studentVO.id = :id";
+                Query query = session.createQuery(hql);
+                query.setParameter("id", id);
+                Iterator iterator = query.list().iterator();
+                while (iterator.hasNext()) {
+                    TeamVO teamVO = (TeamVO) iterator.next();
+                    teamVOS.add(teamVO);
+                }
+                return teamVOS;
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
             }
-            return teamVOS;
         }
     }
 
@@ -200,7 +216,6 @@ public class TeamDAO {
                 }
             }catch(Exception e){
                 e.printStackTrace();
-                System.out.println("??????????????????");
                 transaction.rollback();
                 throw e;
             }
@@ -212,7 +227,7 @@ public class TeamDAO {
      * @param applicationId
      * @return
      */
-    public String refuseJoinApplication(Integer applicationId){
+    public String refuseJoinApplication(Integer applicationId) throws Exception{
         if(applicationId==null||applicationId.equals("")){
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
             return "fail";
@@ -241,7 +256,7 @@ public class TeamDAO {
             }catch(Exception e){
                 e.printStackTrace();
                 transaction.rollback();
-                return "fail";
+                throw e;
             }
         }
     }

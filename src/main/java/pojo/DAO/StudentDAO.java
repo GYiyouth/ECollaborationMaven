@@ -20,7 +20,7 @@ public class StudentDAO {
      * @param studentId
      * @return StudentVO/null
      */
-    public StudentVO getStudentInfoByStudentId(Integer studentId) {
+    public StudentVO getStudentInfoByStudentId(Integer studentId) throws Exception{
         if (studentId == null || studentId.equals("")) {
             System.out.println("studentId is null---"+this.getClass()+"---getStudentInfoByStudentId()" );
             return null;
@@ -29,11 +29,16 @@ public class StudentDAO {
             SessionFactory sf = BeanFactory.getSessionFactory();
             Session session = sf.openSession();
             //如果没有这个学生信息  返回null;
-            StudentVO studentVO = session.get(StudentVO.class, studentId);
-            if(studentVO==null){
-                return null;
-            }else{
-                return studentVO;
+            try {
+                StudentVO studentVO = session.get(StudentVO.class, studentId);
+                if (studentVO == null) {
+                    return null;
+                } else {
+                    return studentVO;
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                throw e;
             }
         }
     }
