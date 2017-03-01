@@ -33,7 +33,8 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
     public String execute() throws Exception {
         ApplicationContext context = BeanFactory.getApplicationContext();
         UserBO userBO = context.getBean("userBO",UserBO.class);
-        return userBO.logIn(userName,passWord,session);
+        String result = userBO.logIn(userName,passWord,session);
+        return result;
     }
 
 

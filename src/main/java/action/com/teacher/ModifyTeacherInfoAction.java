@@ -58,7 +58,8 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
             teacherVO.setLastLogTime(lastLogTime);
             teacherVO.setActiveBefore(activeBefore);
             teacherVO.setNewsFlag(newsFlag);
-            jsonObject = TeacherBO.updateTeacherInfo(teacherVO);
+            TeacherBO teacherBO = BeanFactory.getBean("teacherBO", TeacherBO.class);
+            jsonObject = teacherBO.updateTeacherInfo(teacherVO);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch (Exception e){

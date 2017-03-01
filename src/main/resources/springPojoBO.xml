@@ -6,6 +6,7 @@
     <bean id="userBO" class="pojo.businessObject.UserBO"/>
     <bean id="teamBO" class="pojo.businessObject.TeamBO"/>
     <bean id="teacherBO" class="pojo.businessObject.TeacherBO"/>
+    <bean id="planBO" class="pojo.businessObject.PlanBO"/>
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->

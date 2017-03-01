@@ -1,5 +1,6 @@
 package tool;
 
+import net.sf.json.JSONObject;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,5 +25,9 @@ public class BeanFactory {
     }
     public static SessionFactory getSessionFactory(){
         return getApplicationContext().getBean("sessionFactory", SessionFactory.class);
+    }
+
+    public static JSONObject getJSONO(){
+        return getBean("jsonObject", JSONObject.class);
     }
 }
