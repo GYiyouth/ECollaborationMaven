@@ -72,7 +72,7 @@ public class TeamBO {
             ApplicationContext context = BeanFactory.getApplicationContext();
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
-            UserVO senderUserVO = (UserVO) session.get("userVO");
+            UserVO senderUserVO = (UserVO) session.get("studentVO");
             try {
                 UserVO receiverUserVO = teamDAO.getLeaderStudentVOByTeamId(teamId);
                 TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
@@ -190,6 +190,12 @@ public class TeamBO {
     }
 
 
+    /**
+     * 拒绝某人加入团队
+     * @param applicationId
+     * @return
+     * @throws Exception
+     */
     public JSONObject refuseJoinApplication(Integer applicationId) throws Exception{
         if(applicationId==null||applicationId.equals("")){
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
@@ -211,6 +217,16 @@ public class TeamBO {
                 throw e;
             }
         }
+    }
+
+    /**
+     * 获取team在某个项目的所有信息，包括代码、文件数、学生、计划
+     * @param teamId
+     * @param projectId
+     * @return
+     */
+    public JSONObject getTeamCodeECFileInfo(Integer teamId, Integer projectId){
+        return null;
     }
 
 }

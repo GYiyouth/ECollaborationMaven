@@ -44,9 +44,9 @@ public class UserBO {
                 return null;
             }else{
                 session.clear();
-                userDTO.clone(userVO);
-                session.put("userVO", userVO);
-                jsonObject.put("userBean",userDTO);
+//                userDTO.clone(userVO);
+//                session.put("userVO", userVO);
+//                jsonObject.put("userBean",userDTO);
                 if(userVO.getRole().equals("manager")){
                     ManagerDAO managerDAO = BeanFactory.getApplicationContext().getBean("managerDAO",ManagerDAO.class);
                     ManagerVO managerVO = managerDAO.getManagerInfo(userVO.getId());

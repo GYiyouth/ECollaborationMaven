@@ -15,6 +15,7 @@ import tool.Time;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by GR on 2017/2/26.
@@ -174,6 +175,35 @@ public class TeamDAO {
                 throw e;
             }
         }
+    }
+
+    /**
+     * 根据teamId获取团队的所有学生set集合
+     * @return
+     */
+    public Set<StudentVO> getStudentVOSByTeamId(Integer teamId){
+        if(teamId == null||teamId.equals("")){
+            return null;
+        }else{
+            Session session = BeanFactory.getSessionFactory().openSession();
+            try{
+                String hql = "select StudentVO from StudentTeamVO as st where st.logName = :logName and passWord = :passWord";
+//                Query query = session.createQuery(hql);
+//                query.setParameter("logName",logName);
+//                query.setParameter("passWord",passWord);
+//                Iterator iterator = query.iterate();
+//                if (iterator.hasNext()){
+//                    UserVO userVO = (UserVO)iterator.next();
+////                    return userVO;
+//                }else{
+//                    return null;
+//                }
+            }catch(Exception e){
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        return null;
     }
 
     /**
