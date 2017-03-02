@@ -3,16 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userDAO" class="pojo.DAO.UserDAO" />
-    <bean id="studentDAO" class="pojo.DAO.StudentDAO"/>
-    <bean id="teacherDAO" class="pojo.DAO.TeacherDAO" />
-    <bean id="managerDAO" class="pojo.DAO.ManagerDAO" />
-    <bean id="teamDAO" class="pojo.DAO.TeamDAO"/>
-    <bean id="planDAO" class="pojo.DAO.PlanDAO"/>
-    <bean id="projectDAO" class="pojo.DAO.ProjectDAO"/>
-    <bean id="applicationDAO" class="pojo.DAO.ApplicationDAO"/>
+    <bean id="userDAO" class="pojo.DAO.UserDAO" scope="prototype"/>
+    <bean id="studentDAO" class="pojo.DAO.StudentDAO" scope="prototype"/>
+    <bean id="teacherDAO" class="pojo.DAO.TeacherDAO" scope="prototype"/>
+    <bean id="managerDAO" class="pojo.DAO.ManagerDAO" scope="prototype"/>
+    <bean id="teamDAO" class="pojo.DAO.TeamDAO" scope="prototype"/>
+    <bean id="planDAO" class="pojo.DAO.PlanDAO" scope="prototype"/>
+    <bean id="projectDAO" class="pojo.DAO.ProjectDAO" scope="prototype"/>
+    <bean id="applicationDAO" class="pojo.DAO.ApplicationDAO" scope="prototype"/>
     <bean id="codeDAO" class="pojo.DAO.CodeDAO" scope="prototype"/>
     <bean id="ecFileDAO" class="pojo.DAO.ECFileDAO" scope="prototype"/>
+    <bean id="accessScoreDAO" class="pojo.DAO.AccessScoreDAO" scope="prototype"/>
     <!--<bean id="teacherDAO" class="pojo.DAO.TeacherDAO" scope="prototype"/>-->
     <!--<bean id="managerDAO" class="pojo.DAO.ManagerDAO" scope="prototype"/>-->
     <!--<bean id="userDAO" class="pojo.DAO.UserDAO" scope="prototype"/>-->
