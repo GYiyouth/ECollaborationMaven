@@ -121,3 +121,5 @@
          * 如果是教师，会返回teacherVO中的projectSet
          * session里放置projectVOList
     完成查看projectVOList的action
+
+    新增一个AccessScoreDAO，放置有关打分评价的东西

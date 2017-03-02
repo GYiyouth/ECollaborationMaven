@@ -49,7 +49,7 @@ public class GetMyProjectVOList implements SessionAware, ServletRequestAware, Se
         }
 
 
-        UserVO userVO;
+        UserVO userVO = null;
         if (session.containsKey("teacherVO")){
             userVO = (TeacherVO) session.get("teacherVO");
         }else if (session.containsKey("studentVO")){
@@ -126,5 +126,57 @@ public class GetMyProjectVOList implements SessionAware, ServletRequestAware, Se
     public void setServletResponse(HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public ArrayList<ProjectDTO> getOtherProjectDTOList() {
+        return otherProjectDTOList;
+    }
+
+    public void setOtherProjectDTOList(ArrayList<ProjectDTO> otherProjectDTOList) {
+        this.otherProjectDTOList = otherProjectDTOList;
+    }
+
+    public ArrayList<ProjectDTO> getSchoolProjectDTOList() {
+        return schoolProjectDTOList;
+    }
+
+    public void setSchoolProjectDTOList(ArrayList<ProjectDTO> schoolProjectDTOList) {
+        this.schoolProjectDTOList = schoolProjectDTOList;
+    }
+
+    public ArrayList<ProjectDTO> getInterestProjectDTOList() {
+        return interestProjectDTOList;
+    }
+
+    public void setInterestProjectDTOList(ArrayList<ProjectDTO> interestProjectDTOList) {
+        this.interestProjectDTOList = interestProjectDTOList;
     }
 }
