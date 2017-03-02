@@ -43,7 +43,6 @@ public class ProjectVO {
 	private TeacherVO teacherVO;
 
     @ManyToMany(targetEntity = TeamVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinTable(name = "team_project",
             joinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id")

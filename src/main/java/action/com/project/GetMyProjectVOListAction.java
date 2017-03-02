@@ -71,8 +71,8 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
                 ProjectDTO projectDTO = BeanFactory.getBean("projectDTO", ProjectDTO.class);
                 projectDTO.clone(projectVO);
                 int priority;
-                if (projectDTO.getPriority() == null)
-                    priority = -1;
+                if (projectDTO.getPriority() == null || projectDTO.getPriority() == 0)
+                    priority = 3;
                 else
                     priority = projectDTO.getPriority();
 
@@ -100,7 +100,7 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
             jsonObject.put("result", "success");
             jsonObject.put(jsonProperty[0], schoolProjectDTOList);
             jsonObject.put(jsonProperty[1], interestProjectDTOList);
-            jsonObject.put(jsonProperty[2], interestProjectDTOList);
+            jsonObject.put(jsonProperty[2], otherProjectDTOList);
 
             JSONHandler.sendJSON(jsonObject, response);
             return "success";

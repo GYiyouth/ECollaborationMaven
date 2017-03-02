@@ -3,10 +3,7 @@ package pojo.businessObject;
 //import com.sun.istack.internal.Nullable;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
-import pojo.valueObject.domain.ProjectVO;
-import pojo.valueObject.domain.StudentVO;
-import pojo.valueObject.domain.TeacherVO;
-import pojo.valueObject.domain.UserVO;
+import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 
 import java.util.ArrayList;
@@ -115,6 +112,17 @@ public class ProjectBO {
         session.put(sessionProperty, arrayList);
 
         return arrayList;
+    }
+
+    /**
+     * 团队申请项目
+     * 消息会涉及，团队中的所有人，项目的老师
+     * @param teamVO
+     * @param projectVO
+     * @throws Exception
+     */
+    public void applyProject(TeamVO teamVO, ProjectVO projectVO, Map session) throws Exception{
+//        ApplicationVO applicationVO
     }
 
 }
