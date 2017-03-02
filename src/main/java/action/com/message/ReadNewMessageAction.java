@@ -89,4 +89,33 @@ public class ReadNewMessageAction implements SessionAware, ServletRequestAware, 
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map getSession() {
+        return session;
+    }
+
+
+    public ArrayList<MessageDTO> getMessageDTOArrayList() {
+        return messageDTOArrayList;
+    }
+
+    public void setMessageDTOArrayList(ArrayList<MessageDTO> messageDTOArrayList) {
+        this.messageDTOArrayList = messageDTOArrayList;
+    }
 }
