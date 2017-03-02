@@ -35,7 +35,7 @@
 
     <bean id="studentScoreVO" class="pojo.valueObject.assist.StudentScoreVO" scope="prototype"/>
 
-    <bean id="projectAccessTypeVO" class="pojo.valueObject.assist.ProjectAccessTypeVO" scope="prototype">
+    <bean id="projectAccessTypeVO" class="pojo.valueObject.assist.ProjectAccessTypeVO" scope="prototype"/>
 
-    </bean>
+    <bean id="projectTaskVO" class="pojo.valueObject.assist.ProjectTaskVO" scope="prototype"/>
 </beans>
