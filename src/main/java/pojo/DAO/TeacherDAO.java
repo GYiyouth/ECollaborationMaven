@@ -2,9 +2,14 @@ package pojo.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import pojo.valueObject.domain.TeacherVO;
 import tool.BeanFactory;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by GR on 2017/2/26.
@@ -38,6 +43,31 @@ public class TeacherDAO {
             Session session = sessionFactory.openSession();
             session.update(teacherVO);
             return session.get(TeacherVO.class, teacherVO.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    /**
+     * 获取所有教师
+     * @return
+     */
+    public HashMap<Integer, TeacherVO> getAllTeacher(){
+        HashMap<Integer, TeacherVO> hashMap = new HashMap<>();
+        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            List<TeacherVO> list = session.createCriteria(TeacherVO.class)
+                    .list();
+            transaction.commit();
+            Iterator iterator = list.iterator();
+            while (iterator.hasNext()){
+                TeacherVO teacherVO = (TeacherVO) iterator.next();
+                hashMap.put(teacherVO.getId(), teacherVO);
+            }
+            return hashMap;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
