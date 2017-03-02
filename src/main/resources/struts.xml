@@ -97,4 +97,11 @@
         </action>
     </package>
 
+
+    <package name="message" extends="struts-default">
+        <action name="readNewMessage" class="action.com.message.ReadNewMessageAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
 </struts>

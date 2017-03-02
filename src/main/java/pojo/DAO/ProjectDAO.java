@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import pojo.valueObject.assist.MessageReceiverVO;
 import pojo.valueObject.assist.StudentTeamVO;
 import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
@@ -230,7 +231,7 @@ public class ProjectDAO {
 
             if (teamVO == null || projectVO == null)
                 throw new NullPointerException("teamVO == null || projectVO == null");
-            ApplicationVO applicationVO = BeanFactory.getBean("application", ApplicationVO.class);
+            ApplicationVO applicationVO = BeanFactory.getBean("applicationVO", ApplicationVO.class);
             applicationVO.setType("project");
             applicationVO.setTeamVO(teamVO);
             applicationVO.setProjectVO(projectVO);
@@ -253,15 +254,21 @@ public class ProjectDAO {
             messageVO.setDeadDate(Time.getDeadTime());
             session.save(messageVO);
 
+            MessageReceiverVO messageReceiverVO = BeanFactory.getBean("messageReceiverVO", MessageReceiverVO.class);
+            messageReceiverVO.setMessageVO(messageVO);
+            messageReceiverVO.setReceiverUserVO(handleUserVO);
+            messageReceiverVO.setReadFlag(false);
+            session.save(messageReceiverVO);
+
             Integer newsFlag = handleUserVO.getNewsFlag();
             if (newsFlag != null )
                 newsFlag ++;
             else
                 newsFlag = 1;
             handleUserVO.setNewsFlag(newsFlag);
-            session.update(handleUserVO);
 
-            session.save(messageVO);
+            session.update(handleUserVO);
+            session.save(applicationVO);
 
             transaction.commit();
 

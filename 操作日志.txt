@@ -131,5 +131,7 @@
     完成搜索项目的action
     完成申请项目的大DAO
 
+    完成 获取 未读消息的 action ReadNewMessageAction，不会关联Application
+
 耿：
     老师发布任务
