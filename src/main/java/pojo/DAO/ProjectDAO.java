@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import pojo.valueObject.assist.MessageReceiverVO;
 import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentTeamVO;
 import pojo.valueObject.assist.TeamProjectVO;
@@ -254,15 +255,21 @@ public class ProjectDAO {
             messageVO.setDeadDate(Time.getDeadTime());
             session.save(messageVO);
 
+            MessageReceiverVO messageReceiverVO = BeanFactory.getBean("messageReceiverVO", MessageReceiverVO.class);
+            messageReceiverVO.setMessageVO(messageVO);
+            messageReceiverVO.setReceiverUserVO(handleUserVO);
+            messageReceiverVO.setReadFlag(false);
+            session.save(messageReceiverVO);
+
             Integer newsFlag = handleUserVO.getNewsFlag();
             if (newsFlag != null )
                 newsFlag ++;
             else
                 newsFlag = 1;
             handleUserVO.setNewsFlag(newsFlag);
-            session.update(handleUserVO);
 
-            session.save(messageVO);
+            session.update(handleUserVO);
+            session.save(applicationVO);
 
             transaction.commit();
 

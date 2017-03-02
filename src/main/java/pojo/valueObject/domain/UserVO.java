@@ -30,7 +30,7 @@ public class UserVO {
     private String photo; //路径，默认放在web.upload.headPhotos下
     private String lastLogTime;
     private String activeBefore;
-    private int newsFlag;
+    private Integer newsFlag;
     // toString needed
     @ManyToMany(targetEntity = MessageVO.class)
     @JoinTable(name = "message_receiver",
@@ -60,7 +60,7 @@ public class UserVO {
                 ", photo='" + photo + '\'' +
                 ", lastLogTime='" + lastLogTime + '\'' +
                 ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newsFlag +
+                ", newsFlag=" + newsFlag +
                 ", messageVOSet=" + messageVOSet.size() +
                 '}';
     }
@@ -155,11 +155,11 @@ public class UserVO {
     public void setActiveBefore(String activeBefore) {
         this.activeBefore = activeBefore;
     }
-    public int getNewsFlag() {
+    public Integer getNewsFlag() {
         return newsFlag;
     }
-    public void setNewsFlag(int newFlag) {
-        this.newsFlag = newFlag;
+    public void setNewsFlag(int newsFlag) {
+        this.newsFlag = newsFlag;
     }
 
 
