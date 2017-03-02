@@ -68,9 +68,15 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
             Iterator iterator = projectVOList.iterator();
             while (iterator.hasNext()){
                 ProjectVO projectVO = (ProjectVO) iterator.next();
-                ProjectDTO projectDTO = new ProjectDTO();
+                ProjectDTO projectDTO = BeanFactory.getBean("projectDTO", ProjectDTO.class);
                 projectDTO.clone(projectVO);
-                switch (projectDTO.getPriority()){
+                int priority;
+                if (projectDTO.getPriority() == null)
+                    priority = -1;
+                else
+                    priority = projectDTO.getPriority();
+
+                switch (priority){
                     case 1:{
                         //工程实践
                         schoolProjectDTOList.add(projectDTO);

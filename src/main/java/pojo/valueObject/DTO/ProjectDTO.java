@@ -89,7 +89,7 @@ public class ProjectDTO {
                 ", status=" + status +
                 ", creatorUserVOId=" + creatorUserVOId +
                 ", teacherVOId=" + teacherVOId +
-                ", teamVOIdSet=" + teamVOIdSet.size() +
+//                ", teamVOIdSet=" + teamVOIdSet.size() +
                 '}';
     }
 
