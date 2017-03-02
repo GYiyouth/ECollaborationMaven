@@ -27,7 +27,7 @@ import java.util.Map;
  * 提供schoolProjectDTOList interestProjectDTOList , otherProjectDTOList
  * Created by geyao on 2017/3/2.
  */
-public class GetMyProjectVOList implements SessionAware, ServletRequestAware, ServletResponseAware {
+public class GetMyProjectVOListAction implements SessionAware, ServletRequestAware, ServletResponseAware {
     private Map<String,Object> session;
     private HttpServletRequest request;
     private HttpServletResponse response;

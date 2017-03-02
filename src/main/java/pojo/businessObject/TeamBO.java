@@ -104,6 +104,10 @@ public class TeamBO {
         ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList", ArrayList.class);
         JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
         try {
+
+            System.out.println("session是" + session);
+
+
             UserVO userVO = (StudentVO) session.get("studentVO");
             if (userVO != null) {
                 ArrayList<TeamVO> teamVOS = teamDAO.getMyJoinTeamsByStudentId(userVO.getId());

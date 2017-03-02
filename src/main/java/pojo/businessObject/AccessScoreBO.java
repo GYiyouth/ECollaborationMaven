@@ -7,14 +7,14 @@ import org.hibernate.criterion.Restrictions;
 import pojo.DAO.AccessScoreDAO;
 import pojo.valueObject.assist.ProjectAccessTypeVO;
 import pojo.valueObject.assist.StudentScoreVO;
+import pojo.valueObject.assist.StudentTeamVO;
 import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.ProjectVO;
+import pojo.valueObject.domain.StudentVO;
+import pojo.valueObject.domain.TeamVO;
 import tool.BeanFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by geyao on 2017/3/2.
@@ -46,7 +46,7 @@ public class AccessScoreBO {
             throw new NullPointerException("id == null || teamId == null");
         }
 
-        HashMap hashMap = new HashMap();
+        HashMap<StudentVO, Integer> hashMap = new HashMap();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -59,15 +59,34 @@ public class AccessScoreBO {
             List<TeamProjectVO> teamProjectList = session.createCriteria(TeamProjectVO.class)
                     .add(Restrictions.eq("projectVO", projectVO))
                     .list();
-            
+            Iterator forTeam = teamProjectList.iterator();
+
+            List<StudentVO> studentVOList = new ArrayList<>();
+            List<TeamVO> teamVOList = new ArrayList<>();
+            while (forTeam.hasNext()){
+                TeamProjectVO teamProjectVO = (TeamProjectVO) forTeam.next();
+                teamVOList.add(teamProjectVO.getTeamVO());
+            }//teamVOList拿到
+
+            studentVOList = session.createCriteria(StudentTeamVO.class)
+                    .add(Restrictions.in("teamVO", teamVOList))
+                    .list();//拿到了studentVOList
+
             List StuScoRecList = session.createCriteria(StudentScoreVO.class)
-                    .add(Restrictions.eq("projectAccessTypeVO", projectAccessTypeVO))
+                    .add(Restrictions.in("studentVO", studentVOList))
                     .list();
+
+            Iterator iterator = studentVOList.iterator();
+            while (iterator.hasNext()){
+                StudentScoreVO studentScoreVO = (StudentScoreVO) iterator.next();
+                hashMap.put(studentScoreVO.getStudentVO(), studentScoreVO.getScore());
+            }
+
+            return hashMap;
 
         }catch (Exception e){
             e.printStackTrace();
             throw e;
         }
-        return null;
     }
 }
