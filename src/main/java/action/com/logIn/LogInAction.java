@@ -39,6 +39,7 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
         UserBO userBO = context.getBean("userBO",UserBO.class);
         try {
             jsonObject = userBO.logIn(userName, passWord, session);
+            System.out.println("jsonObject = " + jsonObject);
             jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);

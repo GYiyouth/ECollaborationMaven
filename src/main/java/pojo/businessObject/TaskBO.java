@@ -18,7 +18,7 @@ public class TaskBO {
 //        TeacherVO teacherVO = BeanFactory.getApplicationContext().getBean("teacherVO",TeacherVO.class);
         if(projectId==null){
             throw new NullPointerException("ERROR:projectId is null---"+this.getClass()+"---addTaskToProject()");
-            return null;
+//            return null;
         }
         TaskDAO taskDAO = BeanFactory.getApplicationContext().getBean("taskDAO",TaskDAO.class);
         TaskVO taskVO = BeanFactory.getApplicationContext().getBean("taskVO",TaskVO.class);
@@ -27,7 +27,8 @@ public class TaskBO {
             taskVO.setCreatorTeacherVO(teacherVO);
             taskVO.setTitle(title);
             taskVO.setContent(content);
-            taskVO.setBeginDate();
+//            taskVO.setBeginDate();
+            return null;
         }catch (Exception e){
             e.printStackTrace();
             throw e;

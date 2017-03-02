@@ -12,6 +12,10 @@ import java.io.IOException;
  */
 public class JSONHandler {
 	public static void sendJSON(JSONObject jsonObject, HttpServletResponse response) throws IOException {
+		if (jsonObject == null || response == null){
+            System.out.println(JSONHandler.class);
+            System.out.println("jsonObject == null || response == null");
+        }
 		if (!jsonObject.containsKey("result")){
 			jsonObject.put("result", "fail");
 		}

@@ -71,4 +71,11 @@
         </action>
     </package>
 
+    <package name="modifyTeacherInfoAction" extends="struts-default">
+        <action name="modifyTeacherInfoAction" class="action.com.teacher.ModifyTeacherInfoAction" method="modifyTeacherInfo">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
 </struts>

@@ -34,6 +34,8 @@ public class GetMyJoinTeamsAction extends ActionSupport implements ServletReques
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
         try {
             jsonObject = teamBO.getMyJoinTeams(session);
+            if (jsonObject == null)
+                jsonObject = BeanFactory.getJSONO();
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch (Exception e){
