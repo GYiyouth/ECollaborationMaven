@@ -1,7 +1,7 @@
 package action.com.logIn;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.deploy.net.HttpResponse;
+//import com.sun.deploy.net.HttpResponse;
 import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -56,4 +56,18 @@ public class LogOutAction extends ActionSupport implements ServletResponseAware,
     public void setJsonObject(JSONObject jsonObject) {
         this.jsonObject = jsonObject;
     }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+
 }

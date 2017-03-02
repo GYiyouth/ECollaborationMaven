@@ -39,6 +39,8 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
         UserBO userBO = context.getBean("userBO",UserBO.class);
         try {
             jsonObject = userBO.logIn(userName, passWord, session);
+            jsonObject.put("result", "success");
+
             JSONHandler.sendJSON(jsonObject,response);
             return "success";
         }catch(Exception e){
@@ -87,4 +89,31 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
         this.session = session;
     }
 
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
 }

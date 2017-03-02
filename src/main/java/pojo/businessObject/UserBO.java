@@ -55,6 +55,7 @@ public class UserBO {
                         managerDTO.clone(managerVO);
                         session.put("managerVO", managerVO);
                         jsonObject.put("managerBean", managerDTO);
+                        jsonObject.put("role", "manager");
                         return jsonObject;
                     }else{
                         System.out.println("获取管理员的信息为空---"+this.getClass()+"logIn()");
@@ -68,6 +69,7 @@ public class UserBO {
                         teacherDTO.clone(teacherVO);
                         session.put("teacherVO", teacherVO);
                         jsonObject.put("teacherBean", teacherDTO);
+                        jsonObject.put("role", "teacher");
                         return jsonObject;
                     }else{
                         System.out.println("获取老师的信息为空---"+this.getClass()+"logIn()");
@@ -81,6 +83,7 @@ public class UserBO {
                         studentDTO.clone(studentVO);
                         session.put("studentVO", studentVO);
                         jsonObject.put("studentBean",studentDTO);
+                        jsonObject.put("role", "student");
                         return jsonObject;
                     }else{
                         System.out.println("获取学生的信息为空---"+this.getClass()+"logIn()");

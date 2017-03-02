@@ -1,6 +1,6 @@
 package pojo.businessObject;
 
-import com.sun.istack.internal.Nullable;
+//import com.sun.istack.internal.Nullable;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.valueObject.domain.ProjectVO;
@@ -61,7 +61,7 @@ public class ProjectBO {
      * @throws Exception
      */
     public ArrayList<ProjectVO> getMyProjectVOList(
-            UserVO userVO, @Nullable Integer grade,  Map session) throws Exception{
+            UserVO userVO, Integer grade,  Map session) throws Exception{
         if (userVO == null || session == null)
             throw new NullPointerException("userVO == null || session == null");
         if (userVO.getRole().equals("teacher")){
@@ -90,7 +90,7 @@ public class ProjectBO {
      * @throws Exception
      */
     public ArrayList<ProjectVO> getTeacherProjectVOList(TeacherVO teacherVO,
-                                                       Map session, @Nullable Integer grade)throws Exception{
+                                                       Map session, Integer grade)throws Exception{
         if (teacherVO == null || session == null)
             throw new  NullPointerException("teacherVO == null || session == null");
         ArrayList<ProjectVO> arrayList = new ArrayList<>();

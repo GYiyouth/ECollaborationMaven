@@ -74,4 +74,40 @@ public class GetPlanAction implements SessionAware, ServletRequestAware, Servlet
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public ArrayList<PlanDTO> getPlanBeanList() {
+        return planBeanList;
+    }
+
+    public void setPlanBeanList(ArrayList<PlanDTO> planBeanList) {
+        this.planBeanList = planBeanList;
+    }
 }
