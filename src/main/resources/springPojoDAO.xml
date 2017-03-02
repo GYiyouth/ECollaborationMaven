@@ -10,6 +10,7 @@
     <bean id="teamDAO" class="pojo.DAO.TeamDAO"/>
     <bean id="planDAO" class="pojo.DAO.PlanDAO"/>
     <bean id="projectDAO" class="pojo.DAO.ProjectDAO"/>
+    <bean id="applicationDAO" class="pojo.DAO.ApplicationDAO"/>
     <!--<bean id="userDAO" class="pojo.DAO.UserDAO" scope="prototype"/>-->
     <!--<bean id="studentDAO" class="pojo.DAO.StudentDAO" scope="prototype"/>-->
     <!--<bean id="teacherDAO" class="pojo.DAO.TeacherDAO" scope="prototype"/>-->

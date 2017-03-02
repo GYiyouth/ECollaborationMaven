@@ -110,3 +110,6 @@
     ProjectBO新增 添加方法，在session里添加projectDAO
     ProjectAction新增 添加方法， 默认的状态是开放申请。
     Time小工具新增了返回年级的方法-getGrade
+
+    新建了application的DAO，写了一堆查询方法
+    新建ApplicationBO,session里添加applicationVOList
