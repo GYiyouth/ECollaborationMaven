@@ -1,13 +1,9 @@
 package pojo.valueObject.domain;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
-import pojo.valueObject.assist.MessageReceiverVO;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "message")

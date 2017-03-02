@@ -45,6 +45,10 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="searchTeam" class="action.com.team.SearchTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
 
@@ -92,6 +96,10 @@
 
     <package name="task" extends="struts-default">
         <action name="createTask" class="action.com.task.CreateTaskAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="addTeamProjectAccess" class="action.com.task.AddTeamProjectAccessAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>

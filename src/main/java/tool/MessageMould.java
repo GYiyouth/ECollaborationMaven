@@ -2,6 +2,7 @@ package tool;
 
 import org.springframework.context.ApplicationContext;
 import pojo.valueObject.domain.MessageVO;
+import pojo.valueObject.domain.TeamVO;
 import pojo.valueObject.domain.UserVO;
 
 /**
@@ -28,6 +29,40 @@ public class MessageMould {
             messageVO.setSenderUserVO(userVO);
             messageVO.setDeadDate("1999-01-01 00:00:00");
 //            messageVO.setReadFlag(0);
+            return messageVO;
+        }
+    }
+
+    public static MessageVO acceptJoinTeamMessageVOMould(UserVO userVO, TeamVO teamVO){
+        if(userVO==null||teamVO==null){
+            System.out.println("userVO/teamVO为空！！---tool/MessageMould/acceptJoinTeamMessageVOMould()");
+            return null;
+        }else{
+            MessageVO messageVO = BeanFactory.getApplicationContext().getBean("messageVO",MessageVO.class);
+            //设置消息内容
+            messageVO.setTitle("加入团队申请通过！");
+            messageVO.setContent("团队："+teamVO.getTeamName()+"组长通过了您的加团请求！");
+            messageVO.setCreateTime(Time.getCurrentTime());
+            messageVO.setSenderUserVO(userVO);
+            messageVO.setDeadDate("2020-01-01 00:00:00");
+            messageVO.setReadFlag(0);
+            return messageVO;
+        }
+    }
+
+    public static MessageVO refuseJoinTeamMessageVOMould(UserVO userVO, TeamVO teamVO){
+        if(userVO==null||teamVO==null){
+            System.out.println("userVO/teamVO为空！！---tool/MessageMould/refuseJoinTeamMessageVOMould()");
+            return null;
+        }else{
+            MessageVO messageVO = BeanFactory.getApplicationContext().getBean("messageVO",MessageVO.class);
+            //设置消息内容
+            messageVO.setTitle("加入团队申请没有通过！");
+            messageVO.setContent("团队："+teamVO.getTeamName()+"组长拒绝了您的加团请求！");
+            messageVO.setCreateTime(Time.getCurrentTime());
+            messageVO.setSenderUserVO(userVO);
+            messageVO.setDeadDate("2020-01-01 00:00:00");
+            messageVO.setReadFlag(0);
             return messageVO;
         }
     }

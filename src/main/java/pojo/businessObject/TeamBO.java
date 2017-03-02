@@ -80,11 +80,14 @@ public class TeamBO {
             TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
             UserVO senderUserVO = (UserVO) session.get("studentVO");
             try {
-                UserVO receiverUserVO = teamDAO.getLeaderStudentVOByTeamId(teamId);
+                StudentVO receiverUserVO = teamDAO.getLeaderStudentVOByTeamId(teamId);
                 TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
                 String result = teamDAO.applyJoinTeam(senderUserVO, receiverUserVO, teamVO);
-                if(result.equals("success")){
+                if (result.equals("success")) {
                     jsonObject.put("result", "success");
+                    return jsonObject;
+                } else if(result.equals("full")) {
+                    jsonObject.put("result", "full");
                     return jsonObject;
                 }else{
                     return null;
@@ -180,15 +183,16 @@ public class TeamBO {
      * @param applicationId
      * @return
      */
-    public JSONObject acceptJoinApplication(Integer applicationId)throws Exception{
+    public JSONObject acceptJoinApplication(Integer applicationId,Map<String,Object> session)throws Exception{
         if(applicationId==null||applicationId.equals("")){
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---acceptJoinApplication()");
             return null;
         }else{
+            StudentVO studentVO = (StudentVO) session.get("studentVO");
             TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             try {
-                String result = teamDAO.acceptJoinApplication(applicationId);
+                String result = teamDAO.acceptJoinApplication(applicationId,studentVO);
 
                 if (result.equals("success")) {
                     jsonObject.put("result", "success");
@@ -201,6 +205,20 @@ public class TeamBO {
                 e.printStackTrace();
                 throw e;
             }
+            /*
+                        //满了
+            if(teamVO.getMemberMax()<=teamVO.getStudentVOSet().size()){
+                String hql = "select id from ApplicationVO as app where app.result is null and app.teamVO.id = :teamId and app.id != :applicationId";
+                Query query = session.createQuery(hql);
+                query.setParameter("teamId",teamVO.getId());
+                query.setParameter("applicationId",applicationVO.getId());
+                Iterator iterator = query.iterate();
+                while (iterator.hasNext()){
+                    refuseJoinApplication((Integer) iterator.next());
+                }
+            }
+             */
+
         }
     }
 
@@ -211,7 +229,7 @@ public class TeamBO {
      * @return
      * @throws Exception
      */
-    public JSONObject refuseJoinApplication(Integer applicationId) throws Exception{
+    public JSONObject refuseJoinApplication(Integer applicationId,Map<String,Object> session) throws Exception{
         if(applicationId==null||applicationId.equals("")){
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
             return null;
@@ -219,7 +237,8 @@ public class TeamBO {
             TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             try {
-                String result = teamDAO.refuseJoinApplication(applicationId);
+                StudentVO studentVO = (StudentVO) session.get("studentVO");
+                String result = teamDAO.refuseJoinApplication(applicationId,studentVO);
                 if (result.equals("success")) {
                     jsonObject.put("result", "success");
                     return jsonObject;
@@ -305,4 +324,38 @@ public class TeamBO {
         return null;
     }
 
+    /**
+     * 搜索团队
+     * @param searchTeamInfo
+     * @return
+     */
+    public JSONObject searchTeam(String searchTeamInfo) throws Exception{
+        if(searchTeamInfo==null){
+            throw new NullPointerException("ERROR:searchTeamInfo is null!!!---" + this.getClass() + "---searchTeam()");
+        }else{
+            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+            JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject",JSONObject.class);
+            ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+            TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);
+            try{
+                ArrayList<TeamVO> teamVOS = teamDAO.searchTeam(searchTeamInfo);
+                if(teamVOS==null){
+                    System.out.println("查找团队，没找到匹配项，返回null");
+                    teamDTOS = null;
+                }else{
+                    for(TeamVO teamVO:teamVOS){
+                        teamDTO.clone(teamVO);
+                        teamDTOS.add(teamDTO);
+                        System.out.println(teamDTO);
+                    }
+                }
+                jsonObject.put("teamBeans",teamDTOS);
+                jsonObject.put("result","success");
+                return jsonObject;
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
+            }
+        }
+    }
 }

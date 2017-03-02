@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentTeamVO;
 import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
@@ -271,6 +272,32 @@ public class ProjectDAO {
             throw e;
         }finally {
             session.close();
+        }
+    }
+
+    /**
+     * 根据teamVO，projctVO获取TeamProjectVO对象
+     * @param teamVO
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public TeamProjectVO getTeamProjectVO(TeamVO teamVO,ProjectVO projectVO) throws Exception{
+        if(teamVO==null||projectVO==null){
+            throw new NullPointerException("ERROR:teamVO==null||projectVO==null---"+this.getClass()+"---getTeamProjectVO()");
+        }else{
+            Session session = BeanFactory.getSessionFactory().openSession();
+            String hql = "from TeamProjectVO as tp where tp.teamVO.id = :teamId and tp.projectVO.id = :projectId";
+            Query query = session.createQuery(hql);
+            query.setParameter("teamId",teamVO.getId());
+            query.setParameter("projectId",projectVO.getId());
+            Iterator iterator = query.iterate();
+            if (iterator.hasNext()){
+                TeamProjectVO teamProjectVO = (TeamProjectVO)iterator.next();
+                return teamProjectVO;
+            }else{
+                return null;
+            }
         }
     }
 }

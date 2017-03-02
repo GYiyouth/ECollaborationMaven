@@ -15,13 +15,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * 同意加入团队
- * Created by GR on 2017/2/28.
+ *
+ * Created by Administrator on 2017/3/3.
  */
-public class AcceptJoinApplicationAction extends ActionSupport implements ServletRequestAware, ServletResponseAware,SessionAware {
+public class SearchTeamAction  extends ActionSupport implements ServletRequestAware, ServletResponseAware,SessionAware {
 
     //jsp获取
-    private int applicationId;
+    private String teamSearchInfo;
 
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -31,10 +31,10 @@ public class AcceptJoinApplicationAction extends ActionSupport implements Servle
 
     @Override
     public String execute() throws Exception {
-        TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
-        try {
-            jsonObject = teamBO.acceptJoinApplication(applicationId,session);
-            JSONHandler.sendJSON(jsonObject, response);
+        TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO", TeamBO.class);
+        try{
+            jsonObject = teamBO.searchTeam(teamSearchInfo);
+            JSONHandler.sendJSON(jsonObject,response);
             return "success";
         }catch(Exception e){
             e.printStackTrace();
@@ -42,7 +42,6 @@ public class AcceptJoinApplicationAction extends ActionSupport implements Servle
             JSONHandler.sendJSON(jsonObject, response);
             return "fail";
         }
-
     }
 
     @Override
@@ -58,19 +57,19 @@ public class AcceptJoinApplicationAction extends ActionSupport implements Servle
     @Override
     public void setServletResponse(HttpServletResponse response) {
         this.response = response;
-        this.response.setCharacterEncoding("UTF-8");
+//        this.response.setCharacterEncoding("UTF-8");
     }
 
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
 
-    public int getApplicationId() {
-        return applicationId;
+    public String getTeamSearchInfo() {
+        return teamSearchInfo;
     }
 
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
+    public void setTeamSearchInfo(String teamSearchInfo) {
+        this.teamSearchInfo = teamSearchInfo;
     }
 
     public JSONObject getJsonObject() {
