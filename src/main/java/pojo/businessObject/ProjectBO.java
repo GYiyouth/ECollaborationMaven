@@ -1,10 +1,16 @@
 package pojo.businessObject;
 
+import com.sun.istack.internal.Nullable;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.valueObject.domain.ProjectVO;
+import pojo.valueObject.domain.StudentVO;
+import pojo.valueObject.domain.TeacherVO;
+import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -13,7 +19,7 @@ import java.util.Map;
 public class ProjectBO {
 
     /**
-     * 添加任务，在session里添加projectDAO
+     * 添加任务，在session里添加projectVO，如果是老师新建，则还会改动教师VO中的projectSet
      * @param projectVO
      * @param session
      * @return
@@ -31,10 +37,84 @@ public class ProjectBO {
                 session.remove("projectVO");
             session.put("projectVO", projectVO);
 
+            //老师新建项目以后，要把它的ProjectSet也动一下
+            if (session.containsKey("teacherVO")){
+                TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+                teacherVO.getProjectVOSet().add(projectVO);
+            }
             return projectVO;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
         }
     }
+
+    /**
+     * 查询项目
+     * 如果是学生，会先查询他的team，再根据team来完成找项目
+     * 如果是教师，会返回teacherVO中的projectSet
+     * session里放置projectVOList
+     * @param userVO
+     * @param grade
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<ProjectVO> getMyProjectVOList(
+            UserVO userVO, @Nullable Integer grade,  Map session) throws Exception{
+        if (userVO == null || session == null)
+            throw new NullPointerException("userVO == null || session == null");
+        if (userVO.getRole().equals("teacher")){
+            return getTeacherProjectVOList((TeacherVO)userVO, session, grade);
+        }
+
+        ArrayList<ProjectVO> arrayList = new ArrayList<>();
+        ProjectDAO projectDAO = BeanFactory.getBean("projectDAO", ProjectDAO.class);
+        arrayList = projectDAO.getStudentProjectVOList((StudentVO)userVO);
+
+        String sessionProperty = "projectVOList";
+        if (session.containsKey(sessionProperty))
+            session.remove(sessionProperty);
+        session.put(sessionProperty, arrayList);
+
+        return arrayList;
+    }
+
+    /**
+     * 根据TeacherVO里的ProjectSet得到projectList
+     * 加入session：projectVOList
+     * @param teacherVO
+     * @param session
+     * @param grade
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<ProjectVO> getTeacherProjectVOList(TeacherVO teacherVO,
+                                                       Map session, @Nullable Integer grade)throws Exception{
+        if (teacherVO == null || session == null)
+            throw new  NullPointerException("teacherVO == null || session == null");
+        ArrayList<ProjectVO> arrayList = new ArrayList<>();
+        Iterator iterator = teacherVO.getProjectVOSet().iterator();
+        String sessionProperty = "projectVOList";
+        if ( grade == null){
+            while (iterator.hasNext()){
+                arrayList.add( (ProjectVO) iterator.next() );
+            }
+            return arrayList;
+        }else {
+            ProjectVO projectVO = (ProjectVO) iterator.next();
+            if (projectVO.getGrade() != null
+                    && projectVO.getGrade().equals(grade)){
+                arrayList.add(projectVO);
+            }
+        }
+
+        if (session.containsKey(sessionProperty)){
+            session.remove(sessionProperty);
+        }
+        session.put(sessionProperty, arrayList);
+
+        return arrayList;
+    }
+
 }

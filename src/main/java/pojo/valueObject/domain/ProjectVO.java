@@ -31,7 +31,7 @@ public class ProjectVO {
 	private String info = null;
 	private String requirement = null;
 	private String gain = null;
-	private Integer priority = null;
+	private Integer priority = null; //1 school, 2 interest, 3 match
 	private Integer status = null;
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")

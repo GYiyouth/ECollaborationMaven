@@ -21,7 +21,7 @@ public class UserVO {
     private String schoolId;
     private String name;
     private Integer sex;	//1:男 0：女
-    private String role;//1管理员，2教师，3学生
+    private String role;//teacher, student, manager
     private String email;
     private String phoneNumber;
     private String logName;

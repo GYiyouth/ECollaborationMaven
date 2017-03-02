@@ -113,3 +113,11 @@
 
     新建了application的DAO，写了一堆查询方法
     新建ApplicationBO,session里添加applicationVOList
+
+    TeacherVO中含有ProjectSet，可以通过这里调用，添加删除时记得同步处理这里的数据
+
+    ProjectBO新增查询方法，获取本人相关的projectVOList：
+         * 如果是学生，会先查询他的team，再根据team来完成找项目
+         * 如果是教师，会返回teacherVO中的projectSet
+         * session里放置projectVOList
+    完成查看projectVOList的action
