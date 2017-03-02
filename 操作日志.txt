@@ -104,3 +104,6 @@
 2017/03/02
 葛尧：
     删去PlanVO中studentVO的@Cascade注释
+    在PlanBO里添加方法，获取计划返回PlanDTO的list，在session里放置PlanVOList。完成查看计划的action
+
+    ProjectDAO新增 添加方法，注释掉了ProjectVO里面toString方法里一些会引起懒加载异常的代码

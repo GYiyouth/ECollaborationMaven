@@ -74,9 +74,9 @@ public class ProjectVO {
 				", gain='" + gain + '\'' +
 				", priority=" + priority +
 				", status=" + status +
-				", creatorUserVO=" + creatorUserVO.getId() +
-				", teacherVO=" + teacherVO.getId() +
-				", teamVOSet=" + teamVOSet.size() +
+//				", creatorUserVO=" + creatorUserVO.getId() +
+//				", teacherVO=" + teacherVO.getId() +
+//				", teamVOSet=" + teamVOSet.size() +
 				'}';
 	}
 

@@ -27,4 +27,28 @@ public class ProjectDAO {
             session.close();
         }
     }
+
+    /**
+     * 增加项目，不处理与team的关系表
+     * @param projectVO
+     * @return
+     */
+    public ProjectVO addProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO == null)
+            return null;
+        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            session.save(projectVO);
+            transaction.commit();
+            return projectVO;
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+            throw e;
+        }finally {
+            session.close();
+        }
+    }
 }

@@ -47,9 +47,14 @@
         </action>
     </package>
 
+
     <package name="plan" extends="struts-default">
 
         <action name="createPlan" class="action.com.plan.CreatePlanAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getPlanAction" class="action.com.plan.GetPlanAction" method="execute">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>

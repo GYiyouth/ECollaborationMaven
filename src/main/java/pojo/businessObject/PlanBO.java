@@ -6,8 +6,11 @@ import pojo.DAO.ProjectDAO;
 import pojo.valueObject.DTO.PlanDTO;
 import pojo.valueObject.domain.PlanVO;
 import pojo.valueObject.domain.ProjectVO;
+import pojo.valueObject.domain.StudentVO;
 import tool.BeanFactory;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -36,11 +39,45 @@ public class PlanBO {
             jsonObject.put("planBean", planDTO);
             if (session.containsKey("planVO")){
                 session.replace("planVO", planVO);
+            }else {
+                session.put("planVO", planVO);
             }
             if (session.containsKey("projectVO")){
                 session.replace("projectVO", projectVO);
+            }else {
+                session.put("projectVO", projectVO);
             }
             return jsonObject;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    /**
+     * 返回PlanDTO的list，在session里放置planVOList
+     * @param studentVO
+     * @param projectId
+     * @param session
+     * @return
+     */
+    public ArrayList<PlanDTO> getPlanDTO(StudentVO studentVO, Integer projectId, Map session) throws Exception{
+        ArrayList<PlanDTO> planDTOList = new ArrayList<>();
+        ArrayList<PlanVO> planVOList = new ArrayList<>();
+        try {
+            PlanDAO planDAO = new PlanDAO();
+            planVOList = planDAO.getPlanVOList(studentVO, projectId);
+            if (session.containsKey("planVOList"))
+                session.remove("planVOList");
+            session.put("planVOList", planVOList);
+
+            Iterator iterator = planVOList.iterator();
+            while (iterator.hasNext()){
+                PlanDTO planDTO = new PlanDTO();
+                planDTO.clone( (PlanVO)iterator.next() );
+                planDTOList.add(planDTO);
+            }
+            return planDTOList;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
