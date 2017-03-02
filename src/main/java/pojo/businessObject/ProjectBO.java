@@ -118,13 +118,14 @@ public class ProjectBO {
      * 团队申请项目
      * 消息会涉及，团队中的所有人，项目的老师
      * @param teamId
-     * @param projectid
+     * @param projectId
      * @throws Exception
      */
-    public void applyProject(Integer teamId, Integer projectid) throws Exception{
+    public void applyProject(Integer teamId, Integer projectId) throws Exception{
 
 //        ApplicationVO applicationVO = BeanFactory.getBean("applicationVO", ApplicationVO.class);
-
+        ProjectDAO projectDAO = BeanFactory.getBean("projectDAO", ProjectDAO.class);
+        projectDAO.applyProject(teamId, projectId);
     }
 
 }

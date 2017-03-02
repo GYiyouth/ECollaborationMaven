@@ -223,8 +223,10 @@ public class ProjectDAO {
             }
             StudentVO teamLeader = teamVO.getCreatorStudentVO();
 
-            ArrayList<StudentVO> affectedStudentVOList = new ArrayList<>();
-            affectedStudentVOList.addAll(teamVO.getStudentVOSet());
+            System.out.println("处理人 = " + handleUserVO.getName());
+            System.out.println("团队队长 = " + teamLeader.getName());
+//            ArrayList<StudentVO> affectedStudentVOList = new ArrayList<>();
+//            affectedStudentVOList.addAll(teamVO.getStudentVOSet());
 
             if (teamVO == null || projectVO == null)
                 throw new NullPointerException("teamVO == null || projectVO == null");
