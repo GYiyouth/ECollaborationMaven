@@ -13,6 +13,7 @@ import pojo.valueObject.domain.TeamVO;
 import tool.BeanFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -135,6 +136,49 @@ public class ProjectDAO {
             throw e;
         }finally {
             session.close();
+        }
+    }
+
+    public HashMap<Integer,ProjectVO> getAllProject(int grade) throws Exception{
+        HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
+        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            List projectVOList = session.createCriteria(ProjectVO.class)
+                    .add(Restrictions.eq("grade", grade))
+                    .list();
+            Iterator iterator = projectVOList.iterator();
+            transaction.commit();
+            while (iterator.hasNext()){
+                ProjectVO projectVO = (ProjectVO) iterator.next();
+                hashMap.put(projectVO.getId(), projectVO);
+            }
+            return hashMap;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public HashMap<Integer,ProjectVO> getAllProject() throws Exception{
+        HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
+        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            List projectVOList = session.createCriteria(ProjectVO.class)
+                    .list();
+            Iterator iterator = projectVOList.iterator();
+            transaction.commit();
+            while (iterator.hasNext()){
+                ProjectVO projectVO = (ProjectVO) iterator.next();
+                hashMap.put(projectVO.getId(), projectVO);
+            }
+            return hashMap;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
         }
     }
 }

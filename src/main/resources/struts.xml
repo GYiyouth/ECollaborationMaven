@@ -69,9 +69,17 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="searchProjectAction" class="action.com.project.SearchProjectAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="appSearchProjectAction" class="action.com.project.SearchProjectAction" method="appExecute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
-    <package name="modifyTeacherInfoAction" extends="struts-default">
+    <package name="teacher" extends="struts-default">
         <action name="modifyTeacherInfoAction" class="action.com.teacher.ModifyTeacherInfoAction" method="modifyTeacherInfo">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
