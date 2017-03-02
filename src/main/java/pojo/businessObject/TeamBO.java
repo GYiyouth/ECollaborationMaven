@@ -16,7 +16,9 @@ import tool.BeanFactory;
 import tool.Time;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by GR on 2017/2/26.
@@ -103,6 +105,7 @@ public class TeamBO {
         TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
         ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList", ArrayList.class);
         JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
+        Set<TeamDTO> teamDTOSet = new HashSet<>();
         try {
 
             System.out.println("session是" + session);
@@ -115,6 +118,7 @@ public class TeamBO {
                     System.out.println("teamVOS==null||teamVOS.size()==0---" + this.getClass() + "---getMyJoinTeams()");
                     return null;
                 } else {
+                    ArrayList<TeamDTO> teamDTOS1 = new ArrayList<>();
                     if (teamVOS.size() != 0) {
                         //已经加入团队
                         TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO", TeamDTO.class);
@@ -122,9 +126,12 @@ public class TeamBO {
                             teamDTO.clone(teamVO);
                             teamDTOS.add(teamDTO);
                         }
+                        teamDTOSet.addAll(teamDTOS);
+
+                        teamDTOS1.addAll(teamDTOSet);
                     }
                     jsonObject.put("result", "success");
-                    jsonObject.put("teamBeans", teamDTOS);
+                    jsonObject.put("teamBeans", teamDTOS1);
                     return jsonObject;
                 }
             } else {
