@@ -117,12 +117,14 @@ public class ProjectBO {
     /**
      * 团队申请项目
      * 消息会涉及，团队中的所有人，项目的老师
-     * @param teamVO
-     * @param projectVO
+     * @param teamId
+     * @param projectid
      * @throws Exception
      */
-    public void applyProject(TeamVO teamVO, ProjectVO projectVO, Map session) throws Exception{
-//        ApplicationVO applicationVO
+    public void applyProject(Integer teamId, Integer projectid) throws Exception{
+
+//        ApplicationVO applicationVO = BeanFactory.getBean("applicationVO", ApplicationVO.class);
+
     }
 
 }

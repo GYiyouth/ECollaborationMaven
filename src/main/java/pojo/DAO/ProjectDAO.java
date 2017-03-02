@@ -6,11 +6,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import pojo.valueObject.assist.StudentTeamVO;
 import pojo.valueObject.assist.TeamProjectVO;
-import pojo.valueObject.domain.ProjectVO;
-import pojo.valueObject.domain.StudentVO;
-import pojo.valueObject.domain.TeacherVO;
-import pojo.valueObject.domain.TeamVO;
+import pojo.valueObject.domain.*;
 import tool.BeanFactory;
+import tool.Time;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,6 +137,12 @@ public class ProjectDAO {
         }
     }
 
+    /**
+     * 根据年纪获取所有项目
+     * @param grade
+     * @return
+     * @throws Exception
+     */
     public HashMap<Integer,ProjectVO> getAllProject(int grade) throws Exception{
         HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
@@ -161,6 +165,11 @@ public class ProjectDAO {
         }
     }
 
+    /**
+     * 获取所有项目
+     * @return
+     * @throws Exception
+     */
     public HashMap<Integer,ProjectVO> getAllProject() throws Exception{
         HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
@@ -179,6 +188,87 @@ public class ProjectDAO {
         }catch (Exception e){
             e.printStackTrace();
             throw e;
+        }
+    }
+
+    /**
+     * 申请项目
+     * 添加application
+     * 添加message
+     * 改变相关人员的NewsFlag
+     * @param teamId
+     * @param projectId
+     * @throws Exception
+     */
+    public void applyProject(Integer teamId, Integer projectId) throws Exception{
+
+        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            TeamVO teamVO = session.get(TeamVO.class, teamId);
+            ProjectVO projectVO = session.get(ProjectVO.class, projectId);
+            List oldList = session.createCriteria(ApplicationVO.class)
+                    .add(Restrictions.eq("teamVO", teamVO))
+                    .add(Restrictions.eq("projectVO", projectVO))
+                    .list();
+            if (oldList.size() >=1 )
+                throw new Exception("已有存在的申请");
+
+            //处理人优先让老师申请，没有老师，则是学生申请
+            UserVO handleUserVO = null;
+            handleUserVO = projectVO.getTeacherVO();
+            if (handleUserVO == null){
+                handleUserVO = projectVO.getCreatorUserVO();
+            }
+            StudentVO teamLeader = teamVO.getCreatorStudentVO();
+
+            ArrayList<StudentVO> affectedStudentVOList = new ArrayList<>();
+            affectedStudentVOList.addAll(teamVO.getStudentVOSet());
+
+            if (teamVO == null || projectVO == null)
+                throw new NullPointerException("teamVO == null || projectVO == null");
+            ApplicationVO applicationVO = BeanFactory.getBean("application", ApplicationVO.class);
+            applicationVO.setType("project");
+            applicationVO.setTeamVO(teamVO);
+            applicationVO.setProjectVO(projectVO);
+            applicationVO.setHandlerUserVO(handleUserVO);
+            applicationVO.setAffectedUserVO(teamLeader);
+            applicationVO.setCreatedTime(Time.getCurrentTime());
+            //接下来处理message，最后寸application
+
+            MessageVO messageVO = BeanFactory.getBean("messageVO", MessageVO.class);
+            messageVO.setTitle(projectVO.getName() + "有新的申请消息");
+            messageVO.setContent(teamVO.getTeamName() + "团队申请加入您的项目【" +
+                projectVO.getName() + "】\n团队情况如下：\n队长：" + teamLeader.getName() +
+                    "\n小队人员数：" + teamVO.getStudentVOSet().size() +
+                    "\n目前项目已有多少 " + projectVO.getTeamVOSet().size() + " 个团队在做" +
+                    "\n项目设定的最大承接团队数目是：" + projectVO.getTeamMax()
+            );
+            messageVO.setCreateTime(Time.getCurrentTime());
+            messageVO.setSenderUserVO(teamLeader);
+            messageVO.setReadFlag(1);
+            messageVO.setDeadDate(Time.getDeadTime());
+            session.save(messageVO);
+
+            Integer newsFlag = handleUserVO.getNewsFlag();
+            if (newsFlag != null )
+                newsFlag ++;
+            else
+                newsFlag = 1;
+            handleUserVO.setNewsFlag(newsFlag);
+            session.update(handleUserVO);
+
+            session.save(messageVO);
+
+            transaction.commit();
+
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+            throw e;
+        }finally {
+            session.close();
         }
     }
 }
