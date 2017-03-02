@@ -26,7 +26,7 @@ public class ECFileVO {
 	private Integer downLoadTimes = null;
 	private Integer priority = null;
     @ManyToOne(targetEntity = UserVO.class)
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
 	private UserVO creatorUserVO;
 	private String path = null;

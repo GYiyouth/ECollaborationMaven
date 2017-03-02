@@ -4,15 +4,19 @@ import com.opensymphony.xwork2.ActionSupport;
 import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import pojo.businessObject.TeamBO;
+import tool.BeanFactory;
+import tool.JSONHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 
 /**
+ * 获取团队的详细信息（取消了团队计划）
  * Created by GR on 2017/3/1.
  */
-public class GetTeamCodeECFileInfoAction extends ActionSupport implements ServletRequestAware, ServletResponseAware{
+public class GetMyJoinTeamInfoAction extends ActionSupport implements ServletRequestAware, ServletResponseAware{
 
     //jsp提供
     private int projectId;
@@ -25,7 +29,17 @@ public class GetTeamCodeECFileInfoAction extends ActionSupport implements Servle
 
     @Override
     public String execute() throws Exception {
-        return super.execute();
+        TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
+        try {
+            jsonObject = teamBO.getTeamCodeECFileInfo(teamId,projectId);
+            JSONHandler.sendJSON(jsonObject,response);
+            return "success";
+        }catch(Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
+        }
     }
 
     @Override

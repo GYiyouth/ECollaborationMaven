@@ -11,8 +11,8 @@
     <bean id="planDAO" class="pojo.DAO.PlanDAO"/>
     <bean id="projectDAO" class="pojo.DAO.ProjectDAO"/>
     <bean id="applicationDAO" class="pojo.DAO.ApplicationDAO"/>
-    <!--<bean id="userDAO" class="pojo.DAO.UserDAO" scope="prototype"/>-->
-    <!--<bean id="studentDAO" class="pojo.DAO.StudentDAO" scope="prototype"/>-->
+    <bean id="codeDAO" class="pojo.DAO.CodeDAO" scope="prototype"/>
+    <bean id="ecFileDAO" class="pojo.DAO.ECFileDAO" scope="prototype"/>
     <!--<bean id="teacherDAO" class="pojo.DAO.TeacherDAO" scope="prototype"/>-->
     <!--<bean id="managerDAO" class="pojo.DAO.ManagerDAO" scope="prototype"/>-->
     <!--<bean id="userDAO" class="pojo.DAO.UserDAO" scope="prototype"/>-->

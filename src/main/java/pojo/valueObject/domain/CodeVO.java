@@ -26,17 +26,17 @@ public class CodeVO {
 	private String path = null;
 
     @ManyToOne(targetEntity = StudentVO.class)
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "studentId", referencedColumnName = "id")
 	private StudentVO studentVO;
 
     @ManyToOne(targetEntity = TeamVO.class)
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "teamId", referencedColumnName = "id")
 	private TeamVO teamVO;
 
     @ManyToOne(targetEntity = ProjectVO.class)
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "projectId", referencedColumnName = "id")
 	private ProjectVO projectVO;
 

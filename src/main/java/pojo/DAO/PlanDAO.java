@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentProjectPlanVO;
 import pojo.valueObject.domain.PlanVO;
 import pojo.valueObject.domain.ProjectVO;

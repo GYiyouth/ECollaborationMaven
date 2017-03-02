@@ -178,32 +178,35 @@ public class TeamDAO {
     }
 
     /**
-     * 根据teamId获取团队的所有学生set集合
+     * 根据teamId获取团队的所有学生信息集合
      * @return
      */
-    public Set<StudentVO> getStudentVOSByTeamId(Integer teamId){
+    public ArrayList<StudentVO> getStudentVOSByTeamId(Integer teamId){
         if(teamId == null||teamId.equals("")){
             return null;
         }else{
             Session session = BeanFactory.getSessionFactory().openSession();
             try{
-                String hql = "select StudentVO from StudentTeamVO as st where st.logName = :logName and passWord = :passWord";
-//                Query query = session.createQuery(hql);
-//                query.setParameter("logName",logName);
-//                query.setParameter("passWord",passWord);
-//                Iterator iterator = query.iterate();
-//                if (iterator.hasNext()){
-//                    UserVO userVO = (UserVO)iterator.next();
-////                    return userVO;
-//                }else{
-//                    return null;
-//                }
+                String hql = "select StudentVO from StudentTeamVO as st where st.teamVO.id = :teamId order by leaderFlag DESC";
+                Query query = session.createQuery(hql);
+                query.setParameter("teamId",teamId);
+                Iterator iterator = query.iterate();
+                if (iterator.hasNext()){
+                    ArrayList<StudentVO> studentVOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+                    while(iterator.hasNext()) {
+                        StudentVO studentVO = (StudentVO) iterator.next();
+                        studentVOS.add(studentVO);
+                    }
+                    return studentVOS;
+                }else{
+                    System.out.println("ERROR:查询到的结果 is null!!!---"+this.getClass()+"---getStudentVOSByTeamId()");
+                    return null;
+                }
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
             }
         }
-        return null;
     }
 
     /**

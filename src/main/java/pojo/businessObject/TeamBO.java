@@ -3,8 +3,12 @@ package pojo.businessObject;
 import net.sf.json.JSONObject;
 import org.apache.struts2.components.Bean;
 import org.springframework.context.ApplicationContext;
-import pojo.DAO.TeamDAO;
+import pojo.DAO.*;
+import pojo.valueObject.DTO.ECFileDTO;
+import pojo.valueObject.DTO.PlanDTO;
+import pojo.valueObject.DTO.StudentDTO;
 import pojo.valueObject.DTO.TeamDTO;
+import pojo.valueObject.domain.PlanVO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeamVO;
 import pojo.valueObject.domain.UserVO;
@@ -225,7 +229,68 @@ public class TeamBO {
      * @param projectId
      * @return
      */
-    public JSONObject getTeamCodeECFileInfo(Integer teamId, Integer projectId){
+    public JSONObject getTeamCodeECFileInfo(Integer teamId, Integer projectId) throws Exception{
+        if(teamId==null||teamId.equals("")||projectId==null||projectId.equals("")) {
+            System.out.println("ERROR:teamId/projectId is null!!!---" + this.getClass() + "---getTeamCodeECFileInfo()");
+        }else{
+            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+//            StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
+            CodeDAO codeDAO = BeanFactory.getApplicationContext().getBean("codeDAO",CodeDAO.class);
+            ECFileDAO ecFileDAO = BeanFactory.getApplicationContext().getBean("ecFileDAO", ECFileDAO.class);
+            PlanDAO planDAO = BeanFactory.getApplicationContext().getBean("planDAO",PlanDAO.class);
+
+            JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
+            ArrayList<Integer> codeSums = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);    //代码行数集合
+            ArrayList<Integer> fileSums = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+            ArrayList<ArrayList> planBeansAllStudents = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+            try{
+                ArrayList<StudentVO> studentVOS = teamDAO.getStudentVOSByTeamId(teamId);
+                ArrayList<StudentDTO> studentDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+                if(studentVOS == null){
+                    System.out.println("ERROR:studentVOS is null!!!---" + this.getClass() + "---getTeamCodeECFileInfo()");
+                    return null;
+                }else{
+                    for(StudentVO studentVO:studentVOS){
+                        StudentDTO studentDTO = BeanFactory.getApplicationContext().getBean("studentDTO",StudentDTO.class);
+                        studentDTO.clone(studentVO);
+                        studentDTOS.add(studentDTO);
+                        Integer tempCode = codeDAO.getCodeSumByStudentIdProjectId(studentVO.getId(),projectId);
+                        if(tempCode==null){
+                            codeSums.add(0);
+                        }else{
+                            codeSums.add(tempCode);
+                        }
+                        Integer tempFile = ecFileDAO.getECFileSumByStudentId(studentVO.getId());
+                        if(tempFile==null){
+                            fileSums.add(0);
+                        }else{
+                            fileSums.add(tempCode);
+                        }
+                        ArrayList<PlanVO> tempPlanVOS = planDAO.getPlanVOList(studentVO,projectId);
+                        ArrayList<PlanDTO> planDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
+                        if(tempPlanVOS == null||tempPlanVOS.isEmpty()){
+                            System.out.println("ERROR:teamPlanVOS is null---"+this.getClass()+"---getTeamCodeECFileInfo()");
+                            planBeansAllStudents.add(null);
+                        }else{
+                            for(PlanVO planVO:tempPlanVOS){
+                                PlanDTO planDTO = BeanFactory.getApplicationContext().getBean("planDTO",PlanDTO.class);
+                                planDTO.clone(planVO);
+                                planDTOS.add(planDTO);
+                            }
+                            planBeansAllStudents.add(planDTOS);
+                        }
+                    }
+                    jsonObject.put("studentBeans", studentDTOS);
+                    jsonObject.put("codeSums", codeSums);
+                    jsonObject.put("fileSum", fileSums);
+                    jsonObject.put("planBeansAllStudents", planBeansAllStudents);
+                    jsonObject.put("result", "success");
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                throw e;
+            }
+        }
         return null;
     }
 

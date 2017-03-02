@@ -16,15 +16,17 @@ public class ProjectDAO {
             return null;
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = session.beginTransaction();
         try{
-            return session.get(ProjectVO.class, id);
+//            return session.get(ProjectVO.class, id);
+            ProjectVO projectVO = session.get(ProjectVO.class, id);
+            return projectVO;
         }catch (Exception e){
             e.printStackTrace();
-            transaction.rollback();
+//            transaction.rollback();
             throw e;
         }finally {
-            session.close();
+//            session.close();
         }
     }
 
