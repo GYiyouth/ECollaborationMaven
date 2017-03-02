@@ -22,7 +22,7 @@ public class TaskVO {
 	private String title = null;
 	private String content = null;
     @ManyToOne(targetEntity = TeacherVO.class)
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
 	private TeacherVO creatorTeacherVO;
 
@@ -36,7 +36,7 @@ public class TaskVO {
             joinColumns = @JoinColumn(name = "taskId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id")
     )
-    @Cascade(CascadeType.ALL)
+//    @Cascade(CascadeType.ALL)
     private Set<ProjectVO> projectVOSet;
 
 	public TaskVO() {

@@ -78,4 +78,11 @@
         </action>
     </package>
 
+    <package name="task" extends="struts-default">
+        <action name="createTask" class="action.com.task.CreateTaskAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
 </struts>

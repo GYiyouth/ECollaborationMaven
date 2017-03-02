@@ -43,6 +43,7 @@
                 <value>pojo.valueObject.assist.TeamProjectAccessVO</value>
                 <value>pojo.valueObject.assist.StudentScoreVO</value>
                 <value>pojo.valueObject.assist.ProjectAccessTypeVO</value>
+                <value>pojo.valueObject.assist.ProjectTaskVO</value>
             </list>
         </property>
 
