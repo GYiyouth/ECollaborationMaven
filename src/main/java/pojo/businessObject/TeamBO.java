@@ -130,7 +130,6 @@ public class TeamBO {
 
                         teamDTOS1.addAll(teamDTOSet);
                     }
-
                     jsonObject.put("result", "success");
                     jsonObject.put("teamBeans", teamDTOS1);
                     return jsonObject;
