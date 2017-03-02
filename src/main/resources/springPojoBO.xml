@@ -10,7 +10,7 @@
     <bean id="projectBO" class="pojo.businessObject.ProjectBO"/>
     <bean id="applicationBO" class="pojo.businessObject.ApplicationBO"/>
     <bean id="accessScoreBO" class="pojo.businessObject.AccessScoreBO"/>
-    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <bean id="taskBO" class="pojo.businessObject.TaskBO"/>
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
