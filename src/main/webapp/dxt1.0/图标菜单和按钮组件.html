@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图标菜单和按钮组件</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body style="margin: 50px">
+
+<!--小图标组件-->
+<i class="glyphicon glyphicon-star"></i>
+
+<span class="glyphicon glyphicon-star"></span>
+
+<button class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-star"></span>
+</button>
+
+<!--下拉菜单组件-->
+<!--基本格式-->
+<div class="dropdown">
+    <button class=" btn btn-default" data-toggle="dropdown">
+        下拉菜单
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li class="dropdown-header">网站导航</li>
+        <li class="divider"><a href="#">首页</a> </li>
+        <li><a href="#">咨询</a> </li>
+        <li><a href="#">产品</a> </li>
+        <li class="disabled"><a href="#">关于</a> </li>
+    </ul>
+</div>
+
+<div class="dropup">
+    <button class=" btn btn-default" data-toggle="dropdown">
+        下拉菜单
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">首页</a> </li>
+        <li><a href="#">咨询</a> </li>
+        <li><a href="#">产品</a> </li>
+        <li><a href="#">关于</a> </li>
+    </ul>
+</div>
+
+
+<!--按钮组组件-->
+<!--基本格式-->
+<div class="btn-group">
+    <button type="button" class="btn btn-default">左</button>
+    <button type="button" class="btn btn-default">中</button>
+    <button type="button" class="btn btn-default">右</button>
+</div>
+
+<!--将多个按钮组整合起来便于管理-->
+<div class="btn-toolbar">
+<div class="btn-group">
+    <button type="button" class="btn btn-default">左</button>
+    <button type="button" class="btn btn-default">中</button>
+    <button type="button" class="btn btn-default">右</button>
+</div>
+<div class="btn-group">
+    <button type="button" class="btn btn-default">左</button>
+    <button type="button" class="btn btn-default">中</button>
+    <button type="button" class="btn btn-default">右</button>
+</div>
+</div>
+
+<!--设置按钮大小-->
+<div class="btn-group btn-group-lg"></div>
+<div class="btn-group "></div>
+<div class="btn-group btn-group-sm"></div>
+<div class="btn-group btn-group-xs"></div>
+
+<!--嵌套一个分组,比如下拉菜单-->
+<div class="btn-group">
+    <button type="button" class="btn btn-default">左</button>
+    <button type="button" class="btn btn-default">中</button>
+    <button type="button" class="btn btn-default">右</button>
+    <div class="btn-group">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            下拉菜单
+            <span class="caret"></span>
+        </button>
+    </div>
+</div>
+
+<!--垂直-->
+<div class="btn-group-vertical">
+    <button type="button" class="btn btn-default">左</button>
+    <button type="button" class="btn btn-default">中</button>
+    <button type="button" class="btn btn-default">右</button>
+</div>
+
+
+<div class="btn-group-justified">
+    <a type="button" class="btn btn-default">左</a>
+    <a type="button" class="btn btn-default">中</a>
+    <a type="button" class="btn btn-default">右</a>
+</div>
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

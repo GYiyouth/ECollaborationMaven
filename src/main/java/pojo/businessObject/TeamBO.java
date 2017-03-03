@@ -2,6 +2,8 @@ package pojo.businessObject;
 
 import net.sf.json.JSONObject;
 import org.apache.struts2.components.Bean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import pojo.DAO.*;
 import pojo.valueObject.DTO.ECFileDTO;
@@ -351,9 +353,12 @@ public class TeamBO {
                     teamDTOS = null;
                 }else{
                     for(TeamVO teamVO:teamVOS){
+                        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//                        Session session = sessionFactory.openSession();
                         teamDTO.clone(teamVO);
                         teamDTOS.add(teamDTO);
                         System.out.println(teamDTO);
+//                        session.close();
                     }
                 }
                 jsonObject.put("teamBeans",teamDTOS);

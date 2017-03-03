@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播插件</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body style="margin: 100px;">
+<!--轮播-->
+<!--基本实例-->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: auto">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" ></li>
+        <li data-target="#myCarousel" data-slide-to="2" ></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="img/timg.jpeg" alt="第一张">
+        </div>
+        <div class="item ">
+            <img src="img/timg.jpeg" alt="第二张">
+        </div>
+        <div class="item ">
+            <img src="img/timg.jpeg" alt="第三张">
+        </div>
+    </div>
+
+    <a href="#myCarousel" data-slide="prev" class="carousel-control left">&lsaquo;</a>
+    <a href="#myCarousel" data-slide="next" class="carousel-control right">&rsaquo;</a>
+
+
+</div>
+
+
+<!--javascript方法:悬停,切换间隔时间等-->
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

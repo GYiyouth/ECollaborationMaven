@@ -33,26 +33,27 @@ public class TeamDTO {
             this.setCreateDate(teamVO.getCreateDate());
             this.setMemberMax(teamVO.getMemberMax());
             this.setDescription(teamVO.getDescription());
-            if(!teamVO.getProjectVOSet().isEmpty()){
-                Set<ProjectVO> projectVOSet = teamVO.getProjectVOSet();
-                Set<Integer> projectVOIdSet = new HashSet<>();
-                for (ProjectVO projectVO: projectVOSet) {
-                    projectVOIdSet.add(projectVO.getId());
-                }
-                this.setProjectVOIdSet(projectVOIdSet);
-            }else{
-                this.projectVOIdSet = new HashSet<>();
-            }
-            if(!teamVO.getStudentVOSet().isEmpty()){
-                Set<StudentVO> studentVOSet = teamVO.getStudentVOSet();
-                Set<Integer> studentVOIdSet = new HashSet<>();
-                for (StudentVO studentVO: studentVOSet) {
-                    studentVOIdSet.add(studentVO.getId());
-                }
-                this.setStudentVOIdSet(studentVOIdSet);
-            }else{
-                this.studentVOIdSet = new HashSet<>();
-            }
+
+//            if(!teamVO.getProjectVOSet().isEmpty()){
+//                Set<ProjectVO> projectVOSet = teamVO.getProjectVOSet();
+//                Set<Integer> projectVOIdSet = new HashSet<>();
+//                for (ProjectVO projectVO: projectVOSet) {
+//                    projectVOIdSet.add(projectVO.getId());
+//                }
+//                this.setProjectVOIdSet(projectVOIdSet);
+//            }else{
+//                this.projectVOIdSet = new HashSet<>();
+//            }
+//            if(!teamVO.getStudentVOSet().isEmpty()){
+//                Set<StudentVO> studentVOSet = teamVO.getStudentVOSet();
+//                Set<Integer> studentVOIdSet = new HashSet<>();
+//                for (StudentVO studentVO: studentVOSet) {
+//                    studentVOIdSet.add(studentVO.getId());
+//                }
+//                this.setStudentVOIdSet(studentVOIdSet);
+//            }else{
+//                this.studentVOIdSet = new HashSet<>();
+//            }
         }else{
             System.out.println("teamVO is null!!");
         }
