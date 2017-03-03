@@ -67,8 +67,8 @@ public class TeamDTO {
                 ", createDate='" + createDate +
                 ", memberMax=" + memberMax +
                 ", description='" + description +
-                ", projectVOIdSet=" + projectVOIdSet.size() +
-                ", studentVOIdSet=" + studentVOIdSet.size() +
+//                ", projectVOIdSet=" + projectVOIdSet.size() +
+//                ", studentVOIdSet=" + studentVOIdSet.size() +
                 '}';
     }
 

@@ -232,7 +232,7 @@ public class ProjectDAO {
 
             if (teamVO == null || projectVO == null)
                 throw new NullPointerException("teamVO == null || projectVO == null");
-            ApplicationVO applicationVO = BeanFactory.getBean("application", ApplicationVO.class);
+            ApplicationVO applicationVO = BeanFactory.getBean("applicationVO", ApplicationVO.class);
             applicationVO.setType("project");
             applicationVO.setTeamVO(teamVO);
             applicationVO.setProjectVO(projectVO);

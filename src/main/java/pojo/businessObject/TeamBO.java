@@ -15,10 +15,7 @@ import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 import tool.Time;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by GR on 2017/2/26.
@@ -70,7 +67,7 @@ public class TeamBO {
      * @param session
      * @return
      */
-    public JSONObject applyJoinTeam(Integer teamId, Map<String, Object> session) throws Exception{
+    public JSONObject applyJoinTeam(Integer teamId, Map session) throws Exception{
         if (teamId == null || teamId.equals("")) {
             System.out.println("teamId is  null---" + this.getClass() + "applyJoinTeam()");
             return null;
@@ -78,7 +75,10 @@ public class TeamBO {
             ApplicationContext context = BeanFactory.getApplicationContext();
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
-            UserVO senderUserVO = (UserVO) session.get("studentVO");
+            //耿瑞你他妈这里凭什么不判空？？？
+            System.out.println("测试" + this.getClass());
+            System.out.println("session是 ： " + session);
+            UserVO senderUserVO = (StudentVO) session.get("studentVO");
             try {
                 StudentVO receiverUserVO = teamDAO.getLeaderStudentVOByTeamId(teamId);
                 TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
@@ -125,16 +125,23 @@ public class TeamBO {
                     if (teamVOS.size() != 0) {
                         //已经加入团队
                         TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO", TeamDTO.class);
-                        for (TeamVO teamVO : teamVOS) {
-                            teamDTO.clone(teamVO);
-                            teamDTOS.add(teamDTO);
+                        Iterator iterator = teamVOS.iterator();
+                        while (iterator.hasNext()){
+                            TeamVO teamVO = (TeamVO) iterator.next();
+                            TeamDTO teamDTO1 = BeanFactory.getBean("teamDTO", TeamDTO.class);
+                            teamDTO1.clone(teamVO);
+                            teamDTOS.add(teamDTO1);
                         }
                         teamDTOSet.addAll(teamDTOS);
-
+                        //傻逼耿瑞
                         teamDTOS1.addAll(teamDTOSet);
+                        System.out.println("team列表是");
+                        System.out.println(teamDTOS);
+                        System.out.println("teamSet是");
+                        System.out.println(teamDTOSet);
                     }
                     jsonObject.put("result", "success");
-                    jsonObject.put("teamBeans", teamDTOS1);
+                    jsonObject.put("teamBeans", teamDTOS);
                     return jsonObject;
                 }
             } else {

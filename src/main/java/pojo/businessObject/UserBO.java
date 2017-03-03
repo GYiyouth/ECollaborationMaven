@@ -76,8 +76,11 @@ public class UserBO {
                         return null;
                     }
                 }else if(userVO.getRole().equals("student")){
-                    StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
+                    //你写的什么玩意儿耿瑞这尼玛登录还分2次拿数据的我操
+//                    StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
+                    StudentDAO studentDAO = BeanFactory.getBean("studentDAO", StudentDAO.class);
                     StudentVO studentVO = studentDAO.getStudentInfoByStudentId(userVO.getId());
+
                     if(studentVO != null) {
                         StudentDTO studentDTO = BeanFactory.getApplicationContext().getBean("studentDTO",StudentDTO.class);
                         studentDTO.clone(studentVO);

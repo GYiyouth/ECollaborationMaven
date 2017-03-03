@@ -2,6 +2,7 @@ package pojo.valueObject.domain;
 
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.context.annotation.Lazy;
 import pojo.valueObject.assist.StudentTeamVO;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class TeamVO {
 	private String description;
 
     @ManyToMany(targetEntity = ProjectVO.class)
+    @Lazy(false)
     @JoinTable(name = "team_project",
             joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id")
@@ -35,6 +37,7 @@ public class TeamVO {
     private Set<ProjectVO> projectVOSet;
 
     @ManyToMany(targetEntity = StudentVO.class)
+    @Lazy(false)
     @JoinTable(name = "student_team",
             joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "id")
@@ -54,8 +57,8 @@ public class TeamVO {
                 ", createDate='" + createDate + '\'' +
                 ", memberMax=" + memberMax +
                 ", description='" + description + '\'' +
-                ", projectVOSet=" + projectVOSet.size() +
-                ", studentVOSet=" + studentVOSet.size() +
+//                ", projectVOSet=" + projectVOSet.size() +
+//                ", studentVOSet=" + studentVOSet.size() +
                 '}';
     }
 
