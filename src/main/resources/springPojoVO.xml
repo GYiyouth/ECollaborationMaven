@@ -41,47 +41,63 @@
     <bean id="projectVO" class="pojo.valueObject.domain.ProjectVO" scope="prototype">
         <!--<property name="creatorUserVO" ref="userVO"/>-->
         <!--<property name="teacherVO" ref="teacherVO"/>-->
-        <!--<property name="teamVOSet">-->
-            <!--<set/>-->
-        <!--</property>-->
+        <property name="teamVOSet">
+            <set/>
+        </property>
     </bean>
 
     <bean id="studentVO" class="pojo.valueObject.domain.StudentVO" scope="prototype"/>
 
     <bean id="taskVO" class="pojo.valueObject.domain.TaskVO" scope="prototype">
         <!--<property name="creatorTeacherVO" ref="teacherVO"/>-->
-        <!--<property name="projectVOSet">-->
-            <!--<set/>-->
-        <!--</property>-->
+        <property name="projectVOSet">
+            <set/>
+        </property>
     </bean>
 
     <bean id="teacherVO" class="pojo.valueObject.domain.TeacherVO" scope="prototype">
-        <!--<property name="projectVOSet">-->
-            <!--<set>-->
-            <!--</set>-->
-        <!--</property>-->
+        <property name="projectVOSet">
+            <set>
+            </set>
+        </property>
     </bean>
 
     <bean id="teamVO" class="pojo.valueObject.domain.TeamVO" scope="prototype">
         <!--<property name="creatorStudentVO" ref="studentVO"/>-->
-        <!--<property name="projectVOSet">-->
-            <!--<set/>-->
-        <!--</property>-->
-        <!--<property name="studentVOSet">-->
-            <!--<set/>-->
-        <!--</property>-->
+        <property name="projectVOSet">
+            <set/>
+        </property>
+        <property name="studentVOSet">
+            <set/>
+        </property>
     </bean>
 
     <bean id="userVO" class="pojo.valueObject.domain.UserVO">
-        <!--<property name="messageVOSet">-->
-            <!--<set>-->
-            <!--</set>-->
-        <!--</property>-->
+        <property name="messageVOSet">
+            <set>
+            </set>
+        </property>
     </bean>
 
+
     <bean id="test" class="pojo.valueObject.domain.Test">
-        <property name="studentVO" ref="studentVO"/>
+        <property name="age" value="22"/>
+        <property name="test2">
+            <!--使用嵌套Bean定义setTest2方法的参数值-->
+            <bean class="pojo.valueObject.domain.Test2">
+                <property name="age" value="11"/>
+            </bean>
+        </property>
     </bean>
+    <bean id="son1" class=
+            "org.springframework.beans.factory.config.PropertyPathFactoryBean">
+        <!--确定目标bean，指定son1 Bean来自哪个bean的getter方法-->
+        <property name="targetBeanName" value="test"/>
+        <!--确定目标bean，指定son1 Bean来自该bean的哪个getter方法-->
+        <property name="propertyPath" value="test2"/>
+        <!--根据配置，从上下文获取就是得到getTest.getTest2()-->
+    </bean>
+
 
 
 

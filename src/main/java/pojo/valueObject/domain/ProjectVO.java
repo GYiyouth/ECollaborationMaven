@@ -31,7 +31,7 @@ public class ProjectVO {
 	private String info = null;
 	private String requirement = null;
 	private String gain = null;
-	private Integer priority = null;
+	private Integer priority = null; //1 school, 2 interest, 3 match
 	private Integer status = null;
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
@@ -43,7 +43,6 @@ public class ProjectVO {
 	private TeacherVO teacherVO;
 
     @ManyToMany(targetEntity = TeamVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinTable(name = "team_project",
             joinColumns = @JoinColumn(name = "projectId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id")
@@ -74,9 +73,9 @@ public class ProjectVO {
 				", gain='" + gain + '\'' +
 				", priority=" + priority +
 				", status=" + status +
-				", creatorUserVO=" + creatorUserVO.getId() +
-				", teacherVO=" + teacherVO.getId() +
-				", teamVOSet=" + teamVOSet.size() +
+//				", creatorUserVO=" + creatorUserVO.getId() +
+//				", teacherVO=" + teacherVO.getId() +
+//				", teamVOSet=" + teamVOSet.size() +
 				'}';
 	}
 

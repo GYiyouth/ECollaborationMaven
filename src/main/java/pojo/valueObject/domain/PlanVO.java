@@ -19,7 +19,6 @@ public class PlanVO {
     private String title;
     private String content;
     @ManyToOne(targetEntity = StudentVO.class)
-    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
     private StudentVO studentVO;
 

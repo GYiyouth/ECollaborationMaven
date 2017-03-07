@@ -6,7 +6,12 @@
     <bean id="userBO" class="pojo.businessObject.UserBO"/>
     <bean id="teamBO" class="pojo.businessObject.TeamBO"/>
     <bean id="teacherBO" class="pojo.businessObject.TeacherBO"/>
-    <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
+    <bean id="planBO" class="pojo.businessObject.PlanBO"/>
+    <bean id="projectBO" class="pojo.businessObject.ProjectBO"/>
+    <bean id="applicationBO" class="pojo.businessObject.ApplicationBO"/>
+    <bean id="accessScoreBO" class="pojo.businessObject.AccessScoreBO"/>
+    <bean id="taskBO" class="pojo.businessObject.TaskBO"/>
+    <bean id="messageBO" class="pojo.businessObject.MessageBO"/>
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->
     <!--<bean id="userBO" class="pojo.businessObject.UserBO" scope="prototype"/>-->

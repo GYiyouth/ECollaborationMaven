@@ -21,7 +21,7 @@ public class UserDAO {
      * @param passWord
      * @return UserVO/null
      */
-    public UserVO getUserInfo(String logName,String passWord){
+    public UserVO getUserInfo(String logName,String passWord) throws Exception{
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
             return null;
         }else {
@@ -41,7 +41,7 @@ public class UserDAO {
                 }
             }catch(Exception e){
                 e.printStackTrace();
-                return null;
+                throw e;
             }
         }
     }
@@ -51,7 +51,7 @@ public class UserDAO {
      * @param userVO
      * @return
      */
-    public StudentVO getStudentVOByUserVO(UserVO userVO){
+    public StudentVO getStudentVOByUserVO(UserVO userVO) throws Exception{
         if(userVO == null) {
             return null;
         }else{
@@ -62,7 +62,7 @@ public class UserDAO {
                 return studentVO;
             }catch(Exception e){
                 e.printStackTrace();
-                return null;
+                throw e;
             }
         }
     }

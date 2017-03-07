@@ -18,18 +18,23 @@ public class ApplicationVO {
     private int id;
 
     private String type;
+
     @ManyToOne(targetEntity = TeamVO.class)
     @JoinColumn(name = "teamId", referencedColumnName = "id")
     private TeamVO teamVO;
+
     @ManyToOne(targetEntity = ProjectVO.class)
     @JoinColumn(name = "projectId", referencedColumnName = "id")
     private ProjectVO projectVO;
+
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "handlerId", referencedColumnName = "id")
     private UserVO handlerUserVO;
+
     @ManyToOne(targetEntity = UserVO.class)
     @JoinColumn(name = "affectedId", referencedColumnName = "id")
     private UserVO affectedUserVO;
+
     private String createdTime;
     private String result;
     @OneToOne(targetEntity = MessageVO.class)

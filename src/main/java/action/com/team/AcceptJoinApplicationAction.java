@@ -33,7 +33,7 @@ public class AcceptJoinApplicationAction extends ActionSupport implements Servle
     public String execute() throws Exception {
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
         try {
-            jsonObject = teamBO.acceptJoinApplication(applicationId);
+            jsonObject = teamBO.acceptJoinApplication(applicationId,session);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch(Exception e){

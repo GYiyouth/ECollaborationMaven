@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
-<html lang="en">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>葛尧</title>
+    <meta charset="utf-8"/>
+    <title>ECollaboration</title>
 </head>
 <body>
-<center>
-测试huohuo
-<form id="test" action="logIn.action" method="post">
-    测试<input type="submit" value="提交">
-</form>
-</center>
+<%--<h2>Hello World!<br>This is Ge Yao<br>真的成了？？？</h2>--%>
+<%--<A HREF="helloworld.html">click</A>--%>
+<script type="text/javascript">
+
+    window.location.href="./dxt1.0/login.html";
+
+</script>
 </body>
 </html>

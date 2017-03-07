@@ -32,13 +32,17 @@ public class GetMyJoinTeamsAction extends ActionSupport implements ServletReques
     @Override
     public String execute() throws Exception {
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
-        jsonObject = teamBO.getMyJoinTeams(session);
-        if(jsonObject==null){
-            System.out.println("ERROR:jsonObject==null---"+this.getClass()+"----execute()");
-            return "fail";
-        }else{
+        try {
+            jsonObject = teamBO.getMyJoinTeams(session);
+            if (jsonObject == null)
+                jsonObject = BeanFactory.getJSONO();
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
         }
     }
 
@@ -69,5 +73,25 @@ public class GetMyJoinTeamsAction extends ActionSupport implements ServletReques
 
     public void setJsonObject(JSONObject jsonObject) {
         this.jsonObject = jsonObject;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
     }
 }

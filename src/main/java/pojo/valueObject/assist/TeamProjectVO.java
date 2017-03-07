@@ -20,11 +20,9 @@ public class TeamProjectVO {
     private int id;
     @ManyToOne(targetEntity = TeamVO.class)
     @JoinColumn(name = "teamId", referencedColumnName = "id")
-    @Cascade(CascadeType.ALL)
     private TeamVO teamVO;
     @ManyToOne(targetEntity = ProjectVO.class)
     @JoinColumn(name = "projectId", referencedColumnName = "id")
-    @Cascade(CascadeType.ALL)
     private ProjectVO projectVO;
 
     private String showUrl;

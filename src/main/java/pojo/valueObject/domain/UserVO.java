@@ -1,6 +1,11 @@
 package pojo.valueObject.domain;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
@@ -16,7 +21,7 @@ public class UserVO {
     private String schoolId;
     private String name;
     private Integer sex;	//1:男 0：女
-    private String role;//1管理员，2教师，3学生
+    private String role;//teacher, student, manager
     private String email;
     private String phoneNumber;
     private String logName;
@@ -25,7 +30,7 @@ public class UserVO {
     private String photo; //路径，默认放在web.upload.headPhotos下
     private String lastLogTime;
     private String activeBefore;
-    private int newsFlag;
+    private Integer newsFlag;
     // toString needed
     @ManyToMany(targetEntity = MessageVO.class)
     @JoinTable(name = "message_receiver",
@@ -55,7 +60,7 @@ public class UserVO {
                 ", photo='" + photo + '\'' +
                 ", lastLogTime='" + lastLogTime + '\'' +
                 ", activeBefore='" + activeBefore + '\'' +
-                ", newFlag=" + newsFlag +
+                ", newsFlag=" + newsFlag +
                 ", messageVOSet=" + messageVOSet.size() +
                 '}';
     }
@@ -150,11 +155,11 @@ public class UserVO {
     public void setActiveBefore(String activeBefore) {
         this.activeBefore = activeBefore;
     }
-    public int getNewsFlag() {
+    public Integer getNewsFlag() {
         return newsFlag;
     }
-    public void setNewsFlag(int newFlag) {
-        this.newsFlag = newFlag;
+    public void setNewsFlag(int newsFlag) {
+        this.newsFlag = newsFlag;
     }
 
 

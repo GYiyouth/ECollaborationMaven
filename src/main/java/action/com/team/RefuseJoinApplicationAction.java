@@ -31,13 +31,15 @@ public class RefuseJoinApplicationAction extends ActionSupport implements Servle
     @Override
     public String execute() throws Exception {
         TeamBO teamBO = BeanFactory.getApplicationContext().getBean("teamBO",TeamBO.class);
-        jsonObject = teamBO.refuseJoinApplication(applicationId);
-        if(jsonObject==null){
-            System.out.println("ERROR:jsonObject==null---"+this.getClass()+"---execute()");
-            return "fail";
-        }else{
+        try {
+            jsonObject = teamBO.refuseJoinApplication(applicationId,session);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            jsonObject.put("result","SQLException");
+            JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
         }
     }
 
@@ -75,5 +77,25 @@ public class RefuseJoinApplicationAction extends ActionSupport implements Servle
 
     public void setJsonObject(JSONObject jsonObject) {
         this.jsonObject = jsonObject;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
     }
 }

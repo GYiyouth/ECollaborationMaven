@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉菜单和滚动监听插件</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<!--下拉菜单-->
+<!--声明式用法-->
+<div class="dropdown" id="dropdown">
+    <button class="btn bg-primary" data-toggle="dropdown">
+        下拉菜单
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">产品</a></li>
+        <li><a href="#">资讯</a></li>
+        <li><a href="#">关于</a></li>
+    </ul>
+</div>
+<!--如果按钮在容器外部,可以通过data-target进行绑定-->
+<button class="btn bg-primary btn-lg" id="btn" data-toggle="dropdown" data-target="#dropdown">test</button>
+
+
+<!--js调用中,没有属性方法并不好用,下面介绍四个基本事件-->
+<div class="dropdown" id="dropdown">
+    <button class="btn bg-primary" id="btn" data-toggle="dropdown" data-target="#dropdown">
+        下拉菜单
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">产品</a></li>
+        <li><a href="#">资讯</a></li>
+        <li><a href="#">关于</a></li>
+    </ul>
+</div>
+
+
+<!--滚动监听-->
+<!--基本实例-->
+<nav id="nav" class="navbar navbar-default">
+    <a href="#" class="navbar-brand">Web开发</a>
+    <ul class="nav navbar-nav">
+        <li><a href="#html5">HTML5</a> </li>
+        <li><a href="#bootstrap">Bootstrap</a></li>
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown">Javascript<span class="caret"></span> </a>
+            <ul class="dropdown-menu">
+                <li><a href="#jquery">JQuery</a> </li>
+                <li><a href="#yui">Yui</a> </li>
+                <li><a href="#extjs">Extjs</a> </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<div data-offset="0" data-target="#nav" data-spy="scroll" style="height: 200px;overflow:auto;position: relative;padding: 0 10px; ">
+    <h4 id="html5">HTML5</h4>
+    <p>TeamViewer GmbH * Jahnstr. 30 * 73037 Göppingen * 德国
+        Tel. 07161 60692 50 * Fax +49 (0) 7161 60692 79
+        Registration AG Ulm HRB 534075 * CEO (首席执行官): Andreas König, CFO (首席财务官): Dr. Thomas Nowak</p>
+    <h4 id="bootstrap">Bootstrap</h4>
+    <p>TeamViewer GmbH * Jahnstr. 30 * 73037 Göppingen * 德国
+        Tel. 07161 60692 50 * Fax +49 (0) 7161 60692 79
+        Registration AG Ulm HRB 534075 * CEO (首席执行官): Andreas König, CFO (首席财务官): Dr. Thomas Nowak</p>
+    <h4 id="jquery">JQuery</h4>
+    <p>TeamViewer GmbH * Jahnstr. 30 * 73037 Göppingen * 德国
+        Tel. 07161 60692 50 * Fax +49 (0) 7161 60692 79
+        Registration AG Ulm HRB 534075 * CEO (首席执行官): Andreas König, CFO (首席财务官): Dr. Thomas Nowak</p>
+    <h4 id="yui">Yui</h4>
+    <p>TeamViewer GmbH * Jahnstr. 30 * 73037 Göppingen * 德国
+        Tel. 07161 60692 50 * Fax +49 (0) 7161 60692 79
+        Registration AG Ulm HRB 534075 * CEO (首席执行官): Andreas König, CFO (首席财务官): Dr. Thomas Nowak</p>
+    <h4 id="extjs">Extjs</h4>
+    <p>TeamViewer GmbH * Jahnstr. 30 * 73037 Göppingen * 德国
+        Tel. 07161 60692 50 * Fax +49 (0) 7161 60692 79
+        Registration AG Ulm HRB 534075 * CEO (首席执行官): Andreas König, CFO (首席财务官): Dr. Thomas Nowak</p>
+</div>
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    //$('#btn').dropdown();
+    //$('#btn').dropdown('toggle');
+
+
+
+</script>
+</body>
+</html>

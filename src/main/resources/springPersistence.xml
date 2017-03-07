@@ -9,7 +9,7 @@
           p:driverClass="com.mysql.jdbc.Driver"
           p:jdbcUrl="jdbc:mysql://localhost:3306/ECollaborationWeb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
           p:user="root"
-          p:password="123456"
+          p:password="686995"
           p:maxPoolSize="40"
           p:minPoolSize="2"
           p:initialPoolSize="2"
@@ -43,8 +43,10 @@
                 <value>pojo.valueObject.assist.TeamProjectAccessVO</value>
                 <value>pojo.valueObject.assist.StudentScoreVO</value>
                 <value>pojo.valueObject.assist.ProjectAccessTypeVO</value>
+                <value>pojo.valueObject.assist.ProjectTaskVO</value>
             </list>
         </property>
+
         <property name="hibernateProperties">
             <props>
                 <!--执行数据库连接方言-->

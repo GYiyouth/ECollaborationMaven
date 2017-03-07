@@ -1,7 +1,10 @@
 package pojo.valueObject.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by geyao on 2017/02/18.

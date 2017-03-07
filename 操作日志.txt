@@ -90,3 +90,63 @@
 2017/02/28
 耿：
     完成功能：查看团队信息，查看自己加入的所有团队信息，接受拒绝加入团队的请求。
+
+2017/03/01
+葛尧：
+    增加创建计划的action、BO(新增计划,并往session里添加planVO与projectVO)、DAO，在使用PlanDAO的添加计划的时候，会同时往计划表添加
+    登录以后，session里会有：studentVO，或teacherVO，或managerVO
+    约定所有的BO均不许出现静态方法，作用域均为单例。
+
+耿：
+    修改之前的代码：1.层层throw Exception，最后在action中可以分清异常的类别
+                    2.封装成json
+
+2017/03/02
+葛尧：
+    删去PlanVO中studentVO的@Cascade注释
+    在PlanBO里添加方法，获取计划返回PlanDTO的list，在session里放置PlanVOList。完成查看计划的action
+
+    ProjectDAO新增 添加方法，注释掉了ProjectVO里面toString方法里一些会引起懒加载异常的代码
+    ProjectBO新增 添加方法，在session里添加projectDAO
+    ProjectAction新增 添加方法， 默认的状态是开放申请。
+    Time小工具新增了返回年级的方法-getGrade
+
+    新建了application的DAO，写了一堆查询方法
+    新建ApplicationBO,session里添加applicationVOList
+
+    TeacherVO中含有ProjectSet，可以通过这里调用，添加删除时记得同步处理这里的数据
+
+    ProjectBO新增查询方法，获取本人相关的projectVOList：
+         * 如果是学生，会先查询他的team，再根据team来完成找项目
+         * 如果是教师，会返回teacherVO中的projectSet
+         * session里放置projectVOList
+    完成查看projectVOList的action
+
+    新增一个AccessScoreDAO，放置有关打分评价的东西
+        添加评价种类DAO,忘了考虑百分比
+
+    登录后json里多了个一个role的字段，对应student，teacher，manager
+    根据某一个评价条目，获取该条目下,该团队的学生的分数
+
+    完成搜索项目的action
+    完成申请项目的大DAO
+
+    完成 获取 未读消息的 action ReadNewMessageAction，不会关联Application
+
+
+
+耿：
+    老师发布任务
+    搜索团队功能（团队名字、团队描述、团队成员（包括组长），项目）
+    修改申请、接受、拒绝加入团队的功能：bug：当用户读消息后，没有令newsFlag--，有待商榷
+    给团队的任务打分
+
+    完成团队搜索，申请团队（注意不能申请自己的团队）
+    TeamDTO删除了两个set的clone
+
+2017/03/07
+葛尧：
+    在web.xml里添加了listener，以开启Bean的request，session作用域
+    加了2个Test类用来做实验
+
+

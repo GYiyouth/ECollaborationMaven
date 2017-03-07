@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模态框插件</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<!--基本使用 分别为modal(模态生命层),dialog(窗口声明层),content(内容层)。内容层又分三层:header,body和footer-->
+<!--模态声明,show表示显示-->
+<div class="modal show" tabindex="-1">
+    <!--窗口声明-->
+    <div class="modal-dialog">
+        <!--内容声明-->
+        <div class="modal-content">
+            <!--头部-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">会员登录</h4>
+            </div>
+            <!--主体-->
+            <div class="media-body">
+                <p>暂时无法登录会员</p>
+            </div>
+            <!-- 注脚-->
+            <div class="modal-footer">
+                <button class="btn btn-default">注册</button>
+                <button class="btn btn-default">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--没有show,点击弹窗-->
+<div class="modal "  id="myModal" tabindex="-1">
+    <!--窗口声明-->
+    <div class="modal-dialog" >
+        <!--内容声明-->
+        <div class="modal-content">
+            <!--头部-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">会员登录</h4>
+            </div>
+            <!--主体-->
+            <div class="media-body">
+                <p>暂时无法登录会员</p>
+            </div>
+            <!-- 注脚-->
+            <div class="modal-footer">
+                <button class="btn btn-default">注册</button>
+                <button class="btn btn-default">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">点击弹窗</button>
+
+<!--弹窗大小-->
+<div class="modal-dialog modal-lg" >
+<div class="modal-dialog sm-lg" >
+
+<!--淡入淡出-->
+    <div class="modal fade" id="myModal">
+
+<!--在主体部分使用栅格系统中的流体-->
+        <div class="media-body">
+            <div class="container-fluid">
+                <div class="col-md-4">1</div>
+                <div class="col-md-4">1</div>
+                <div class="col-md-4">1</div>
+            </div>
+        </div>
+
+$('#myModal').on
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $('#btn').on('click',function () {
+                $('#myModal').modal('show');
+            })
+            </script>
+        <script type="text/javascript">
+            $('#myModal').on('show.bs.modal',function () {
+                alert('在show方法调用时立即触发')
+            })
+
+            $('#myModal').on('shown.bs.modal',function () {
+                alert('在模态框显示完毕后触发')
+            })
+
+
+            $('#myModal').on('hide.bs.modal',function () {
+                alert('在hide方法调用时立即触发')
+            })
+
+            $('#myModal').on('hiden.bs.modal',function () {
+                alert('在模态框显示完毕后触发')
+            })
+
+            $('#myModal').on('loaded.bs.modal',function () {
+                alert('远程数据加载完毕后触发')
+            })
+            </script>
+
+</body>
+</html>

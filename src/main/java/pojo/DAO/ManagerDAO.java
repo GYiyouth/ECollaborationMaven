@@ -16,14 +16,20 @@ public class ManagerDAO {
      * @param id
      * @return
      */
-    public ManagerVO getManagerInfo(Integer id){
+    public ManagerVO getManagerInfo(Integer id) throws Exception{
         if(id == null){
             return null;
         }else {
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
             Session session = sf.openSession();
-            return session.get(ManagerVO.class, id);
+            try{
+                ManagerVO managerVO = session.get(ManagerVO.class, id);
+                return managerVO;
+            }catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
         }
     }
 }

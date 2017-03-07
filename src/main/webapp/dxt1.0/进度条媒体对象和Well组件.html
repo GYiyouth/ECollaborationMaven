@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进度条媒体对象和Well组件</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<!--Well组件-->
+<!--嵌入效果-->
+<div class="well">
+    Bootstrap
+</div>
+<!--有lg和sm两种可选值-->
+<div class="well well-lg">
+    Bootstrap
+</div>
+
+
+<!--进度条组件-->
+<!--基本进度条-->
+<div class="progress">
+    <div class="progress-bar" style="width: 60%;">60%</div>
+</div>
+<!--最低值进度条-->
+<div class="progress">
+    <div class="progress-bar" style="min-width: 20px">0%</div>
+</div>
+<!--结合情景的进度条-->
+<div class="progress">
+    <div class="progress-bar progress-bar-success" style="min-width: 20px;width: 60%">60%</div>
+</div>
+<!--条纹状-->
+<div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped" style="min-width: 20px;width: 60%">60%</div>
+</div>
+<!--动画效果-->
+<div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped active" style="min-width: 20px;width: 60%">60%</div>
+</div>
+<!--堆叠效果-->
+<div class="progress">
+    <div class="progress-bar progress-bar-success" style="min-width: 20px;width: 35%">35%</div>
+    <div class="progress-bar progress-bar-warning" style="min-width: 20px;width: 20%">20%</div>
+    <div class="progress-bar progress-bar-danger" style="min-width: 20px;width: 10%">10%</div>
+</div>
+
+
+<!--媒体对象组件-->
+<!--基本实例-->
+<div class="media">
+    <div class="media-left ">
+        <img src="img/timg.jpeg" alt="" class="media-object">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">标题</h4>
+        <p>网易公司(163.com)旗下实用技能学习平台。与优秀讲师、专业机构、院校合作，为您提供海量优质课程，以及创新的在线学习体验，帮助您获得全新的个人发展和能力提升。</p>
+    </div>
+</div>
+
+<!--媒体对象在右边-->
+<div class="media">
+    <div class="media-body">
+        <h4 class="media-heading">标题</h4>
+        <p>网易公司(163.com)旗下实用技能学习平台。与优秀讲师、专业机构、院校合作，为您提供海量优质课程，以及创新的在线学习体验，帮助您获得全新的个人发展和能力提升。</p>
+    </div>
+    <div class="media-right">
+    <img src="img/timg.jpeg" alt="" class="media-object">
+</div>
+</div>
+
+<!--媒体对象列表-->
+<ul class="media-list">
+    <li class="media">
+        <div class="media-left ">
+            <img src="img/timg.jpeg" alt="" class="media-object">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">标题</h4>
+            <p>网易公司(163.com)旗下实用技能学习平台。与优秀讲师、专业机构、院校合作，为您提供海量优质课程，以及创新的在线学习体验，帮助您获得全新的个人发展和能力提升。</p>
+    <div class="media">
+        <div class="media-left ">
+            <img src="img/timg.jpeg" alt="" class="media-object">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">标题</h4>
+            <p>网易公司(163.com)旗下实用技能学习平台。与优秀讲师、专业机构、院校合作，为您提供海量优质课程，以及创新的在线学习体验，帮助您获得全新的个人发展和能力提升。</p>
+        </div>
+    </div>
+        </div>
+    </li>
+</ul>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

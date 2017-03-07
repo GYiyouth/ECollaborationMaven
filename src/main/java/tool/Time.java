@@ -78,5 +78,11 @@ public class Time {
         return (getYear() + "-" + getMonth() + "-" + getDay() + " " +  getHour() + ":" + getMinute() + ":" + getSecond());
     }
 
-
+    public static String getGrade(){
+        Integer year = Integer.parseInt(getYear());
+        int month = Integer.parseInt(getMonth());
+        if (month<9)
+            year--;
+        return year.toString();
+    }
 }
