@@ -50,7 +50,7 @@ public class ProjectDAOTest {
 //
 //        projectVO.setTeacherVO(teacherVO);
 //        projectVO.setCreatorUserVO(studentVO);
-//        projectVO.setName("20170302测试");
+//        projectVO.setAge("20170302测试");
 //
 //        projectDAO.addProjectVO(projectVO);
 //
