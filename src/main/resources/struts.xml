@@ -6,110 +6,110 @@
 
 <struts>
 
-    <package age="logIn" extends="struts-default">
+    <package name="logIn" extends="struts-default">
 
-        <action age="logIn" class="action.com.logIn.LogInAction">
-            <result age="teacher">teacher.jsp</result>
-            <result age="manager">manager.jsp</result>
-            <result age="student">student.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="logIn" class="action.com.logIn.LogInAction">
+            <result name="teacher">teacher.jsp</result>
+            <result name="manager">manager.jsp</result>
+            <result name="student">student.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="logOut" class="action.com.logIn.LogOutAction">
-            <result age="success">success.jsp</result>
+        <action name="logOut" class="action.com.logIn.LogOutAction">
+            <result name="success">success.jsp</result>
         </action>
     </package>
 
-    <package age="team" extends="struts-default">
+    <package name="team" extends="struts-default">
 
-        <action age="createTeam" class="action.com.team.CreateTeamAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="createTeam" class="action.com.team.CreateTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="applyJoinTeam" class="action.com.team.ApplyJoinTeamAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="applyJoinTeam" class="action.com.team.ApplyJoinTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="getMyJoinTeams" class="action.com.team.GetMyJoinTeamsAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="getMyJoinTeams" class="action.com.team.GetMyJoinTeamsAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="getTeamInfo" class="action.com.team.GetTeamInfoAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="getTeamInfo" class="action.com.team.GetTeamInfoAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="acceptJoinApplication" class="action.com.team.AcceptJoinApplicationAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="acceptJoinApplication" class="action.com.team.AcceptJoinApplicationAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="refuseJoinApplication" class="action.com.team.RefuseJoinApplicationAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="refuseJoinApplication" class="action.com.team.RefuseJoinApplicationAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-        <action age="searchTeam" class="action.com.team.SearchTeamAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-    </package>
-
-
-    <package age="plan" extends="struts-default">
-
-        <action age="createPlan" class="action.com.plan.CreatePlanAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="getPlanAction" class="action.com.plan.GetPlanAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-    </package>
-
-    <package age="project" extends="struts-default">
-        <action age="addProjectAction" class="action.com.project.AddProjectAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="getMyProjectVOList" class="action.com.project.GetMyProjectVOListAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="searchProjectAction" class="action.com.project.SearchProjectAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="appSearchProjectAction" class="action.com.project.SearchProjectAction" method="appExecute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="applyProject" class="action.com.project.ApplyProjectAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-    </package>
-
-    <package age="teacher" extends="struts-default">
-        <action age="modifyTeacherInfoAction" class="action.com.teacher.ModifyTeacherInfoAction" method="modifyTeacherInfo">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-    </package>
-
-    <package age="task" extends="struts-default">
-        <action age="createTask" class="action.com.task.CreateTaskAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
-        </action>
-        <action age="addTeamProjectAccess" class="action.com.task.AddTeamProjectAccessAction">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+        <action name="searchTeam" class="action.com.team.SearchTeamAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
     </package>
 
 
-    <package age="message" extends="struts-default">
-        <action age="readNewMessage" class="action.com.message.ReadNewMessageAction" method="execute">
-            <result age="success">success.jsp</result>
-            <result age="fail">fail.jsp</result>
+    <package name="plan" extends="struts-default">
+
+        <action name="createPlan" class="action.com.plan.CreatePlanAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getPlanAction" class="action.com.plan.GetPlanAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
+    <package name="project" extends="struts-default">
+        <action name="addProjectAction" class="action.com.project.AddProjectAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getMyProjectVOList" class="action.com.project.GetMyProjectVOListAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="searchProjectAction" class="action.com.project.SearchProjectAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="appSearchProjectAction" class="action.com.project.SearchProjectAction" method="appExecute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="applyProject" class="action.com.project.ApplyProjectAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
+    <package name="teacher" extends="struts-default">
+        <action name="modifyTeacherInfoAction" class="action.com.teacher.ModifyTeacherInfoAction" method="modifyTeacherInfo">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
+    <package name="task" extends="struts-default">
+        <action name="createTask" class="action.com.task.CreateTaskAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="addTeamProjectAccess" class="action.com.task.AddTeamProjectAccessAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
+
+    <package name="message" extends="struts-default">
+        <action name="readNewMessage" class="action.com.message.ReadNewMessageAction" method="execute">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
     </package>
 </struts>
