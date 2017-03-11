@@ -149,4 +149,7 @@
     在web.xml里添加了listener，以开启Bean的request，session作用域
     加了2个Test类用来做实验
 
+2017/03/11
+葛尧：
+    把多有的openSession()都换成了getCurrentSession()了
 

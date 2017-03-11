@@ -31,7 +31,7 @@ public class TeamDAO {
     public TeamVO createTeam(TeamVO teamVO, StudentVO studentVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction =  session.beginTransaction();
         try{
             session.save(teamVO);
@@ -60,7 +60,7 @@ public class TeamDAO {
     public String applyJoinTeam(UserVO senderUserVO, StudentVO receiverUserVO, TeamVO teamVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         MessageMould messageMould = context.getBean("messageMould",MessageMould.class);
         MessageReceiverVO messageReceiverVO = context.getBean("messageReceiverVO",MessageReceiverVO.class);
         ApplicationVO applicationVO = context.getBean("applicationVO",ApplicationVO.class);
@@ -104,7 +104,7 @@ public class TeamDAO {
             transaction.rollback();
             throw e;
         }finally {
-            session.close();
+//            session.close();
         }
     }
 
@@ -120,7 +120,7 @@ public class TeamDAO {
         }else{
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             try {
                 TeamVO teamVO = session.get(TeamVO.class, teamId);
                 if (teamVO == null) {
@@ -133,7 +133,7 @@ public class TeamDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }
@@ -149,7 +149,7 @@ public class TeamDAO {
             return null;
         }else {
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.openSession();
+            Session session = sf.getCurrentSession();
             try {
                 String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true and studentTeam.teamVO.id =:teamId";
                 Query query = session.createQuery(hql);
@@ -166,7 +166,7 @@ public class TeamDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }
@@ -183,7 +183,7 @@ public class TeamDAO {
         }else {
             ArrayList<TeamVO> teamVOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             try {
                 String hql = "select teamVO from StudentTeamVO as st where st.studentVO.id = :id";
                 Query query = session.createQuery(hql);
@@ -209,7 +209,7 @@ public class TeamDAO {
         if(teamId == null||teamId.equals("")){
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             try{
                 String hql = "select StudentVO from StudentTeamVO as st where st.teamVO.id = :teamId order by leaderFlag DESC";
                 Query query = session.createQuery(hql);
@@ -245,7 +245,7 @@ public class TeamDAO {
         }else{
             StudentTeamVO studentTeamVO = BeanFactory.getApplicationContext().getBean("studentTeamVO",StudentTeamVO.class);
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             try{
                 ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
@@ -320,7 +320,7 @@ public class TeamDAO {
             return "fail";
         }else{
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             try{
                 ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
@@ -375,7 +375,7 @@ public class TeamDAO {
         if(searchTeamInfo==null){
             throw new NullPointerException("ERROR:searchTeamInfo is null!!!---"+this.getClass()+"---searchTeam()");
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             ArrayList<TeamVO> teamVOS = new ArrayList<>();
             Map<Integer,Integer> teamSearchResult = new HashMap<>();

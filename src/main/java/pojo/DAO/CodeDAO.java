@@ -21,7 +21,7 @@ public class CodeDAO {
             System.out.println("ERROR:studentId is null---"+this.getClass()+"---getCodeSumByStudentId()");
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             try{
                 String hql = "select sum(c.row) from CodeVO as c where c.studentVO.id = :studentId and c.projectVO.id = :projectId";
                 Query query = session.createQuery(hql);
@@ -32,8 +32,6 @@ public class CodeDAO {
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
-            }finally {
-                session.close();
             }
         }
     }

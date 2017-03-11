@@ -27,7 +27,7 @@ public class TaskDAO {
             System.out.println("ERROR:taskVO/projectVO is null---"+this.getClass()+"---addTaskToProject()");
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             ProjectTaskVO projectTaskVO = BeanFactory.getApplicationContext().getBean("projectTaskVO",ProjectTaskVO.class);
             Transaction transaction = session.beginTransaction();
             try{
@@ -42,7 +42,7 @@ public class TaskDAO {
                 transaction.rollback();
                 throw e;
             }finally {
-                session.close();
+
             }
         }
     }
@@ -55,7 +55,7 @@ public class TaskDAO {
         if(teamProjectVO==null||taskVO == null||access == null){
             throw new NullPointerException("ERROR:teamProjectVO==null||taskVO == null||access == null--"+this.getClass()+"---addTeamProjectAccess()");
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             Transaction transaction = session.beginTransaction();
             try{
                 TeamProjectAccessVO teamProjectAccessVO = BeanFactory.getApplicationContext().getBean("teamProjectAccessVO", TeamProjectAccessVO.class);
@@ -70,7 +70,7 @@ public class TaskDAO {
                 transaction.rollback();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }
@@ -85,7 +85,7 @@ public class TaskDAO {
         if(taskId==null){
             throw new NullPointerException("ERROR:taskId==null---"+this.getClass()+"---getTaskVOByTaskId()");
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             try {
                 TaskVO taskVO = session.get(TaskVO.class, taskId);
                 return taskVO;
@@ -93,7 +93,7 @@ public class TaskDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }

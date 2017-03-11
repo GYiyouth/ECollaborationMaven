@@ -29,7 +29,7 @@ public class ApplicationDAO {
         if (applicationVO == null)
             return null;
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try{
             session.save(applicationVO);
@@ -38,8 +38,6 @@ public class ApplicationDAO {
             e.printStackTrace();
             transaction.rollback();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -107,7 +105,7 @@ public class ApplicationDAO {
         }
         ArrayList<ApplicationVO> arrayList = new ArrayList<>();
         SessionFactory sessionFactor = BeanFactory.getSessionFactory();
-        Session session = sessionFactor.openSession();
+        Session session = sessionFactor.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try{
             List list;
@@ -122,8 +120,6 @@ public class ApplicationDAO {
             e.printStackTrace();
             transaction.rollback();
             throw e;
-        }finally {
-            session.close();
         }
     }
 }

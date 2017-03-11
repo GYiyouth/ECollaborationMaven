@@ -32,7 +32,7 @@ public class ProjectDAO {
         if (id == null || id < 0)
             return null;
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 //        Transaction transaction = session.beginTransaction();
         try{
 //            return session.get(ProjectVO.class, id);
@@ -42,8 +42,6 @@ public class ProjectDAO {
             e.printStackTrace();
 //            transaction.rollback();
             throw e;
-        }finally {
-//            session.close();
         }
     }
 
@@ -56,7 +54,7 @@ public class ProjectDAO {
         if (projectVO == null)
             return null;
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try{
             session.save(projectVO);
@@ -66,8 +64,6 @@ public class ProjectDAO {
             transaction.rollback();
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -104,7 +100,7 @@ public class ProjectDAO {
 
         ArrayList<ProjectVO> arrayList = new ArrayList<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
             List<StudentTeamVO> STlist = session.createCriteria(StudentTeamVO.class)
@@ -134,8 +130,6 @@ public class ProjectDAO {
         }catch (Exception e){
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -148,7 +142,7 @@ public class ProjectDAO {
     public HashMap<Integer,ProjectVO> getAllProject(int grade) throws Exception{
         HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
             List projectVOList = session.createCriteria(ProjectVO.class)
@@ -175,7 +169,7 @@ public class ProjectDAO {
     public HashMap<Integer,ProjectVO> getAllProject() throws Exception{
         HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
             List projectVOList = session.createCriteria(ProjectVO.class)
@@ -205,7 +199,7 @@ public class ProjectDAO {
     public void applyProject(Integer teamId, Integer projectId) throws Exception{
 
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try{
             TeamVO teamVO = session.get(TeamVO.class, teamId);
@@ -277,8 +271,6 @@ public class ProjectDAO {
             transaction.rollback();
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -293,7 +285,7 @@ public class ProjectDAO {
         if(teamVO==null||projectVO==null){
             throw new NullPointerException("ERROR:teamVO==null||projectVO==null---"+this.getClass()+"---getTeamProjectVO()");
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             String hql = "from TeamProjectVO as tp where tp.teamVO.id = :teamId and tp.projectVO.id = :projectId";
             Query query = session.createQuery(hql);
             query.setParameter("teamId",teamVO.getId());

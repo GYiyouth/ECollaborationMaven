@@ -22,7 +22,7 @@ public class ManagerDAO {
         }else {
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.openSession();
+            Session session = sf.getCurrentSession();
             try{
                 ManagerVO managerVO = session.get(ManagerVO.class, id);
                 return managerVO;

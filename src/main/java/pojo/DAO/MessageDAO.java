@@ -27,7 +27,7 @@ public class MessageDAO {
     public ArrayList<MessageVO> getUnreadMessageVO(UserVO userVO){
         ArrayList<MessageVO> arrayList = new ArrayList<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try{
             List mrList = session.createCriteria(MessageReceiverVO.class)
@@ -73,8 +73,6 @@ public class MessageDAO {
             transaction.rollback();
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 }

@@ -31,7 +31,7 @@ public class PlanDAO {
         if (planVO == null || projectVO == null)
             return null;
         SessionFactory sessionFactory= BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
 
@@ -48,8 +48,6 @@ public class PlanDAO {
             transaction.rollback();
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -64,7 +62,7 @@ public class PlanDAO {
     public ArrayList<PlanVO> getPlanVOList(StudentVO studentVO, Integer projectId) throws Exception{
         ArrayList<PlanVO> arrayList = new ArrayList<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
             List<StudentProjectPlanVO> list;
@@ -84,8 +82,6 @@ public class PlanDAO {
             e.printStackTrace();
             transaction.rollback();
             throw e;
-        }finally {
-            session.close();
         }
     }
 }

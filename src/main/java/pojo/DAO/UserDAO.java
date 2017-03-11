@@ -26,7 +26,7 @@ public class UserDAO {
             return null;
         }else {
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.openSession();
+            Session session = sf.getCurrentSession();
             try{
                 String hql = "from UserVO as user where user.logName = :logName and passWord = :passWord";
                 Query query = session.createQuery(hql);
@@ -56,7 +56,7 @@ public class UserDAO {
             return null;
         }else{
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             try{
                 StudentVO studentVO = session.get(StudentVO.class,userVO.getId());
                 return studentVO;

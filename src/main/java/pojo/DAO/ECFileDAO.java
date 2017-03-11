@@ -14,7 +14,7 @@ public class ECFileDAO {
             System.out.println("ERROR:studentId is null---"+this.getClass()+"---getCodeSumByStudentId()");
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             try{
                 String hql = "select count(*) from ECFileVO as ecf where ecf.creatorUserVO.id = :studentId";
                 Query query = session.createQuery(hql);
@@ -24,8 +24,6 @@ public class ECFileDAO {
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
-            }finally {
-                session.close();
             }
         }
     }

@@ -30,7 +30,7 @@ public class AccessScoreDAO {
             ) throws Exception{
 
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try{
@@ -60,8 +60,6 @@ public class AccessScoreDAO {
             transaction.rollback();
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 
@@ -77,7 +75,7 @@ public class AccessScoreDAO {
         }
         ArrayList<String> arrayList = new ArrayList<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
         try{
@@ -91,11 +89,9 @@ public class AccessScoreDAO {
                 arrayList.add(projectAccessTypeVO.getType());
             }
             return arrayList;
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
             throw e;
-        }finally {
-            session.close();
         }
     }
 }

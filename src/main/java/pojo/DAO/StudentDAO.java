@@ -25,7 +25,7 @@ public class StudentDAO {
             System.out.println("studentId is null---"+this.getClass()+"---getStudentInfoByStudentId()" );
             return null;
         } else {
-            Session session = BeanFactory.getSessionFactory().openSession();
+            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             //如果没有这个学生信息  返回null;
             try {
                 StudentVO studentVO = session.get(StudentVO.class, studentId);

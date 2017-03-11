@@ -27,7 +27,7 @@ public class TeacherDAO {
         }else {
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.openSession();
+            Session session = sf.getCurrentSession();
             return session.get(TeacherVO.class, id);
         }
     }
@@ -40,7 +40,7 @@ public class TeacherDAO {
     public TeacherVO updateTeacherInfo(TeacherVO teacherVO) throws Exception{
         try {
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             session.update(teacherVO);
             return session.get(TeacherVO.class, teacherVO.getId());
         }catch (Exception e){
@@ -56,7 +56,7 @@ public class TeacherDAO {
     public HashMap<Integer, TeacherVO> getAllTeacher(){
         HashMap<Integer, TeacherVO> hashMap = new HashMap<>();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         try {
             List<TeacherVO> list = session.createCriteria(TeacherVO.class)
