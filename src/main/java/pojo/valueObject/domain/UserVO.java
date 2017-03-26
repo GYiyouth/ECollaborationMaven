@@ -2,6 +2,7 @@ package pojo.valueObject.domain;
 
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
