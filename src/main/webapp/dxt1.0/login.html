@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>欢迎登陆中国科学技术大学工程实践中心</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script>
         function submitform() {
             alert("异步脚本开始");
@@ -14,13 +12,14 @@
                     alert("status为4");
                     if(xhr.status>=200&&xhr.status<300||xhr.status==304){
                         alert("收到JSON数据")
-                        var result=JSON.parse(xhr.responseText);
-                        if(result.result=="success"){
-
+                        var JObject=JSON.parse(xhr.responseText);
+                        switch(JObject.result){
+                            case "success": alert("登陆成功");
+                            case "fail":alert("系统出错");
+                            case "loginforworry":
                         }
                     }else{
                         alert("发生错误，请重新登录");
-                        alert(xhr.status);
                     }
 
             }
