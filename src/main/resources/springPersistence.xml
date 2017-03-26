@@ -9,7 +9,7 @@
           p:driverClass="com.mysql.jdbc.Driver"
           p:jdbcUrl="jdbc:mysql://localhost:3306/ECollaborationWeb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
           p:user="root"
-          p:password="686995"
+          p:password="123456"
           p:maxPoolSize="40"
           p:minPoolSize="2"
           p:initialPoolSize="2"
@@ -56,6 +56,7 @@
                 <!--是否根据hibernate映射创建数据表-->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
             </props>
         </property>
         
