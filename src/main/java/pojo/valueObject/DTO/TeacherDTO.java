@@ -20,16 +20,16 @@ public class TeacherDTO extends UserDTO {
             super.clone(teacherVO);
             this.setHomePageUrl(teacherVO.getHomePageUrl());
             this.setNeedStudentsFlag(teacherVO.getNeedStudentsFlag());
-            if(!teacherVO.getProjectVOSet().isEmpty()){
-                Set<ProjectVO> projectVOSet = teacherVO.getProjectVOSet();
-                Set<Integer> projectVOIdSet = new HashSet<>();
-                for(ProjectVO projectVO: projectVOSet){
-                    projectVOIdSet.add(projectVO.getId());
-                }
-                this.setProjectVOIdSet(projectVOIdSet);
-            }else{
-                this.projectVOIdSet = new HashSet<>();
-            }
+//            if(!teacherVO.getProjectVOSet().isEmpty()){
+//                Set<ProjectVO> projectVOSet = teacherVO.getProjectVOSet();
+//                Set<Integer> projectVOIdSet = new HashSet<>();
+//                for(ProjectVO projectVO: projectVOSet){
+//                    projectVOIdSet.add(projectVO.getId());
+//                }
+//                this.setProjectVOIdSet(projectVOIdSet);
+//            }else{
+//                this.projectVOIdSet = new HashSet<>();
+//            }
         }else{
             System.out.println("teacherVO is null!");
         }

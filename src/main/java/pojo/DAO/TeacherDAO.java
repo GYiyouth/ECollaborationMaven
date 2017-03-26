@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.TeacherVO;
 import tool.BeanFactory;
 
@@ -21,14 +22,22 @@ public class TeacherDAO {
      * @param id
      * @return
      */
+
     public TeacherVO getTeacherInfo(Integer id){
         if(id==null){
             return null;
         }else {
-            ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.getCurrentSession();
+            Session session = sf.openSession();
+            try {
             return session.get(TeacherVO.class, id);
+
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
+            }finally {
+                session.close();
+            }
         }
     }
 

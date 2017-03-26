@@ -45,7 +45,7 @@ public class UserDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }
@@ -68,7 +68,7 @@ public class UserDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-                session.close();
+//                session.close();
             }
         }
     }

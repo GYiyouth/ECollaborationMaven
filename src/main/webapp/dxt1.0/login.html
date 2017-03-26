@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <title>欢迎登陆中国科学技术大学工程实践中心</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script>
-        function submitform(){
-            alert("异步脚本开始");
-            var xhr=new XMLHttpRequest();
-            xhr.onload=function(){
-                if(xhr.status>=200&&xhr.status.status<300||xhr.status==304){
-                    var result=JSON.parse(xhr.responsetext);
-                    alert("1");
-                }else{
-                    alert("发生错误，请重新登录");
-                    alert(xhr.status);
-                }
-            }
-            alert("初始化请求");
-            xhr.open("post","logIn",true);
-            var form=document.getElementById("loginform");
+    <!--<script>-->
+        <!--function submitform(){-->
+            <!--alert("异步脚本开始");-->
+            <!--var xhr=new XMLHttpRequest();-->
+            <!--xhr.onload=function(){-->
+                <!--if(xhr.status>=200&&xhr.status.status<300||xhr.status==304){-->
+                    <!--var result=JSON.parse(xhr.responsetext);-->
+                    <!--alert("1");-->
+                <!--}else{-->
+                    <!--alert("发生错误，请重新登录");-->
+                    <!--alert(xhr.status);-->
+                <!--}-->
+            <!--}-->
+            <!--alert("初始化请求");-->
+            <!--xhr.open("post","logIn",true);-->
+            <!--var form=document.getElementById("loginform");-->
 
-            xhr.send(new FormData(form));
-        }
+            <!--xhr.send(new FormData(form));-->
+        <!--}-->
 
-    </script>
+    <!--</script>-->
 </head>
 <body  style="margin: 50px">
 
@@ -50,6 +50,7 @@
                         <input type="button" class="btn btn-default btn-sm" value="登录" onclick="submitform();">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="reset"  class="btn btn-default btn-sm" >重置</button>
+                        <input type="submit" value="提交">
                     </div>
                 </form>
             </div>
