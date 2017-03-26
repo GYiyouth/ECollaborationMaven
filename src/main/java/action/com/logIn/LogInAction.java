@@ -48,7 +48,7 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
             jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);
-            return "success";
+            return jsonObject.get("role").toString();
         }catch(Exception e){
             e.printStackTrace();
             jsonObject.put("result","SQLException");

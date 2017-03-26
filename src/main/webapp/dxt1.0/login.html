@@ -6,27 +6,26 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script>
         function submitform() {
-            alert("异步脚本开始");
             var xhr=new XMLHttpRequest();
             xhr.onload=function(){
-                    alert("status为4");
                     if(xhr.status>=200&&xhr.status<300||xhr.status==304){
                         alert("收到JSON数据")
                         var JObject=JSON.parse(xhr.responseText);
                         switch(JObject.result){
                             case "success": alert("登陆成功");
-                            case "fail":alert("系统出错");
-                            case "loginforworry":
+                                if(JObject.role=="student"){
+                                    window.open("/dxt1.0/student-team-info.html");
+                                };break;
+                            case "fail":alert("系统出错");break;
+                            case "logInfoWrong":alert("用户名或密码错误");break;
                         }
                     }else{
                         alert("发生错误，请重新登录");
                     }
 
             }
-            alert("初始化请求");
             xhr.open("post","logIn",false);
             var form=document.getElementById("loginform");
-            alert("发送请求");
             xhr.send(new FormData(form));
         }
     </script>

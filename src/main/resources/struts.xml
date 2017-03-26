@@ -11,7 +11,7 @@
         <action name="logIn" class="action.com.logIn.LogInAction">
             <result name="teacher">teacher.jsp</result>
             <result name="manager">manager.jsp</result>
-            <result name="student">student.jsp</result>
+            <result name="student">dxt1.0/student-team-info.html</result>
             <result name="fail">fail.jsp</result>
         </action>
         <action name="logOut" class="action.com.logIn.LogOutAction">
