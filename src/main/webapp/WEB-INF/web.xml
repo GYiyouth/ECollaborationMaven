@@ -45,6 +45,8 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+
+
     <!--&lt;!&ndash;开启Session作用域&ndash;&gt;-->
     <!--<listener>-->
         <!--<listener-class>org.springframework.web.context.request.SessionScope</listener-class>-->

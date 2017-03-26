@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <title>欢迎登陆中国科学技术大学工程实践中心</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script>
-        function submitform(){
+        function submitform() {
             alert("异步脚本开始");
             var xhr=new XMLHttpRequest();
             xhr.onload=function(){
-                if(xhr.status>=200&&xhr.status.status<300||xhr.status==304){
-                    var result=JSON.parse(xhr.responsetext);
-                    alert("1");
-                }else{
-                    alert("发生错误，请重新登录");
-                    alert(xhr.status);
-                }
+                    alert("status为4");
+                    if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+                        alert("收到JSON数据")
+                        var result=JSON.parse(xhr.responseText);
+                        if(result.result=="success"){
+
+                        }
+                    }else{
+                        alert("发生错误，请重新登录");
+                        alert(xhr.status);
+                    }
+
             }
             alert("初始化请求");
-            xhr.open("post","logIn",true);
+            xhr.open("post","logIn",false);
             var form=document.getElementById("loginform");
-
+            alert("发送请求");
             xhr.send(new FormData(form));
         }
-
     </script>
 </head>
 <body  style="margin: 50px">

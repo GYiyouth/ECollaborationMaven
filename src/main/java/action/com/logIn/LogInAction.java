@@ -35,6 +35,8 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
 
     @Override
     public String execute() throws Exception {
+        System.out.println(userName+"username");
+        System.out.println(passWord+"password");
         session.clear();
         System.out.println("session已清空 =========  ");
         ApplicationContext context = BeanFactory.getApplicationContext();

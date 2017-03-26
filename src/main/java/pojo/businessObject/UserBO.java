@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Created by GR on 2017/2/26.
  */
-@Transactional
+
 public class UserBO {
 
     /**
@@ -46,6 +46,7 @@ public class UserBO {
                 return null;
             }else{
                 session.clear();
+                System.out.println(userVO);
 //                userDTO.clone(userVO);
 //                session.put("userVO", userVO);
 //                jsonObject.put("userBean",userDTO);
