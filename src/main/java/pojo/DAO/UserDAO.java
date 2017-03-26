@@ -2,6 +2,7 @@ package pojo.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.context.ApplicationContext;
 import pojo.valueObject.domain.StudentVO;
@@ -26,7 +27,8 @@ public class UserDAO {
             return null;
         }else {
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.getCurrentSession();
+            Session session = sf.openSession();
+//            Transaction transaction = session.beginTransaction();
             try{
                 String hql = "from UserVO as user where user.logName = :logName and passWord = :passWord";
                 Query query = session.createQuery(hql);
@@ -42,6 +44,8 @@ public class UserDAO {
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }
@@ -56,13 +60,15 @@ public class UserDAO {
             return null;
         }else{
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            Session session = sessionFactory.openSession();
             try{
                 StudentVO studentVO = session.get(StudentVO.class,userVO.getId());
                 return studentVO;
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }

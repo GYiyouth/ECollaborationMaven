@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <title>欢迎登陆中国科学技术大学工程实践中心</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script>
+        function submitform(){
+            alert("异步脚本开始");
+            var xhr=new XMLHttpRequest();
+            xhr.onload=function(){
+                if(xhr.status>=200&&xhr.status.status<300||xhr.status==304){
+                    var result=JSON.parse(xhr.responsetext);
+                    alert("1");
+                }else{
+                    alert("发生错误，请重新登录");
+                    alert(xhr.status);
+                }
+            }
+            alert("初始化请求");
+            xhr.open("post","logIn",true);
+            var form=document.getElementById("loginform");
+
+            xhr.send(new FormData(form));
+        }
+
+    </script>
 </head>
 <body  style="margin: 50px">
 
@@ -15,18 +36,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
-                <form class="form-horizontal" action="logIn">
+                <form id="loginform" class="form-horizontal" action="logIn">
                     <div class="form-group">
                         <label>用户名</label>
-                        <input type="text" class="form-control" age="userName" placeholder="请输入你的用户名">
+                        <input type="text" class="form-control" name="userName" placeholder="请输入你的用户名">
                         <i class="fa fa-user"></i>
                     </div>
                     <div class="form-group help">
                         <label>密码</label>
-                        <input type="password" class="form-control" age="passWord" placeholder="请输入你的密码">
+                        <input type="password" class="form-control" name="passWord" placeholder="请输入你的密码">
                     </div>
                     <div class="form-group">
-                        <input type="button" class="btn btn-default btn-sm" value="登录" onclick="javascript:window.location.href='teacher-selfcenter-main.html'">
+                        <input type="button" class="btn btn-default btn-sm" value="登录" onclick="submitform();">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="reset"  class="btn btn-default btn-sm" >重置</button>
                     </div>
@@ -41,5 +62,6 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>

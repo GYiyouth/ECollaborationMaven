@@ -2,6 +2,7 @@ package pojo.businessObject;
 
 import net.sf.json.JSONObject;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.ManagerDAO;
 import pojo.DAO.StudentDAO;
 import pojo.DAO.TeacherDAO;
@@ -21,6 +22,7 @@ import java.util.Map;
 /**
  * Created by GR on 2017/2/26.
  */
+@Transactional
 public class UserBO {
 
     /**

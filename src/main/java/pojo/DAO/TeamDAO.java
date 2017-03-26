@@ -31,7 +31,7 @@ public class TeamDAO {
     public TeamVO createTeam(TeamVO teamVO, StudentVO studentVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction =  session.beginTransaction();
         try{
             session.save(teamVO);
@@ -47,6 +47,8 @@ public class TeamDAO {
             e.printStackTrace();
             transaction.rollback();
             throw e;
+        }finally {
+            session.close();
         }
     }
 
@@ -60,7 +62,7 @@ public class TeamDAO {
     public String applyJoinTeam(UserVO senderUserVO, StudentVO receiverUserVO, TeamVO teamVO) throws Exception{
         ApplicationContext context = BeanFactory.getApplicationContext();
         SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         MessageMould messageMould = context.getBean("messageMould",MessageMould.class);
         MessageReceiverVO messageReceiverVO = context.getBean("messageReceiverVO",MessageReceiverVO.class);
         ApplicationVO applicationVO = context.getBean("applicationVO",ApplicationVO.class);
@@ -104,7 +106,7 @@ public class TeamDAO {
             transaction.rollback();
             throw e;
         }finally {
-//            session.close();
+            session.close();
         }
     }
 
@@ -120,7 +122,7 @@ public class TeamDAO {
         }else{
             ApplicationContext context = BeanFactory.getApplicationContext();
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            Session session = sessionFactory.openSession();
             try {
                 TeamVO teamVO = session.get(TeamVO.class, teamId);
                 if (teamVO == null) {
@@ -133,7 +135,7 @@ public class TeamDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-//                session.close();
+                session.close();
             }
         }
     }
@@ -149,7 +151,7 @@ public class TeamDAO {
             return null;
         }else {
             SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.getCurrentSession();
+            Session session = sf.openSession();
             try {
                 String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true and studentTeam.teamVO.id =:teamId";
                 Query query = session.createQuery(hql);
@@ -166,7 +168,7 @@ public class TeamDAO {
                 e.printStackTrace();
                 throw e;
             }finally {
-//                session.close();
+                session.close();
             }
         }
     }
@@ -183,7 +185,7 @@ public class TeamDAO {
         }else {
             ArrayList<TeamVO> teamVOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            Session session = sessionFactory.openSession();
             try {
                 String hql = "select teamVO from StudentTeamVO as st where st.studentVO.id = :id";
                 Query query = session.createQuery(hql);
@@ -197,6 +199,8 @@ public class TeamDAO {
             }catch (Exception e){
                 e.printStackTrace();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }
@@ -209,7 +213,7 @@ public class TeamDAO {
         if(teamId == null||teamId.equals("")){
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().getCurrentSession();
+            Session session = BeanFactory.getSessionFactory().openSession();
             try{
                 String hql = "select StudentVO from StudentTeamVO as st where st.teamVO.id = :teamId order by leaderFlag DESC";
                 Query query = session.createQuery(hql);
@@ -229,6 +233,8 @@ public class TeamDAO {
             }catch(Exception e){
                 e.printStackTrace();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }
@@ -245,7 +251,7 @@ public class TeamDAO {
         }else{
             StudentTeamVO studentTeamVO = BeanFactory.getApplicationContext().getBean("studentTeamVO",StudentTeamVO.class);
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             try{
                 ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
@@ -305,6 +311,8 @@ public class TeamDAO {
                 e.printStackTrace();
                 transaction.rollback();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }
@@ -320,7 +328,7 @@ public class TeamDAO {
             return "fail";
         }else{
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             try{
                 ApplicationVO applicationVO = session.get(ApplicationVO.class,applicationId);
@@ -361,6 +369,8 @@ public class TeamDAO {
                 e.printStackTrace();
                 transaction.rollback();
                 throw e;
+            }finally {
+                session.close();
             }
         }
     }
@@ -375,74 +385,85 @@ public class TeamDAO {
         if(searchTeamInfo==null){
             throw new NullPointerException("ERROR:searchTeamInfo is null!!!---"+this.getClass()+"---searchTeam()");
         }else{
-            Session session = BeanFactory.getSessionFactory().getCurrentSession();
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
-            ArrayList<TeamVO> teamVOS = new ArrayList<>();
-            Map<Integer,Integer> teamSearchResult = new HashMap<>();
-            //团队名类似的
-            String hql1 = "from TeamVO as team where team.teamName like :searchTeamInfo";
-            Query query = session.createQuery(hql1);
-            query.setParameter("searchTeamInfo","%"+searchTeamInfo+"%");
-            Iterator iterator = query.iterate();
-            while (iterator.hasNext()){
-                TeamVO teamVO = (TeamVO) iterator.next();
-                if(teamSearchResult.containsKey(teamVO.getId())){
-                    teamSearchResult.put(teamVO.getId(),teamSearchResult.get(teamVO.getId())+1);
-                }else{
-                    teamSearchResult.put(teamVO.getId(),1);
-                }
-            }
-            //项目描述类似的
-            String hql4 = "from TeamVO as team where team.description like :searchTeamInfo";
-            query = session.createQuery(hql4);
-            query.setParameter("searchTeamInfo","%"+searchTeamInfo+"%");
-            iterator = query.iterate();
-            while (iterator.hasNext()){
-                TeamVO teamVO = (TeamVO) iterator.next();
-                if(teamSearchResult.containsKey(teamVO.getId())){
-                    teamSearchResult.put(teamVO.getId(),teamSearchResult.get(teamVO.getId())+1);
-                }else{
-                    teamSearchResult.put(teamVO.getId(),1);
-                }
-            }
-            //项目名类似的
-            String hql2 = "select teamVO from TeamProjectVO as tp where tp.projectVO.name like :searchTeamInfo";
-            query = session.createQuery(hql2);
-            query.setParameter("searchTeamInfo","%"+searchTeamInfo+"%");
-            iterator = query.iterate();
-            while (iterator.hasNext()){
-                TeamVO teamVO = (TeamVO) iterator.next();
-                if(teamSearchResult.containsKey(teamVO.getId())){
-                    teamSearchResult.put(teamVO.getId(),teamSearchResult.get(teamVO.getId())+1);
-                }else{
-                    teamSearchResult.put(teamVO.getId(),1);
-                }
-            }
-            //组员名字类似
-            String hql3 = "select teamVO from StudentTeamVO as st where st.studentVO.name like :searchTeamInfo";
-            query = session.createQuery(hql3);
-            query.setParameter("searchTeamInfo","%"+searchTeamInfo+"%");
-            iterator = query.iterate();
-            while (iterator.hasNext()){
-                TeamVO teamVO = (TeamVO) iterator.next();
-                if(teamSearchResult.containsKey(teamVO.getId())){
-                    teamSearchResult.put(teamVO.getId(),teamSearchResult.get(teamVO.getId())+1);
-                }else{
-                    teamSearchResult.put(teamVO.getId(),1);
-                }
-            }
 
-            //排序
-            teamSearchResult = MapSort.sortMap(teamSearchResult);
-            for (Integer key : teamSearchResult.keySet()) {
-                TeamVO teamVO = teamDAO.getTeamVOByTeamId(key);
-                teamVOS.add(teamVO);
+
+
+            Session session = BeanFactory.getSessionFactory().openSession();
+            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
+            ArrayList<TeamVO> teamVOS = new ArrayList<>();
+            Map<Integer, Integer> teamSearchResult = new HashMap<>();
+            try {
+                //团队名类似的
+                String hql1 = "from TeamVO as team where team.teamName like :searchTeamInfo";
+                Query query = session.createQuery(hql1);
+                query.setParameter("searchTeamInfo", "%" + searchTeamInfo + "%");
+                Iterator iterator = query.iterate();
+                while (iterator.hasNext()) {
+                    TeamVO teamVO = (TeamVO) iterator.next();
+                    if (teamSearchResult.containsKey(teamVO.getId())) {
+                        teamSearchResult.put(teamVO.getId(), teamSearchResult.get(teamVO.getId()) + 1);
+                    } else {
+                        teamSearchResult.put(teamVO.getId(), 1);
+                    }
+                }
+                //项目描述类似的
+                String hql4 = "from TeamVO as team where team.description like :searchTeamInfo";
+                query = session.createQuery(hql4);
+                query.setParameter("searchTeamInfo", "%" + searchTeamInfo + "%");
+                iterator = query.iterate();
+                while (iterator.hasNext()) {
+                    TeamVO teamVO = (TeamVO) iterator.next();
+                    if (teamSearchResult.containsKey(teamVO.getId())) {
+                        teamSearchResult.put(teamVO.getId(), teamSearchResult.get(teamVO.getId()) + 1);
+                    } else {
+                        teamSearchResult.put(teamVO.getId(), 1);
+                    }
+                }
+                //项目名类似的
+                String hql2 = "select teamVO from TeamProjectVO as tp where tp.projectVO.name like :searchTeamInfo";
+                query = session.createQuery(hql2);
+                query.setParameter("searchTeamInfo", "%" + searchTeamInfo + "%");
+                iterator = query.iterate();
+                while (iterator.hasNext()) {
+                    TeamVO teamVO = (TeamVO) iterator.next();
+                    if (teamSearchResult.containsKey(teamVO.getId())) {
+                        teamSearchResult.put(teamVO.getId(), teamSearchResult.get(teamVO.getId()) + 1);
+                    } else {
+                        teamSearchResult.put(teamVO.getId(), 1);
+                    }
+                }
+                //组员名字类似
+                String hql3 = "select teamVO from StudentTeamVO as st where st.studentVO.name like :searchTeamInfo";
+                query = session.createQuery(hql3);
+                query.setParameter("searchTeamInfo", "%" + searchTeamInfo + "%");
+                iterator = query.iterate();
+                while (iterator.hasNext()) {
+                    TeamVO teamVO = (TeamVO) iterator.next();
+                    if (teamSearchResult.containsKey(teamVO.getId())) {
+                        teamSearchResult.put(teamVO.getId(), teamSearchResult.get(teamVO.getId()) + 1);
+                    } else {
+                        teamSearchResult.put(teamVO.getId(), 1);
+                    }
+                }
+
+                //排序
+                teamSearchResult = MapSort.sortMap(teamSearchResult);
+                for (Integer key : teamSearchResult.keySet()) {
+                    TeamVO teamVO = teamDAO.getTeamVOByTeamId(key);
+                    teamVOS.add(teamVO);
+                }
+                Set<TeamVO> teamVOSet = new HashSet<>();
+                teamVOSet.addAll(teamVOS);
+                ArrayList<TeamVO> teamVOS2 = new ArrayList<>();
+                teamVOS2.addAll(teamVOSet);
+                return teamVOS2;
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
+            }finally {
+                session.close();
             }
-            Set<TeamVO> teamVOSet = new HashSet<>();
-            teamVOSet.addAll(teamVOS);
-            ArrayList<TeamVO> teamVOS2 = new ArrayList<>();
-            teamVOS2.addAll(teamVOSet);
-            return teamVOS2;
         }
+
     }
 }
