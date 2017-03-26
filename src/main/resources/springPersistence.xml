@@ -56,6 +56,10 @@
                 </prop>
                 <!--是否根据hibernate映射创建数据表-->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+                <!--好看地显示Hibernate的SQL语句-->
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
             </props>
