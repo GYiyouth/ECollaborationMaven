@@ -35,21 +35,20 @@ public class UserBO {
     public JSONObject logIn(String logName, String passWord, Map<String , Object> session) throws Exception{
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
             System.out.println("用户名或者密码为空---"+this.getClass()+"logIn()");
-            return null;
+            throw new NullPointerException("用户名或者密码为空---"+this.getClass()+"logIn()");
         }else {
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             UserDAO userDAO = BeanFactory.getApplicationContext().getBean("userDAO", UserDAO.class);
             UserDTO userDTO = BeanFactory.getApplicationContext().getBean("userDTO",UserDTO.class);
             UserVO userVO = userDAO.getUserInfo(logName,passWord);
             if(userVO==null){
-                System.out.println("没有这个用户user---"+this.getClass()+"logIn()");
-                return null;
+                //账号密码不正确，获取不到。
+                System.out.println("useVO is null---"+this.getClass()+"logIn()");
+                jsonObject.put("result", "logInfoWrong");
+                jsonObject.put("role","visitor");
+                return jsonObject;
             }else{
                 session.clear();
-                System.out.println(userVO);
-//                userDTO.clone(userVO);
-//                session.put("userVO", userVO);
-//                jsonObject.put("userBean",userDTO);
                 if(userVO.getRole().equals("manager")){
                     ManagerDAO managerDAO = BeanFactory.getApplicationContext().getBean("managerDAO",ManagerDAO.class);
                     ManagerVO managerVO = managerDAO.getManagerInfo(userVO.getId());
@@ -62,7 +61,7 @@ public class UserBO {
                         return jsonObject;
                     }else{
                         System.out.println("获取管理员的信息为空---"+this.getClass()+"logIn()");
-                        return null;
+                        throw new NullPointerException("用户名或者密码为空---"+this.getClass()+"logIn()");
                     }
                 }else if(userVO.getRole().equals("teacher")){
                     TeacherDAO teacherDAO = BeanFactory.getApplicationContext().getBean("teacherDAO",TeacherDAO.class);
@@ -76,11 +75,10 @@ public class UserBO {
                         return jsonObject;
                     }else{
                         System.out.println("获取老师的信息为空---"+this.getClass()+"logIn()");
-                        return null;
+                        throw new NullPointerException("用户名或者密码为空---"+this.getClass()+"logIn()");
                     }
                 }else if(userVO.getRole().equals("student")){
                     //你写的什么玩意儿耿瑞这尼玛登录还分2次拿数据的我操
-//                    StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
                     StudentDAO studentDAO = BeanFactory.getBean("studentDAO", StudentDAO.class);
                     StudentVO studentVO = studentDAO.getStudentInfoByStudentId(userVO.getId());
 
@@ -93,11 +91,11 @@ public class UserBO {
                         return jsonObject;
                     }else{
                         System.out.println("获取学生的信息为空---"+this.getClass()+"logIn()");
-                        return null;
+                        throw new NullPointerException("获取学生的信息为空---"+this.getClass()+"logIn()");
                     }
                 }else{
                     System.out.println("没有这种角色---"+this.getClass()+"logIn()");
-                    return null;
+                    throw new NullPointerException("没有这种角色---"+this.getClass()+"logIn()");
                 }
             }
         }

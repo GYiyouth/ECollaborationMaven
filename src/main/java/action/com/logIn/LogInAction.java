@@ -35,17 +35,14 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
 
     @Override
     public String execute() throws Exception {
-        System.out.println(userName+"username");
-        System.out.println(passWord+"password");
         session.clear();
         System.out.println("session已清空 =========  ");
-        ApplicationContext context = BeanFactory.getApplicationContext();
-        UserBO userBO = context.getBean("userBO",UserBO.class);
+        UserBO userBO = BeanFactory.getBean("userBO",UserBO.class);
         try {
             System.out.println("request" + request);
             jsonObject = userBO.logIn(userName, passWord, session);
             System.out.println("jsonObject = " + jsonObject);
-            jsonObject.put("result", "success");
+//            jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);
             return jsonObject.get("role").toString();
