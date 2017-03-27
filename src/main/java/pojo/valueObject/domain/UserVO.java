@@ -33,7 +33,7 @@ public class UserVO {
     private String activeBefore;
     private Integer newsFlag;
     // toString needed
-    @ManyToMany(targetEntity = MessageVO.class)
+    @ManyToMany(targetEntity = MessageVO.class,fetch = FetchType.EAGER)
     @JoinTable(name = "message_receiver",
             joinColumns = @JoinColumn(name = "receiverId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "messageId", referencedColumnName = "id")

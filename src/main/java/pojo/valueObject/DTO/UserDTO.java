@@ -47,16 +47,16 @@ public class UserDTO {
             this.setNewsFlag(userVO.getNewsFlag());
             //集合的id值
             //空 则初始化messageVOIdSet
-//            if(!userVO.getMessageVOSet().isEmpty()) {
-//                Set<MessageVO> messageVOSet = userVO.getMessageVOSet();
-//                Set<Integer> messageVOIdSet = new HashSet<>();
-//                for (MessageVO messageVO: messageVOSet) {
-//                    messageVOIdSet.add(messageVO.getId());
-//                }
-//                this.setMessageVOIdSet(messageVOIdSet);
-//            }else{
-//                this.messageVOIdSet = new HashSet<>();
-//            }
+            if(!userVO.getMessageVOSet().isEmpty()) {
+                Set<MessageVO> messageVOSet = userVO.getMessageVOSet();
+                Set<Integer> messageVOIdSet = new HashSet<>();
+                for (MessageVO messageVO: messageVOSet) {
+                    messageVOIdSet.add(messageVO.getId());
+                }
+                this.setMessageVOIdSet(messageVOIdSet);
+            }else{
+                this.messageVOIdSet = new HashSet<>();
+            }
         }else{
             System.out.println("userVO is null");
         }

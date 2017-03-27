@@ -48,6 +48,7 @@ public class UserBO {
                 jsonObject.put("role","visitor");
                 return jsonObject;
             }else{
+                jsonObject.put("result", "success");
                 session.clear();
                 if(userVO.getRole().equals("manager")){
                     ManagerDAO managerDAO = BeanFactory.getApplicationContext().getBean("managerDAO",ManagerDAO.class);
