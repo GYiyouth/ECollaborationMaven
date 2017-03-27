@@ -42,6 +42,7 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
             System.out.println("request" + request);
             jsonObject = userBO.logIn(userName, passWord, session);
             System.out.println("jsonObject = " + jsonObject);
+            //43行调用的logIn已经对result赋值了？
 //            jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);
