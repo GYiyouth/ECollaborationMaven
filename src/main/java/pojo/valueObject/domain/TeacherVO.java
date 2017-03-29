@@ -1,5 +1,7 @@
 package pojo.valueObject.domain;
 
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class TeacherVO extends UserVO {
 
 	@OneToMany(targetEntity = ProjectVO.class,
         mappedBy = "teacherVO")
+    @Lazy(value = false)
     private Set<ProjectVO> projectVOSet;
 
     public TeacherVO() {
@@ -27,7 +30,7 @@ public class TeacherVO extends UserVO {
         return "TeacherVO{" + super.toString() +
                 "homePageUrl='" + homePageUrl + '\'' +
                 ", needStudentsFlag=" + needStudentsFlag +
-                ", projectVOSet=" + projectVOSet.size() +
+//                ", projectVOSet=" + projectVOSet.size() +
                 '}';
     }
 

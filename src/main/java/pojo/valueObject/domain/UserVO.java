@@ -38,6 +38,7 @@ public class UserVO {
             joinColumns = @JoinColumn(name = "receiverId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "messageId", referencedColumnName = "id")
     )
+    @Lazy(value = false)
     private Set<MessageVO> messageVOSet;
 
 
