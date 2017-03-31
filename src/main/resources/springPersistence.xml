@@ -20,6 +20,7 @@
           p:dataSource-ref="dataSource">
         <property name="packagesToScan" value="pojo"/>
         <!--annotatedClass用来列出所有的持久化类-->
+
         <property name="annotatedClasses">
             <list>
                 <value>pojo.valueObject.domain.ApplicationVO</value>
@@ -51,6 +52,7 @@
 
         <property name="hibernateProperties">
             <props>
+                <prop key="hibernate.max_fetch_depth">2</prop>
                 <!--执行数据库连接方言-->
                 <prop key="hibernate.dialect">
                     org.hibernate.dialect.MySQL5InnoDBDialect
@@ -68,6 +70,9 @@
         </property>
         
     </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate"
+        p:sessionFactory-ref="sessionFactory"/>
 
 
     <!-- 开启注解事务 只对当前配置文件有效 -->
