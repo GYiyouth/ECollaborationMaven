@@ -10,7 +10,7 @@
           p:driverClass="com.mysql.jdbc.Driver"
           p:jdbcUrl="jdbc:mysql://localhost:3306/ECollaborationWeb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
           p:user="root"
-          p:password="686995"
+          p:password="123456"
           p:maxPoolSize="40"
           p:minPoolSize="2"
           p:initialPoolSize="2"
@@ -20,7 +20,6 @@
           p:dataSource-ref="dataSource">
         <property name="packagesToScan" value="pojo"/>
         <!--annotatedClass用来列出所有的持久化类-->
-
         <property name="annotatedClasses">
             <list>
                 <value>pojo.valueObject.domain.ApplicationVO</value>

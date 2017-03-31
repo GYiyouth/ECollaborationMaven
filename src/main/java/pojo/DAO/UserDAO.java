@@ -4,8 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.StudentVO;
@@ -29,6 +31,9 @@ public class UserDAO {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
+
+//    @Autowired
+//    private HibernateTemplate hibernateTemplate;
 
     public UserVO getUser(int id){
         return sessionFactory.getCurrentSession().get(UserVO.class, 1);

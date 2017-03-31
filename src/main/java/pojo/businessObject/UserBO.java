@@ -1,29 +1,26 @@
 package pojo.businessObject;
 
 import net.sf.json.JSONObject;
-import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
-import pojo.DAO.ManagerDAO;
-import pojo.DAO.StudentDAO;
-import pojo.DAO.TeacherDAO;
-import pojo.DAO.UserDAO;
+import org.hibernate.SessionFactory;
+import pojo.DAO.*;
 import pojo.valueObject.DTO.ManagerDTO;
 import pojo.valueObject.DTO.StudentDTO;
 import pojo.valueObject.DTO.TeacherDTO;
 import pojo.valueObject.DTO.UserDTO;
-import pojo.valueObject.domain.ManagerVO;
-import pojo.valueObject.domain.StudentVO;
-import pojo.valueObject.domain.TeacherVO;
-import pojo.valueObject.domain.UserVO;
+import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 
-import java.util.Map;
+import javax.annotation.Resource;
+import java.util.*;
 
 /**
  * Created by GR on 2017/2/26.
  */
 
 public class UserBO {
+
+    @Resource(name = "projectDAO")
+    private ProjectDAO projectDAO;
 
     /**
      * 登录
@@ -32,6 +29,7 @@ public class UserBO {
      * @param session
      * @return student、manager、teacher、fail
      */
+
     public JSONObject logIn(String logName, String passWord, Map<String , Object> session) throws Exception{
         if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
             System.out.println("用户名或者密码为空---"+this.getClass()+"logIn()");
@@ -51,8 +49,7 @@ public class UserBO {
                 jsonObject.put("result", "success");
                 session.clear();
                 if(userVO.getRole().equals("manager")){
-                    ManagerDAO managerDAO = BeanFactory.getApplicationContext().getBean("managerDAO",ManagerDAO.class);
-                    ManagerVO managerVO = managerDAO.getManagerInfo(userVO.getId());
+                    ManagerVO managerVO = (ManagerVO)userVO;
                     if(managerVO != null) {
                         ManagerDTO managerDTO = BeanFactory.getApplicationContext().getBean("managerDTO",ManagerDTO.class);
                         managerDTO.clone(managerVO);
@@ -65,9 +62,15 @@ public class UserBO {
                         throw new NullPointerException("用户名或者密码为空---"+this.getClass()+"logIn()");
                     }
                 }else if(userVO.getRole().equals("teacher")){
-                    TeacherDAO teacherDAO = BeanFactory.getApplicationContext().getBean("teacherDAO",TeacherDAO.class);
-                    TeacherVO teacherVO = teacherDAO.getTeacherInfo(userVO.getId());
+                    TeacherVO teacherVO = (TeacherVO)userVO;
                     if(teacherVO != null) {
+                        //获取老师的project
+                        ArrayList<ProjectVO> teacherProjects = projectDAO.getTeacherProjectVOList(teacherVO);
+                        if(teacherProjects.isEmpty()){
+                            throw new NullPointerException("老师项目为空---"+this.getClass()+"logIn()");
+                        }
+                        Set<ProjectVO> projectVOSet = new HashSet<ProjectVO>(teacherProjects);
+                        teacherVO.setProjectVOSet(projectVOSet);
                         TeacherDTO teacherDTO = BeanFactory.getApplicationContext().getBean("teacherDTO",TeacherDTO.class);
                         teacherDTO.clone(teacherVO);
                         session.put("teacherVO", teacherVO);
@@ -79,10 +82,7 @@ public class UserBO {
                         throw new NullPointerException("用户名或者密码为空---"+this.getClass()+"logIn()");
                     }
                 }else if(userVO.getRole().equals("student")){
-                    //你写的什么玩意儿耿瑞这尼玛登录还分2次拿数据的我操
-                    StudentDAO studentDAO = BeanFactory.getBean("studentDAO", StudentDAO.class);
-                    StudentVO studentVO = studentDAO.getStudentInfoByStudentId(userVO.getId());
-
+                    StudentVO studentVO = (StudentVO)userVO;
                     if(studentVO != null) {
                         StudentDTO studentDTO = BeanFactory.getApplicationContext().getBean("studentDTO",StudentDTO.class);
                         studentDTO.clone(studentVO);
