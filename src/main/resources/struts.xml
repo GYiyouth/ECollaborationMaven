@@ -85,6 +85,9 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="getTeacherProjectAction" class="action.com.project.GetTeacherProjectAction" method="execute">
+
+        </action>
     </package>
 
     <package name="teacher" extends="struts-default">
