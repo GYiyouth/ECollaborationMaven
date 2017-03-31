@@ -269,7 +269,7 @@ public class ProjectDAO {
     }
 
     /**
-     * 根据teamVO，projctVO获取TeamProjectVO对象
+     * 根据teamVO，projectVO获取TeamProjectVO对象
      * @param teamVO
      * @param projectVO
      * @return

@@ -3,6 +3,9 @@ package pojo.DAO;
 import org.apache.struts2.components.Bean;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import pojo.valueObject.assist.ProjectTaskVO;
 import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.assist.TeamProjectVO;
@@ -12,9 +15,12 @@ import pojo.valueObject.domain.TeamVO;
 import tool.BeanFactory;
 
 /**
- * Created by GR on 2017/3/2.
+ * Created by geyao on 2017/3/2.
  */
+@Repository
 public class TaskDAO {
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
     /**
      * 老师发布任务
@@ -27,23 +33,31 @@ public class TaskDAO {
             System.out.println("ERROR:taskVO/projectVO is null---"+this.getClass()+"---addTaskToProject()");
             return null;
         }else{
-            Session session = BeanFactory.getSessionFactory().getCurrentSession();
-            ProjectTaskVO projectTaskVO = BeanFactory.getApplicationContext().getBean("projectTaskVO",ProjectTaskVO.class);
-            Transaction transaction = session.beginTransaction();
-            try{
-                session.save(taskVO);
-                projectTaskVO.setProjectVO(projectVO);
-                projectTaskVO.setTaskVO(taskVO);
-                session.save(projectTaskVO);
-                transaction.commit();
-                return taskVO;
-            }catch (Exception e){
-                e.printStackTrace();
-                transaction.rollback();
-                throw e;
-            }finally {
+//            Session session = BeanFactory.getSessionFactory().getCurrentSession();
+//            ProjectTaskVO projectTaskVO = BeanFactory.getApplicationContext().getBean("projectTaskVO",ProjectTaskVO.class);
+//            Transaction transaction = session.beginTransaction();
+//            try{
+//                session.save(taskVO);
+//                projectTaskVO.setProjectVO(projectVO);
+//                projectTaskVO.setTaskVO(taskVO);
+//                session.save(projectTaskVO);
+//                transaction.commit();
+//                return taskVO;
+//            }catch (Exception e){
+//                e.printStackTrace();
+//                transaction.rollback();
+//                throw e;
+//            }finally {
+//
+//            }
 
-            }
+            hibernateTemplate.save(taskVO);
+//            taskVO.getProjectVOSet().add(projectVO);
+            ProjectTaskVO projectTaskVO = BeanFactory.getBean("projectTaskVO", ProjectTaskVO.class);
+            projectTaskVO.setTaskVO(taskVO);
+            projectTaskVO.setProjectVO(projectVO);
+            hibernateTemplate.save(projectTaskVO);
+            return taskVO;
         }
     }
 
@@ -55,23 +69,25 @@ public class TaskDAO {
         if(teamProjectVO==null||taskVO == null||access == null){
             throw new NullPointerException("ERROR:teamProjectVO==null||taskVO == null||access == null--"+this.getClass()+"---addTeamProjectAccess()");
         }else{
-            Session session = BeanFactory.getSessionFactory().getCurrentSession();
-            Transaction transaction = session.beginTransaction();
-            try{
+//            Session session = BeanFactory.getSessionFactory().getCurrentSession();
+//            Transaction transaction = session.beginTransaction();
+//            try{
                 TeamProjectAccessVO teamProjectAccessVO = BeanFactory.getApplicationContext().getBean("teamProjectAccessVO", TeamProjectAccessVO.class);
                 teamProjectAccessVO.setTaskVO(taskVO);
                 teamProjectAccessVO.setTeam_project_id(teamProjectVO.getId());
                 teamProjectAccessVO.setAccess(access);
-                session.save(teamProjectAccessVO);
-                transaction.commit();
+                hibernateTemplate.save(teamProjectAccessVO);
                 return "success";
-            }catch (Exception e){
-                e.printStackTrace();
-                transaction.rollback();
-                throw e;
-            }finally {
-//                session.close();
-            }
+//                session.save(teamProjectAccessVO);
+//                transaction.commit();
+//                return "success";
+//            }catch (Exception e){
+//                e.printStackTrace();
+//                transaction.rollback();
+//                throw e;
+//            }finally {
+////                session.close();
+//            }
         }
     }
 

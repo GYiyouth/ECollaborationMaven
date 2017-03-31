@@ -53,12 +53,12 @@ public class GetTeacherProjectAction implements SessionAware, ServletRequestAwar
             jsonObject.put("result", "success");
             jsonObject.put("nowProjects", nowProjects);
             jsonObject.put("oldProjects", oldProjects);
+            JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch (Exception e){
             e.printStackTrace();
-            return "fail";
-        }finally {
             JSONHandler.sendJSON(jsonObject, response);
+            return "fail";
         }
     }
 
