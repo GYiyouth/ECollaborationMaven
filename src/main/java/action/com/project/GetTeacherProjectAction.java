@@ -34,12 +34,11 @@ public class GetTeacherProjectAction implements SessionAware, ServletRequestAwar
     private ProjectBO projectBO;
 
     public String execute() throws Exception {
-        String role = session.get("role").toString();
-        if (!role.equals("teacher"))
-            return "fail";
+        TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+        String role = teacherVO.getRole();
         JSONObject jsonObject = BeanFactory.getJSONO();
         try {
-            TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+
             Integer grade = Integer.parseInt(Time.getGrade());
             ArrayList<ProjectVO> projectVOs = projectBO.getTeacherProjectVOList(teacherVO, session, null);
             ArrayList<ProjectVO> nowProjects = new ArrayList<>();
