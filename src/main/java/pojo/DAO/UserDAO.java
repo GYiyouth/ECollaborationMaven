@@ -46,6 +46,7 @@ public class UserDAO {
                 throw e;
             }finally {
 //                session.close();
+
             }
         }
     }
