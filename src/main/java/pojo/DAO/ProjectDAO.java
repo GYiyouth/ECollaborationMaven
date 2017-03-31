@@ -104,10 +104,12 @@ public class ProjectDAO {
             throw new NullPointerException("studentVO == null");
 
         return  (ArrayList<ProjectVO>)
-                hibernateTemplate.findByNamedParam(
-                        "select projectVO from TeamProjectVO " +
-                                " where teamVO in (select teamVO from StudentTeamVO where studentVO.id = :studentID)",
-                        "studentId", studentVO.getId());
+                hibernateTemplate.find(
+                        "select tp.projectVO from  TeamProjectVO  tp " +
+                                " where tp.teamVO in (" +
+                                " select st.teamVO from StudentTeamVO st " +
+                                " where st.studentVO.id = "+ studentVO.getId() +")"
+                );
 
 //        ArrayList<ProjectVO> arrayList = new ArrayList<>();
 //        SessionFactory sessionFactory = BeanFactory.getSessionFactory();

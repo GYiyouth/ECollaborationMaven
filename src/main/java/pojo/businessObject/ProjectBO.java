@@ -25,6 +25,13 @@ public class ProjectBO {
     @Autowired
     private ProjectDAO projectDAO;
 
+    public ProjectDAO getProjectDAO() {
+        return projectDAO;
+    }
+
+    public void setProjectDAO(ProjectDAO projectDAO) {
+        this.projectDAO = projectDAO;
+    }
 
     /**
      * 添加任务，在session里添加projectVO，如果是老师新建，则还会改动教师VO中的projectSet
@@ -78,7 +85,9 @@ public class ProjectBO {
 
         ArrayList<ProjectVO> arrayList = new ArrayList<>();
 //        ProjectDAO projectDAO = BeanFactory.getBean("projectDAO", ProjectDAO.class);
-        arrayList = projectDAO.getStudentProjectVOList((StudentVO)userVO);
+        StudentVO studentVO = (StudentVO) userVO;
+        System.out.println(studentVO);
+        arrayList = projectDAO.getStudentProjectVOList(studentVO);
 
         String sessionProperty = "projectVOList";
         if (session.containsKey(sessionProperty))
