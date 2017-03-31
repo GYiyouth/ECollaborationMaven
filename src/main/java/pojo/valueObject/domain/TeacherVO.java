@@ -30,7 +30,7 @@ public class TeacherVO extends UserVO {
         return "TeacherVO{" + super.toString() +
                 "homePageUrl='" + homePageUrl + '\'' +
                 ", needStudentsFlag=" + needStudentsFlag +
-//                ", projectVOSet=" + projectVOSet.size() +
+                ", projectVOSet=" + projectVOSet.size() +
                 '}';
     }
 

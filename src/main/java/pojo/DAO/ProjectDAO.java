@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import pojo.valueObject.assist.MessageReceiverVO;
 import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentTeamVO;
@@ -23,6 +24,7 @@ import java.util.List;
 /**
  * Created by geyao on 2017/3/1.
  */
+@Repository
 public class ProjectDAO {
 
     @Autowired
@@ -76,7 +78,7 @@ public class ProjectDAO {
         }
         return (ArrayList<ProjectVO>)
                 hibernateTemplate.findByNamedParam(
-                        "select p from  ProjectVO p where p.teacherVO.id = :id", null, teacherVO.getId()
+                        "select p from  ProjectVO p where p.teacherVO.id = :id", "id", teacherVO.getId()
                 );
     }
 

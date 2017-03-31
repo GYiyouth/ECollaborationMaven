@@ -71,6 +71,7 @@ public class UserBO {
                         }
                         Set<ProjectVO> projectVOSet = new HashSet<ProjectVO>(teacherProjects);
                         teacherVO.setProjectVOSet(projectVOSet);
+                        System.out.println(teacherVO.getProjectVOSet().size());
                         TeacherDTO teacherDTO = BeanFactory.getApplicationContext().getBean("teacherDTO",TeacherDTO.class);
                         teacherDTO.clone(teacherVO);
                         session.put("teacherVO", teacherVO);
