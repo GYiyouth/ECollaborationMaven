@@ -147,31 +147,16 @@ public class ProjectDAO {
     }
 
     /**
-     * 根据年纪获取所有项目
+     * 根据年级获取所有项目
      * @param grade
      * @return
      * @throws Exception
      */
-    public HashMap<Integer,ProjectVO> getAllProject(int grade) throws Exception{
-        HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            List projectVOList = session.createCriteria(ProjectVO.class)
-                    .add(Restrictions.eq("grade", grade))
-                    .list();
-            Iterator iterator = projectVOList.iterator();
-            transaction.commit();
-            while (iterator.hasNext()){
-                ProjectVO projectVO = (ProjectVO) iterator.next();
-                hashMap.put(projectVO.getId(), projectVO);
-            }
-            return hashMap;
-        }catch (Exception e){
-            e.printStackTrace();
-            throw e;
-        }
+    public List<ProjectVO> getAllProject(int grade) throws Exception{
+        return (List<ProjectVO>)
+                hibernateTemplate.findByNamedParam(
+                "select p from ProjectVO p where p.grade = :grade", "grade", grade
+        );
     }
 
     /**
@@ -181,14 +166,10 @@ public class ProjectDAO {
      */
     public HashMap<Integer,ProjectVO> getAllProject() throws Exception{
         HashMap<Integer, ProjectVO> hashMap = new HashMap<>();
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+
         try {
-            List projectVOList = session.createCriteria(ProjectVO.class)
-                    .list();
+            List projectVOList = hibernateTemplate.find("select p from ProjectVO p");
             Iterator iterator = projectVOList.iterator();
-            transaction.commit();
             while (iterator.hasNext()){
                 ProjectVO projectVO = (ProjectVO) iterator.next();
                 hashMap.put(projectVO.getId(), projectVO);
@@ -288,7 +269,7 @@ public class ProjectDAO {
     }
 
     /**
-     * 根据teamVO，projctVO获取TeamProjectVO对象
+     * 根据teamVO，projectVO获取TeamProjectVO对象
      * @param teamVO
      * @param projectVO
      * @return
