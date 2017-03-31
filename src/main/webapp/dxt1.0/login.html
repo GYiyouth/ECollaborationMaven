@@ -4,31 +4,6 @@
     <meta charset="UTF-8">
     <title>欢迎登陆中国科学技术大学工程实践中心</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script>
-        function submitform() {
-            var xhr=new XMLHttpRequest();
-            xhr.onload=function(){
-                    if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-                        alert("收到JSON数据")
-                        var JObject=JSON.parse(xhr.responseText);
-                        switch(JObject.result){
-                            case "success": alert("登陆成功");
-                                if(JObject.role=="student"){
-                                    window.open("/dxt1.0/student-team-info.html");
-                                };break;
-                            case "fail":alert("系统出错");break;
-                            case "logInfoWrong":alert("用户名或密码错误");break;
-                        }
-                    }else{
-                        alert("发生错误，请重新登录");
-                    }
-
-            }
-            xhr.open("post","logIn",false);
-            var form=document.getElementById("loginform");
-            xhr.send(new FormData(form));
-        }
-    </script>
 </head>
 <body  style="margin: 50px">
 
@@ -66,6 +41,6 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<script src="js/fsy-login.js"></script>
 </body>
 </html>
