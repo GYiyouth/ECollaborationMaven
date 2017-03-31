@@ -101,9 +101,9 @@ public class TaskDAO {
         if(taskId==null){
             throw new NullPointerException("ERROR:taskId==null---"+this.getClass()+"---getTaskVOByTaskId()");
         }else{
-            Session session = BeanFactory.getSessionFactory().getCurrentSession();
+//            Session session = BeanFactory.getSessionFactory().getCurrentSession();
             try {
-                TaskVO taskVO = session.get(TaskVO.class, taskId);
+                TaskVO taskVO = hibernateTemplate.get(TaskVO.class, taskId);
                 return taskVO;
             }catch (Exception e){
                 e.printStackTrace();
