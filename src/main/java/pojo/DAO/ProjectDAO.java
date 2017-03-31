@@ -14,6 +14,7 @@ import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 import tool.Time;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,19 +36,8 @@ public class ProjectDAO {
      */
     public ProjectVO getProjectVO(Integer id) throws Exception{
         if (id == null || id < 0)
-            return null;
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-        try{
-//            return session.get(ProjectVO.class, id);
-            ProjectVO projectVO = session.get(ProjectVO.class, id);
-            return projectVO;
-        }catch (Exception e){
-            e.printStackTrace();
-//            transaction.rollback();
-            throw e;
-        }
+            throw new SQLException("projectId输入异常");
+        return hibernateTemplate.get(ProjectVO.class, id);
     }
 
     /**
@@ -57,19 +47,21 @@ public class ProjectDAO {
      */
     public ProjectVO addProjectVO(ProjectVO projectVO) throws Exception{
         if (projectVO == null)
-            return null;
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try{
-            session.save(projectVO);
-            transaction.commit();
-            return projectVO;
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-            throw e;
-        }
+            throw new SQLException("projectVO输入异常");
+        hibernateTemplate.save(projectVO);
+        return projectVO;
+//        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        try{
+//            session.save(projectVO);
+//            transaction.commit();
+//            return projectVO;
+//        }catch (Exception e){
+//            transaction.rollback();
+//            e.printStackTrace();
+//            throw e;
+//        }
     }
 
     /**
@@ -79,7 +71,13 @@ public class ProjectDAO {
      * @throws Exception
      */
     public ArrayList<ProjectVO> getTeacherProjectVOList(TeacherVO teacherVO) throws Exception{
-        return null;
+        if (teacherVO == null){
+            throw new SQLException("teacherVO输入异常");
+        }
+        return (ArrayList<ProjectVO>)
+                hibernateTemplate.findByNamedParam(
+                        "select p from  ProjectVO p where p.teacherVO.id = :id", null, teacherVO.getId()
+                );
     }
 
     /**
