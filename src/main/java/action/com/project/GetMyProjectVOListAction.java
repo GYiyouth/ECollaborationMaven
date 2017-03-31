@@ -5,6 +5,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.stereotype.Service;
 import pojo.DAO.ProjectDAO;
 import pojo.businessObject.ProjectBO;
 import pojo.valueObject.DTO.ProjectDTO;
@@ -15,6 +16,7 @@ import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 import tool.JSONHandler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -27,10 +29,14 @@ import java.util.Map;
  * 提供schoolProjectDTOList interestProjectDTOList , otherProjectDTOList
  * Created by geyao on 2017/3/2.
  */
+@Service
 public class GetMyProjectVOListAction implements SessionAware, ServletRequestAware, ServletResponseAware {
     private Map<String,Object> session;
     private HttpServletRequest request;
     private HttpServletResponse response;
+
+    @Resource(name = "projectBO")
+    private ProjectBO projectBO;
 
     private Integer grade;
 
@@ -60,7 +66,7 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
 
 
         try {
-            ProjectBO projectBO = BeanFactory.getBean("projectBO", ProjectBO.class);
+//            ProjectBO projectBO = BeanFactory.getBean("projectBO", ProjectBO.class);
             if (grade != null && (grade < 1))
                 grade = null;
             ArrayList<ProjectVO> projectVOList = projectBO.getMyProjectVOList(userVO, grade, session);

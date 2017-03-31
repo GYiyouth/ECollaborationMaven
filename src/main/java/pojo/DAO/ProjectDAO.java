@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import pojo.valueObject.assist.MessageReceiverVO;
 import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentTeamVO;
@@ -12,6 +14,7 @@ import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 import tool.Time;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +25,9 @@ import java.util.List;
  */
 public class ProjectDAO {
 
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
+
     /**
      * 获取项目，根据id
      * @param id
@@ -30,19 +36,8 @@ public class ProjectDAO {
      */
     public ProjectVO getProjectVO(Integer id) throws Exception{
         if (id == null || id < 0)
-            return null;
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();
-        try{
-//            return session.get(ProjectVO.class, id);
-            ProjectVO projectVO = session.get(ProjectVO.class, id);
-            return projectVO;
-        }catch (Exception e){
-            e.printStackTrace();
-//            transaction.rollback();
-            throw e;
-        }
+            throw new SQLException("projectId输入异常");
+        return hibernateTemplate.get(ProjectVO.class, id);
     }
 
     /**
@@ -52,19 +47,21 @@ public class ProjectDAO {
      */
     public ProjectVO addProjectVO(ProjectVO projectVO) throws Exception{
         if (projectVO == null)
-            return null;
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try{
-            session.save(projectVO);
-            transaction.commit();
-            return projectVO;
-        }catch (Exception e){
-            transaction.rollback();
-            e.printStackTrace();
-            throw e;
-        }
+            throw new SQLException("projectVO输入异常");
+        hibernateTemplate.save(projectVO);
+        return projectVO;
+//        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        try{
+//            session.save(projectVO);
+//            transaction.commit();
+//            return projectVO;
+//        }catch (Exception e){
+//            transaction.rollback();
+//            e.printStackTrace();
+//            throw e;
+//        }
     }
 
     /**
@@ -74,7 +71,13 @@ public class ProjectDAO {
      * @throws Exception
      */
     public ArrayList<ProjectVO> getTeacherProjectVOList(TeacherVO teacherVO) throws Exception{
-        return null;
+        if (teacherVO == null){
+            throw new SQLException("teacherVO输入异常");
+        }
+        return (ArrayList<ProjectVO>)
+                hibernateTemplate.findByNamedParam(
+                        "select p from  ProjectVO p where p.teacherVO.id = :id", null, teacherVO.getId()
+                );
     }
 
     /**
@@ -98,39 +101,47 @@ public class ProjectDAO {
         if (studentVO == null)
             throw new NullPointerException("studentVO == null");
 
-        ArrayList<ProjectVO> arrayList = new ArrayList<>();
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            List<StudentTeamVO> STlist = session.createCriteria(StudentTeamVO.class)
-                    .add(Restrictions.eq("studentVO", studentVO))
-                    .list();
-            Iterator sTiterator = STlist.iterator();
-            //放置TeamVO
-            ArrayList<TeamVO> teamVOArrayList = new ArrayList<>();
-            while (sTiterator.hasNext()){
-                StudentTeamVO studentTeamVO = (StudentTeamVO)sTiterator.next();
-                teamVOArrayList.add(studentTeamVO.getTeamVO());
-            }
-            List<TeamProjectVO> TPList = session.createCriteria(TeamProjectVO.class)
-                    .add(Restrictions.in("teamVO", teamVOArrayList))
-                    .list();
-            transaction.commit();
-            System.out.println(STlist);
-            System.out.println(TPList);
-            Iterator iterator = TPList.iterator();
-            while (iterator.hasNext()) {
-                TeamProjectVO teamProjectVO = (TeamProjectVO) iterator.next();
+        return  (ArrayList<ProjectVO>)
+                hibernateTemplate.find(
+                        "select tp.projectVO from  TeamProjectVO  tp " +
+                                " where tp.teamVO in (" +
+                                " select st.teamVO from StudentTeamVO st " +
+                                " where st.studentVO.id = "+ studentVO.getId() +")"
+                );
 
-                ProjectVO projectVO = teamProjectVO.getProjectVO();
-                arrayList.add(projectVO);
-            }
-            return arrayList;
-        }catch (Exception e){
-            e.printStackTrace();
-            throw e;
-        }
+//        ArrayList<ProjectVO> arrayList = new ArrayList<>();
+//        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
+//        try {
+//            List<StudentTeamVO> STlist = session.createCriteria(StudentTeamVO.class)
+//                    .add(Restrictions.eq("studentVO", studentVO))
+//                    .list();
+//            Iterator sTiterator = STlist.iterator();
+//            //放置TeamVO
+//            ArrayList<TeamVO> teamVOArrayList = new ArrayList<>();
+//            while (sTiterator.hasNext()){
+//                StudentTeamVO studentTeamVO = (StudentTeamVO)sTiterator.next();
+//                teamVOArrayList.add(studentTeamVO.getTeamVO());
+//            }
+//            List<TeamProjectVO> TPList = session.createCriteria(TeamProjectVO.class)
+//                    .add(Restrictions.in("teamVO", teamVOArrayList))
+//                    .list();
+//            transaction.commit();
+//            System.out.println(STlist);
+//            System.out.println(TPList);
+//            Iterator iterator = TPList.iterator();
+//            while (iterator.hasNext()) {
+//                TeamProjectVO teamProjectVO = (TeamProjectVO) iterator.next();
+//
+//                ProjectVO projectVO = teamProjectVO.getProjectVO();
+//                arrayList.add(projectVO);
+//            }
+//            return arrayList;
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            throw e;
+//        }
     }
 
     /**

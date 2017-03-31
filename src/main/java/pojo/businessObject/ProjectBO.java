@@ -1,6 +1,11 @@
 package pojo.businessObject;
 
 //import com.sun.istack.internal.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.valueObject.domain.*;
@@ -13,7 +18,20 @@ import java.util.Map;
 /**
  * Created by geyao on 2017/3/2.
  */
+@Service
+@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
 public class ProjectBO {
+
+    @Autowired
+    private ProjectDAO projectDAO;
+
+    public ProjectDAO getProjectDAO() {
+        return projectDAO;
+    }
+
+    public void setProjectDAO(ProjectDAO projectDAO) {
+        this.projectDAO = projectDAO;
+    }
 
     /**
      * 添加任务，在session里添加projectVO，如果是老师新建，则还会改动教师VO中的projectSet
@@ -66,8 +84,10 @@ public class ProjectBO {
         }
 
         ArrayList<ProjectVO> arrayList = new ArrayList<>();
-        ProjectDAO projectDAO = BeanFactory.getBean("projectDAO", ProjectDAO.class);
-        arrayList = projectDAO.getStudentProjectVOList((StudentVO)userVO);
+//        ProjectDAO projectDAO = BeanFactory.getBean("projectDAO", ProjectDAO.class);
+        StudentVO studentVO = (StudentVO) userVO;
+        System.out.println(studentVO);
+        arrayList = projectDAO.getStudentProjectVOList(studentVO);
 
         String sessionProperty = "projectVOList";
         if (session.containsKey(sessionProperty))
