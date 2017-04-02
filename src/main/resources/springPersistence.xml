@@ -35,7 +35,7 @@
                 <value>pojo.valueObject.domain.TeacherVO</value>
                 <value>pojo.valueObject.domain.TeamVO</value>
                 <value>pojo.valueObject.domain.UserVO</value>
-                <value>pojo.valueObject.domain.Test</value>
+
 
                 <value>pojo.valueObject.assist.MessageReceiverVO</value>
                 <value>pojo.valueObject.assist.StudentProjectFileVO</value>

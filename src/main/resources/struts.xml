@@ -6,7 +6,7 @@
 
 <struts>
 
-    <package name="logIn" extends="struts-default">
+    <package name="logIn" extends="struts-default" namespace="/">
 
         <action name="logIn" class="action.com.logIn.LogInAction">
             <result name="teacher">teacher.jsp</result>

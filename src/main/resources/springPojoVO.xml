@@ -82,23 +82,23 @@
     </bean>
 
 
-    <bean id="test" class="pojo.valueObject.domain.Test">
-        <property name="age" value="22"/>
-        <property name="test2">
-            <!--使用嵌套Bean定义setTest2方法的参数值-->
-            <bean class="pojo.valueObject.domain.Test2">
-                <property name="age" value="11"/>
-            </bean>
-        </property>
-    </bean>
-    <bean id="son1" class=
-            "org.springframework.beans.factory.config.PropertyPathFactoryBean">
-        <!--确定目标bean，指定son1 Bean来自哪个bean的getter方法-->
-        <property name="targetBeanName" value="test"/>
-        <!--确定目标bean，指定son1 Bean来自该bean的哪个getter方法-->
-        <property name="propertyPath" value="test2"/>
-        <!--根据配置，从上下文获取就是得到getTest.getTest2()-->
-    </bean>
+    <!--<bean id="test" class="pojo.valueObject.domain.Test">-->
+        <!--<property name="age" value="22"/>-->
+        <!--<property name="test2">-->
+            <!--&lt;!&ndash;使用嵌套Bean定义setTest2方法的参数值&ndash;&gt;-->
+            <!--<bean class="pojo.valueObject.domain.Test2">-->
+                <!--<property name="age" value="11"/>-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="son1" class=-->
+            <!--"org.springframework.beans.factory.config.PropertyPathFactoryBean">-->
+        <!--&lt;!&ndash;确定目标bean，指定son1 Bean来自哪个bean的getter方法&ndash;&gt;-->
+        <!--<property name="targetBeanName" value="test"/>-->
+        <!--&lt;!&ndash;确定目标bean，指定son1 Bean来自该bean的哪个getter方法&ndash;&gt;-->
+        <!--<property name="propertyPath" value="test2"/>-->
+        <!--&lt;!&ndash;根据配置，从上下文获取就是得到getTest.getTest2()&ndash;&gt;-->
+    <!--</bean>-->
 
 
 

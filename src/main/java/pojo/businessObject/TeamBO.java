@@ -4,7 +4,9 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.components.Bean;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.*;
 import pojo.valueObject.DTO.ECFileDTO;
 import pojo.valueObject.DTO.PlanDTO;
@@ -22,7 +24,16 @@ import java.util.*;
 /**
  * Created by GR on 2017/2/26.
  */
+@Transactional
 public class TeamBO {
+    @Autowired
+    private TeamDAO teamDAO;
+    @Autowired
+    private CodeDAO codeDAO;
+    @Autowired
+    private ECFileDAO ecFileDAO;
+    @Autowired
+    private PlanDAO planDAO;
 
     /**
      * 创建团队
@@ -38,7 +49,7 @@ public class TeamBO {
         ApplicationContext context = BeanFactory.getApplicationContext();
         JSONObject jsonObject = context.getBean("jsonObject",JSONObject.class);
         TeamDTO teamDTO = context.getBean("teamDTO",TeamDTO.class);
-        TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
+//        TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
         TeamVO teamVO = context.getBean("teamVO", TeamVO.class);
         StudentVO studentVO = (StudentVO) session.get("studentVO");
         teamVO.setCreateDate(Time.getCurrentTime());
@@ -76,7 +87,7 @@ public class TeamBO {
         } else {
             ApplicationContext context = BeanFactory.getApplicationContext();
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
-            TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
+//            TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
             //耿瑞你他妈这里凭什么不判空？？？
             System.out.println("测试" + this.getClass());
             System.out.println("session是 ： " + session);
@@ -107,7 +118,7 @@ public class TeamBO {
      * @return
      */
     public JSONObject getMyJoinTeams(Map<String, Object> session) throws Exception{
-        TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
+//        TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
         ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList", ArrayList.class);
         JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
         Set<TeamDTO> teamDTOSet = new HashSet<>();
@@ -166,7 +177,7 @@ public class TeamBO {
             System.out.println("ERROR:teamId is null---"+this.getClass()+"---getTeamInfoByTeamId()");
             return null;
         }else{
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
+//            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
             try {
                 TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
                 if (teamVO == null) {
@@ -198,7 +209,7 @@ public class TeamBO {
             return null;
         }else{
             StudentVO studentVO = (StudentVO) session.get("studentVO");
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+//            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             try {
                 String result = teamDAO.acceptJoinApplication(applicationId,studentVO);
@@ -243,7 +254,7 @@ public class TeamBO {
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---refuseJoinApplication()");
             return null;
         }else{
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+//            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             try {
                 StudentVO studentVO = (StudentVO) session.get("studentVO");
@@ -272,11 +283,11 @@ public class TeamBO {
         if(teamId==null||teamId.equals("")||projectId==null||projectId.equals("")) {
             System.out.println("ERROR:teamId/projectId is null!!!---" + this.getClass() + "---getTeamCodeECFileInfo()");
         }else{
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+//            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
 //            StudentDAO studentDAO = BeanFactory.getApplicationContext().getBean("studentDAO",StudentDAO.class);
-            CodeDAO codeDAO = BeanFactory.getApplicationContext().getBean("codeDAO",CodeDAO.class);
-            ECFileDAO ecFileDAO = BeanFactory.getApplicationContext().getBean("ecFileDAO", ECFileDAO.class);
-            PlanDAO planDAO = BeanFactory.getApplicationContext().getBean("planDAO",PlanDAO.class);
+//            CodeDAO codeDAO = BeanFactory.getApplicationContext().getBean("codeDAO",CodeDAO.class);
+//            ECFileDAO ecFileDAO = BeanFactory.getApplicationContext().getBean("ecFileDAO", ECFileDAO.class);
+//            PlanDAO planDAO = BeanFactory.getApplicationContext().getBean("planDAO",PlanDAO.class);
 
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
             ArrayList<Integer> codeSums = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);    //代码行数集合
@@ -342,7 +353,7 @@ public class TeamBO {
         if(searchTeamInfo==null){
             throw new NullPointerException("ERROR:searchTeamInfo is null!!!---" + this.getClass() + "---searchTeam()");
         }else{
-            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
+//            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject",JSONObject.class);
             ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
             TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);

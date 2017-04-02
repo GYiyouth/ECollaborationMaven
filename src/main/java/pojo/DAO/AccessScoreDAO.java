@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class AccessScoreDAO {
 
+
+
     /**
      * 添加评价种类
      * 忘了考虑百分比

@@ -1,14 +1,17 @@
 package pojo.valueObject.domain;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by geyao on 2017/3/7.
  */
+@Component
 public class Test2 {
-    private String age;
-    public String getAge() {
-        return age;
-    }
-    public void setAge(String age) {
-        this.age = age;
+    int a = 1;
+    private  class Inner{
+        private  int age = 1;
+        {
+            a = 1;
+        }
     }
 }
