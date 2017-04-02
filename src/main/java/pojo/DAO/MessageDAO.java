@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import pojo.valueObject.assist.MessageReceiverVO;
 import pojo.valueObject.domain.MessageVO;
 import pojo.valueObject.domain.UserVO;
@@ -17,6 +19,8 @@ import java.util.List;
  * Created by GR on 2017/2/27.
  */
 public class MessageDAO {
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
     /**
      * 获取未读消息VOList

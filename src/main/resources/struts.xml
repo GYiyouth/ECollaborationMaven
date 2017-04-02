@@ -62,6 +62,9 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="finishPlanAction" class="action.com.plan.FinishPlanAction" method="execute">
+
+        </action>
     </package>
 
     <package name="project" extends="struts-default">

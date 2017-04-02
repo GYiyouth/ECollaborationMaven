@@ -2,6 +2,7 @@ package pojo.businessObject;
 
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.valueObject.DTO.PlanDTO;
@@ -9,6 +10,7 @@ import pojo.valueObject.domain.PlanVO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.StudentVO;
 import tool.BeanFactory;
+import tool.Time;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +19,7 @@ import java.util.Map;
 /**
  * Created by geyao on 2017/3/1.
  */
+@Transactional
 public class PlanBO {
     @Autowired
     private PlanDAO planDAO;
@@ -85,5 +88,18 @@ public class PlanBO {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public boolean finishAction(StudentVO studentVO, Integer planId) throws Exception{
+        if (planId == null)
+            throw new NullPointerException("参数为空异常");
+        PlanVO planVO = planDAO.getPlanById(planId);
+        if (planVO == null)
+            throw new NullPointerException("该plan不存在");
+        if (!planVO.getStudentVO().getId().equals( studentVO.getId() ) )
+            return false;
+        planVO.setFinishDate(Time.getCurrentTime());
+        planDAO.updatePlanVO(planVO);
+        return true;
     }
 }

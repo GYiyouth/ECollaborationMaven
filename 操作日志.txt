@@ -166,3 +166,4 @@
 葛尧：
     改写了teamDAO使用hibernateTemplate的方式，并在测试了搜索、获取消息的action
     改写了PlanDAO，相关的BO，测试了查询的action
+    完成FinishPlanAction

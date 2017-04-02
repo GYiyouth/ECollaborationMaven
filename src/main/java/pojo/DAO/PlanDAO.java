@@ -101,4 +101,13 @@ public class PlanDAO {
 //            throw e;
 //        }
     }
+
+    public PlanVO getPlanById(Integer planId) throws Exception{
+        return hibernateTemplate.get(PlanVO.class, planId);
+    }
+
+    public PlanVO updatePlanVO(PlanVO planVO) throws Exception{
+        hibernateTemplate.update(planVO);
+        return planVO;
+    }
 }
