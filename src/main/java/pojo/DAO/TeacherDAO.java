@@ -3,7 +3,10 @@ package pojo.DAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.TeacherVO;
 import tool.BeanFactory;
@@ -15,7 +18,10 @@ import java.util.List;
 /**
  * Created by GR on 2017/2/26.
  */
+@Repository
 public class TeacherDAO {
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
     /**
      * 根据id获取老师信息
@@ -27,16 +33,14 @@ public class TeacherDAO {
         if(id==null){
             return null;
         }else {
-            SessionFactory sf = BeanFactory.getSessionFactory();
-            Session session = sf.openSession();
+//            SessionFactory sf = BeanFactory.getSessionFactory();
+//            Session session = sf.openSession();
             try {
-            return session.get(TeacherVO.class, id);
+            return hibernateTemplate.get(TeacherVO.class, id);
 
             }catch (Exception e){
                 e.printStackTrace();
                 throw e;
-            }finally {
-                session.close();
             }
         }
     }
@@ -48,10 +52,10 @@ public class TeacherDAO {
      */
     public TeacherVO updateTeacherInfo(TeacherVO teacherVO) throws Exception{
         try {
-            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
-            session.update(teacherVO);
-            return session.get(TeacherVO.class, teacherVO.getId());
+//            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//            Session session = sessionFactory.getCurrentSession();
+            hibernateTemplate.update(teacherVO);
+            return teacherVO;
         }catch (Exception e){
             e.printStackTrace();
             throw e;
@@ -64,13 +68,12 @@ public class TeacherDAO {
      */
     public HashMap<Integer, TeacherVO> getAllTeacher(){
         HashMap<Integer, TeacherVO> hashMap = new HashMap<>();
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+//        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
+//        Session session = sessionFactory.getCurrentSession();
+//        Transaction transaction = session.beginTransaction();
         try {
-            List<TeacherVO> list = session.createCriteria(TeacherVO.class)
-                    .list();
-            transaction.commit();
+            List<TeacherVO> list = (List<TeacherVO>) hibernateTemplate.find(" from TeacherVO t ");
+//            transaction.commit();
             Iterator iterator = list.iterator();
             while (iterator.hasNext()){
                 TeacherVO teacherVO = (TeacherVO) iterator.next();

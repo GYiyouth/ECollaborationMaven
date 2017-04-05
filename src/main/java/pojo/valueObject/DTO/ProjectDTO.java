@@ -54,15 +54,15 @@ public class ProjectDTO {
             if(projectVO.getTeacherVO()!=null){
                 this.setTeacherVOId(projectVO.getTeacherVO().getId());
             }
-            if(!projectVO.getTeamVOSet().isEmpty()){
-                Set<TeamVO> teamVOSet = projectVO.getTeamVOSet();
-                Set<Integer> teamVOIdSet = new HashSet<>();
-                for(TeamVO teamVO: teamVOSet){
-                    teamVOIdSet.add(teamVO.getId());
-                }
-            }else{
-                this.teamVOIdSet = new HashSet<>();
-            }
+//            if(!projectVO.getTeamVOSet().isEmpty()){
+//                Set<TeamVO> teamVOSet = projectVO.getTeamVOSet();
+//                Set<Integer> teamVOIdSet = new HashSet<>();
+//                for(TeamVO teamVO: teamVOSet){
+//                    teamVOIdSet.add(teamVO.getId());
+//                }
+//            }else{
+//                this.teamVOIdSet = new HashSet<>();
+//            }
         }else{
             System.out.println("projectVO is null");
         }

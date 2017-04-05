@@ -16,23 +16,16 @@ import java.lang.reflect.Field;
  * Created by geyao on 2017/2/19.
  */
 public class Test{
-    private String age;
-    private Test2 test2;
-    public Test() {
-        super();
+    public static void main(String[] args) {
+        String str = "将会被final";
+        A a = new A() {
+            @Override
+            public void foo() {
+                System.out.println(str);
+            }
+        };
     }
-    public Test2 getTest2() {
-        return test2;
-    }
-    public void setTest2(Test2 test2) {
-        this.test2 = test2;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
+}
+interface A{
+    void foo();
 }

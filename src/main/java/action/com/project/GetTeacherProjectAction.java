@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Service;
 import pojo.businessObject.ProjectBO;
+import pojo.valueObject.DTO.ProjectDTO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TeacherVO;
 import tool.BeanFactory;
@@ -35,19 +36,23 @@ public class GetTeacherProjectAction implements SessionAware, ServletRequestAwar
 
     public String execute() throws Exception {
         TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
-        String role = teacherVO.getRole();
+        if (teacherVO == null)
+            return "fail";
         JSONObject jsonObject = BeanFactory.getJSONO();
         try {
 
             Integer grade = Integer.parseInt(Time.getGrade());
             ArrayList<ProjectVO> projectVOs = projectBO.getTeacherProjectVOList(teacherVO, session, null);
-            ArrayList<ProjectVO> nowProjects = new ArrayList<>();
-            ArrayList<ProjectVO> oldProjects = new ArrayList<>();
+            projectVOs = (projectVOs == null)? new ArrayList<>(): projectVOs;
+            ArrayList<ProjectDTO> nowProjects = new ArrayList<>();
+            ArrayList<ProjectDTO> oldProjects = new ArrayList<>();
             for (ProjectVO projectVO : projectVOs){
-                if (projectVO.getGrade().equals(grade))
-                    nowProjects.add(projectVO);
+                ProjectDTO projectDTO = BeanFactory.getBean("projectDTO", ProjectDTO.class);
+                projectDTO.clone(projectVO);
+                if (projectVO.getGrade() != null && projectVO.getGrade().equals(grade))
+                    nowProjects.add(projectDTO);
                 else
-                    oldProjects.add(projectVO);
+                    oldProjects.add(projectDTO);
             }
             jsonObject.put("result", "success");
             jsonObject.put("nowProjects", nowProjects);

@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.transaction.TransactionManager;
 import javax.transaction.UserTransaction;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by GR on 2017/2/26.
@@ -46,12 +47,16 @@ public class UserDAO {
      * @return UserVO/null
      */
     public UserVO getUserInfo(String logName,String passWord) throws Exception{
-        return  (UserVO)
+        List<UserVO> list =
                 sessionFactory.getCurrentSession()
                 .createQuery("from UserVO as user where user.logName = :logName and passWord = :passWord")
                 .setParameter("logName", logName)
                 .setParameter("passWord", passWord)
-                .list().get(0);
+                .list();
+        if(list.size() > 0)
+            return list.get(0);
+        else
+            return null;
 //        if(logName==null||logName.equals("")||passWord==null||passWord.equals("")){
 //            return null;
 //        }else {
