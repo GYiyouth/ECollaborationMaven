@@ -91,3 +91,24 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         }
     }
 }
+//获取Json数据并进行分页显示
+function getInfo(){
+    xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            var reqJson=JSON.parse(xhr.responseText);
+            var myProJson=reqJson.schoolProjectDTOList;
+            setMyProInfo(myProJson);
+            var intProJson=reqJson.interestProjectDTOList;
+            var domBox=document.getElementById("domBox");
+            var domList=document.getElementById("list");
+            var pagePreDom=document.getElementById("pre");
+            var pageNextDom=document.getElementById("next");
+            var each=5;
+            paging(domBox,"current",domList,each,pagePreDom,pageNextDom,intProJson);
+        }else{
+            alert("请刷新页面");
+        }
+    }
+    xhr.open("get","getMyProjectVOList",false);
+    xhr.send();
+}
