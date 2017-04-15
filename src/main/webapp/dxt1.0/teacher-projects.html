@@ -38,10 +38,10 @@
     <div class="row">
         <div class="col-md-5 col-md-offset-7">
             <div class="col-md-6 ">
-                <input type="text" class="form-control" age="search" placeholder="输入要搜索的项目">
+                <input type="text" class="form-control" name="search" placeholder="输入要搜索的项目">
             </div>
             <div class="col-md-2.5 col-md-offset-0.5">
-                <input type="submit" value="搜索" class="btn btn-default " onclick="javascript:window.location.href='teacher-project-search.html'">
+                <input type="button" value="搜索"  class="btn btn-default " onclick="javascript:window.location.href='teacher-project-info.html'">
                 <a href="teacher-new-project.html"><button type="submit" class="btn btn-default ">新建项目</button></a>
             </div>
         </div>
@@ -52,60 +52,22 @@
     <div class="row">
         <div class="col-md-5 info-left">
             <h3>当前项目</h3>
-            <div class="list-group">
-                <a href="teacher-project-info.html" class="list-group-item ">
-                    <h4>Ecollaboration</h4>
-                    <p class="list-group-item-text">本项目旨在建设一个校园工程实践中心</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>居家app</h4>
-                    <p class="list-group-item-text">该app要完成一个可以购买多样化家居产品的功能</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>BBweb</h4>
-                    <p class="list-group-item-text">要求完成一个电商网站</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>图像识别技术</h4>
-                    <p class="list-group-item-text">该项目要求设计出一种更高效的图像识别算法</p>
-                </a>
+            <div id="now-domBox"class="list-group">
             </div>
-            <ul class="pagination pagination-lg ">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li ><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">&raquo;</a></li>
+            <ul class="pager">
+                <li><a id="now-preDom" href="javascript:;">上一页</a></li>
+                <li id="now-list"></li>
+                <li><a id="now-nextDom" href="javascript:;">下一页</a></li>
             </ul>
         </div>
         <div class="col-md-5 col-md-offset-2">
             <h3>以往项目</h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item ">
-                    <h4>知性app</h4>
-                    <p class="list-group-item-text">一个杂志阅读型app</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>等app</h4>
-                    <p class="list-group-item-text">提示各地共建信息的app</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>货币识别算法</h4>
-                    <p class="list-group-item-text">该项目要求设计出一种更高效的货币识别算法</p>
-                </a>
-                <a href="#" class="list-group-item ">
-                    <h4>心情web</h4>
-                    <p class="list-group-item-text">一个小清新的卡片式网站</p>
-                </a>
+            <div id="old-domBox" class="list-group">
             </div>
-            <ul class="pagination pagination-lg ">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li ><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">&raquo;</a></li>
+            <ul class="pager">
+                <li><a id="old-preDom"href="javascript:;">上一页</a></li>
+                <li id="old-list"></li>
+                <li><a id="old-nextDom" href="javascript:;">下一页</a></li>
             </ul>
         </div>
     </div>
