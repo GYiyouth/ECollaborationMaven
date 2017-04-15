@@ -35,6 +35,7 @@
                 <value>pojo.valueObject.domain.TeacherVO</value>
                 <value>pojo.valueObject.domain.TeamVO</value>
                 <value>pojo.valueObject.domain.UserVO</value>
+                <value>pojo.valueObject.domain.ContributionsVO</value>
 
 
                 <value>pojo.valueObject.assist.MessageReceiverVO</value>
@@ -87,12 +88,12 @@
     <!--<aop:advisor pointcut-ref="service" advice-ref="txAdvice"/>-->
     <!--</aop:config>-->
 
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <tx:method name="get*" read-only="false"/>
-            <tx:method name="add" rollback-for="Exception"/>
-            <tx:method name="update*"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="get*" read-only="false"/>-->
+            <!--<tx:method name="add" rollback-for="Exception"/>-->
+            <!--<tx:method name="update*" read-only="false"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
 
 </beans>

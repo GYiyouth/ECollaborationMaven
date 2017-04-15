@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.StudentVO;
 import tool.BeanFactory;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by GR on 2017/2/26.
@@ -34,6 +36,29 @@ public class StudentDAO {
             return null;
         } else {
             return hibernateTemplate.get(StudentVO.class, studentId);
+        }
+    }
+
+    /**
+     * 根据学生github的用户名返回学生信息
+     * @param githubLogin
+     * @return
+     * @throws Exception
+     */
+    public StudentVO getByGithubLogin(String githubLogin) throws Exception{
+        if (githubLogin == null || githubLogin.equals("")) {
+            throw new NullPointerException("githubLogin is null---"+this.getClass()+"---getByGithubLogin()" );
+        } else {
+            List<StudentVO> studentVOS =  (ArrayList<StudentVO>)
+                    hibernateTemplate.findByNamedParam(
+                            "select s from  StudentVO s where s.githubLogin = :githubLogin", "githubLogin", githubLogin
+                    );
+            if(!studentVOS.isEmpty()){
+                return studentVOS.get(0);
+            }else{
+                return null;
+//                throw new NullPointerException("没找到学生："+this.getClass()+"getByGithubLogin()");
+            }
         }
     }
 }

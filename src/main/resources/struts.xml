@@ -17,6 +17,10 @@
         <action name="logOut" class="action.com.logIn.LogOutAction">
             <result name="success">success.jsp</result>
         </action>
+        <action name="getUserInfo" class="action.com.logIn.getUserInfoAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
     <package name="team" extends="struts-default">
@@ -116,6 +120,12 @@
         <action name="readNewMessage" class="action.com.message.ReadNewMessageAction" method="execute">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
+    <package name="test" extends="struts-default">
+        <action name="testAction" class="action.com.TestAction">
+            <result name="success">success.jsp</result>
         </action>
     </package>
 </struts>

@@ -293,4 +293,20 @@ public class ProjectDAO {
             }
         }
     }
+
+    public ProjectVO getByGithubURL(String githubURL) throws Exception{
+        if (githubURL == null|| githubURL.equals("")){
+            throw new SQLException("githubURL输入异常"+this.getClass()+"getByGithubURL()");
+        }else {
+            List<ProjectVO> projectVOS =  (ArrayList<ProjectVO>)
+                    hibernateTemplate.findByNamedParam(
+                            "select p from  ProjectVO p where p.githubURL = :githubURL", "githubURL", githubURL
+                    );
+            if(!projectVOS.isEmpty()){
+                return projectVOS.get(0);
+            }else{
+                throw new NullPointerException("没找到项目："+this.getClass()+"getByGithubURL()");
+            }
+        }
+    }
 }

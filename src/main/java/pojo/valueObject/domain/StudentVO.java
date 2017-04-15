@@ -23,6 +23,7 @@ public class StudentVO extends UserVO {
     private Integer codeScore2;
     private Integer presentationScore;
     private Integer finalScore  ;
+    private String githubLogin;
 
 
     public StudentVO() {
@@ -42,6 +43,7 @@ public class StudentVO extends UserVO {
                 ", codeScore2=" + codeScore2 +
                 ", presentationScore=" + presentationScore +
                 ", finalScore=" + finalScore +
+                ", githubLogin=" + githubLogin +
                 '}';
     }
 
@@ -123,5 +125,13 @@ public class StudentVO extends UserVO {
 
     public void setFinalScore(Integer finalScore) {
         this.finalScore = finalScore;
+    }
+
+    public String getGithubLogin() {
+        return githubLogin;
+    }
+
+    public void setGithubLogin(String githubLogin) {
+        this.githubLogin = githubLogin;
     }
 }
