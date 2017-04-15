@@ -132,7 +132,6 @@ public class UserBO {
             throw new NullPointerException("session空的---"+this.getClass()+"---getInfo()");
         }else {
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
-            System.out.println("????????"+session.get("role")+"========");
             if (session.get("role").equals("teacher")) {
                 TeacherDTO teacherDTO = BeanFactory.getBean("teacherDTO", TeacherDTO.class);
                 TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
