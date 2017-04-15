@@ -39,5 +39,3 @@ function submitform() {
     var form=document.getElementById("loginform");
     xhr.send(new FormData(form));
 }
-
-addLoadEvent(submitform);

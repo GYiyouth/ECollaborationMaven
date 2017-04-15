@@ -13,6 +13,7 @@ function addLoadEvent(func){
     }
 }
 function getInfo(){
+    var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             var myProJson=JSON.parse(xhr.responseText);
@@ -31,8 +32,6 @@ function getInfo(){
             paging(oldDomBox,"current",oldDomList,each,oldPreDom,oldNextDom,oldProJson);
         }else{
             alert("请刷新页面");
-            alert(xhr.responseText);
-            alert(xhr.status);
         }
     }
     xhr.open("get","getTeacherProjectAction",false);
@@ -117,5 +116,5 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
     }
 }
 //获取Json数据并进行分页显示
-var xhr=new XMLHttpRequest();
+
 addLoadEvent(getInfo);

@@ -14,6 +14,7 @@ function addLoadEvent(func){
 }
 
 function getInfo(){
+    var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             var reqJson=JSON.parse(xhr.responseText);
@@ -134,5 +135,5 @@ function setMyProInfo(myProJson) {
 }
 
 
-var xhr=new XMLHttpRequest();
+
 addLoadEvent(getInfo);
