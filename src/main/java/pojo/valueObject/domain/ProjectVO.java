@@ -48,6 +48,8 @@ public class ProjectVO {
             inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "id")
     )
     private Set<TeamVO> teamVOSet;
+    private String githubURL;
+
 
 
 	public ProjectVO(){
@@ -73,7 +75,7 @@ public class ProjectVO {
 				", gain='" + gain + '\'' +
 				", priority=" + priority +
 				", status=" + status +
-//				", creatorUserVO=" + creatorUserVO.getId() +
+				", githubURL=" + githubURL +
 //				", teacherVO=" + teacherVO.getId() +
 //				", teamVOSet=" + teamVOSet.size() +
 				'}';
@@ -232,6 +234,11 @@ public class ProjectVO {
 	}
 
 
+	public String getGithubURL() {
+		return githubURL;
+	}
 
-
+	public void setGithubURL(String githubURL) {
+		this.githubURL = githubURL;
+	}
 }

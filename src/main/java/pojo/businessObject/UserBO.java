@@ -54,6 +54,7 @@ public class UserBO {
                         ManagerDTO managerDTO = BeanFactory.getApplicationContext().getBean("managerDTO",ManagerDTO.class);
                         managerDTO.clone(managerVO);
                         session.put("managerVO", managerVO);
+                        session.put("role","manager");
                         jsonObject.put("managerBean", managerDTO);
                         jsonObject.put("role", "manager");
                         return jsonObject;
@@ -75,6 +76,7 @@ public class UserBO {
                         TeacherDTO teacherDTO = BeanFactory.getApplicationContext().getBean("teacherDTO",TeacherDTO.class);
                         teacherDTO.clone(teacherVO);
                         session.put("teacherVO", teacherVO);
+                        session.put("role", "teacher");
                         jsonObject.put("teacherBean", teacherDTO);
                         jsonObject.put("role", "teacher");
                         return jsonObject;
@@ -88,6 +90,7 @@ public class UserBO {
                         StudentDTO studentDTO = BeanFactory.getApplicationContext().getBean("studentDTO",StudentDTO.class);
                         studentDTO.clone(studentVO);
                         session.put("studentVO", studentVO);
+                        session.put("role", "student");
                         jsonObject.put("studentBean",studentDTO);
                         jsonObject.put("role", "student");
                         return jsonObject;
@@ -116,6 +119,37 @@ public class UserBO {
             return jsonObject;
         }else{
             return null;
+        }
+    }
+
+    /**
+     * 点击个人中心，获取个人资料
+     * @param session
+     * @return
+     */
+    public JSONObject getInfo(Map<String, Object> session) throws Exception{
+        if(session.isEmpty()){
+            throw new NullPointerException("session空的---"+this.getClass()+"---getInfo()");
+        }else {
+            JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
+            System.out.println("????????"+session.get("role")+"========");
+            if (session.get("role").equals("teacher")) {
+                TeacherDTO teacherDTO = BeanFactory.getBean("teacherDTO", TeacherDTO.class);
+                TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+                teacherDTO.clone(teacherVO);
+                jsonObject.put("teacherBean", teacherDTO);
+            } else if (session.get("role").equals("student")) {
+                StudentDTO studentDTO = BeanFactory.getBean("studentDTO", StudentDTO.class);
+                StudentVO studentVO = (StudentVO) session.get("studentVO");
+                studentDTO.clone(studentVO);
+                jsonObject.put("studentBean", studentDTO);
+            } else if (session.get("role").equals("manager")) {
+                ManagerDTO managerDTO = BeanFactory.getBean("managerDTO", ManagerDTO.class);
+                ManagerVO managerVO = (ManagerVO) session.get("managerVO");
+                managerDTO.clone(managerVO);
+                jsonObject.put("managerBean", managerDTO);
+            }
+            return jsonObject;
         }
     }
 }

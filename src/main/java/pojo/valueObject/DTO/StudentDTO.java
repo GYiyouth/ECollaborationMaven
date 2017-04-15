@@ -17,6 +17,7 @@ public class StudentDTO extends UserDTO{
     private Integer codeScore2;
     private Integer presentationScore;
     private Integer finalScore;
+    private String githubLogin;
 
 
     public void clone(StudentVO studentVO) {
@@ -32,6 +33,7 @@ public class StudentDTO extends UserDTO{
             this.setCodeScore2(studentVO.getCodeScore2());
             this.setPresentationScore(studentVO.getPresentationScore());
             this.setFinalScore(studentVO.getFinalScore());
+            this.setGithubLogin(studentVO.getGithubLogin());
         }else{
             System.out.println("studentVO is null!");
         }
@@ -50,6 +52,7 @@ public class StudentDTO extends UserDTO{
                 ", codeScore2=" + codeScore2 +
                 ", presentationScore=" + presentationScore +
                 ", finalScore=" + finalScore +
+                ", githubLogin=" +githubLogin +
                 '}';
     }
 
@@ -131,5 +134,13 @@ public class StudentDTO extends UserDTO{
 
     public void setFinalScore(Integer finalScore) {
         this.finalScore = finalScore;
+    }
+
+    public String getGithubLogin() {
+        return githubLogin;
+    }
+
+    public void setGithubLogin(String githubLogin) {
+        this.githubLogin = githubLogin;
     }
 }

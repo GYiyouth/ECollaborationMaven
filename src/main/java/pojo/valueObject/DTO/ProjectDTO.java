@@ -29,6 +29,7 @@ public class ProjectDTO {
     private Integer creatorUserVOId;
     private Integer teacherVOId;
     private Set<Integer> teamVOIdSet;
+    private String githubURL;
 
     public void clone(ProjectVO projectVO){
         if(projectVO!=null){
@@ -63,6 +64,7 @@ public class ProjectDTO {
 //            }else{
 //                this.teamVOIdSet = new HashSet<>();
 //            }
+            this.setGithubURL(projectVO.getGithubURL());
         }else{
             System.out.println("projectVO is null");
         }
@@ -90,6 +92,7 @@ public class ProjectDTO {
                 ", creatorUserVOId=" + creatorUserVOId +
                 ", teacherVOId=" + teacherVOId +
 //                ", teamVOIdSet=" + teamVOIdSet.size() +
+                ", githubURL=" + githubURL +
                 '}';
     }
 
@@ -243,5 +246,13 @@ public class ProjectDTO {
 
     public void setTeamVOIdSet(Set<Integer> teamVOIdSet) {
         this.teamVOIdSet = teamVOIdSet;
+    }
+
+    public String getGithubURL() {
+        return githubURL;
+    }
+
+    public void setGithubURL(String githubURL) {
+        this.githubURL = githubURL;
     }
 }
