@@ -132,6 +132,10 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="getMyTask" class="action.com.task.GetMyTaskAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
     <package name="message" extends="struts-default">

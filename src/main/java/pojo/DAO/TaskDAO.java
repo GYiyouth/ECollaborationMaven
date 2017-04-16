@@ -118,12 +118,17 @@ public class TaskDAO {
         }
     }
 
-
+    /**
+     * 根据项目获取任务列表
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
     public ArrayList<TaskVO> getTasksByProject(ProjectVO projectVO) throws Exception{
         if(projectVO==null){
             throw  new NullPointerException("projectVO是空的---"+this.getClass()+"---getTaskByProject()");
         }else{
-            String hql = "select pt from ProjectTaskVO pt where pt.projectVO = ?";
+            String hql = "select pt.taskVO from ProjectTaskVO pt where pt.projectVO = ?";
             List<TaskVO> list = (List<TaskVO>) hibernateTemplate.find(hql, projectVO);
             return (ArrayList<TaskVO>) list;
         }
