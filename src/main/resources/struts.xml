@@ -95,6 +95,9 @@
         <action name="getTeacherProjectAction" class="action.com.project.GetTeacherProjectAction" method="execute">
 
         </action>
+        <action name="modifyProjectInfoAction" class="action.com.project.ModifyProjectInfoAction" method="execute">
+
+        </action>
     </package>
 
     <package name="teacher" extends="struts-default">

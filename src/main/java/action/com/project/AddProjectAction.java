@@ -42,11 +42,11 @@ public class AddProjectAction implements SessionAware, ServletRequestAware, Serv
     private String requirement;
     private String gain;
     private Integer priority = 0;           //区分是那种项目 0：工程实践 1：个人兴趣 2比赛
-    private Integer grade = Integer.parseInt(Time.getGrade());              //年份
+
     //非jsp提交
     private String createDate;
     private Integer teamNumber;
-
+    private Integer grade = Integer.parseInt(Time.getGrade());              //年份
 
     private Integer status;             //状态   0：失效 1：申请 2：执行 3：完成
     private Integer creatorId;

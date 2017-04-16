@@ -309,4 +309,19 @@ public class ProjectDAO {
             }
         }
     }
+
+    /**
+     * 更新项目信息
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public ProjectVO updateProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO != null){
+            hibernateTemplate.update(projectVO);
+            return projectVO;
+        }else {
+            throw new NullPointerException("projectVO为空");
+        }
+    }
 }

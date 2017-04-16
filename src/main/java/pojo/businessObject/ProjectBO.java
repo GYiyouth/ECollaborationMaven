@@ -148,4 +148,25 @@ public class ProjectBO {
         projectDAO.applyProject(teamId, projectId);
     }
 
+
+    /**
+     * 根据Id查询项目VO
+     * @param projectId
+     * @return
+     * @throws Exception
+     */
+    public ProjectVO getProjectVO(Integer projectId) throws Exception{
+        if (projectId != null && projectId > 0 )
+                return projectDAO.getProjectVO(projectId);
+        else
+            throw new NullPointerException("projectId为空");
+    }
+
+    public ProjectVO updateProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO != null)
+            return projectDAO.updateProjectVO(projectVO);
+        else
+            throw new NullPointerException("ProjectVO为空");
+    }
+
 }
