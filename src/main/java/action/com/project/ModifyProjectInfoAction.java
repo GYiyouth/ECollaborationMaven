@@ -5,6 +5,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import pojo.DAO.ProjectDAO;
 import pojo.businessObject.ProjectBO;
 import pojo.valueObject.DTO.ProjectDTO;
@@ -22,12 +23,13 @@ import java.util.Map;
  * 返回的字符串中有 projectBean
  * Created by geyao on 2017/4/16.
  */
+@Controller
 public class ModifyProjectInfoAction implements SessionAware, ServletRequestAware, ServletResponseAware {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
 
-    @Autowired
+
     private ProjectBO projectBO;
 
     //jsp提交
@@ -76,7 +78,127 @@ public class ModifyProjectInfoAction implements SessionAware, ServletRequestAwar
 
     }
 
+    public HttpServletRequest getRequest() {
+        return request;
+    }
 
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+
+    public ProjectBO getProjectBO() {
+        return projectBO;
+    }
+
+    @Autowired
+    public void setProjectBO(ProjectBO projectBO) {
+        this.projectBO = projectBO;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getApplyBeforeDate() {
+        return applyBeforeDate;
+    }
+
+    public void setApplyBeforeDate(String applyBeforeDate) {
+        this.applyBeforeDate = applyBeforeDate;
+    }
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public String getSurvivalDate() {
+        return survivalDate;
+    }
+
+    public void setSurvivalDate(String survivalDate) {
+        this.survivalDate = survivalDate;
+    }
+
+    public Integer getTeamMax() {
+        return teamMax;
+    }
+
+    public void setTeamMax(Integer teamMax) {
+        this.teamMax = teamMax;
+    }
+
+    public Integer getMemberMax() {
+        return memberMax;
+    }
+
+    public void setMemberMax(Integer memberMax) {
+        this.memberMax = memberMax;
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getGain() {
+        return gain;
+    }
+
+    public void setGain(String gain) {
+        this.gain = gain;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
