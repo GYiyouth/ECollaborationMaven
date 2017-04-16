@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Ec-style.css">
-
+    <style type="text/css">
+        label.error{color:red;font-size:13px;}
+    </style>
 </head>
 <body>
 
@@ -31,52 +33,76 @@
         </div>
     </div>
 </nav>
+<br><br><br>
 
-<form id="selfInfoform">
-    <div>
-        <img src="img/timg.jpeg" class="img-rounded" id="picture">
-    </div>
+<form id="selfInfo">
 
-    <div class="container">
+<div class="container">
+    <div class="col-md-9 col-md-offset-0.5">
         <div class="row">
-            <div class="col-md-2 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-1">
                 <p class="text-muted">姓名</p>
-                <input name="" type="text" class="form-control" placeholder="耿瑞">
+                <input type="text" class="form-control" name="name">
             </div>
-            <div class="col-md-2 col-md-offset-0">
+            <div class="col-md-5 ">
                 <p class="text-muted">性别</p>
-                <input name="" type="text" class="form-control" placeholder="男">
+                <input type="text" class="form-control" name="sex">
             </div>
         </div>
         <br>
 
         <div class="row">
-            <div class="col-md-2 col-md-offset-2">
-                <p class="text-muted">邮箱</p>
-                <input name="" type="text" class="form-control" placeholder="*********@mail.ustc.edu">
+            <div class="col-md-5 col-md-offset-1">
+                <p class="text-muted" >学工号</p>
+                <input type="text" class="form-control" name="schoolId">
             </div>
-            <div class="col-md-2 col-md-offset-0">
+            <div class="col-md-5">
                 <p class="text-muted">联系方式</p>
-                <input  name="" type="text" class="form-control" placeholder=".13988881234">
+                <input type="text" class="form-control" name="phoneNumber">
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-6 col-md-offset-2">
-                <p class="text-muted">家庭住址</p>
-                <input name="" type="text" class="form-control" placeholder="独墅湖高教区****">
+            <div class="col-md-5 col-md-offset-1">
+                <p class="text-muted">电子邮箱</p>
+                <input type="text" class="form-control" name="email">
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-5">
                 <p class="text-muted">毕业学校</p>
-                <input name="" type="text" class="form-control" placeholder="****大学">
+                <input type="text" class="form-control" name="graduatedSchool">
             </div>
         </div>
-        <button type="reset" class="btn btn-primary"  style="margin-left: 635px">重置</button>
-        <button id="submitButton" type="submit" class="btn btn-success" >确定</button>
+        <br>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+                <p class="text-muted">年级</p>
+                <input type="text" class="form-control" name="grade">
+            </div>
+            <div class="col-md-5">
+                <p class="text-muted">github用户名</p>
+                <input type="text" class="form-control" name="githubLogin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p class="text-muted">个人主页</p>
+                <input type="text" class="form-control" name="homePageUrl">
+            </div>
+        </div>
     </div>
+    <div class="col-md-2">
+        <br><br>
+        <div>
+            <img src="img/t.jpg" class="img-rounded" id="picture">
+        </div>
+        <br><br>
+        <input type="file" value="选取新图片" >
+    </div>
+</div>
+    <br><br><br>
+        <button type="reset" class="btn btn-default"  style="margin-left: 635px">清空</button>
+        <button id="submitButton" type="submit" class="btn btn-default" >修改</button>
+
 </form>
 
 <footer id="footer">
@@ -91,6 +117,8 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/student/fsy-student-selfcenter-main.js"></script>
+<script src="js/jquery.validate.js"></script>
+
 
 </body>
 </html>

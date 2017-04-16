@@ -40,6 +40,7 @@ public class ModifyStudentInfoAction extends ActionSupport implements ServletReq
     @Override
     public String execute() throws Exception {
         try {
+            System.out.println("...");
 //            StudentVO studentVO = BeanFactory.getBean("studentVO", StudentVO.class);
             StudentVO studentVO = (StudentVO) session.get("studentVO");
             studentVO.setSchoolId(schoolId);
@@ -53,6 +54,7 @@ public class ModifyStudentInfoAction extends ActionSupport implements ServletReq
             studentVO.setTecKeyWord(tecKeyWord);
             studentVO.setHomePageUrl(homePageUrl);
             studentVO.setGithubLogin(githubLogin);
+            System.out.println("hhhhh"+studentVO);
             StudentBO studentBO = BeanFactory.getBean("studentBO", StudentBO.class);
             JSONObject jsonObject = studentBO.updateTeacherInfo(studentVO);
             JSONHandler.sendJSON(jsonObject, response);
