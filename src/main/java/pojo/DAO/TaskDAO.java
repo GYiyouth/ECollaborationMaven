@@ -9,10 +9,14 @@ import org.springframework.stereotype.Repository;
 import pojo.valueObject.assist.ProjectTaskVO;
 import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.assist.TeamProjectVO;
+import pojo.valueObject.domain.ContributionsVO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TaskVO;
 import pojo.valueObject.domain.TeamVO;
 import tool.BeanFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by geyao on 2017/3/2.
@@ -62,7 +66,7 @@ public class TaskDAO {
     }
 
     /**
-     * l老师对任务评价
+     * 老师对任务评价
      * @return
      */
     public String addTeamProjectAccess(TeamProjectVO teamProjectVO,TaskVO taskVO, Integer access) throws Exception{
@@ -111,6 +115,17 @@ public class TaskDAO {
             }finally {
 //                session.close();
             }
+        }
+    }
+
+
+    public ArrayList<TaskVO> getTasksByProject(ProjectVO projectVO) throws Exception{
+        if(projectVO==null){
+            throw  new NullPointerException("projectVO是空的---"+this.getClass()+"---getTaskByProject()");
+        }else{
+            String hql = "select pt from ProjectTaskVO pt where pt.projectVO = ?";
+            List<TaskVO> list = (List<TaskVO>) hibernateTemplate.find(hql, projectVO);
+            return (ArrayList<TaskVO>) list;
         }
     }
 }

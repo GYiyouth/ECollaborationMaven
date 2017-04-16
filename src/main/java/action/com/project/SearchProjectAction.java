@@ -117,6 +117,12 @@ public class SearchProjectAction implements SessionAware, ServletRequestAware, S
             for (ProjectDTO projectBean : getSearchResultHashMap().values()){
                 arrayList.add(projectBean);
             }
+            ArrayList<ProjectDTO> list = new ArrayList<>();
+            list.addAll(show4TimesProjectDTOs);
+            list.addAll(show3TimesProjectDTOs);
+            list.addAll(show2TimesProjectDTOs);
+            list.addAll(show1TimesProjectDTOs);
+            jsonObject.put("projectsList", list);
             jsonObject.put("show1TimesProjectBeans", show1TimesProjectDTOs);
             jsonObject.put("show2TimesProjectBeans", show2TimesProjectDTOs);
             jsonObject.put("show3TimesProjectBeans", show3TimesProjectDTOs);

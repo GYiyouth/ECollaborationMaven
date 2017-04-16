@@ -499,4 +499,30 @@ public class TeamDAO {
         }
 
     }
+
+    /**
+     * 修改团队信息
+     * @param teamVO
+     * @return
+     * @throws Exception
+     */
+    public TeamVO modifyTeamInfo(TeamVO teamVO) throws Exception{
+        try {
+            hibernateTemplate.update(teamVO);
+            return teamVO;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    /**
+     * 根据项目获取团队列表
+     * @param projectVO
+     * @return
+     */
+    public List<TeamVO> getTeamVOByProjectVO(ProjectVO projectVO) {
+        return (List<TeamVO>)
+                hibernateTemplate.find("select tp.teamVO from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
+    }
 }

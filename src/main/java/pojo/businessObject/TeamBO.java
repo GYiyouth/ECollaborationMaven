@@ -88,7 +88,6 @@ public class TeamBO {
             ApplicationContext context = BeanFactory.getApplicationContext();
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
 //            TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
-            //耿瑞你他妈这里凭什么不判空？？？
             System.out.println("测试" + this.getClass());
             System.out.println("session是 ： " + session);
             UserVO senderUserVO = (StudentVO) session.get("studentVO");
@@ -380,5 +379,24 @@ public class TeamBO {
                 throw e;
             }
         }
+    }
+
+    /**
+     * 修改团队信息
+     * @param newTeamVO
+     * @return
+     * @throws Exception
+     */
+    public JSONObject modifyTeamInfo(TeamVO newTeamVO) throws Exception{
+        TeamDAO teamDAO = BeanFactory.getBean("teamDAO", TeamDAO.class);
+        JSONObject jsonObject = BeanFactory.getBean("jsonObject", JSONObject.class);
+        TeamVO teamVO = teamDAO.modifyTeamInfo(newTeamVO);
+        if (teamVO != null){
+            TeamDTO teamDTO = BeanFactory.getBean("teamDTO", TeamDTO.class);
+            teamDTO.clone(teamVO);
+            jsonObject.put("result", "success");
+            jsonObject.put("teamBean", teamDTO);
+        }
+        return jsonObject;
     }
 }
