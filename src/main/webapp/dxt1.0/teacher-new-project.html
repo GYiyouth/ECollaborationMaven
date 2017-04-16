@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Ec-style.css">
-
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <style type="text/css">
+        label.error{color:red;font-size:13px;}
+    </style>
 </head>
 <body>
 
@@ -32,33 +35,49 @@
         </div>
     </div>
 </nav>
-<br><br><br><br><br><br>
+<br><br><br>
 
 
 
-<form>
+<form id="newProForm">
     <div class="container">
     <div class="form-group">
         <label>项目名称</label>
-        <input type="text" class="form-control" placeholder="请输入项目名称" autofocus >
+        <input type="text" class="form-control" placeholder="请输入项目名称" autofocus name="name">
     </div>
     <div class="form-group">
-        <label>团队数</label>
-        <input type="number" class="form-control" placeholder="请输入团队数" min="1">
+        <label>最大团队数</label>
+        <input type="number" class="form-control" placeholder="请输入团队数" name="teamMax">
     </div>
     <div class="form-group">
-        <label>每个团队人数上限</label>
-        <input type="number" class="form-control" placeholder="请输入上限" min="2" max="4">
+        <label>团队人数上限</label>
+        <input type="number" class="form-control" placeholder="请输入上限" name="memberMax" >
     </div>
     <div class="form-group">
         <label>项目描述</label>
-        <input type="text" class="form-control" width="150px" height="400px" placeholder="请输入项目描述" size="100">
+        <input type="text" class="form-control" width="150px" height="400px" placeholder="请输入项目描述" size="100" name="info">
+    </div>
+    <div class="form-group">
+        <label>关键词</label>
+        <input type="text" class="form-control" width="150px" height="400px" placeholder="请输入相关关键词" name="keyWord">
     </div>
     <div class="form-group">
         <label>相关要求</label>
-        <input type="text" class="form-control" width="150px" height="400px" placeholder="请输入相关要求">
+        <input type="text" class="form-control" width="150px" height="400px" placeholder="请输入相关要求" name="requirement">
     </div>
-    <input type="button" class="btn btn-default" value="提交" onclick="javascript:window.location.href='teacher-success.html'"></input>
+    <div class="form-group">
+        <label>申请截止时间</label>
+        <input type="text"  value="2014-09-23 23:05" name="applyBeforeDate" id="datetimepicker" >
+    </div>
+    <div class="form-group">
+        <label>项目截止时间</label>
+        <input type="text" value="2014-09-23 23:05" name="finishDate" id="datetimepicker2" >
+    </div>
+    <div class="form-group">
+        <label>项目创建日期</label>
+        <input type="text" value="2014-09-23 23:05" name="createDate" id="datetimepicker3" >
+    </div>
+    <input id="submitButton" type="submit" class="btn btn-default" value="提交">
     <button type="reset"  class="btn btn-default" >重置</button>
     </div>
 </form>
@@ -78,8 +97,9 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    var a = JSON.parse()
-</script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/teacher/fsy-teacher-new-project.js"></script>
 </body>
 </html>

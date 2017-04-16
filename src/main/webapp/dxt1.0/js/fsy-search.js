@@ -1,48 +1,14 @@
 /**
- * Created by fansuyu on 2017/3/31.
+ * Created by fansuyu on 2017/4/16.
  */
-function addLoadEvent(func){
-    var oldonload=window.onload;
-    if(typeof window.onload !='function'){
-        window.onload=func;
-    }else{
-        window.onload=function(){
-            oldonload();
-            func();
-        }
-    }
-}
-function getInfo(){
-    var xhr=new XMLHttpRequest();
-    xhr.onload=function(){
-        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            var myProJson=JSON.parse(xhr.responseText);
-            var oldProJson=myProJson.oldProjects;
-            var nowProJson=myProJson.oldProjects;
-            var oldDomBox=document.getElementById("old-domBox");
-            var oldDomList=document.getElementById("old-list");
-            var oldPreDom=document.getElementById("old-preDom");
-            var oldNextDom=document.getElementById("old-nextDom");
-            var nowDomBox=document.getElementById("now-domBox");
-            var nowDomList=document.getElementById("now-list");
-            var nowPreDom=document.getElementById("now-preDom");
-            var nowNextDom=document.getElementById("now-nextDom");
-            var each=5;
-            paging(nowDomBox,"current",nowDomList,each,nowPreDom,nowNextDom,nowProJson);
-            paging(oldDomBox,"current",oldDomList,each,oldPreDom,oldNextDom,oldProJson);
-        }else{
-            alert("请刷新页面");
-        }
-    }
-    xhr.open("get","getTeacherProjectAction",false);
-    xhr.send();
-}
 function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
 {
     //当前元素
     var preNum = 0;
     //数据总长度
     var jsonLen = arrJson.length;
+    //每个页的分量
+    var each = each;
     //页数总数
     var page = Math.ceil(jsonLen / each);
 
@@ -57,7 +23,6 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         domP += '</a>';
         domBox.innerHTML += domP;
     }
-
     // 设置列表页数
     for (var i = 0; i < page; i++) {
         var domA = document.createElement('a');
@@ -108,13 +73,61 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
                 break;
             }
             var domP = '<a href="javascript:;" class="list-group-item">';
-            domP += '<h4>'+arrJsonCurrent.name+'</h4>';
+            domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '</a>';
             domBox.innerHTML += domP;
         }
     }
 }
-//获取Json数据并进行分页显示
+function submitSearchForm(){
+    var xhr=new XMLHttpRequest();
+    xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            alert("提交成功");
+            alert(xhr.responseText);
+            return xhr;
+        }else{
+            alert("请重新登录");
+        }
+    }
+    xhr.open("post","appSearchProjectAction",false);
+    var searchForm=document.getElementById("searchform");
+    xhr.send(new FormData(searchForm));
+}
+function showResult(xhrShow){
+    var $showDiv=$("#formshowDiv");
+    $showDiv.empty();
+    var str=
+        '<div class="container">'
+        +'<h3>搜索结果</h3>'
+        +'<section id="domBox" class="list-group"></section>'+ '<ul class="pager">'
+        +'<li><a href="javascript:;" id="preDom">上一页</a></li>'
+        +'<li id="list"></li>'
+        +'<li><a href="javascript:;" id="nextDom">下一页</a></li>'
+        +'</ul>'
+        +'</div>'
+    $showDiv.html(str);
+    var domBox=document.getElementById("domBox");
+    var domList=document.getElementById("list");
+    var preDom=document.getElementById("preDom");
+    var nextDom=document.getElementById("nextDom");
+    var each=5;
+    var JObject=JSON.parse(xhrShow);
+    paging(domBox,"current",domList,each,preDom,nextDom,JObject.projectsList);
 
-addLoadEvent(getInfo);
+}
+$(function(){
+    $("#searchButton").click(function(event){
+        var info=$("#searchInfo").val();
+        if(info==""){
+            return false;
+        }else{
+            event.preventDefault();
+            var xhr=submitSearchForm();
+            showResult(xhr);
+        }
+    });
+})
+
+

@@ -14,6 +14,7 @@ function addLoadEvent(func){
 }
 
 function getInfo(){
+    var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             var reqJson=JSON.parse(xhr.responseText);
@@ -22,10 +23,10 @@ function getInfo(){
             var intProJson=reqJson.interestProjectDTOList;
             var domBox=document.getElementById("domBox");
             var domList=document.getElementById("list");
-            var pagePreDom=document.getElementById("pre");
-            var pageNextDom=document.getElementById("next");
+            var preDom=document.getElementById("preDom");
+            var nextDom=document.getElementById("nextDom");
             var each=5;
-            paging(domBox,"current",domList,each,pagePreDom,pageNextDom,intProJson);
+            paging(domBox,"current",domList,each,preDom,nextDom,intProJson);
         }else{
             alert("请刷新页面");
         }
@@ -134,5 +135,5 @@ function setMyProInfo(myProJson) {
 }
 
 
-var xhr=new XMLHttpRequest();
+
 addLoadEvent(getInfo);
