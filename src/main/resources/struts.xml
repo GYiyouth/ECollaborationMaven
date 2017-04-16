@@ -98,6 +98,9 @@
         <action name="modifyProjectInfoAction" class="action.com.project.ModifyProjectInfoAction" method="execute">
 
         </action>
+        <action name="fireTeamFromProjectAction" class="action.com.project.FireTeamFromProjectAction" method="execute">
+
+        </action>
     </package>
 
     <package name="teacher" extends="struts-default">
