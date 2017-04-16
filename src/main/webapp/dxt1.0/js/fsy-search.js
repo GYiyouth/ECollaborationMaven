@@ -1,40 +1,6 @@
 /**
- * Created by fansuyu on 2017/3/31.
+ * Created by fansuyu on 2017/4/16.
  */
-function addLoadEvent(func){
-    var oldonload=window.onload;
-    if(typeof window.onload !='function'){
-        window.onload=func;
-    }else{
-        window.onload=function(){
-            oldonload();
-            func();
-        }
-    }
-}
-
-function getInfo(){
-    var xhr=new XMLHttpRequest();
-    xhr.onload=function(){
-        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            var reqJson=JSON.parse(xhr.responseText);
-            var myProJson=reqJson.schoolProjectDTOList;
-            setMyProInfo(myProJson);
-            var intProJson=reqJson.interestProjectDTOList;
-            var domBox=document.getElementById("domBox");
-            var domList=document.getElementById("list");
-            var preDom=document.getElementById("preDom");
-            var nextDom=document.getElementById("nextDom");
-            var each=5;
-            paging(domBox,"current",domList,each,preDom,nextDom,intProJson);
-        }else{
-            alert("请刷新页面");
-        }
-    }
-    xhr.open("get","getMyProjectVOList",false);
-    xhr.send();
-}
-//分页函数--参数分别为（显示内容的域,当前页特效,分页数，一页多少条记录，上一页，下一页，Json对象数组）
 function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
 {
     //当前元素
@@ -114,26 +80,54 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         }
     }
 }
-function setMyProInfo(myProJson) {
-    var number=document.getElementById('number');
-    var createDate=document.getElementById('createDate');
-    var keyWord=document.getElementById('keyWord');
-    var info=document.getElementById('info');
-    var status=document.getElementById('status');
-    var teacherVOId=document.getElementById('teacherVOId');
-    var teamVOIdSet=document.getElementById('teamVOIdSet');
-    number.innerHTML='成员人数 :'+myProJson[0].teamVOIdSet.length;
-    createDate.innerHTML='创建日期 :'+myProJson[0].createDate;
-    keyWord.innerHTML='关键字 :'+myProJson[0].keyWord;
-    info.innerHTML='信息 :'+myProJson[0].info;
-    status.innerHTML='项目状态 :'+myProJson[0].status;
-    teacherVOId.innerHTML='指导老师 :'+myProJson[0].teacherVOId;
-    for(var i=0;i<myProJson[0].teamVOIdSet.length;i++){
-        teamVOIdSet.innerHTML+='成员 '+i+' :'+myProJson[0].teamVOIdSet[i]+'<br>';
+function submitSearchForm(){
+    var xhr=new XMLHttpRequest();
+    xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            alert("提交成功");
+            alert(xhr.responseText);
+            return xhr;
+        }else{
+            alert("请重新登录");
+        }
     }
+    xhr.open("post","appSearchProjectAction",false);
+    var searchForm=document.getElementById("searchform");
+    xhr.send(new FormData(searchForm));
+}
+function showResult(xhrShow){
+    var $showDiv=$("#formshowDiv");
+    $showDiv.empty();
+    var str=
+        '<div class="container">'
+        +'<h3>搜索结果</h3>'
+        +'<section id="domBox" class="list-group"></section>'+ '<ul class="pager">'
+        +'<li><a href="javascript:;" id="preDom">上一页</a></li>'
+        +'<li id="list"></li>'
+        +'<li><a href="javascript:;" id="nextDom">下一页</a></li>'
+        +'</ul>'
+        +'</div>'
+    $showDiv.html(str);
+    var domBox=document.getElementById("domBox");
+    var domList=document.getElementById("list");
+    var preDom=document.getElementById("preDom");
+    var nextDom=document.getElementById("nextDom");
+    var each=5;
+    var JObject=JSON.parse(xhrShow);
+    paging(domBox,"current",domList,each,preDom,nextDom,JObject.projectsList);
 
 }
+$(function(){
+    $("#searchButton").click(function(event){
+        var info=$("#searchInfo").val();
+        if(info==""){
+            return false;
+        }else{
+            event.preventDefault();
+            var xhr=submitSearchForm();
+            showResult(xhr);
+        }
+    });
+})
 
 
-
-addLoadEvent(getInfo);

@@ -23,12 +23,27 @@ function getinfo(){
             alert("请刷新页面");
         }
     }
-    xhr.open("get",'',false);
-    alert("定义xhr")
+    xhr.open("get",'getUserInfo',false);
     xhr.send();
-    alert("发送请求");
 
 }
-
-
-addLoadEvent(getinfo);
+function submitSelfInfo() {
+    var xhr=new XMLHttpRequest();
+    xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            alert("收到JSON数据");
+            alert(xhr.responseText);
+        }else{
+            alert("请刷新页面");
+        }
+    }
+    xhr.open("post","",false);
+    var selfInfoForm=$("#selfInfoform").get(0);
+    xhr.send(new FormData(selfInfoForm));
+}
+$(document).ready(getinfo);
+$(document).ready(function () {
+    $("#submitbutton").click(function(){
+        submitSelfInfo();
+    })
+})

@@ -39,3 +39,4 @@ function submitform() {
     var form=document.getElementById("loginform");
     xhr.send(new FormData(form));
 }
+$("#submitbutton").click(submitform);
