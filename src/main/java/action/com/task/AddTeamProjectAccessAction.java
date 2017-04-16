@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * 给团队完成的任务打分
- * Created by Administrator on 2017/3/3.
+ * Created by GR on 2017/3/3.
  */
 public class AddTeamProjectAccessAction extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
 

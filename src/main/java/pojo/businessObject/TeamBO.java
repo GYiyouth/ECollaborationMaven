@@ -88,7 +88,6 @@ public class TeamBO {
             ApplicationContext context = BeanFactory.getApplicationContext();
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
 //            TeamDAO teamDAO = context.getBean("teamDAO", TeamDAO.class);
-            //耿瑞你他妈这里凭什么不判空？？？
             System.out.println("测试" + this.getClass());
             System.out.println("session是 ： " + session);
             UserVO senderUserVO = (StudentVO) session.get("studentVO");
