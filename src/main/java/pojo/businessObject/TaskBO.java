@@ -98,18 +98,48 @@ public class TaskBO {
     }
 
 
+    /**
+     * 获取我的所有任务
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
     public JSONObject getMyTask(ProjectVO projectVO) throws Exception {
         TaskDAO taskDAO = BeanFactory.getBean("taskDAO", TaskDAO.class);
         ArrayList<TaskVO> taskVOs = taskDAO.getTasksByProject(projectVO);
         ArrayList<TaskDTO> taskDTOS = new ArrayList<>();
         JSONObject jsonObject = BeanFactory.getBean("jsonObject", JSONObject.class);
-        TaskDTO taskDTO = BeanFactory.getBean("taskDTO", TaskDTO.class);
         if (!taskVOs.isEmpty()) {
             jsonObject.put("result", "success");
+
             for (TaskVO taskVO:taskVOs){
+                TaskDTO taskDTO = BeanFactory.getBean("taskDTO", TaskDTO.class);
                 taskDTO.clone(taskVO);
                 taskDTOS.add(taskDTO);
             }
+            jsonObject.put("TaskBeans", taskDTOS);
+        }
+        return jsonObject;
+    }
+
+    /**
+     * 获取我进行中的所有任务
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public JSONObject getMyWorkingTask(ProjectVO projectVO) throws Exception {
+        ArrayList<TaskDTO> taskDTOS = new ArrayList<>();
+        TaskDAO taskDAO = BeanFactory.getBean("taskDAO", TaskDAO.class);
+        ArrayList<TaskVO> taskVOs = taskDAO.getWorkingTasksByProject(projectVO);
+        JSONObject jsonObject = BeanFactory.getBean("jsonObject", JSONObject.class);
+        if (!taskVOs.isEmpty()){
+            for (TaskVO taskVO:taskVOs){
+                TaskDTO taskDTO = BeanFactory.getBean("taskDTO", TaskDTO.class);
+                taskDTO.clone(taskVO);
+                taskDTOS.add(taskDTO);
+            }
+            jsonObject.put("result", "success");
             jsonObject.put("TaskBeans", taskDTOS);
         }
         return jsonObject;
