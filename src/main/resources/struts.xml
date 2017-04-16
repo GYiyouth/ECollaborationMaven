@@ -107,6 +107,10 @@
         <action name="deleteProjectAction" class="action.com.project.DeleteProjectAction" method="execute">
 
         </action>
+        <action name="getProjectById" class="action.com.project.GetProjectByIdAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
     <package name="teacher" extends="struts-default">
