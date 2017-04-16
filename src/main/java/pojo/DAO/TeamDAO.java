@@ -515,4 +515,14 @@ public class TeamDAO {
             throw e;
         }
     }
+
+    /**
+     * 根据项目获取团队列表
+     * @param projectVO
+     * @return
+     */
+    public List<TeamVO> getTeamVOByProjectVO(ProjectVO projectVO) {
+        return (List<TeamVO>)
+                hibernateTemplate.find("select tp.teamVO from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
+    }
 }

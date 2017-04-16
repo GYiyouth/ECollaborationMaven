@@ -7,11 +7,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import pojo.valueObject.assist.MessageReceiverVO;
+import pojo.valueObject.assist.*;
 import org.hibernate.query.Query;
-import pojo.valueObject.assist.StudentTeamVO;
-import pojo.valueObject.assist.TeamProjectAccessVO;
-import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 import tool.Time;
@@ -356,8 +353,94 @@ public class ProjectDAO {
         return teamProjectAccessVOList;
     }
 
-    public void deleteTeamProjectAccessVO(List<TeamProjectAccessVO> list) throws Exception{
+    public void delete(List<TeamProjectAccessVO> list) throws Exception{
         if (list == null || list.size() < 1)
             hibernateTemplate.deleteAll(list);
+    }
+
+    /**
+     * 删除一个项目下所有的任务
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deleteTaskByProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO == null){
+            throw new NullPointerException("projectVO为空");
+        }
+        hibernateTemplate.deleteAll(
+                hibernateTemplate.find("from ProjectTaskVO pt where pt.projectVO.id = ?", projectVO.getId())
+        );
+    }
+
+    /**
+     * 删除一个项目下的所有计划
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deletePlanByProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO == null){
+            throw new NullPointerException("projectVO为空");
+        }
+        hibernateTemplate.deleteAll(
+                hibernateTemplate.find("from StudentProjectPlanVO spt where spt.projectVO.id = ?", projectVO.getId())
+        );
+    }
+
+    /**
+     * 删除一个项目下的所有文件
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deleteFileByProjectVO(ProjectVO projectVO) throws Exception{
+        if (projectVO == null){
+            throw new NullPointerException("projectVO为空");
+        }
+        hibernateTemplate.deleteAll(
+                hibernateTemplate.find("from StudentProjectFileVO spf where spf.projectVO.id = ?", projectVO.getId())
+        );
+    }
+
+    /**
+     * 删除一个项目下的所有任务评价——access
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deleteTeamProjectAccess(ProjectVO projectVO) throws Exception{
+        List<TeamProjectVO> teamProjectVOList = (List<TeamProjectVO>)
+                hibernateTemplate.find("from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
+        List<TeamProjectAccessVO> teamProjectAccessVOList = new ArrayList<>();
+        for (TeamProjectVO teamProjectVO : teamProjectVOList){
+            teamProjectAccessVOList.addAll(
+                    (List<TeamProjectAccessVO>)hibernateTemplate.find("from TeamProjectAccessVO tpa where tpa.team_project_id = ?", teamProjectVO.getId())
+            );
+        }
+        hibernateTemplate.deleteAll(teamProjectAccessVOList);
+    }
+
+    /**
+     * 删除一个项目下所有评价标准
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deleteProjectAccessType(ProjectVO projectVO) throws Exception{
+        if (projectVO == null)
+            throw new NullPointerException("项目为空");
+        List<ProjectAccessTypeVO> projectAccessTypeVOList;
+        projectAccessTypeVOList = (List<ProjectAccessTypeVO>)
+                hibernateTemplate.find("from ProjectAccessTypeVO pat where pat.projectVO.id = ?", projectVO.getId());
+        hibernateTemplate.deleteAll(projectAccessTypeVOList);
+    }
+
+    /**
+     * 删除一个项目下所有的项目团队
+     * @param projectVO
+     * @throws Exception
+     */
+    public void deleteTeamProjectByProject(ProjectVO projectVO) throws Exception{
+        if (projectVO == null)
+            throw new NullPointerException("项目为空");
+        List<TeamProjectVO> teamProjectVOList = (List<TeamProjectVO>)
+                hibernateTemplate.find("from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
+        hibernateTemplate.deleteAll(teamProjectVOList);
     }
 }

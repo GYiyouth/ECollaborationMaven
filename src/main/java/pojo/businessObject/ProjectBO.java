@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.DAO.TeamDAO;
+import pojo.valueObject.assist.ProjectAccessTypeVO;
 import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
@@ -201,7 +202,7 @@ public class ProjectBO {
             if (projectVO.getTeacherVO().getId().equals(userVO.getId())){
                 //操作人必须是老师
                 //删除已有评价，删除项目团队
-                projectDAO.deleteTeamProjectAccessVO(teamProjectAccessVOList);
+                projectDAO.delete(teamProjectAccessVOList);
                 projectDAO.delete(teamProjectVO);
                 return true;
             }
@@ -209,13 +210,46 @@ public class ProjectBO {
             if (projectVO.getPriority().equals(2)){ // 是学生兴趣项目
                 if (projectVO.getCreatorUserVO().getId().equals(userVO.getId())){
                     //操作人是学生创始人
-                    projectDAO.deleteTeamProjectAccessVO(teamProjectAccessVOList);
+                    projectDAO.delete(teamProjectAccessVOList);
                     projectDAO.delete(teamProjectVO);
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * 删除项目，要涉及到以下关系表：
+     * project_accessType
+     * project_task
+     * student_project_file
+     * student_project_plan
+     * team_project
+     * team_project_access
+     * @param projectId
+     * @throws Exception
+     */
+    public void deleteProjectVO(Integer projectId) throws Exception{
+        if (projectId == null)
+            throw new NullPointerException("projectId为空");
+        ProjectVO projectVO = projectDAO.getProjectVO(projectId);
+        if (projectVO == null)
+            throw new NullPointerException("projectId为空");
+
+        List<TeamVO> teamVOList = teamDAO.getTeamVOByProjectVO(projectVO);
+        Iterator teamVOIterator = teamVOList.iterator();
+        while (teamVOIterator.hasNext()) {
+            TeamVO teamVO = (TeamVO) teamVOIterator.next();
+            projectDAO.delete( projectDAO.getTeamProjectAccessVO(teamVO, projectVO) );
+        }
+        projectDAO.deleteTeamProjectAccess(projectVO);
+        projectDAO.deleteProjectAccessType(projectVO);
+        projectDAO.deleteFileByProjectVO(projectVO);
+        projectDAO.deletePlanByProjectVO(projectVO);
+        projectDAO.deleteTaskByProjectVO(projectVO);
+        projectDAO.deleteTeamProjectByProject(projectVO);
+        projectDAO.delete(projectVO);
     }
 
 }

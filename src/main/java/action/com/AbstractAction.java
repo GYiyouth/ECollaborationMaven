@@ -1,8 +1,10 @@
 package action.com;
 
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+import tool.BeanFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,6 @@ public abstract class AbstractAction implements SessionAware, ServletRequestAwar
     protected Map<String,Object> session;
     protected HttpServletRequest request;
     protected HttpServletResponse response;
-
 
 
 
