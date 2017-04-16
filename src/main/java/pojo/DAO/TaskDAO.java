@@ -118,13 +118,36 @@ public class TaskDAO {
         }
     }
 
-
+    /**
+     * 根据项目获取所有任务列表
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
     public ArrayList<TaskVO> getTasksByProject(ProjectVO projectVO) throws Exception{
         if(projectVO==null){
             throw  new NullPointerException("projectVO是空的---"+this.getClass()+"---getTaskByProject()");
         }else{
-            String hql = "select pt from ProjectTaskVO pt where pt.projectVO = ?";
+            String hql = "select pt.taskVO from ProjectTaskVO pt where pt.projectVO = ? order by pt.taskVO.targetDate";
             List<TaskVO> list = (List<TaskVO>) hibernateTemplate.find(hql, projectVO);
+            return (ArrayList<TaskVO>) list;
+        }
+    }
+
+    /**
+     * 根据项目获取所有未完成任务列表
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<TaskVO> getWorkingTasksByProject(ProjectVO projectVO ) throws Exception{
+        if(projectVO==null){
+            throw  new NullPointerException("projectVO内容是空的---"+this.getClass()+"---getTaskByProject()");
+        }else{
+            String currentTime = tool.Time.getCurrentTime();
+            System.out.println(currentTime+"???????");
+            String hql = "select pt.taskVO from ProjectTaskVO pt where pt.projectVO = ? and pt.taskVO.targetDate > ? order by pt.taskVO.targetDate";
+            List<TaskVO> list = (List<TaskVO>) hibernateTemplate.find(hql, projectVO,currentTime);
             return (ArrayList<TaskVO>) list;
         }
     }

@@ -107,6 +107,10 @@
         <action name="deleteProjectAction" class="action.com.project.DeleteProjectAction" method="execute">
 
         </action>
+        <action name="getProjectById" class="action.com.project.GetProjectByIdAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
 
     <package name="teacher" extends="struts-default">
@@ -129,6 +133,14 @@
             <result name="fail">fail.jsp</result>
         </action>
         <action name="addTeamProjectAccess" class="action.com.task.AddTeamProjectAccessAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getMyTask" class="action.com.task.GetMyTaskAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="getMyWorkingTask" class="action.com.task.GetMyWorkingTaskAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>

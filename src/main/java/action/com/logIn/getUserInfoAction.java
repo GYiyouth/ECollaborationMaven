@@ -65,4 +65,12 @@ public class getUserInfoAction  extends ActionSupport implements ServletRequestA
     public void setSession(Map<String, Object> session) {
         this.session = session;
     }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
 }

@@ -24,6 +24,8 @@ public class ModifyStudentInfoAction extends ActionSupport implements ServletReq
     private HttpServletResponse response;
     private Map<String, Object> session;
 
+    private  JSONObject jsonObject;
+
     //jsp
     private String schoolId;
     private String name;
@@ -181,5 +183,13 @@ public class ModifyStudentInfoAction extends ActionSupport implements ServletReq
 
     public void setGithubLogin(String githubLogin) {
         this.githubLogin = githubLogin;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }

@@ -6,9 +6,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import pojo.DAO.ProjectDAO;
-import pojo.DAO.TaskDAO;
 import pojo.businessObject.TaskBO;
-import pojo.valueObject.DTO.TaskDTO;
 import pojo.valueObject.domain.ProjectVO;
 import tool.BeanFactory;
 import tool.JSONHandler;
@@ -21,7 +19,7 @@ import java.util.Map;
 /**
  * Created by GR on 2017/4/16.
  */
-public class GetMyTaskAction  extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
+public class GetMyWorkingTaskAction extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private Map<String, Object> session;
@@ -38,7 +36,7 @@ public class GetMyTaskAction  extends ActionSupport implements SessionAware, Ser
             TaskBO taskBO = BeanFactory.getBean("taskBO", TaskBO.class);
             ProjectVO projectVO = projectDAO.getProjectVO(projectId);
             if (projectVO != null) {
-                jsonObject = taskBO.getMyTask(projectVO);
+                jsonObject = taskBO.getMyWorkingTask(projectVO);
                 JSONHandler.sendJSON(jsonObject, response);
                 return "success";
             }else{
