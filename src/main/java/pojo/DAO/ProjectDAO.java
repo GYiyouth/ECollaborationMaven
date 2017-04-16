@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import pojo.valueObject.assist.MessageReceiverVO;
 import org.hibernate.query.Query;
 import pojo.valueObject.assist.StudentTeamVO;
+import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
 import tool.BeanFactory;
@@ -323,5 +324,40 @@ public class ProjectDAO {
         }else {
             throw new NullPointerException("projectVO为空");
         }
+    }
+
+    public void delete(ProjectVO projectVO) throws Exception{
+        hibernateTemplate.delete(projectVO);
+    }
+
+    public void delete(TeamProjectVO teamProjectVO) throws Exception{
+        hibernateTemplate.delete(teamProjectVO);
+    }
+
+    public void delete(TeamProjectAccessVO teamProjectAccessVO) throws Exception{
+        hibernateTemplate.delete(teamProjectAccessVO);
+    }
+
+    /**
+     * 获取一个项目团队所有的任务评价
+     * @param teamVO
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public List<TeamProjectAccessVO> getTeamProjectAccessVO(TeamVO teamVO, ProjectVO projectVO) throws Exception{
+        TeamProjectVO teamProjectVO = getTeamProjectVO(teamVO, projectVO);
+        List<TeamProjectAccessVO> teamProjectAccessVOList = (List<TeamProjectAccessVO>)
+                hibernateTemplate.find("select tpa from TeamProjectAccessVO tpa " +
+                                "where tpa.team_project_id = ?"
+                , teamProjectVO.getId());
+        if (teamProjectAccessVOList == null)
+            teamProjectAccessVOList = new ArrayList<>();
+        return teamProjectAccessVOList;
+    }
+
+    public void deleteTeamProjectAccessVO(List<TeamProjectAccessVO> list) throws Exception{
+        if (list == null || list.size() < 1)
+            hibernateTemplate.deleteAll(list);
     }
 }

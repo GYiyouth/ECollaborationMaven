@@ -8,11 +8,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.PlanDAO;
 import pojo.DAO.ProjectDAO;
+import pojo.DAO.TeamDAO;
+import pojo.valueObject.assist.TeamProjectAccessVO;
+import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +28,8 @@ public class ProjectBO {
 
     @Autowired
     private ProjectDAO projectDAO;
+    @Autowired
+    private TeamDAO teamDAO;
 
     public ProjectDAO getProjectDAO() {
         return projectDAO;
@@ -150,7 +156,7 @@ public class ProjectBO {
 
 
     /**
-     * 根据Id查询项目VO
+     * 根据Id查询ProjectVO
      * @param projectId
      * @return
      * @throws Exception
@@ -162,11 +168,54 @@ public class ProjectBO {
             throw new NullPointerException("projectId为空");
     }
 
+    /**
+     * 更新ProjectVO
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
     public ProjectVO updateProjectVO(ProjectVO projectVO) throws Exception{
         if (projectVO != null)
             return projectDAO.updateProjectVO(projectVO);
         else
             throw new NullPointerException("ProjectVO为空");
+    }
+
+    /**
+     * 辞退某个团队，工程实践项目，操作人仅可为老师，个人兴趣项目，操作人可为创建人
+     * @param userVO
+     * @param teamId
+     * @param projectId
+     * @return
+     */
+    public boolean fireTeam(UserVO userVO, Integer teamId, Integer projectId) throws Exception{
+        ProjectVO projectVO = projectDAO.getProjectVO(projectId);
+        if (projectVO == null) return false;
+        TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
+        if (teamVO == null) return false;
+        TeamProjectVO teamProjectVO = projectDAO.getTeamProjectVO(teamVO, projectVO);
+        if (teamProjectVO == null) return false;
+        List<TeamProjectAccessVO> teamProjectAccessVOList = projectDAO.getTeamProjectAccessVO(teamVO, projectVO);
+        if (projectVO.getPriority().equals(1)){
+            //工程实践项目
+            if (projectVO.getTeacherVO().getId().equals(userVO.getId())){
+                //操作人必须是老师
+                //删除已有评价，删除项目团队
+                projectDAO.deleteTeamProjectAccessVO(teamProjectAccessVOList);
+                projectDAO.delete(teamProjectVO);
+                return true;
+            }
+        }else {
+            if (projectVO.getPriority().equals(2)){ // 是学生兴趣项目
+                if (projectVO.getCreatorUserVO().getId().equals(userVO.getId())){
+                    //操作人是学生创始人
+                    projectDAO.deleteTeamProjectAccessVO(teamProjectAccessVOList);
+                    projectDAO.delete(teamProjectVO);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
