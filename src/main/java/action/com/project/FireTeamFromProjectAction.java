@@ -14,6 +14,7 @@ import tool.JSONHandler;
 
 /**
  * 辞退某个团队，需要修改team_project表
+ * 仅返回结果
  * Created by geyao on 2017/4/16.
  */
 @Controller
