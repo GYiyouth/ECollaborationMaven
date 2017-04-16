@@ -13,9 +13,9 @@ import java.util.Map;
  * Created by geyao on 2017/4/16.
  */
 public abstract class AbstractAction implements SessionAware, ServletRequestAware, ServletResponseAware {
-    private Map<String,Object> session;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    protected Map<String,Object> session;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
 
 
 
