@@ -53,8 +53,11 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="modifyTeamInfo" class="action.com.team.ModifyTeamInfoAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
     </package>
-
 
     <package name="plan" extends="struts-default">
 
@@ -107,6 +110,13 @@
         </action>
     </package>
 
+    <package name="student" extends="struts-default">
+        <action name="modifyStudentInfo" class="action.com.student.ModifyStudentInfoAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+    </package>
+
     <package name="task" extends="struts-default">
         <action name="createTask" class="action.com.task.CreateTaskAction">
             <result name="success">success.jsp</result>
@@ -117,7 +127,6 @@
             <result name="fail">fail.jsp</result>
         </action>
     </package>
-
 
     <package name="message" extends="struts-default">
         <action name="readNewMessage" class="action.com.message.ReadNewMessageAction" method="execute">

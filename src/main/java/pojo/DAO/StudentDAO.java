@@ -61,4 +61,20 @@ public class StudentDAO {
             }
         }
     }
+
+    /**
+     * 更新学生个人信息
+     * @param studentVO
+     * @return
+     */
+    public StudentVO updateStudentInfo(StudentVO studentVO) throws Exception{
+        try {
+            hibernateTemplate.update(studentVO);
+            return studentVO;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 }

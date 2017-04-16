@@ -499,4 +499,20 @@ public class TeamDAO {
         }
 
     }
+
+    /**
+     * 修改团队信息
+     * @param teamVO
+     * @return
+     * @throws Exception
+     */
+    public TeamVO modifyTeamInfo(TeamVO teamVO) throws Exception{
+        try {
+            hibernateTemplate.update(teamVO);
+            return teamVO;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

@@ -381,4 +381,23 @@ public class TeamBO {
             }
         }
     }
+
+    /**
+     * 修改团队信息
+     * @param newTeamVO
+     * @return
+     * @throws Exception
+     */
+    public JSONObject modifyTeamInfo(TeamVO newTeamVO) throws Exception{
+        TeamDAO teamDAO = BeanFactory.getBean("teamDAO", TeamDAO.class);
+        JSONObject jsonObject = BeanFactory.getBean("jsonObject", JSONObject.class);
+        TeamVO teamVO = teamDAO.modifyTeamInfo(newTeamVO);
+        if (teamVO != null){
+            TeamDTO teamDTO = BeanFactory.getBean("teamDTO", TeamDTO.class);
+            teamDTO.clone(teamVO);
+            jsonObject.put("result", "success");
+            jsonObject.put("teamBean", teamDTO);
+        }
+        return jsonObject;
+    }
 }
