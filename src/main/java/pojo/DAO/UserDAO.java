@@ -25,13 +25,13 @@ import java.util.List;
  * Created by GR on 2017/2/26.
  */
 @Repository
-@Transactional
-
 //@DependsOn(value = "sessionFactory")
 public class UserDAO {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
 //    @Autowired
 //    private HibernateTemplate hibernateTemplate;
@@ -95,7 +95,7 @@ public class UserDAO {
             return null;
         }else{
             SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = sessionFactory.getCurrentSession();
             try{
                 StudentVO studentVO = session.get(StudentVO.class,userVO.getId());
                 return studentVO;
@@ -106,5 +106,11 @@ public class UserDAO {
 //                session.close();
             }
         }
+    }
+
+    public void update(UserVO userVO) throws Exception{
+        if (userVO == null)
+            return;
+        hibernateTemplate.update(userVO);
     }
 }

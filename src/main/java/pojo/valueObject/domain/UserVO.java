@@ -165,4 +165,22 @@ public class UserVO {
     }
 
 
+    @Override
+    public int hashCode() {
+        if (this.getId() != null || !this.getId().equals(0))
+            return this.getId();
+        else
+            return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            UserVO userVO = (UserVO) obj;
+            return this.getId() == userVO.getId();
+        }catch (Exception e){
+            return false;
+        }
+
+    }
 }
