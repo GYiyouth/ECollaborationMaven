@@ -4,6 +4,7 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.stereotype.Controller;
 import pojo.DAO.ProjectDAO;
 import pojo.DAO.TeacherDAO;
 import pojo.valueObject.DTO.ProjectDTO;
@@ -33,6 +34,7 @@ import java.util.Map;
  * Created by geyao on 2016/12/31.
  * Created by geyao on 2017/3/2.
  */
+@Controller
 public class SearchProjectAction implements SessionAware, ServletRequestAware, ServletResponseAware {
 
     private HttpServletRequest request;
@@ -88,6 +90,7 @@ public class SearchProjectAction implements SessionAware, ServletRequestAware, S
 
     //网页端查询
     public String execute() throws Exception {
+        System.out.println(keyWord);
         try {
             this.setSearchResultHashMap(analyse(getKeyWord()));
             this.session = SessionTools.removeAttribute(session, "SearchResultHashMap");
