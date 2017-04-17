@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>老师点击项目的详情</title>
+    <title>老师身份查看项目详情</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Ec-style.css">
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 </head>
 <body>
 
@@ -23,11 +23,12 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right" style="margin-top:0">
-                <li class="active"><a href="teacher-projects.html"><span class="glyphicon glyphicon-home"></span> 已有项目</a></li>
+                <li><a href="teacher-projects.html"><span class="glyphicon glyphicon-home"></span> 已有项目</a></li>
                 <li><a href="teacher-teams.html"><span class="glyphicon glyphicon-list"></span> 团队管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-fire"></span> 发布</a></li>
                 <li><a href="teacher-selfcenter-main.html"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
-                <li><a href="project-platform-teacher.html"><span class="glyphicon glyphicon-question-sign"></span> 项目平台</a></li>
+                <li class="active"><a href="project-platform-student.html"><span class="glyphicon glyphicon-question-sign"></span> 项目平台</a></li>
+                <li><a href="search-teacher.html"><span class="glyphicon glyphicon-question-sign"></span> 搜索项目</a></li>
             </ul>
         </div>
     </div>
@@ -35,19 +36,79 @@
 <br><br><br><br><br>
 
 
-<div class="container">
-            <h4>项目名称</h4>
-            <input type="text" class="form-control" value="Ecollaboration">
-            <h4>项目简介</h4>
-            <input type="text" class="form-control" value="本项目旨在建设一个校园工程实践中心">
-            <h4>项目执行团队</h4>
-            <input type="text" class="form-control" value="ustc-wings   壮志雄心" onclick="javascript:window.location.href='teacher-team-info-from-project.html'"></p>
-            <input type="button" value="返回" class="btn btn-default"
-                onclick="javascript:window.location.href='teacher-projects.html'">
+
+
+    <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">项目名称</p>
+                    <input type="text" class="form-control"  name="name">
+                </div>
+                <div class="col-md-5 ">
+                    <p class="text-muted">项目描述</p>
+                    <input type="text" class="form-control"  name="info">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">项目关键字</p>
+                    <input type="text" class="form-control"  name="keyWord">
+                </div>
+                <div class="col-md-5">
+
+                    <p class="text-muted" >申请截止日期</p>
+                    <input type="text" class="form-control"  name="applyBeforeDate">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">团队数上限</p>
+                    <input type="text" class="form-control" name="teamMax">
+                </div>
+                <div class="col-md-5">
+                    <p class="text-muted">当前团队数</p>
+                    <input type="text" class="form-control"  name="teamNumber">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">相关要求</p>
+                    <input type="text" class="form-control"  name="requirement">
+                </div>
+                <div class="col-md-5">
+                    <p class="text-muted">项目截止时间</p>
+                    <input type="text" class="form-control"  name="finishDate">
+                </div>
+            </div>
+            <br>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">当前执行团队</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                        <a href="#">团队一</a><br>
+                        <a href="#">团队二</a><br>
+                        <a href="#">团队三</a><br>
+                        ....
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<br>
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<br><br><br><br><br><br><br>
 <footer id="footer">
     <div class="container">
         <p>© 2009 中国科学技术大学软件学院 </p>
@@ -57,10 +118,9 @@
     </div>
 </footer>
 
-
-
-
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+
 </body>
 </html>
