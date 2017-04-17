@@ -67,9 +67,9 @@ public class UserBO {
                     if(teacherVO != null) {
                         //获取老师的project
                         ArrayList<ProjectVO> teacherProjects = projectDAO.getTeacherProjectVOList(teacherVO);
-                        if(teacherProjects.isEmpty()){
-                            throw new NullPointerException("老师项目为空---"+this.getClass()+"logIn()");
-                        }
+//                        if(teacherProjects.isEmpty()){
+//                            throw new NullPointerException("老师项目为空---"+this.getClass()+"logIn()");
+//                        }
                         Set<ProjectVO> projectVOSet = new HashSet<ProjectVO>(teacherProjects);
                         teacherVO.setProjectVOSet(projectVOSet);
                         System.out.println(teacherVO.getProjectVOSet().size());
