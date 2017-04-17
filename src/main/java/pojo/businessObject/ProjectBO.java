@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by geyao on 2017/3/2.
  */
 @Service
-@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
+@Transactional
 public class ProjectBO {
 
     @Autowired
