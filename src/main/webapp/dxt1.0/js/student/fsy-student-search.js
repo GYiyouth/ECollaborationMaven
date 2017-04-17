@@ -17,7 +17,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a name="itemDom" href="javascript:void(0);" class="list-group-item" title='+arrJson[i].id+'>';
+        var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
         domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
@@ -73,7 +73,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a name="itemDom" href="javascript:void(0);" class="list-group-item" title='+arrJson[i].id+'>';
+            var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
@@ -116,7 +116,13 @@ function showResult(JObject){
     var nextDom=document.getElementById("nextDom");
     var each=5;
     paging(domBox,"current",domList,each,preDom,nextDom,jsonTest);
-
+    setclick();
+}
+function setclick(){
+    $("a[name=itemDom]").click(function(){
+        var itemId = $(this).attr("title");
+        sessionStorage.setItem("itemId",itemId);
+    });
 }
 var JObject;
 $(function(){
@@ -131,14 +137,6 @@ $(function(){
         }
     });
 });
-$(function(){
-    $("a[name=itemDom]").click(function(){
-        alert('1');
-        var str = $(this).attr("title");
-        sessionStorage.setItem("key1",str);
-    });
-});
-
 
 
 
