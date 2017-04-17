@@ -7,9 +7,11 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pojo.DAO.ProjectDAO;
+import pojo.businessObject.MessageBO;
 import pojo.businessObject.ProjectBO;
 import pojo.valueObject.DTO.ProjectDTO;
 import pojo.valueObject.domain.ProjectVO;
+import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 import tool.JSONHandler;
 
@@ -20,6 +22,7 @@ import java.util.Map;
 
 /**
  * 修改项目信息
+ * 给相关团队的学生、老师发送消息
  * 返回的字符串中有 projectBean
  * Created by geyao on 2017/4/16.
  */
@@ -31,6 +34,8 @@ public class ModifyProjectInfoAction implements SessionAware, ServletRequestAwar
 
 
     private ProjectBO projectBO;
+    @Autowired
+    private MessageBO messageBO;
 
     //jsp提交
     private Integer id;
@@ -51,6 +56,9 @@ public class ModifyProjectInfoAction implements SessionAware, ServletRequestAwar
         JSONObject jsonObject = BeanFactory.getJSONO();
         try {
             ProjectVO projectVO = projectBO.getProjectVO(id);
+            String role = session.get("role").toString();
+            UserVO userVO = (UserVO) session.get(role + "VO");
+            //没有做判空处理
             projectVO.setName(name);
             projectVO.setApplyBeforeDate(applyBeforeDate);
             projectVO.setFinishDate(finishDate);
@@ -62,7 +70,10 @@ public class ModifyProjectInfoAction implements SessionAware, ServletRequestAwar
             projectVO.setRequirement(requirement);
             projectVO.setGain(gain);
             projectVO.setPriority(priority);
+
             projectBO.updateProjectVO(projectVO);
+            messageBO.updateProjectVO(projectVO, userVO);
+
             jsonObject.put("result", "success");
             ProjectDTO projectDTO = BeanFactory.getBean("projectDTO", ProjectDTO.class);
             projectDTO.clone(projectVO);

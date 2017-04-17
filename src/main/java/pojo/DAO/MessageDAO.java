@@ -79,4 +79,16 @@ public class MessageDAO {
             throw e;
         }
     }
+
+    public void save(MessageReceiverVO messageReceiverVO) throws Exception{
+        if (messageReceiverVO == null)
+            return;
+        hibernateTemplate.save(messageReceiverVO);
+    }
+
+    public void save(MessageVO messageVO) throws Exception{
+        if (messageVO == null)
+            return;
+        hibernateTemplate.save(messageVO);
+    }
 }
