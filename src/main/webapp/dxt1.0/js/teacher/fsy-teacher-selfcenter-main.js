@@ -5,7 +5,6 @@ function getinfo(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            alert(xhr.responseText);
             var JObject=JSON.parse(xhr.responseText);
             var teacher=JObject.teacherBean;
             setSelfInfo(teacher);
@@ -82,7 +81,6 @@ function submitSelfInfo(){
     xhrr.onload=function () {
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             alert("修改成功");
-            alert(xhrr.responseText);
         }else{
             alert("请刷新页面");
         }
