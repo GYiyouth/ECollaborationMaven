@@ -85,11 +85,9 @@
     </div>
 
 <br>
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a data-toggle="modal" data-target="#myModal" >
-        <input type="submit"  value="申请" class="btn btn-default">
-            </a>
+        <button id="applyButton" type="button" class="btn btn-default" data-dismiss="modal">申请</button>
 
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -103,20 +101,13 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <p align="center">
-
-                            <input type="radio" name="team" value="male">团队一
-                            <input type="radio" name="team" value="female">团队二
-                            <input type="radio" name="team" value="female">团队三
+                        <p id="teamDom" align="center">
 
                         </p>
                     </div>
                     <div class="modal-footer">
                         <p align="center">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">
-                                确定
-                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
                         </p>
                     </div>
                 </div>
