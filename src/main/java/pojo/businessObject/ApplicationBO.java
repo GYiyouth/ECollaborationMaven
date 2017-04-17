@@ -1,5 +1,6 @@
 package pojo.businessObject;
 
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.ApplicationDAO;
 import pojo.valueObject.domain.ApplicationVO;
 import pojo.valueObject.domain.UserVO;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Created by geyao on 2017/3/2.
  */
+@Transactional
 public class ApplicationBO {
 
     /**
@@ -38,6 +40,7 @@ public class ApplicationBO {
             throw e;
         }
     }
+
 
 
 }
