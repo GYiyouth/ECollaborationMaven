@@ -113,8 +113,8 @@ function showResult(xhrShow){
     var preDom=document.getElementById("preDom");
     var nextDom=document.getElementById("nextDom");
     var each=5;
-    var JObject=JSON.parse(xhrShow);
-    paging(domBox,"current",domList,each,preDom,nextDom,JObject.projectsList);
+    // var JObject=JSON.parse(xhrShow);
+    paging(domBox,"current",domList,each,preDom,nextDom,jsonTest);
 
 }
 $(function(){
@@ -124,10 +124,43 @@ $(function(){
             return false;
         }else{
             event.preventDefault();
-            var xhr=submitSearchForm();
-            showResult(xhr);
+            var xhrr=submitSearchForm();
+            alert('1');
+            alert(xhrr.responseText);
+            alert('1');
+            showResult();
         }
     });
 })
+var jsonTest=[
+    {
+        "name":"name1",
+        "info":"info1"
+    },
+    {
+        "name":"name2",
+        "info":"info2"
+    },
+    {
+        "name":"name3",
+        "info":"info3"
+    },
+    {
+        "name":"name4",
+        "info":"info4"
+    },
+    {
+        "name":"name4",
+        "info":"info4"
+    },
+    {
+        "name":"name5",
+        "info":"info5"
+    },
+    {
+        "name":"name6",
+        "info":"info6"
+    }
+]
 
 
