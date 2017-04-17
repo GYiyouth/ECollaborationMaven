@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.DTO.TeamDTO;
 import pojo.valueObject.assist.MessageReceiverVO;
 import pojo.valueObject.assist.StudentTeamVO;
@@ -25,6 +26,7 @@ import java.util.*;
 /**
  * Created by GR on 2017/2/26.
  */
+@Transactional
 public class TeamDAO {
     @Autowired
     private HibernateTemplate hibernateTemplate;

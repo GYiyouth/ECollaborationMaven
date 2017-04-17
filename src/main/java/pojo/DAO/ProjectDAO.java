@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.assist.*;
 import org.hibernate.query.Query;
 import pojo.valueObject.domain.*;
@@ -23,6 +24,7 @@ import java.util.List;
  * Created by geyao on 2017/3/1.
  */
 @Repository
+@Transactional
 public class ProjectDAO {
 
     @Autowired

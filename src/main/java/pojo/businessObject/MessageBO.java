@@ -87,7 +87,7 @@ public class MessageBO {
         HashSet<UserVO>receiverSet = new HashSet<>();
         receiverSet.addAll(receiverVOList);
         messageVO.setReadFlag(receiverSet.size());
-
+        messageDAO.save(messageVO);
         for (UserVO userVO : receiverSet){
             MessageReceiverVO messageReceiverVO = BeanFactory
                     .getBean("messageReceiverVO", MessageReceiverVO.class);
@@ -100,7 +100,7 @@ public class MessageBO {
             userDAO.update(userVO);
             messageDAO.save(messageReceiverVO);
         }
-        messageDAO.save(messageVO);
+
     }
 
     /**

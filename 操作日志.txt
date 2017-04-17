@@ -182,4 +182,4 @@
 
 2017/04/17
 葛尧：
-    发送消息BO,删除团队action,获取申请的action
+    发送消息BO,删除团队action,获取申请的action(此action一度不支持在Spring下工作)
