@@ -5,6 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.ApplicationVO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TeamVO;
@@ -17,7 +20,10 @@ import java.util.List;
 /**
  * Created by geyao on 2017/3/2.
  */
+@Transactional
 public class ApplicationDAO {
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
     /**
      * 添加计划
@@ -51,8 +57,11 @@ public class ApplicationDAO {
         if (handlerVO == null){
             return null;
         }
-        return comGetApplicationVOList("handlerUserVO", handlerVO);
+        return (ArrayList<ApplicationVO>)
+                hibernateTemplate.find("from ApplicationVO a where  a.handlerUserVO.id = ?", handlerVO.getId());
     }
+
+
 
     /**
      * 获取被影响的人的application，大多是申请人

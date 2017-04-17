@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import pojo.DAO.ProjectDAO;
+import pojo.DAO.TeamDAO;
+import pojo.DAO.UserDAO;
 import pojo.businessObject.ApplicationBO;
+import pojo.businessObject.TeamBO;
+import pojo.businessObject.UserBO;
 import pojo.valueObject.DTO.ApplicationDTO;
 import pojo.valueObject.domain.ApplicationVO;
 import pojo.valueObject.domain.ProjectVO;
@@ -25,11 +30,17 @@ import java.util.List;
 public class GetApplicationAction extends AbstractAction {
     @Autowired
     private ApplicationBO applicationBO;
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
 
-    @Transactional
+    @Autowired
+    private TeamDAO teamDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private ProjectDAO projectDAO;
+
+//    @Transactional
     public String execute() throws Exception{
+        System.out.println("获取申请");
         JSONObject jsonObject = BeanFactory.getJSONO();
         String role = session.get("role").toString();
         UserVO userVO = (UserVO) session.get(role + "VO");
@@ -47,23 +58,25 @@ public class GetApplicationAction extends AbstractAction {
             //名字的顺序为 项目 团队 处理人 申请人
             switch (applicationDTO.getType()){
                 case "team":{
-                    TeamVO teamVO = hibernateTemplate
-                            .get(TeamVO.class, applicationDTO.getTeamId());
+                    TeamVO teamVO = teamDAO.getTeamVOByTeamId(applicationDTO.getTeamId());
+//                            hibernateTemplate
+//                            .get(TeamVO.class, applicationDTO.getTeamId());
                     names.add("");
                     names.add(teamVO.getTeamName());
-                    UserVO handlerId = hibernateTemplate
-                            .get(UserVO.class, applicationDTO.getHandlerId());
+                    UserVO handlerId = userDAO.getUser(applicationDTO.getHandlerId());
+//                            hibernateTemplate
+//                            .get(UserVO.class, applicationDTO.getHandlerId());
                     names.add(handlerId.getName());
                     names.add(userVO.getName());
                 }break;
                 case "project":{
-                    ProjectVO projectVO = hibernateTemplate.
-                            get(ProjectVO.class, applicationDTO.getProjectId());
+                    ProjectVO projectVO = projectDAO.getProjectVO(applicationDTO.getProjectId());
+//                            hibernateTemplate.
+//                            get(ProjectVO.class, applicationDTO.getProjectId());
 
                     names.add(projectVO.getName());
                     names.add("");
-                    UserVO handlerId = hibernateTemplate
-                            .get(UserVO.class, applicationDTO.getHandlerId());
+                    UserVO handlerId = userDAO.getUser(applicationDTO.getHandlerId());
                     names.add(handlerId.getName());
                     names.add(userVO.getName());
                 }break;
@@ -78,6 +91,7 @@ public class GetApplicationAction extends AbstractAction {
         jsonObject.put("applicationDTOList", applicationDTOList);
         jsonObject.put("name", name);
         JSONHandler.sendJSON(jsonObject, response);
+        System.out.println(jsonObject);
         return "success";
     }
 }

@@ -25,6 +25,7 @@ import java.util.List;
  * Created by GR on 2017/2/26.
  */
 @Repository
+@Transactional
 //@DependsOn(value = "sessionFactory")
 public class UserDAO {
 
