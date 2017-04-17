@@ -4,6 +4,7 @@ import action.com.AbstractAction;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import pojo.businessObject.MessageBO;
 import pojo.businessObject.ProjectBO;
 import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
@@ -23,6 +24,9 @@ public class DeleteProjectAction extends AbstractAction {
     @Autowired
     private ProjectBO projectBO;
 
+    @Autowired
+    private MessageBO messageBO;
+
     public String execute() throws Exception{
         String role = session.get("role").toString();
         UserVO userVO = (UserVO) session.get(role + "VO");
@@ -32,6 +36,7 @@ public class DeleteProjectAction extends AbstractAction {
             return "fail";
         }
         try {
+            messageBO.deleteProject(projectId, userVO);
             projectBO.deleteProjectVO(projectId);
             jsonObject.put("result", "success");
             return "success";

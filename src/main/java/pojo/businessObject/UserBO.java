@@ -2,6 +2,7 @@ package pojo.businessObject;
 
 import net.sf.json.JSONObject;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.*;
 import pojo.valueObject.DTO.ManagerDTO;
 import pojo.valueObject.DTO.StudentDTO;
@@ -16,7 +17,7 @@ import java.util.*;
 /**
  * Created by GR on 2017/2/26.
  */
-
+@Transactional
 public class UserBO {
 
     @Resource(name = "projectDAO")

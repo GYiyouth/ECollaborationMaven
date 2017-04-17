@@ -5,6 +5,7 @@ import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import pojo.businessObject.MessageBO;
 import pojo.businessObject.ProjectBO;
 import pojo.businessObject.TeamBO;
 import pojo.valueObject.domain.ProjectVO;
@@ -26,6 +27,9 @@ public class FireTeamFromProjectAction extends AbstractAction {
 
     private ProjectBO projectBO;
 
+    @Autowired
+    private MessageBO messageBO;
+
     private TeamBO teamBO;
 
     public String execute() throws Exception{
@@ -35,6 +39,7 @@ public class FireTeamFromProjectAction extends AbstractAction {
             try {
                 UserVO userVO = (UserVO) session.get(role + "VO");
                 if (projectBO.fireTeam(userVO, teamId, projectId)){
+                    messageBO.fireTeam(teamId, projectId, userVO);
                     jsonObject.put("result", "success");
                     JSONHandler.sendJSON(jsonObject, response);
                     return "success";
