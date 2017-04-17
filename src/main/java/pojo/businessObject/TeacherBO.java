@@ -1,6 +1,7 @@
 package pojo.businessObject;
 
 import net.sf.json.JSONObject;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.TeacherDAO;
 import pojo.valueObject.DTO.TeacherDTO;
 import pojo.valueObject.domain.TeacherVO;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by geyao on 2017/2/27.
  */
+@Transactional
 public class TeacherBO {
 
     /**

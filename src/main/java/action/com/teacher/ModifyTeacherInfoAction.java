@@ -44,22 +44,28 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
     @SuppressWarnings("all")
     public String modifyTeacherInfo() throws Exception{
         try {
-            TeacherVO teacherVO = BeanFactory.getApplicationContext().getBean("teacherVO", TeacherVO.class);
-            teacherVO.setId(id);
+            TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+            if (teacherVO == null){
+                JSONHandler.sendJSON(jsonObject, response);
+                return "fail";
+            }
+//            teacherVO.setId(id);
             teacherVO.setSchoolId(schoolId);
             teacherVO.setName(name);
-            teacherVO.setRole(role);
+//            teacherVO.setRole(role);
             teacherVO.setEmail(email);
             teacherVO.setPhoneNumber(phoneNumber);
-            teacherVO.setLogName(logName);
-            teacherVO.setPassWord(passWord);
-            teacherVO.setCreateDate(createDate);
+//            teacherVO.setLogName(logName);
+//            teacherVO.setPassWord(passWord);
+//            teacherVO.setCreateDate(createDate);
             teacherVO.setPhoto(photo);
-            teacherVO.setLastLogTime(lastLogTime);
-            teacherVO.setActiveBefore(activeBefore);
-            teacherVO.setNewsFlag(newsFlag);
+//            teacherVO.setLastLogTime(lastLogTime);
+//            teacherVO.setActiveBefore(activeBefore);
+//            teacherVO.setNewsFlag(newsFlag);
+            teacherVO.setHomePageUrl(homePageUrl);
             TeacherBO teacherBO = BeanFactory.getBean("teacherBO", TeacherBO.class);
             jsonObject = teacherBO.updateTeacherInfo(teacherVO);
+            System.out.println(teacherVO);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch (Exception e){

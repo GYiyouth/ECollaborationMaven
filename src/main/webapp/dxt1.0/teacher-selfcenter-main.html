@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Ec-style.css">
-
+    <style type="text/css">
+        label.error{color:red;font-size:13px;}
+    </style>
 </head>
+
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top" >
@@ -28,58 +31,65 @@
                 <li><a href="#"><span class="glyphicon glyphicon-fire"></span> 发布</a></li>
                 <li class="active"><a href="teacher-selfcenter-main.html"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
                 <li><a href="project-platform-teacher.html"><span class="glyphicon glyphicon-question-sign"></span> 项目平台</a></li>
+                <li><a href="search-student.html"><span class="glyphicon glyphicon-question-sign"></span> 搜索项目</a></li>
             </ul>
         </div>
      </div>
 </nav>
+<br><br><br><br><br>
 
-<form>
-    <div>
-        <img src="img/t.jpg" class="img-rounded" id="picture">
-    </div>
+<form id="selfInfo">
 
-    <div class="container">
+<div class="container">
+    <div class="col-md-9 col-md-offset-0.5">
         <div class="row">
-            <div class="col-md-2 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-1">
                 <p class="text-muted">姓名</p>
-                <input type="text" class="form-control" placeholder="朱洪军">
+                <input type="text" class="form-control" name="name">
             </div>
-            <div class="col-md-2 col-md-offset-0">
+            <div class="col-md-5 ">
                 <p class="text-muted">性别</p>
-                <input type="text" class="form-control" placeholder="男">
+                <input type="text" class="form-control" name="sex">
             </div>
         </div>
         <br>
 
         <div class="row">
-            <div class="col-md-2 col-md-offset-2">
-                <p class="text-muted">邮箱</p>
-                <input type="text" class="form-control" placeholder="*********@mail.ustc.edu">
+            <div class="col-md-5 col-md-offset-1">
+                <p class="text-muted" >学工号</p>
+                <input type="text" class="form-control" name="schoolId">
             </div>
-            <div class="col-md-2 col-md-offset-0">
+            <div class="col-md-5">
                 <p class="text-muted">联系方式</p>
-                <input type="text" class="form-control" placeholder="13988881234">
+                <input type="text" class="form-control" name="phoneNumber">
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-1">
+                <p class="text-muted">电子邮箱</p>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="col-md-5">
                 <p class="text-muted">个人主页</p>
-                <input type="text" class="form-control" placeholder="http://staff.ustc.edu.cn/~waterzhj/">
+                <input type="text" class="form-control" name="homePageUrl">
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-2">
-                <p class="text-muted">研究方向</p>
-                <input type="text" class="form-control" placeholder="LBS，Android应用安全，软件工程">
-            </div>
-        </div>
-        <hr/>
-        <button type="reset" class="btn btn-default"  style="margin-left: 635px">重置</button>
-        &nbsp;&nbsp;&nbsp;
-        <button type="submit" class="btn btn-default" >确定</button>
     </div>
+    <div class="col-md-2">
+        <br><br>
+        <div>
+            <img src="img/t.jpg" class="img-rounded" id="picture">
+        </div>
+        <br><br>
+        <input type="file" value="选取新图片" >
+    </div>
+</div>
+<br><br><br>
+<button type="reset" class="btn btn-default"  style="margin-left: 635px">清空</button>
+<button id="submitButton" type="submit" class="btn btn-default" >修改</button>
+
 </form>
 
 
@@ -97,6 +107,7 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/fsy-js.js"></script>
+<script src="js/teacher/fsy-teacher-selfcenter-main.js"></script>
+<script src="js/jquery.validate.js"></script>
 </body>
 </html>
