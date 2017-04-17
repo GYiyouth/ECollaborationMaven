@@ -156,5 +156,11 @@
         </action>
     </package>
 
+    <package name="application" extends="struts-default">
+        <action name="getApplication" class="action.com.application.GetApplicationAction" method="execute">
+
+        </action>
+    </package>
+
 
 </struts>

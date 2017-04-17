@@ -15,6 +15,7 @@ public class ApplicationDTO {
     private String createdTime;
     private String handleTime;
     private String result;
+    private int teamId;
 
     public void clone(ApplicationVO applicationVO){
         if(applicationVO!=null){
@@ -32,6 +33,7 @@ public class ApplicationDTO {
             this.setCreatedTime(applicationVO.getCreatedTime());
             this.setHandleTime(applicationVO.getHandleTime());
             this.setResult(applicationVO.getResult());
+            this.setTeamId(applicationVO.getTeamVO().getId());
         }else{
             System.out.println("applicationVO is null!!");
         }
@@ -41,14 +43,15 @@ public class ApplicationDTO {
     public String toString() {
         return "ApplicationDTO{" +
                 "id=" + id +
-                ",type=" + type +
-                ",projectId=" + projectId +
-                ",handlerId=" + handlerId +
-                ",affectedId=" + affectedId +
-                ",createdTime=" + createdTime +
-                ",handleTime=" + handleTime +
-                ",result=" + result +
-                "}";
+                ", type='" + type + '\'' +
+                ", projectId=" + projectId +
+                ", handlerId=" + handlerId +
+                ", affectedId=" + affectedId +
+                ", createdTime='" + createdTime + '\'' +
+                ", handleTime='" + handleTime + '\'' +
+                ", result='" + result + '\'' +
+                ", teamId=" + teamId +
+                '}';
     }
 
     public int getId() {
@@ -113,5 +116,13 @@ public class ApplicationDTO {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 }
