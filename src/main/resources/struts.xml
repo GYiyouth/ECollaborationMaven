@@ -57,6 +57,9 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+        <action name="deleteTeam" class="action.com.team.DeleteTeamAction" method="execute">
+
+        </action>
     </package>
 
     <package name="plan" extends="struts-default">
@@ -153,9 +156,5 @@
         </action>
     </package>
 
-    <package name="test" extends="struts-default">
-        <action name="testAction" class="action.com.TestAction">
-            <result name="success">success.jsp</result>
-        </action>
-    </package>
+
 </struts>
