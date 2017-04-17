@@ -1,19 +1,13 @@
 package pojo.businessObject;
 
 import net.sf.json.JSONObject;
-import org.apache.struts2.components.Bean;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.*;
-import pojo.valueObject.DTO.ECFileDTO;
 import pojo.valueObject.DTO.PlanDTO;
 import pojo.valueObject.DTO.StudentDTO;
 import pojo.valueObject.DTO.TeamDTO;
-import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.domain.PlanVO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeamVO;
@@ -349,6 +343,7 @@ public class TeamBO {
     }
 
     /**
+     *
      * 搜索团队
      * @param searchTeamInfo
      * @return
