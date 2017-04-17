@@ -34,8 +34,8 @@
 </nav>
 <br><br><br><br><br><br>
 
-
-
+接收到的id是
+<p id="pt"></p>
 
     <div class="container">
             <div class="row">
@@ -82,7 +82,7 @@
                     <input type="text" class="form-control" readonly  name="finishDate">
                 </div>
             </div>
-
+    </div>
 
 <br>
 
@@ -136,7 +136,10 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
-
+<script>
+    $(function () {
+        $("#pt").test(sessionStorage.getItem("key1"));
+    })
+</script>
 </body>
 </html>

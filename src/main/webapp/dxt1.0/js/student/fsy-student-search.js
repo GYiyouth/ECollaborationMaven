@@ -17,9 +17,10 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a href="javascript:;" class="list-group-item">';
+        var domP = '<a name="itemDom" href="javascript:void(0);" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
+        domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
         domP += '</a>';
         domBox.innerHTML += domP;
     }
@@ -72,9 +73,10 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a href="javascript:;" class="list-group-item">';
+            var domP = '<a name="itemDom" href="javascript:void(0);" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
+            domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
             domP += '</a>';
             domBox.innerHTML += domP;
         }
@@ -86,7 +88,7 @@ function submitSearchForm(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             alert("提交成功");
             alert(xhr.responseText);
-            return xhr;
+            JObject=JSON.parse(xhr.responseText);
         }else{
             alert("请重新登录");
         }
@@ -95,7 +97,7 @@ function submitSearchForm(){
     var searchForm=document.getElementById("searchform");
     xhr.send(new FormData(searchForm));
 }
-function showResult(xhrShow){
+function showResult(JObject){
     var $showDiv=$("#formshowDiv");
     $showDiv.empty();
     var str=
@@ -113,10 +115,10 @@ function showResult(xhrShow){
     var preDom=document.getElementById("preDom");
     var nextDom=document.getElementById("nextDom");
     var each=5;
-    // var JObject=JSON.parse(xhrShow);
     paging(domBox,"current",domList,each,preDom,nextDom,jsonTest);
 
 }
+var JObject;
 $(function(){
     $("#searchButton").click(function(event){
         var info=$("#searchInfo").val();
@@ -124,42 +126,59 @@ $(function(){
             return false;
         }else{
             event.preventDefault();
-            var xhrr=submitSearchForm();
-            alert('1');
-            alert(xhrr.responseText);
-            alert('1');
-            showResult();
+            submitSearchForm();
+            showResult(JObject);
         }
     });
-})
+});
+$(function(){
+    $("a[name=itemDom]").click(function(){
+        alert('1');
+        var str = $(this).attr("title");
+        sessionStorage.setItem("key1",str);
+    });
+});
+
+
+
+
+
+
 var jsonTest=[
     {
         "name":"name1",
-        "info":"info1"
+        "info":"info1",
+        "id":"1"
     },
     {
         "name":"name2",
-        "info":"info2"
+        "info":"info2",
+        "id":"2"
     },
     {
         "name":"name3",
-        "info":"info3"
+        "info":"info3",
+        "id":"3"
     },
     {
         "name":"name4",
-        "info":"info4"
-    },
-    {
-        "name":"name4",
-        "info":"info4"
+        "info":"info4",
+        "id":"4"
     },
     {
         "name":"name5",
-        "info":"info5"
+        "info":"info5",
+        "id":"5"
+    },
+    {
+        "name":"name5",
+        "info":"info5",
+        "id":"5"
     },
     {
         "name":"name6",
-        "info":"info6"
+        "info":"info6",
+        "id":"6"
     }
 ]
 

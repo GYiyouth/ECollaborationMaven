@@ -18,3 +18,4 @@ function getinfo(){
 
 }
 $(document).ready(getinfo);
+$($("#pt").test(sessionStorage.getItem('itemId')));
