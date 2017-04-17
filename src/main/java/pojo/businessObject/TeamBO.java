@@ -355,7 +355,6 @@ public class TeamBO {
 //            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject",JSONObject.class);
             ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
-            TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);
             try{
                 ArrayList<TeamVO> teamVOS = teamDAO.searchTeam(searchTeamInfo);
                 if(teamVOS==null){
@@ -363,8 +362,7 @@ public class TeamBO {
                     teamDTOS = null;
                 }else{
                     for(TeamVO teamVO:teamVOS){
-                        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-//                        Session session = sessionFactory.openSession();
+                        TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);
                         teamDTO.clone(teamVO);
                         teamDTOS.add(teamDTO);
                         System.out.println(teamDTO);
