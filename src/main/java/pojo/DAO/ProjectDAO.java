@@ -443,4 +443,14 @@ public class ProjectDAO {
                 hibernateTemplate.find("from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
         hibernateTemplate.deleteAll(teamProjectVOList);
     }
+
+    public UserVO getCreatorVO(ProjectVO projectVO) throws Exception{
+        List<UserVO> userVOS = (List<UserVO>)
+                hibernateTemplate.find("select p.creatorUserVO from ProjectVO p " +
+                        " where p.id = ? ", projectVO.getId());
+        if ( userVOS.size() > 0 ){
+            return userVOS.get(0);
+        }
+        return null;
+    }
 }

@@ -102,4 +102,60 @@ public class MessageBO {
         }
         messageDAO.save(messageVO);
     }
+
+    /**
+     * 辞退某个团队，给团队成员发送消息
+     * @param teamId
+     * @param projectId
+     * @param sender
+     * @throws Exception
+     */
+    public void fireTeam(Integer teamId, Integer projectId, UserVO sender) throws Exception{
+        TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
+        ProjectVO projectVO = projectDAO.getProjectVO(projectId);
+
+        MessageVO messageVO = BeanFactory.getBean("messageVO", MessageVO.class);
+        messageVO.setSenderUserVO(sender);
+        messageVO.setTitle(teamVO.getTeamName() + " 团队已退出 " + projectVO.getName());
+        messageVO.setContent("");
+        messageVO.setCreateTime(Time.getCurrentTime());
+        List<UserVO> receiver = new ArrayList<>();
+        receiver.addAll( teamDAO.getStudentVOSByTeamId(teamVO.getId()) );
+        receiver.add(sender);
+        sendMessage(messageVO, receiver);
+    }
+
+    /**
+     * 删除项目，复制了修改项目的代码
+     * @param projectId
+     * @param sender
+     * @throws Exception
+     */
+    public void deleteProject(Integer projectId, UserVO sender) throws Exception{
+        ProjectVO projectVO = projectDAO.getProjectVO(projectId);
+        if (projectVO == null){
+            return;
+        }
+        if (sender == null)
+            return;
+
+        List<TeamVO> teamVOList =
+                teamDAO.getTeamVOByProjectVO(projectVO);
+
+        List<UserVO> receiver = new ArrayList<>();
+
+        for (TeamVO teamVO : teamVOList){
+            receiver.addAll(teamDAO.getStudentVOSByTeamId(teamVO.getId()));
+        }
+
+        receiver.add(teacherDAO.getTeacherVOByProjectVO(projectVO));
+
+        MessageVO messageVO = BeanFactory.getBean("messageVO", MessageVO.class);
+
+        messageVO.setTitle(projectVO.getName() + "项目已被删除");
+        messageVO.setContent(projectVO.getName() + "项目已被删除");
+        messageVO.setContent(Time.getCurrentTime());
+        messageVO.setSenderUserVO(sender);
+        sendMessage(messageVO, receiver);
+    }
 }
