@@ -1,14 +1,10 @@
 package pojo.businessObject;
 
 import net.sf.json.JSONObject;
-import org.apache.struts2.components.Bean;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.*;
-import pojo.valueObject.DTO.ECFileDTO;
 import pojo.valueObject.DTO.PlanDTO;
 import pojo.valueObject.DTO.StudentDTO;
 import pojo.valueObject.DTO.TeamDTO;
@@ -34,6 +30,9 @@ public class TeamBO {
     private ECFileDAO ecFileDAO;
     @Autowired
     private PlanDAO planDAO;
+    @Autowired
+    private ProjectDAO projectDAO;
+
 
     /**
      * 创建团队
@@ -344,6 +343,7 @@ public class TeamBO {
     }
 
     /**
+     *
      * 搜索团队
      * @param searchTeamInfo
      * @return
@@ -355,7 +355,6 @@ public class TeamBO {
 //            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO",TeamDAO.class);
             JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject",JSONObject.class);
             ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList",ArrayList.class);
-            TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);
             try{
                 ArrayList<TeamVO> teamVOS = teamDAO.searchTeam(searchTeamInfo);
                 if(teamVOS==null){
@@ -363,8 +362,7 @@ public class TeamBO {
                     teamDTOS = null;
                 }else{
                     for(TeamVO teamVO:teamVOS){
-                        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-//                        Session session = sessionFactory.openSession();
+                        TeamDTO teamDTO = BeanFactory.getApplicationContext().getBean("teamDTO",TeamDTO.class);
                         teamDTO.clone(teamVO);
                         teamDTOS.add(teamDTO);
                         System.out.println(teamDTO);
@@ -398,5 +396,24 @@ public class TeamBO {
             jsonObject.put("teamBean", teamDTO);
         }
         return jsonObject;
+    }
+
+    /**
+     * 删除team
+     * team_project_access
+     * team_project
+     * student_team
+     * team
+     * @param teamId
+     * @throws Exception
+     */
+    public void deleteTeam(Integer teamId) throws Exception{
+        TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
+        if (teamVO == null)
+            return;
+        teamDAO.deleteTeamProjectAccess(teamVO);
+        teamDAO.deleteTeamProject(teamVO);
+        teamDAO.deleteStudentTeam(teamVO);
+        teamDAO.delete(teamVO);
     }
 }

@@ -1,43 +1,40 @@
-package action.com.project;
+package action.com.team;
 
 import action.com.AbstractAction;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pojo.businessObject.MessageBO;
-import pojo.businessObject.ProjectBO;
+import pojo.businessObject.TeamBO;
+import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 import tool.JSONHandler;
 
 /**
- *
- * 删除项目
- * 需要projectId
- * Created by geyao on 2017/4/16.
+ * 删除团队的action
+ * Created by geyao on 2017/4/17.
  */
 @Controller
-public class DeleteProjectAction extends AbstractAction {
-    //JSP需要
-    private Integer projectId;
+public class DeleteTeamAction extends AbstractAction {
 
+    private Integer teamId;
     @Autowired
-    private ProjectBO projectBO;
-
+    private TeamBO teamBO;
     @Autowired
     private MessageBO messageBO;
 
     public String execute() throws Exception{
-        String role = session.get("role").toString();
-        UserVO userVO = (UserVO) session.get(role + "VO");
         JSONObject jsonObject = BeanFactory.getJSONO();
-        if (role == null || userVO == null){
+        String role = session.get("role").toString();
+        if ( !role.equals("student") || !role.equals("manager")){
             JSONHandler.sendJSON(jsonObject, response);
             return "fail";
         }
         try {
-            messageBO.deleteProject(projectId, userVO);
-            projectBO.deleteProjectVO(projectId);
+            UserVO userVO = (UserVO) session.get(role + "VO");
+            messageBO.deleteTeam(teamId, userVO);
+            teamBO.deleteTeam(teamId);
             jsonObject.put("result", "success");
             return "success";
         }catch (Exception e){
@@ -47,13 +44,6 @@ public class DeleteProjectAction extends AbstractAction {
             JSONHandler.sendJSON(jsonObject, response);
         }
 
-    }
 
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import pojo.valueObject.DTO.TeamDTO;
 import pojo.valueObject.assist.MessageReceiverVO;
 import pojo.valueObject.assist.StudentTeamVO;
+import pojo.valueObject.assist.TeamProjectAccessVO;
+import pojo.valueObject.assist.TeamProjectVO;
 import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 import tool.MapSort;
@@ -521,8 +523,51 @@ public class TeamDAO {
      * @param projectVO
      * @return
      */
-    public List<TeamVO> getTeamVOByProjectVO(ProjectVO projectVO) {
+    public List<TeamVO> getTeamVOByProjectVO(ProjectVO projectVO) throws Exception {
         return (List<TeamVO>)
                 hibernateTemplate.find("select tp.teamVO from TeamProjectVO tp where tp.projectVO.id = ?", projectVO.getId());
+    }
+
+    /**
+     * 根据团队删除评价
+     * @param teamVO
+     * @throws Exception
+     */
+    public void deleteTeamProjectAccess(TeamVO teamVO) throws Exception{
+        List<TeamProjectAccessVO> teamProjectAccessVOList = (List<TeamProjectAccessVO>)
+                hibernateTemplate.find("select tpa from TeamProjectAccessVO tpa, TeamProjectVO tp where  " +
+                        " tpa.team_project_id = tp.id and tp.projectVO.id = ? ", teamVO.getId());
+        hibernateTemplate.deleteAll(teamProjectAccessVOList);
+    }
+
+    /**
+     * 删除teamProject
+     * @param teamVO
+     * @throws Exception
+     */
+    public void deleteTeamProject(TeamVO teamVO) throws Exception{
+        List<TeamProjectVO> teamProjectVOList = (List<TeamProjectVO>)
+                hibernateTemplate.find("from TeamProjectVO tp where tp.teamVO.id = ?", teamVO.getId());
+        hibernateTemplate.deleteAll(teamProjectVOList);
+    }
+
+    /**
+     * 根据团队删除studentTeam
+     * @param teamVO
+     * @throws Exception
+     */
+    public void deleteStudentTeam(TeamVO teamVO) throws Exception{
+        List<StudentTeamVO> studentTeamVOS = (List<StudentTeamVO>)
+                hibernateTemplate.find("from StudentTeamVO st where st.teamVO.id = ?", teamVO.getId());
+        hibernateTemplate.deleteAll(studentTeamVOS);
+    }
+
+    /**
+     * 删除团队
+     * @param teamVO
+     * @throws Exception
+     */
+    public void delete(TeamVO teamVO) throws Exception{
+        hibernateTemplate.delete(teamVO);
     }
 }

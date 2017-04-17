@@ -43,6 +43,7 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
 
     @SuppressWarnings("all")
     public String modifyTeacherInfo() throws Exception{
+        System.out.println("修改老师信息");
         try {
             TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
             if (teacherVO == null){

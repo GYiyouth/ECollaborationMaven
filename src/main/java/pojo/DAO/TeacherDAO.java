@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TeacherVO;
 import tool.BeanFactory;
 
@@ -84,5 +85,18 @@ public class TeacherDAO {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    /**
+     * 查询一个项目的老师
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public TeacherVO getTeacherVOByProjectVO(ProjectVO projectVO) throws Exception{
+        List<TeacherVO> teacherVOS = (List<TeacherVO>)
+                hibernateTemplate.find("select p.teacherVO from ProjectVO p " +
+                        "where p.id = ? ", projectVO.getId());
+        return teacherVOS.size() > 0 ? teacherVOS.get(0) : null;
     }
 }

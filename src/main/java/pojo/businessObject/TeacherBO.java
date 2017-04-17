@@ -24,6 +24,7 @@ public class TeacherBO {
         TeacherDAO teacherDAO = BeanFactory.getApplicationContext().getBean("teacherDAO", TeacherDAO.class);
         JSONObject jsonObject = BeanFactory.getApplicationContext().getBean("jsonObject", JSONObject.class);
         TeacherVO vo = teacherDAO.updateTeacherInfo(newTeacherVO);
+        System.out.println(vo);
         if (vo != null){
             TeacherDTO teacherDTO = BeanFactory.getApplicationContext().getBean("teacherDTO", TeacherDTO.class);
             teacherDTO.clone(vo);
