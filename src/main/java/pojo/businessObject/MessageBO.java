@@ -158,4 +158,26 @@ public class MessageBO {
         messageVO.setSenderUserVO(sender);
         sendMessage(messageVO, receiver);
     }
+
+    /**
+     * 删除团队
+     * @param teamId
+     * @param sender
+     * @throws Exception
+     */
+    public void deleteTeam(Integer teamId, UserVO sender) throws Exception{
+        TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
+        if (teamVO == null)
+            return;
+        List<UserVO> receiver = new ArrayList<>();
+        receiver.addAll(teamDAO.getStudentVOSByTeamId(teamVO.getId()));
+        receiver.add(sender);
+        MessageVO messageVO = BeanFactory.getBean("messageVO", MessageVO.class);
+
+        messageVO.setTitle(teamVO.getTeamName() + "团队已被删除");
+        messageVO.setContent(teamVO.getTeamName() + "团队已被删除");
+        messageVO.setContent(Time.getCurrentTime());
+        messageVO.setSenderUserVO(sender);
+        sendMessage(messageVO, receiver);
+    }
 }
