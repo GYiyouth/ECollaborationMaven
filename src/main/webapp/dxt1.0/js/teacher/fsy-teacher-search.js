@@ -17,7 +17,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a href="student-project-info.html" class="list-group-item">';
+        var domP = '<a href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
         domP += '<div style="display: none;">'+arrJson[i].id+'</div>';
@@ -73,7 +73,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a href="student-project-info.html" class="list-group-item">';
+            var domP = '<a href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '<div style="display: none;">'+arrJson[i].id+'</div>';
@@ -93,11 +93,13 @@ function submitSearchForm(){
             alert("请重新登录");
         }
     }
-    xhr.open("post","appSearchProjectAction",false);
-    var searchForm=document.getElementById("searchform");
-    xhr.send(new FormData(searchForm));
+    var keyWord=$("#searchInfo").val();
+    var url="appSearchProjectAction?"+encodeURIComponent("keyWord")+"="+encodeURIComponent(keyWord);
+    xhr.open("post",url,false);
+    xhr.send();
 }
 function showResult(JObject){
+    var projectsList=JObject.projectsList;
     var $showDiv=$("#formshowDiv");
     $showDiv.empty();
     var str=
@@ -115,8 +117,15 @@ function showResult(JObject){
     var preDom=document.getElementById("preDom");
     var nextDom=document.getElementById("nextDom");
     var each=5;
-    paging(domBox,"current",domList,each,preDom,nextDom,jsonTest);
+    paging(domBox,"current",domList,each,preDom,nextDom,projectsList);
+    setclick();
 
+}
+function setclick(){
+    $("a[name=itemDom]").click(function(){
+        var itemId = $(this).attr("title");
+        sessionStorage.setItem("itemId",itemId);
+    });
 }
 var JObject;
 $(function(){
@@ -131,50 +140,42 @@ $(function(){
         }
     });
 })
-$(function () {
-    $("a[href=student-project-info.html]").click(function (event) {
-        var target=event.target();
-        var divDom=target.getElementsByTagName("div")[0];
-        var id=$(divDom).test();
-        sessionStorage.setItem('itemId',id);
-    })
-})
-var jsonTest=[
-    {
-        "name":"name1",
-        "info":"info1",
-        "id":"1"
-    },
-    {
-        "name":"name2",
-        "info":"info2",
-        "id":"2"
-    },
-    {
-        "name":"name3",
-        "info":"info3",
-        "id":"3"
-    },
-    {
-        "name":"name4",
-        "info":"info4",
-        "id":"4"
-    },
-    {
-        "name":"name5",
-        "info":"info5",
-        "id":"5"
-    },
-    {
-        "name":"name5",
-        "info":"info5",
-        "id":"5"
-    },
-    {
-        "name":"name6",
-        "info":"info6",
-        "id":"6"
-    }
-]
+// var jsonTest=[
+//     {
+//         "name":"name1",
+//         "info":"info1",
+//         "id":"1"
+//     },
+//     {
+//         "name":"name2",
+//         "info":"info2",
+//         "id":"2"
+//     },
+//     {
+//         "name":"name3",
+//         "info":"info3",
+//         "id":"3"
+//     },
+//     {
+//         "name":"name4",
+//         "info":"info4",
+//         "id":"4"
+//     },
+//     {
+//         "name":"name5",
+//         "info":"info5",
+//         "id":"5"
+//     },
+//     {
+//         "name":"name5",
+//         "info":"info5",
+//         "id":"5"
+//     },
+//     {
+//         "name":"name6",
+//         "info":"info6",
+//         "id":"6"
+//     }
+// ]
 
 

@@ -27,6 +27,7 @@ function getInfo(){
             var nextDom=document.getElementById("nextDom");
             var each=5;
             paging(domBox,"current",domList,each,preDom,nextDom,intProJson);
+            setclick();
         }else{
             alert("请刷新页面");
         }
@@ -51,7 +52,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a href="javascript:;" class="list-group-item">';
+        var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
         domP += '</a>';
@@ -106,7 +107,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a href="javascript:;" class="list-group-item">';
+            var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '</a>';
@@ -133,7 +134,11 @@ function setMyProInfo(myProJson) {
     }
 
 }
-
-
+function setclick(){
+    $("a[name=itemDom]").click(function(){
+        var itemId = $(this).attr("title");
+        sessionStorage.setItem("itemId",itemId);
+    });
+}
 
 addLoadEvent(getInfo);

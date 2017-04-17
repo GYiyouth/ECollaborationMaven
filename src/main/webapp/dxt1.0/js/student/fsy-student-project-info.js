@@ -42,6 +42,7 @@ function getTeam() {
 }
 function showTeam(myteam){
     var teamDom=document.getElementById("teamDom");
+    teamDom.innerHTML="";
     for(var i=0;i<myteam.length;i++){
         var teamstr='<input type="radio" name="team" value="male"/>'+myteam[i].teamName;
         teamDom.innerHTML+=teamstr;

@@ -30,6 +30,7 @@ function getInfo(){
             var each=5;
             paging(nowDomBox,"current",nowDomList,each,nowPreDom,nowNextDom,nowProJson);
             paging(oldDomBox,"current",oldDomList,each,oldPreDom,oldNextDom,oldProJson);
+            setclick();
         }else{
             alert("请刷新页面");
         }
@@ -51,7 +52,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a href="javascript:;" class="list-group-item">';
+        var domP = '<a name="itemDom" href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
         domP += '</a>';
@@ -107,14 +108,18 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a href="javascript:;" class="list-group-item">';
-            domP += '<h4>'+arrJsonCurrent.name+'</h4>';
+            var domP = '<a name="itemDom" href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+            domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '</a>';
             domBox.innerHTML += domP;
         }
     }
 }
-//获取Json数据并进行分页显示
-
+function setclick(){
+    $("a[name=itemDom]").click(function(){
+        var itemId = $(this).attr("title");
+        sessionStorage.setItem("itemId",itemId);
+    });
+}
 addLoadEvent(getInfo);

@@ -20,7 +20,6 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
-        domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
         domP += '</a>';
         domBox.innerHTML += domP;
     }
@@ -76,7 +75,6 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
-            domP += '<div name="itemId" style="display: none;">'+arrJson[i].id+'</div>';
             domP += '</a>';
             domBox.innerHTML += domP;
         }
