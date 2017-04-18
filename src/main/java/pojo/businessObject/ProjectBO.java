@@ -269,10 +269,26 @@ public class ProjectBO {
             ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
             MessageReceiverVO messageReceiverVO = messageDAO.getMessageReceiverVOByMessageVOAndReceiverVO(applicationVO.getMessageVO(),applicationVO.getHandlerUserVO());
             if(messageReceiverVO!=null){
+                // 1. 删除消息-接受表中记录
                 messageDAO.deleteMessageReceiver(messageReceiverVO);
             }
+            // 2. 删除申请表记录
             applicationDAO.deleteApplication(applicationVO);
+            // 3. 删除申请的消息
             messageDAO.deleteMessage(applicationVO.getMessageVO());
+
+            // 4. 增加接受之后发给申请者的消息
+            MessageVO messageVO = tool.MessageMould.acceptJoinProjectMessageVOMould(applicationVO.getAffectedUserVO(),applicationVO.getProjectVO());
+            messageDAO.save(messageVO);
+
+            // 5. 保存消息-接受者记录
+            MessageReceiverVO messageReceiverVO1 = BeanFactory.getBean("messageReceiverVO",MessageReceiverVO.class);
+            messageReceiverVO1.setMessageVO(messageVO);
+            messageReceiverVO1.setReceiverUserVO(applicationVO.getAffectedUserVO());
+            messageReceiverVO1.setReadFlag(false);
+            messageDAO.save(messageReceiverVO1);
+
+            // 6. 保存进团队-项目表
             TeamProjectVO teamProjectVO = BeanFactory.getBean("teamProjectVO",TeamProjectVO.class);
             teamProjectVO.setTeamVO(applicationVO.getTeamVO());
             teamProjectVO.setProjectVO(applicationVO.getProjectVO());
@@ -295,10 +311,25 @@ public class ProjectBO {
             ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
             MessageReceiverVO messageReceiverVO = messageDAO.getMessageReceiverVOByMessageVOAndReceiverVO(applicationVO.getMessageVO(),applicationVO.getHandlerUserVO());
             if(messageReceiverVO!=null){
+                // 1. 删除消息-接受表中记录
                 messageDAO.deleteMessageReceiver(messageReceiverVO);
             }
+            // 2. 删除申请表记录
             applicationDAO.deleteApplication(applicationVO);
+            // 3. 删除申请的消息
             messageDAO.deleteMessage(applicationVO.getMessageVO());
+
+
+            // 4. 增加拒绝之后发给申请者的消息
+            MessageVO messageVO = tool.MessageMould.refuseJoinProjectMessageVOMould(applicationVO.getAffectedUserVO(),applicationVO.getProjectVO());
+            messageDAO.save(messageVO);
+
+            // 5. 保存消息-接受者记录
+            MessageReceiverVO messageReceiverVO1 = BeanFactory.getBean("messageReceiverVO",MessageReceiverVO.class);
+            messageReceiverVO1.setMessageVO(messageVO);
+            messageReceiverVO1.setReceiverUserVO(applicationVO.getAffectedUserVO());
+            messageReceiverVO1.setReadFlag(false);
+            messageDAO.save(messageReceiverVO1);
 //            TeamProjectVO teamProjectVO = BeanFactory.getBean("teamProjectVO",TeamProjectVO.class);
 //            teamProjectVO.setTeamVO(applicationVO.getTeamVO());
 //            teamProjectVO.setProjectVO(applicationVO.getProjectVO());
