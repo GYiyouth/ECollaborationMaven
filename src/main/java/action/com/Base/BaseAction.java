@@ -1,6 +1,7 @@
 package action.com.Base;
 
 import com.opensymphony.xwork2.ActionSupport;
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -17,6 +18,7 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
     protected Map<String,Object> session;
     protected HttpServletRequest request;
     protected HttpServletResponse response;
+    protected JSONObject jsonObject;
 
     @Override
     public String execute() throws Exception {
@@ -42,5 +44,13 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
     public void setServletResponse(HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         this.response = response;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }

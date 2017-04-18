@@ -164,6 +164,38 @@ public class TeamBO {
         }
     }
 
+
+    /**
+     * 获取我是组长的所有团队
+     * @param studentVO
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<TeamDTO> getMyManageTeams(StudentVO studentVO) throws Exception{
+        ArrayList<TeamDTO> teamDTOS = BeanFactory.getApplicationContext().getBean("arrayList", ArrayList.class);
+        try {
+            if (studentVO != null) {
+                ArrayList<TeamVO> teamVOS = teamDAO.getMyManageTeamsByStudentId(studentVO);
+                if (teamVOS == null) {
+                    System.out.println("teamVOS==null||teamVOS.size()==0---" + this.getClass() + "---getMyJoinTeams()");
+                    teamDTOS = new ArrayList<>();
+                } else {
+                    for(TeamVO teamVO:teamVOS){
+                        TeamDTO teamDTO = BeanFactory.getBean("teamDTO",TeamDTO.class);
+                        teamDTO.clone(teamVO);
+                        teamDTOS.add(teamDTO);
+                    }
+                }
+                return teamDTOS;
+            } else {
+                throw new NullPointerException("ERROR:userVO == null---" + this.getClass() + "---getMyJoinTeams()");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     /**
      * 根据teamId获取team信息
      * @param teamId

@@ -60,6 +60,7 @@
         <action name="deleteTeam" class="action.com.team.DeleteTeamAction" method="execute">
 
         </action>
+        <action name="getMyManageTeams" class="action.com.team.GetMyManageTeamsAction"/>
     </package>
 
     <package name="plan" extends="struts-default">

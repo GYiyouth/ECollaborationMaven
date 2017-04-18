@@ -590,4 +590,13 @@ public class TeamDAO {
             hibernateTemplate.save(teamProjectVO);
         }
     }
+
+
+    public ArrayList<TeamVO> getMyManageTeamsByStudentId(StudentVO studentVO){
+        if(studentVO == null){
+            throw new NullPointerException("ERROR:studentVO is null!!!---" + this.getClass() + "---getMyManageTeamsByStudentId()");
+        }else{
+            return (ArrayList<TeamVO>) hibernateTemplate.find("select st.teamVO from StudentTeamVO st where st.studentVO = ?  and st.leaderFlag = "+ 1,studentVO);
+        }
+    }
 }
