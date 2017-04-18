@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.domain.ApplicationVO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TeamVO;
@@ -22,6 +23,7 @@ import java.util.List;
  * Created by geyao on 2017/3/2.
  */
 @Repository
+@Transactional
 public class ApplicationDAO {
 
 
@@ -59,7 +61,10 @@ public class ApplicationDAO {
         if (handlerVO == null){
             return null;
         }
-        return comGetApplicationVOList("handlerUserVO", handlerVO);
+        return (ArrayList<ApplicationVO>)
+                hibernateTemplate.find("select a from ApplicationVO a " +
+                        " where a.handlerUserVO.id = ? group by a.teamVO, a.projectVO, a.affectedUserVO order by a.createdTime desc "
+                        , handlerVO.getId());
     }
 
     /**
@@ -112,23 +117,8 @@ public class ApplicationDAO {
             return null;
         }
         ArrayList<ApplicationVO> arrayList = new ArrayList<>();
-        SessionFactory sessionFactor = BeanFactory.getSessionFactory();
-        Session session = sessionFactor.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        try{
-            List list;
-            list = session.createCriteria(ApplicationVO.class)
-                        .add(Restrictions.eq(type, o))
-                        .addOrder(Order.desc("createdTime"))
-                        .list();
-            transaction.commit();
-            arrayList.addAll(list);
-            return arrayList;
-        }catch (Exception e){
-            e.printStackTrace();
-            transaction.rollback();
-            throw e;
-        }
+        return (ArrayList<ApplicationVO>)
+                hibernateTemplate.find("from ApplicationVO a where a." + type + " = ?;", o);
     }
 
     /**

@@ -27,7 +27,7 @@ import java.util.*;
 /**
  * Created by GR on 2017/2/26.
  */
-@Transactional
+
 public class TeamDAO {
     @Resource
     private HibernateTemplate hibernateTemplate;
@@ -171,9 +171,10 @@ public class TeamDAO {
 //            Session session = sf.openSession();
             try {
                 String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true and studentTeam.teamVO.id =?";
-                return
-                        (StudentVO)
+                ArrayList<StudentVO> list =
+                        (ArrayList<StudentVO>)
                                 hibernateTemplate.find(hql, teamId);
+                return list.get(0);
 //                Query query = session.createQuery(hql);
 //                query.setParameter("teamId",teamId);
 //                Iterator iterator = query.iterate();
