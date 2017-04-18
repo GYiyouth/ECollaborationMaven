@@ -207,9 +207,9 @@ public class ProjectDAO {
 //        try{
         TeamVO teamVO = hibernateTemplate.get(TeamVO.class, teamId);
         ProjectVO projectVO = hibernateTemplate.get(ProjectVO.class, projectId);
-        List oldList = hibernateTemplate.find("select a from ApplicationVO a where a.projectVO = ? and a.teamVO = ?", projectVO, teamVO);
-        if (oldList.size() >= 1)
-            throw new Exception("已有存在的申请");
+//        List oldList = hibernateTemplate.find("select a from ApplicationVO a where a.projectVO = ? and a.teamVO = ?", projectVO, teamVO);
+//        if (oldList.size() >= 1)
+//            throw new Exception("已有存在的申请");
 
         //处理人优先让老师申请，没有老师，则是学生申请
         UserVO handleUserVO = null;
