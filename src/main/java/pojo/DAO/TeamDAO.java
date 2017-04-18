@@ -76,6 +76,8 @@ public class TeamDAO {
      * @return success/fail
      */
     public String applyJoinTeam(UserVO senderUserVO, StudentVO receiverUserVO, TeamVO teamVO) throws Exception{
+        if (senderUserVO == null || receiverUserVO == null || teamVO == null)
+            return "fail";
         ApplicationContext context = BeanFactory.getApplicationContext();
 //        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
 //        Session session = sessionFactory.openSession();
@@ -85,7 +87,7 @@ public class TeamDAO {
 //        Transaction transaction = session.beginTransaction();
         try{
             teamVO = hibernateTemplate.get(TeamVO.class,teamVO.getId());
-            receiverUserVO = hibernateTemplate.get(StudentVO.class,receiverUserVO.getId());
+            receiverUserVO = hibernateTemplate.get(StudentVO.class, receiverUserVO.getId());
             if(teamVO.getMemberMax()>teamVO.getStudentVOSet().size()) {
 //            TeamVO teamVO1
                 MessageVO messageVO = messageMould.applyJoinTeamMessageVOMould(senderUserVO);
@@ -170,11 +172,14 @@ public class TeamDAO {
 //            SessionFactory sf = BeanFactory.getSessionFactory();
 //            Session session = sf.openSession();
             try {
-                String hql = "select studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true and studentTeam.teamVO.id =?";
+                String hql = "select studentTeam.studentVO from StudentTeamVO as studentTeam where studentTeam.leaderFlag = true and studentTeam.teamVO.id =?";
                 ArrayList<StudentVO> list =
                         (ArrayList<StudentVO>)
                                 hibernateTemplate.find(hql, teamId);
-                return list.get(0);
+                if (list.size() > 0)
+                    return list.get(0);
+                else
+                    return null;
 //                Query query = session.createQuery(hql);
 //                query.setParameter("teamId",teamId);
 //                Iterator iterator = query.iterate();
@@ -303,10 +308,13 @@ public class TeamDAO {
                         applicationVO.setResult("已处理");
                         applicationVO.setHandleTime(Time.getCurrentTime());
                         hibernateTemplate.update(applicationVO);
+
                         studentTeamVO.setStudentVO(studentVO);
                         studentTeamVO.setTeamVO(teamVO);
                         studentTeamVO.setLeaderFlag(false);
+
                         hibernateTemplate.save(studentTeamVO);
+
                         teamVO = hibernateTemplate.get(TeamVO.class,teamVO.getId());
                         MessageVO messageVO = tool.MessageMould.acceptJoinTeamMessageVOMould(handlerStudentVO,teamVO);
                         MessageReceiverVO messageReceiverVO = BeanFactory.getApplicationContext().getBean("messageReceiverVO",MessageReceiverVO.class);

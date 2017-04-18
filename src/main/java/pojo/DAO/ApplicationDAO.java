@@ -63,7 +63,7 @@ public class ApplicationDAO {
         }
         return (ArrayList<ApplicationVO>)
                 hibernateTemplate.find("select a from ApplicationVO a " +
-                        " where a.handlerUserVO.id = ? group by a.teamVO, a.projectVO, a.affectedUserVO order by a.createdTime desc "
+                        " where a.handlerUserVO.id = ? and a.result = null group by a.teamVO, a.projectVO, a.affectedUserVO order by a.createdTime desc "
                         , handlerVO.getId());
     }
 
