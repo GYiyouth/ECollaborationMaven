@@ -69,10 +69,15 @@ function applyItem() {
     }
     var url="applyProject";
     var applyTeamId=$("p[id=teamDom] input[name=team]:checked").attr("id");
-    url=addURLParam(url,"projectId",sessionStorage.getItem("itemId"));
-    url=addURLParam(url,"teamId",applyTeamId);
-    xhr.open("get",url,false);
-    xhr.send();
+    if(typeof applyTeamId=="undefined"){
+        alert("必须选择一个团队");
+    }else{
+        url=addURLParam(url,"projectId",sessionStorage.getItem("itemId"));
+        url=addURLParam(url,"teamId",applyTeamId);
+        xhr.open("get",url,false);
+        xhr.send();
+    }
+
 }
 function addURLParam(url,name,value) {
     url+=(url.indexOf("?")==-1 ? "?" : "&");
