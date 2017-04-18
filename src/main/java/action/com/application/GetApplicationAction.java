@@ -21,77 +21,44 @@ import tool.BeanFactory;
 import tool.JSONHandler;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * Created by geyao on 2017/4/17.
  */
+
 @Controller
 public class GetApplicationAction extends AbstractAction {
-    @Autowired
+
     private ApplicationBO applicationBO;
 
-    @Autowired
-    private TeamDAO teamDAO;
-    @Autowired
-    private UserDAO userDAO;
-    @Autowired
-    private ProjectDAO projectDAO;
-
-//    @Transactional
     public String execute() throws Exception{
         System.out.println("获取申请");
         JSONObject jsonObject = BeanFactory.getJSONO();
         String role = session.get("role").toString();
         UserVO userVO = (UserVO) session.get(role + "VO");
-        List<ApplicationVO> applicationVOList = applicationBO.
-                getHandlingApplication(userVO, session);
+
+        List<ApplicationVO> applicationVOList = new ArrayList<>();
+        applicationVOList = applicationBO.getHandlingApplication(userVO);
+
+
         //application和各种名字要一一对应
         List<ApplicationDTO> applicationDTOList = new ArrayList<>();
         List<List> name = new ArrayList<>();
+        System.out.println(applicationVOList.size());
+        applicationBO.getApplication(applicationVOList, applicationDTOList, name, userVO);
+        System.out.println("申请获取结束");
 
-        for (ApplicationVO applicationVO : applicationVOList){
-            ApplicationDTO applicationDTO = new ApplicationDTO();
-            applicationDTO.clone(applicationVO);
-            applicationDTOList.add(applicationDTO);
-            List<String> names = new ArrayList<>();
-            //名字的顺序为 项目 团队 处理人 申请人
-            switch (applicationDTO.getType()){
-                case "team":{
-                    TeamVO teamVO = teamDAO.getTeamVOByTeamId(applicationDTO.getTeamId());
-//                            hibernateTemplate
-//                            .get(TeamVO.class, applicationDTO.getTeamId());
-                    names.add("");
-                    names.add(teamVO.getTeamName());
-                    UserVO handlerId = userDAO.getUser(applicationDTO.getHandlerId());
-//                            hibernateTemplate
-//                            .get(UserVO.class, applicationDTO.getHandlerId());
-                    names.add(handlerId.getName());
-                    names.add(userVO.getName());
-                }break;
-                case "project":{
-                    ProjectVO projectVO = projectDAO.getProjectVO(applicationDTO.getProjectId());
-//                            hibernateTemplate.
-//                            get(ProjectVO.class, applicationDTO.getProjectId());
-
-                    names.add(projectVO.getName());
-                    names.add("");
-                    UserVO handlerId = userDAO.getUser(applicationDTO.getHandlerId());
-                    names.add(handlerId.getName());
-                    names.add(userVO.getName());
-                }break;
-                default:break;
-            }
-
-            name.add(names);
-
-
-        }
         jsonObject.put("result", "success");
         jsonObject.put("applicationDTOList", applicationDTOList);
         jsonObject.put("name", name);
         JSONHandler.sendJSON(jsonObject, response);
         System.out.println(jsonObject);
         return "success";
+    }
+    @Autowired
+    public void setApplicationBO(ApplicationBO applicationBO) {
+        this.applicationBO = applicationBO;
     }
 }

@@ -24,7 +24,7 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
     private Map<String, Object> session;
 
     private String name;
-    private Integer sex;        //1:male
+    private String sex;        //1:male
     private String email;
     private String phoneNumber;
     private String homePageUrl;
@@ -53,7 +53,12 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
 //            teacherVO.setId(id);
             teacherVO.setSchoolId(schoolId);
             teacherVO.setName(name);
-            teacherVO.setSex(sex);
+            if (sex != null) {
+                if (sex.equals("男") || sex.equals("1"))
+                    teacherVO.setSex(1);
+                else
+                    teacherVO.setSex(0);
+            }
 //            teacherVO.setRole(role);
             teacherVO.setEmail(email);
             teacherVO.setPhoneNumber(phoneNumber);
@@ -137,11 +142,11 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
         this.name = name;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

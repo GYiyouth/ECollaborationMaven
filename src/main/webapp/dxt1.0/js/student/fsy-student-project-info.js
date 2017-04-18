@@ -30,7 +30,6 @@ function getTeam() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
-            alert(xhr.responseText);
             var JObject=JSON.parse(xhr.responseText);
             var myteam=JObject.teamBeans;
             showTeam(myteam);
@@ -38,7 +37,7 @@ function getTeam() {
             alert("请刷新页面");
         }
     }
-    xhr.open("get","getMyJoinTeams", false);
+    xhr.open("get","getMyManageTeams", false);
     xhr.send();
 }
 function showTeam(myteam){
@@ -48,10 +47,43 @@ function showTeam(myteam){
         teamDom.innerHTML="此项目没有团队参加";
     }else{
         for(var i=0;i<myteam.length;i++){
-            var teamstr='<input type="radio" name="team" value="male"/>'+myteam[i].teamName;
+            var teamstr='<input type="radio" name="team" value="male" id='+myteam[i].id+'>'+myteam[i].teamName;
             teamDom.innerHTML+=teamstr;
         }
     }
 }
+function applyItem() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+            var JObject=JSON.parse(xhr.responseText);
+            var result=JObject.result;
+            if(result=="success"){
+                alert("申请成功");
+            }else{
+                alert("已经提交过申请");
+            }
+        } else {
+            alert("请刷新页面");
+        }
+    }
+    var url="applyProject";
+    var applyTeamId=$("p[id=teamDom] input[name=team]:checked").attr("id");
+    if(typeof applyTeamId=="undefined"){
+        alert("必须选择一个团队");
+    }else{
+        url=addURLParam(url,"projectId",sessionStorage.getItem("itemId"));
+        url=addURLParam(url,"teamId",applyTeamId);
+        xhr.open("get",url,false);
+        xhr.send();
+    }
+
+}
+function addURLParam(url,name,value) {
+    url+=(url.indexOf("?")==-1 ? "?" : "&");
+    url+=encodeURIComponent(name)+"="+encodeURIComponent(value);
+    return url;
+}
 $(document).ready(getInfo);
 $("#applyButton").click(getTeam);
+$("#applyItemButton").click(applyItem);

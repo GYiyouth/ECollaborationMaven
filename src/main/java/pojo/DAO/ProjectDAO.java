@@ -26,7 +26,6 @@ import java.util.List;
  * Created by geyao on 2017/3/1.
  */
 @Repository
-@Transactional
 public class ProjectDAO {
 
     @Autowired
