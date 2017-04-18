@@ -53,6 +53,7 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
 //            teacherVO.setId(id);
             teacherVO.setSchoolId(schoolId);
             teacherVO.setName(name);
+            teacherVO.setSex(sex);
 //            teacherVO.setRole(role);
             teacherVO.setEmail(email);
             teacherVO.setPhoneNumber(phoneNumber);

@@ -17,7 +17,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+        var domP = '<a name="itemDom" href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].name+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].info + '</p>';
         domP += '<div style="display: none;">'+arrJson[i].id+'</div>';
@@ -73,7 +73,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+            var domP = '<a name="itemDom" href="teacher-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '<div style="display: none;">'+arrJson[i].id+'</div>';
@@ -86,8 +86,6 @@ function submitSearchForm(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            alert("提交成功");
-            alert(xhr.responseText);
             JObject=JSON.parse(xhr.responseText);
         }else{
             alert("请重新登录");
@@ -95,7 +93,7 @@ function submitSearchForm(){
     }
     var keyWord=$("#searchInfo").val();
     var url="appSearchProjectAction?"+encodeURIComponent("keyWord")+"="+encodeURIComponent(keyWord);
-    xhr.open("post",url,false);
+    xhr.open("get",url,false);
     xhr.send();
 }
 function showResult(JObject){

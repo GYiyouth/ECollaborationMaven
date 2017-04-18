@@ -36,8 +36,6 @@
 <br><br><br><br><br>
 
 
-接收到的id是
-<p id="pt"></p>
 
     <div class="container">
             <div class="row">
@@ -91,11 +89,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">当前执行团队</a>
+                        <a id="teamButton" href="#collapseOne" data-toggle="collapse" data-parent="#accordion">当前执行团队</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse ">
-                    <div class="panel-body">
+                    <div id="teamDom" class="panel-body">
                         <a href="#">团队一</a><br>
                         <a href="#">团队二</a><br>
                         <a href="#">团队三</a><br>
@@ -122,10 +120,6 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script>
-    $(function () {
-        $("#pt").text(sessionStorage.getItem("itemId"));
-    })
-</script>
+<script src="js/teacher/fsy-teacher-project-info.js"></script>
 </body>
 </html>

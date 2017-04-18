@@ -1,18 +1,6 @@
 /**
  * Created by fansuyu on 2017/3/31.
  */
-function addLoadEvent(func){
-    var oldonload=window.onload;
-    if(typeof window.onload !='function'){
-        window.onload=func;
-    }else{
-        window.onload=function(){
-            oldonload();
-            func();
-        }
-    }
-}
-
 function getInfo(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
@@ -134,11 +122,11 @@ function setMyProInfo(myProJson) {
     }
 
 }
+
 function setclick(){
     $("a[name=itemDom]").click(function(){
         var itemId = $(this).attr("title");
         sessionStorage.setItem("itemId",itemId);
     });
 }
-
-addLoadEvent(getInfo);
+$(document).ready(getInfo);

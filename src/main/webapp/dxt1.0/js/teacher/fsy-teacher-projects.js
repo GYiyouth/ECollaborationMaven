@@ -122,4 +122,4 @@ function setclick(){
         sessionStorage.setItem("itemId",itemId);
     });
 }
-addLoadEvent(getInfo);
+$(document).ready(getInfo);

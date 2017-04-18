@@ -84,8 +84,6 @@ function submitSearchForm(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            alert("提交成功");
-            alert(xhr.responseText);
             JObject=JSON.parse(xhr.responseText);
         }else{
             alert("请重新登录");

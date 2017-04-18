@@ -45,13 +45,13 @@ function showTeam(myteam){
     var teamDom=document.getElementById("teamDom");
     teamDom.innerHTML="";
     if(myteam==null){
-        teamDom.innerHTML="此项目没有团队参加";
+        teamDom.innerHTML="没有团队进行此项任务";
     }else{
         for(var i=0;i<myteam.length;i++){
-            var teamstr='<input type="radio" name="team" value="male"/>'+myteam[i].teamName;
+            var teamstr='<a href="#">'+myteam[i].teamName+'</a><br>';
             teamDom.innerHTML+=teamstr;
         }
     }
 }
 $(document).ready(getInfo);
-$("#applyButton").click(getTeam);
+$("#teamButton").click(getTeam);

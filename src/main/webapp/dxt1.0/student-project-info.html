@@ -34,83 +34,85 @@
 </nav>
 <br><br><br><br><br><br>
 
-接收到的id是
-<p id="pt"></p>
 
-    <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">项目名称</p>
-                    <input type="text" class="form-control" readonly  name="name">
-                </div>
-                <div class="col-md-5 ">
-                    <p class="text-muted">项目描述</p>
-                    <input type="text" class="form-control" readonly  name="info">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">项目关键字</p>
-                    <input type="text" class="form-control" readonly  name="keyWord">
-                </div>
-                <div class="col-md-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <p class="text-muted">项目名称</p>
+            <input type="text" class="form-control" readonly  name="name">
+        </div>
+        <div class="col-md-5 ">
+            <p class="text-muted">项目描述</p>
+            <input type="text" class="form-control" readonly  name="info">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <p class="text-muted">项目关键字</p>
+            <input type="text" class="form-control" readonly  name="keyWord">
+        </div>
+        <div class="col-md-5">
 
-                    <p class="text-muted" >申请截止日期</p>
-                    <input type="text" class="form-control" readonly  name="applyBeforeDate">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">团队数上限</p>
-                    <input type="text" class="form-control" readonly name="teamMax">
-                </div>
-                <div class="col-md-5">
-                    <p class="text-muted">当前团队数</p>
-                    <input type="text" class="form-control" readonly  name="teamNumber">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">相关要求</p>
-                    <input type="text" class="form-control" readonly  name="requirement">
-                </div>
-                <div class="col-md-5">
-                    <p class="text-muted">项目截止时间</p>
-                    <input type="text" class="form-control" readonly  name="finishDate">
-                </div>
-            </div>
+            <p class="text-muted" >申请截止日期</p>
+            <input type="text" class="form-control" readonly  name="applyBeforeDate">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <p class="text-muted">团队数上限</p>
+            <input type="text" class="form-control" readonly name="teamMax">
+        </div>
+        <div class="col-md-5">
+            <p class="text-muted">当前团队数</p>
+            <input type="text" class="form-control" readonly  name="teamNumber">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <p class="text-muted">相关要求</p>
+            <input type="text" class="form-control" readonly  name="requirement">
+        </div>
+        <div class="col-md-5">
+            <p class="text-muted">项目截止时间</p>
+            <input type="text" class="form-control" readonly  name="finishDate">
+        </div>
     </div>
 
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a data-toggle="modal" data-target="#myModal" >
-        <button id="applyButton" type="button" class="btn btn-default" data-dismiss="modal">申请</button>
 
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>×</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            选择团队
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <p id="teamDom" align="center"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <p align="center">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-                        </p>
-                    </div>
+    <br>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a data-toggle="modal" data-target="#myModal" >
+        <button id="applyButton" type="submit"  value="申请" class="btn btn-default">申请</button>
+    </a>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择团队
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p id="teamDom" align="center">
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <p align="center">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
 
 
 
