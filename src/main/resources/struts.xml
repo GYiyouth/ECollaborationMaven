@@ -80,6 +80,7 @@
 
     <package name="project" extends="struts-default">
         <action name="acceptApplication" class="action.com.project.AcceptApplicationAction"/>
+        <action name="refuseApplication" class="action.com.project.RefuseApplicationAction"/>
         <action name="addProjectAction" class="action.com.project.AddProjectAction" method="execute">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>

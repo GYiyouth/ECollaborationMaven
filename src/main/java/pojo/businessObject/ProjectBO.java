@@ -255,10 +255,15 @@ public class ProjectBO {
         projectDAO.delete(projectVO);
     }
 
+    /**
+     * 接受团队对项目的申请
+     * @param applicationId
+     * @throws Exception
+     */
     public void acceptApplyProjectApplication(Integer applicationId) throws Exception{
 
         if(applicationId == null ){
-            throw new NullPointerException("projectId、handlerVO is null---"+this.getClass()+"----acceptApplyProjectApplication()");
+            throw new NullPointerException(" applicationId is null---"+this.getClass()+"----acceptApplyProjectApplication()");
         }else{
             MessageDAO messageDAO = BeanFactory.getBean("messageDAO",MessageDAO.class);
             ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
@@ -272,6 +277,32 @@ public class ProjectBO {
             teamProjectVO.setTeamVO(applicationVO.getTeamVO());
             teamProjectVO.setProjectVO(applicationVO.getProjectVO());
             teamDAO.addTeamProject(teamProjectVO);
+        }
+
+    }
+
+    /**
+     * 拒绝团队对项目的申请
+     * @param applicationId
+     * @throws Exception
+     */
+    public void refuseApplyProjectApplication(Integer applicationId) throws Exception{
+
+        if(applicationId == null ){
+            throw new NullPointerException("applicationId is null---"+this.getClass()+"----acceptApplyProjectApplication()");
+        }else{
+            MessageDAO messageDAO = BeanFactory.getBean("messageDAO",MessageDAO.class);
+            ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
+            MessageReceiverVO messageReceiverVO = messageDAO.getMessageReceiverVOByMessageVOAndReceiverVO(applicationVO.getMessageVO(),applicationVO.getHandlerUserVO());
+            if(messageReceiverVO!=null){
+                messageDAO.deleteMessageReceiver(messageReceiverVO);
+            }
+            applicationDAO.deleteApplication(applicationVO);
+            messageDAO.deleteMessage(applicationVO.getMessageVO());
+//            TeamProjectVO teamProjectVO = BeanFactory.getBean("teamProjectVO",TeamProjectVO.class);
+//            teamProjectVO.setTeamVO(applicationVO.getTeamVO());
+//            teamProjectVO.setProjectVO(applicationVO.getProjectVO());
+//            teamDAO.addTeamProject(teamProjectVO);
         }
 
     }
