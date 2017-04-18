@@ -144,7 +144,6 @@ public class TeamBO {
                             teamDTOS.add(teamDTO1);
                         }
                         teamDTOSet.addAll(teamDTOS);
-                        //傻逼耿瑞
                         teamDTOS1.addAll(teamDTOSet);
                         System.out.println("team列表是");
                         System.out.println(teamDTOS);

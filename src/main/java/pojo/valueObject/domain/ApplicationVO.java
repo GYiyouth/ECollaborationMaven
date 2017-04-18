@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class ApplicationVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String type;
 

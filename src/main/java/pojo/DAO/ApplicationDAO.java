@@ -7,24 +7,26 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import pojo.valueObject.domain.ApplicationVO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TeamVO;
 import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by geyao on 2017/3/2.
  */
-@Transactional
+@Repository
 public class ApplicationDAO {
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
 
+
+    @Resource
+    private HibernateTemplate hibernateTemplate;
     /**
      * 添加计划
      * @param applicationVO
@@ -57,11 +59,8 @@ public class ApplicationDAO {
         if (handlerVO == null){
             return null;
         }
-        return (ArrayList<ApplicationVO>)
-                hibernateTemplate.find("from ApplicationVO a where  a.handlerUserVO.id = ?", handlerVO.getId());
+        return comGetApplicationVOList("handlerUserVO", handlerVO);
     }
-
-
 
     /**
      * 获取被影响的人的application，大多是申请人
@@ -129,6 +128,34 @@ public class ApplicationDAO {
             e.printStackTrace();
             transaction.rollback();
             throw e;
+        }
+    }
+
+    /**
+     * 删除申请消息ApplicationVO中记录
+     * @param applicationVO
+     * @throws Exception
+     */
+    public void deleteApplication(ApplicationVO applicationVO) throws Exception {
+        if(applicationVO == null){
+            throw new NullPointerException("applicationVO is null---"+this.getClass()+"----deleteApplication()");
+        }else{
+            hibernateTemplate.delete(applicationVO);
+        }
+    }
+
+    /**
+     * 根据applicationId拿到applicationVO
+     * @param applicationId
+     * @return
+     * @throws Exception
+     */
+    public ApplicationVO getApplicationVOById(Integer applicationId) throws Exception{
+        if(applicationId == null){
+            throw new NullPointerException("applicationId is null---"+this.getClass()+"---getApplicationVOByApplicationId()");
+        }else{
+            System.out.println("========="+applicationId);
+            return hibernateTemplate.get(ApplicationVO.class,applicationId);
         }
     }
 }

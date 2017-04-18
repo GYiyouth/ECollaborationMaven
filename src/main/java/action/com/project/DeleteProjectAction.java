@@ -3,6 +3,7 @@ package action.com.project;
 import action.com.AbstractAction;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import pojo.businessObject.MessageBO;
 import pojo.businessObject.ProjectBO;
@@ -16,7 +17,7 @@ import tool.JSONHandler;
  * 需要projectId
  * Created by geyao on 2017/4/16.
  */
-@Controller
+@Component
 public class DeleteProjectAction extends AbstractAction {
     //JSP需要
     private Integer projectId;

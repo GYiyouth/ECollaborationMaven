@@ -1,14 +1,15 @@
 package pojo.businessObject;
 
 //import com.sun.istack.internal.Nullable;
+import javafx.application.Application;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import pojo.DAO.PlanDAO;
-import pojo.DAO.ProjectDAO;
-import pojo.DAO.TeamDAO;
+import pojo.DAO.*;
+import pojo.valueObject.assist.MessageReceiverVO;
 import pojo.valueObject.assist.ProjectAccessTypeVO;
 import pojo.valueObject.assist.TeamProjectAccessVO;
 import pojo.valueObject.assist.TeamProjectVO;
@@ -31,6 +32,8 @@ public class ProjectBO {
     private ProjectDAO projectDAO;
     @Autowired
     private TeamDAO teamDAO;
+    @Autowired
+    private ApplicationDAO applicationDAO;
 
     public ProjectDAO getProjectDAO() {
         return projectDAO;
@@ -250,6 +253,27 @@ public class ProjectBO {
         projectDAO.deleteTaskByProjectVO(projectVO);
         projectDAO.deleteTeamProjectByProject(projectVO);
         projectDAO.delete(projectVO);
+    }
+
+    public void acceptApplyProjectApplication(Integer applicationId) throws Exception{
+
+        if(applicationId == null ){
+            throw new NullPointerException("projectId、handlerVO is null---"+this.getClass()+"----acceptApplyProjectApplication()");
+        }else{
+            MessageDAO messageDAO = BeanFactory.getBean("messageDAO",MessageDAO.class);
+            ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
+            MessageReceiverVO messageReceiverVO = messageDAO.getMessageReceiverVOByMessageVOAndReceiverVO(applicationVO.getMessageVO(),applicationVO.getHandlerUserVO());
+            if(messageReceiverVO!=null){
+                messageDAO.deleteMessageReceiver(messageReceiverVO);
+            }
+            applicationDAO.deleteApplication(applicationVO);
+            messageDAO.deleteMessage(applicationVO.getMessageVO());
+            TeamProjectVO teamProjectVO = BeanFactory.getBean("teamProjectVO",TeamProjectVO.class);
+            teamProjectVO.setTeamVO(applicationVO.getTeamVO());
+            teamProjectVO.setProjectVO(applicationVO.getProjectVO());
+            teamDAO.addTeamProject(teamProjectVO);
+        }
+
     }
 
 }

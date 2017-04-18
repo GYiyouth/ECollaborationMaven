@@ -20,6 +20,7 @@ import tool.MapSort;
 import tool.MessageMould;
 import tool.Time;
 
+import javax.annotation.Resource;
 import javax.persistence.MapsId;
 import java.util.*;
 
@@ -28,7 +29,7 @@ import java.util.*;
  */
 @Transactional
 public class TeamDAO {
-    @Autowired
+    @Resource
     private HibernateTemplate hibernateTemplate;
 
     /**
@@ -571,5 +572,22 @@ public class TeamDAO {
      */
     public void delete(TeamVO teamVO) throws Exception{
         hibernateTemplate.delete(teamVO);
+    }
+
+
+    /**
+     * 在团队-项目的表中，添加记录
+     *
+     * @param teamProjectVO
+     * @return
+     * @throws Exception
+     */
+    public void addTeamProject(TeamProjectVO teamProjectVO) throws Exception {
+
+        if (teamProjectVO == null) {
+            System.out.println("ERROR:teamProjectVO is null!!!---" + this.getClass() + "---addTeamProject()");
+        } else {
+            hibernateTemplate.save(teamProjectVO);
+        }
     }
 }

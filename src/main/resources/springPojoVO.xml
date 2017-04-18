@@ -82,7 +82,6 @@
     </bean>
 
     <bean id="contributionsVO" class="pojo.valueObject.domain.ContributionsVO" scope="prototype"/>
-
     <!--<bean id="test" class="pojo.valueObject.domain.Test">-->
         <!--<property name="age" value="22"/>-->
         <!--<property name="test2">-->

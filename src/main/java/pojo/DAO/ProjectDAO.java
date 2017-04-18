@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.assist.*;
 import org.hibernate.query.Query;
 import pojo.valueObject.domain.*;
+import sun.plugin2.message.Message;
 import tool.BeanFactory;
 import tool.Time;
 
+import javax.print.DocFlavor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -462,6 +464,13 @@ public class ProjectDAO {
         hibernateTemplate.deleteAll(teamProjectVOList);
     }
 
+    /**
+     * 获得项目的创建者
+     *
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
     public UserVO getCreatorVO(ProjectVO projectVO) throws Exception {
         List<UserVO> userVOS = (List<UserVO>)
                 hibernateTemplate.find("select p.creatorUserVO from ProjectVO p " +
@@ -471,4 +480,5 @@ public class ProjectDAO {
         }
         return null;
     }
+
 }
