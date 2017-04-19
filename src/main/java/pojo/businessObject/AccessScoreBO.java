@@ -131,7 +131,14 @@ public class AccessScoreBO {
     }
 
 
-    public String addAccessToStudentAction(ArrayList<StudentVO> studentVOS, ArrayList<ProjectAccessTypeVO> projectAccessTypeVOS, ArrayList<Integer> scores) throws Exception {
+    /**
+     * 添加评价分数
+     * @param studentVOS
+     * @param projectAccessTypeVOS
+     * @param scores
+     * @throws Exception
+     */
+    public void addAccessToStudentAction(ArrayList<StudentVO> studentVOS, ArrayList<ProjectAccessTypeVO> projectAccessTypeVOS, ArrayList<Integer> scores) throws Exception {
         if (studentVOS == null || projectAccessTypeVOS == null || scores == null) {
             throw new NullPointerException("studentVOS/projectAccessTypeVOS/scores is null---" + this.getClass().getName() + "---addAccessToStudentAction()");
         } else {
@@ -139,8 +146,26 @@ public class AccessScoreBO {
 
             for (int i = 0; i < studentVOS.size(); i++) {
                 StudentScoreVO studentScoreVO = BeanFactory.getBean("studentScoreVO", StudentScoreVO.class);
+                studentScoreVO.setProjectAccessTypeVO(projectAccessTypeVOS.get(i));
+                studentScoreVO.setStudentVO(studentVOS.get(i));
+                studentScoreVO.setScore(scores.get(i));
+                studentScoreVOS.add(studentScoreVO);
             }
+            accessScoreDAO.addAccessAcore(studentScoreVOS);
         }
-        return null;
+    }
+
+    /**
+     * 获得项目得分的ProjectAccessTypeVO
+     * @param typeId
+     * @return
+     * @throws Exception
+     */
+    public ProjectAccessTypeVO getProjectAccessTypeVOByTypeId(Integer typeId) throws Exception{
+        if(typeId == null){
+            throw new  NullPointerException("typeId is null ---"+this.getClass().getName()+"----getProjectAccessTypeVOByTypeId()");
+        }else{
+            return accessScoreDAO.getProjectAccessTypeVOByTypeId(typeId);
+        }
     }
 }
