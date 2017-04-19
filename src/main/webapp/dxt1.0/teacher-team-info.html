@@ -102,7 +102,7 @@
         </div>
     </div>
     <a data-toggle="modal" data-target="#myModal" >
-        <button type="submit" class="btn btn-default" value="对团队成员打分">对团队成员打分</button>
+        <button id="scoreButton" type="submit" class="btn btn-default" value="对团队成员打分">对团队成员打分</button>
     </a>
 
 
@@ -119,21 +119,29 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <p align="center">
-                        <textarea class="form-control" rows=6 readonly="true" />
-                        评分规则1,
-                        评分规则2,
-                        评分规则3...
-                        </textarea>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <p align="center">
-                        <button type="button" class="btn btn-default"
-                                data-dismiss="modal" onclick="javascript:window.location.href='teacher-personScore.html'">
-                            确定
-                        </button>
-                    </p>
+                    <div class="container">
+                        <form id="rulesForm">
+                            <div id="ruleDiv">
+                                <div class="row" >
+                                    <div class="col-md-2  col-md-offset-0.5">
+                                        <p class="text-muted">评价规则1</p>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <input type="text" class="form-control" name="typeNames" id="typeNames1">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="text-left" >
+                            <button id="addButton" type="button" value="tianjia">添加</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <p align="center">
+                            <button id="submitButton" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

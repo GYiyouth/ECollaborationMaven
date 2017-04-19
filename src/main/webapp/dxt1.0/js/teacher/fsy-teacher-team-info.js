@@ -38,4 +38,51 @@ function setclick(){
         sessionStorage.setItem("itemId",itemId);
     });
 }
-$(document).ready(getInfo)
+function addRule() {
+    var context=$("#ruleDiv").html();
+    context+=
+        '<div class="row" >'
+        +'<div class="col-md-2  col-md-offset-0.5">'
+        +'<p class="text-muted">'+"评价规则"+clicknumber+'</p>'
+        +'</div>'
+        +'<div class="col-md-2 ">'
+        +'<input type="text" class="form-control" name="typeNames" id='+"typeNames"+clicknumber+'>'
+        +'</div>'
+        +'</div>'
+    clicknumber++;
+    $("#ruleDiv").html(context);
+}
+function clearCount() {
+    clicknumber=2;
+    var inite=
+        '<div class="row" >'
+        +'<div class="col-md-2  col-md-offset-0.5">'
+        +'<p class="text-muted">'+"评价规则1"+'</p>'
+        +'</div>'
+        +'<div class="col-md-2 ">'
+        +'<input type="text" class="form-control" name="typeNames" id='+"typeNames1"+'>'
+        +'</div>'
+        +'</div>'
+    $("#ruleDiv").html(inite);
+}
+function submitRules() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+            var JObject=JSON.parse(xhr.responseText);
+            var typeNames=JObject.typeNames;
+            sessionStorage.setItem("typeNames",typeNames);
+            window.open("teacher-personScore.html","_self");
+        } else {
+            alert("请刷新页面");
+        }
+    }
+    xhr.open("post","createAccessType", false);
+    var rulesForm=document.getElementById("rulesForm");
+    xhr.send(new FormData(rulesForm));
+}
+var clicknumber=2;
+$(document).ready(getInfo);
+$("#scoreButton").click(clearCount);
+$("#addButton").click(addRule);
+$("#submitButton").click(submitRules);
