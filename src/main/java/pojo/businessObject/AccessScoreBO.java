@@ -41,7 +41,7 @@ public class AccessScoreBO {
      * @param projectVOList
      * @throws Exception
      */
-    public void addProjectAccessType(ArrayList<String> type, ArrayList<ProjectVO> projectVOList) throws Exception{
+    public void addProjectAccessType(ArrayList<String> type, ArrayList<Integer> projectVOList) throws Exception{
         if (type == null || type.size() == 0 || projectVOList == null || projectVOList.size() == 0){
             throw new NullPointerException("typeList, projectVOList = null");
         }
