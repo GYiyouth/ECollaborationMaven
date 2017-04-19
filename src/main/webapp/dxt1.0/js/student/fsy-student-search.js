@@ -72,7 +72,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+            var domP = '<a name="itemDom" href="student-project-info.html" class="list-group-item" title='+arrJsonCurrent.id+'>';
             domP += '<h4>'+arrJsonCurrent.name+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.info + '</p>';
             domP += '</a>';

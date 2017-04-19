@@ -5,10 +5,8 @@
     <title>学生团队</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/Ec-style.css">
-
 </head>
-<body>
+<br>
 
 <nav class="navbar navbar-default navbar-fixed-top" >
     <div class="container">
@@ -27,40 +25,37 @@
                 <li class="active"><a href="student-teams.html"><span class="glyphicon glyphicon-list"></span> 我的团队</a></li>
                 <li><a href="student-selfcenter-main.html"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
                 <li><a href="project-platform-student.html"><span class="glyphicon glyphicon-question-sign"></span> 项目平台</a></li>
+                <li><a href="search-student.html"><span class="glyphicon glyphicon-question-sign"></span> 搜索项目</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<br><br><br><br><br><br>
-
+<br><br><br><br>
 <div class="container">
-<div class="list-group">
-    <a href="student-team-info.html" class="list-group-item ">
-        <h4>ustcwings</h4>
-        <p class="list-group-item-text">主要致力学校工程实践中心</p>
-    </a>
-    <a href="#" class="list-group-item ">
-        <h4>吃了火药</h4>
-        <p class="list-group-item-text">app相关方向</p>
-    </a>
-    <a href="#" class="list-group-item ">
-        <h4>ur great</h4>
-        <p class="list-group-item-text">web方面的项目研究</p>
-    </a>
-    <a href="#" class="list-group-item ">
-        <h4>恍恍惚惚</h4>
-        <p class="list-group-item-text">兴趣项目</p>
-    </a>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-8">
+            <div class="col-md-5 col-md-offset-1">
+            <input type="button" value="搜索团队"  class="btn btn-default " onclick="javascript:window.location.href='student-team-search.html'">
+
+            </div>
+            <div class="col-md-5">
+                <input type="button" value="新建团队"  class="btn btn-default " onclick="javascript:window.location.href='student-new-team.html'">
+
+            </div>
+        </div>
+    </div>
+</div>
+</br></br>
+<div class="container">
+<div id="domBox" class="list-group">
+
 </div>
 
-<ul class="pagination pagination-lg ">
-    <li><a href="#">&laquo;</a></li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li ><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">&raquo;</a></li>
-</ul>
+    <ul class="pager">
+        <li><a href="javascript:;" id="preDom">上一页</a></li>
+        <li id="list"></li>
+        <li><a href="javascript:;" id="nextDom">下一页</a></li>
+    </ul>
 </div>
 
 
@@ -78,5 +73,6 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/student/fsy-student-teams.js"></script>
 </body>
 </html>
