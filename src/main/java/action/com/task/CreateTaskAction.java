@@ -50,6 +50,8 @@ public class CreateTaskAction extends ActionSupport implements SessionAware, Ser
         try{
             jsonObject = taskBO.addTaskToProject(taskVO,projectId,session);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("创建任务");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

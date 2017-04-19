@@ -39,6 +39,8 @@ public class ApplyJoinTeamAction extends ActionSupport implements ServletRequest
             if (jsonObject == null)
                 jsonObject = BeanFactory.getJSONO();
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("申请加入团队");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

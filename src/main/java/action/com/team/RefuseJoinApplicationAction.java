@@ -34,6 +34,8 @@ public class RefuseJoinApplicationAction extends ActionSupport implements Servle
         try {
             jsonObject = teamBO.refuseJoinApplication(applicationId,session);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("拒绝加入申请");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

@@ -54,6 +54,7 @@ public class GetApplicationAction extends AbstractAction {
         jsonObject.put("applicationDTOList", applicationDTOList);
         jsonObject.put("name", name);
         JSONHandler.sendJSON(jsonObject, response);
+        System.out.println("获取申请");
         System.out.println(jsonObject);
         return "success";
     }

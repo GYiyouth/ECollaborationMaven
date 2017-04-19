@@ -36,7 +36,10 @@ public class CreateAccessTypeAction extends AbstractAction{
         accessScoreBO.addProjectAccessType(typeNames, projectIds);
         jsonObject.put("result", "success");
         JSONHandler.sendJSON(jsonObject, response);
+        System.out.println("创建评价标准");
+        System.out.println(jsonObject);
         return "success";
+
     }
 
     public Integer[] getProjectIds() {

@@ -46,6 +46,8 @@ public class LogInAction extends ActionSupport implements ServletRequestAware, S
 //            jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("登录");
+            System.out.println(jsonObject);
             return jsonObject.get("role").toString();
         }catch(Exception e){
             e.printStackTrace();

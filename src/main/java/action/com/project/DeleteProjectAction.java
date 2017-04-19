@@ -40,6 +40,8 @@ public class DeleteProjectAction extends AbstractAction {
             messageBO.deleteProject(projectId, userVO);
             projectBO.deleteProjectVO(projectId);
             jsonObject.put("result", "success");
+            System.out.println("删除项目");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

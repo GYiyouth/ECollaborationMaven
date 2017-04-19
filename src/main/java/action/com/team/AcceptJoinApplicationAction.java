@@ -35,6 +35,8 @@ public class AcceptJoinApplicationAction extends ActionSupport implements Servle
         try {
             jsonObject = teamBO.acceptJoinApplication(applicationId,session);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("接收团队申请");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

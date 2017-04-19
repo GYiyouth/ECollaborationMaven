@@ -27,6 +27,8 @@ public class GetMyManageTeamsAction extends BaseAction{
                 jsonObject.put("teamBeans",teamDTOS);
                 JSONHandler.sendJSON(jsonObject,response);
             }
+            System.out.println("获取我管理的团队");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

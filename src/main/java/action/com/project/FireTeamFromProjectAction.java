@@ -42,6 +42,8 @@ public class FireTeamFromProjectAction extends AbstractAction {
                     messageBO.fireTeam(teamId, projectId, userVO);
                     jsonObject.put("result", "success");
                     JSONHandler.sendJSON(jsonObject, response);
+                    System.out.println("辞退团队");
+                    System.out.println(jsonObject);
                     return "success";
                 }else {
                     JSONHandler.sendJSON(jsonObject, response);

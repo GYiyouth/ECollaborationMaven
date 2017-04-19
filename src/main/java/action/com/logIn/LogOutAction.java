@@ -29,6 +29,8 @@ public class LogOutAction extends ActionSupport implements ServletResponseAware,
         try {
             jsonObject = userBO.logOut(session);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("登录");
+            System.out.println(jsonObject);
         }catch (Exception e){
             e.printStackTrace();
             jsonObject.put("result","SQLException");

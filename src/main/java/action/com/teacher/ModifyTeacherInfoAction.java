@@ -74,6 +74,8 @@ public class ModifyTeacherInfoAction implements ServletRequestAware, ServletResp
             jsonObject = teacherBO.updateTeacherInfo(teacherVO);
             System.out.println(teacherVO);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("修改老师信息");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

@@ -1,3 +1,5 @@
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import pojo.DAO.UserDAO;
 import pojo.valueObject.domain.TeacherVO;
 import pojo.valueObject.domain.UserVO;
@@ -8,18 +10,14 @@ import tool.BeanFactory;
  */
 public class Test {
     public static void main(String[] args) throws Exception{
-        UserDAO userDAO = BeanFactory.getBean("userDAO", UserDAO.class);
-//        System.out.println(userDAO.getUser(1));
-        TeacherVO teacherVO = (TeacherVO) userDAO.getUser(1);
-        System.out.println(teacherVO);
-        System.out.println("================");
-        System.out.println(userDAO.getUserInfo("1","123"));
-
+        String json = "{\"accessTypeDTOList\":[],\"studentDTOList\":[{\"activeBefore\":\"2016-12-21 13:13:13.0\",\"codeScore1\":0,\"codeScore2\":0,\"createDate\":\"2016-12-21 13:13:13.0\",\"email\":\"gr2016@mail.ustc.edu.cn\",\"finalScore\":0,\"githubLogin\":\"\",\"grade\":2017,\"graduatedSchool\":\"\",\"homePageUrl\":\"\",\"id\":13,\"isNeedProject\":0,\"isOnProject\":0,\"lastLogTime\":\"2016-12-21 13:13:13.0\",\"logName\":\"gr2016\",\"messageVOIdSet\":[54,55,58],\"name\":\"gengrui\",\"newsFlag\":3,\"passWord\":\"123\",\"phoneNumber\":\"18896987820\",\"photo\":\"\",\"presentationScore\":0,\"role\":\"student\",\"schoolId\":\"SA16225071\",\"sex\":1,\"tecKeyWord\":\"\"}],\"studentNum\":1,\"studentScore0\":[],\"result\":\"success\"}";
+        JSONObject jsonObject = JSONObject.fromObject(json);
+        System.out.println(jsonObject.get("result"));
+        int i = JSONArray.fromObject(jsonObject.get("studentDTOList")).size();
+        System.out.println(i);
     }
 
     public static void foo(Test2 test2){
-        test2.a = 2;
-        test2.b = 3;
-        test2.s = "123";
+
     }
 }

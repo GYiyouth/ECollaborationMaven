@@ -36,6 +36,8 @@ public class DeleteTeamAction extends AbstractAction {
             messageBO.deleteTeam(teamId, userVO);
             teamBO.deleteTeam(teamId);
             jsonObject.put("result", "success");
+            System.out.println("删除团队");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

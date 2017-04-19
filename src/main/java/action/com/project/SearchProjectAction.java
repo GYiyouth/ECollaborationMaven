@@ -130,6 +130,7 @@ public class SearchProjectAction implements SessionAware, ServletRequestAware, S
             jsonObject.put("show2TimesProjectBeans", show2TimesProjectDTOs);
             jsonObject.put("show3TimesProjectBeans", show3TimesProjectDTOs);
             jsonObject.put("show4TimesProjectBeans", show4TimesProjectDTOs);
+            System.out.println("搜索项目");
             System.out.println("jsonObject" + jsonObject.toString());
             this.response.getWriter().write(jsonObject.toString());
             this.response.getWriter().flush();

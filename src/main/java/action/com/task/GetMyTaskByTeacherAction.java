@@ -48,6 +48,8 @@ public class GetMyTaskByTeacherAction  extends BaseAction{
             jsonObject.put("result","success");
             jsonObject.put("taskBeans",allProjectTaskVOS);//ArrayList<ArrayList<TaskDTO>>
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("根据老师获取任务");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

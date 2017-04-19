@@ -50,6 +50,8 @@ public class AddTeamProjectAccessAction extends ActionSupport implements Session
             TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
             jsonObject = taskBO.addTeamProjectAccess(taskVO,teamVO,projectVO,access,session);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("添加项目团队评价");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

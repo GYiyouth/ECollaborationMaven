@@ -43,6 +43,8 @@ public class ModifyTeamInfoAction extends ActionSupport implements ServletReques
             TeamBO teamBO = BeanFactory.getBean("teamBO", TeamBO.class);
             JSONObject jsonObject = teamBO.modifyTeamInfo(teamVO);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("修改团队信息");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

@@ -39,6 +39,8 @@ public class CreateTeamAction extends ActionSupport implements ServletRequestAwa
         try {
             jsonObject = teamBO.createTeam(teamName, description, memberMax, session);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("创建团队");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

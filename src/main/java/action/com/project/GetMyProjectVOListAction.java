@@ -109,6 +109,8 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
             jsonObject.put(jsonProperty[2], otherProjectDTOList);
 
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("获取我的项目");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

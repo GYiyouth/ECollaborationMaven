@@ -23,6 +23,8 @@ public class RefuseApplicationAction extends BaseAction{
             projectBO.refuseApplyProjectApplication(applicationId);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("拒绝申请");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             JSONHandler.sendJSON(jsonObject, response);

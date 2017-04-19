@@ -41,6 +41,8 @@ public class FinishPlanAction implements SessionAware, ServletRequestAware, Serv
         if (planBO.finishAction(studentVO, planId) )
             jsonObject.put("result", "success");
         JSONHandler.sendJSON(jsonObject, response);
+        System.out.println("完成计划");
+        System.out.println(jsonObject);
         return "success";
     }
 

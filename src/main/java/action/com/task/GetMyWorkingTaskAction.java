@@ -38,6 +38,8 @@ public class GetMyWorkingTaskAction extends ActionSupport implements SessionAwar
             if (projectVO != null) {
                 jsonObject = taskBO.getMyWorkingTask(projectVO);
                 JSONHandler.sendJSON(jsonObject, response);
+                System.out.println("获取我的当前任务");
+                System.out.println(jsonObject);
                 return "success";
             }else{
                 jsonObject.put("result","SQLException");

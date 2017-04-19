@@ -60,6 +60,9 @@ public class ModifyStudentInfoAction extends ActionSupport implements ServletReq
             StudentBO studentBO = BeanFactory.getBean("studentBO", StudentBO.class);
             JSONObject jsonObject = studentBO.updateTeacherInfo(studentVO);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("修改学生信息");
+            System.out.println(jsonObject);
+
             return "success";
         }catch (Exception e){
             e.printStackTrace();

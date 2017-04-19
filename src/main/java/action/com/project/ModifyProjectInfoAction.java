@@ -79,6 +79,8 @@ public class ModifyProjectInfoAction implements SessionAware, ServletRequestAwar
             projectDTO.clone(projectVO);
             jsonObject.put("projectBean", projectDTO);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("修改项目信息");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

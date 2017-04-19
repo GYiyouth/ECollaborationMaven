@@ -36,6 +36,8 @@ public class GetTeamInfoAction extends ActionSupport implements ServletRequestAw
         try {
             jsonObject = teamBO.getTeamInfoByTeamId(teamId);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("获取团队信息");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

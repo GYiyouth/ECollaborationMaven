@@ -45,6 +45,8 @@ public class GetPlanAction implements SessionAware, ServletRequestAware, Servlet
             jsonObject.put("result", "success");
             jsonObject.put("planBeanList", planBeanList);
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("获取计划");
+            System.out.println(jsonObject);
         }catch (Exception e){
             e.printStackTrace();
             JSONHandler.sendJSON(jsonObject, response);

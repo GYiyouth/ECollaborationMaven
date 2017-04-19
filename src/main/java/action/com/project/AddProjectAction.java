@@ -1,5 +1,6 @@
 package action.com.project;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
@@ -42,6 +43,8 @@ public class AddProjectAction implements SessionAware, ServletRequestAware, Serv
     private String requirement;
     private String gain;
     private Integer priority = 0;           //区分是那种项目 0：工程实践 1：个人兴趣 2比赛
+
+    private String accessJSON;
 
     //非jsp提交
     private String createDate;
@@ -91,10 +94,15 @@ public class AddProjectAction implements SessionAware, ServletRequestAware, Serv
 
             ProjectBO projectBO = BeanFactory.getBean("projectBO", ProjectBO.class);
             projectBO.addProject(projectVO, session);
+
+
+
             projectDTO.clone(projectVO);
             jsonObject.put("projectBean", projectDTO);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("创建团队");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             JSONHandler.sendJSON(jsonObject, response);
@@ -288,5 +296,13 @@ public class AddProjectAction implements SessionAware, ServletRequestAware, Serv
 
     public void setProjectDTO(ProjectDTO projectDTO) {
         this.projectDTO = projectDTO;
+    }
+
+    public String getAccessJSON() {
+        return accessJSON;
+    }
+
+    public void setAccessJSON(String accessJSON) {
+        this.accessJSON = accessJSON;
     }
 }

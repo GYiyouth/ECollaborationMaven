@@ -36,6 +36,8 @@ public class getUserInfoAction  extends ActionSupport implements ServletRequestA
 //            jsonObject.put("result", "success");
 
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("获取用户信息");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

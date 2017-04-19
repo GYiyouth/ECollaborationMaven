@@ -26,6 +26,8 @@ public class AcceptApplicationAction extends BaseAction{
             projectBO.acceptApplyProjectApplication(applicationId);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("获取申请");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             JSONHandler.sendJSON(jsonObject, response);

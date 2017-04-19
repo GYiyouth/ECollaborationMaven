@@ -40,6 +40,8 @@ public class GetMyTaskAction  extends ActionSupport implements SessionAware, Ser
             if (projectVO != null) {
                 jsonObject = taskBO.getMyTask(projectVO);
                 JSONHandler.sendJSON(jsonObject, response);
+                System.out.println("获取我的任务");
+                System.out.println(jsonObject);
                 return "success";
             }else{
                 jsonObject.put("result","SQLException");

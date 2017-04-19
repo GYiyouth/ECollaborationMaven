@@ -36,6 +36,8 @@ public class ApplyProjectAction implements SessionAware, ServletRequestAware, Se
             projectBO.applyProject(teamId, projectId);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("申请项目");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             JSONHandler.sendJSON(jsonObject, response);

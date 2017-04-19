@@ -57,7 +57,8 @@ public class CreatePlanAction  implements SessionAware, ServletRequestAware, Ser
             planVO.setBeginDate(beginDate);
             PlanBO planBO = BeanFactory.getBean("planBO", PlanBO.class);
             jsonObject = planBO.savePlan(planVO, projectId, session);
-
+            System.out.println("创建计划");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

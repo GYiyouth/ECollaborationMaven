@@ -43,6 +43,8 @@ public class GetProjectByIdAction extends BaseAction{
                 jsonObject.put("projectBean", projectDTO);
                 jsonObject.put("result","success");
                 JSONHandler.sendJSON(jsonObject,response);
+                System.out.println("获取项目");
+                System.out.println(jsonObject);
                 return "success";
             }
         }

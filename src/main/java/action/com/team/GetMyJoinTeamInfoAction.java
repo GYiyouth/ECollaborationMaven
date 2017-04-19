@@ -33,6 +33,8 @@ public class GetMyJoinTeamInfoAction extends ActionSupport implements ServletReq
         try {
             jsonObject = teamBO.getTeamCodeECFileInfo(teamId,projectId);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("获取我加入的团队");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();

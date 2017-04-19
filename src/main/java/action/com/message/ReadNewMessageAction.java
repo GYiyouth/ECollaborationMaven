@@ -60,6 +60,8 @@ public class ReadNewMessageAction implements SessionAware, ServletRequestAware, 
             jsonObject.put(jsonProperty, messageDTOArrayList);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
+            System.out.println("获取未读信息");
+            System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
             JSONHandler.sendJSON(jsonObject, response);

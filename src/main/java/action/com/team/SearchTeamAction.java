@@ -35,6 +35,8 @@ public class SearchTeamAction  extends ActionSupport implements ServletRequestAw
         try{
             jsonObject = teamBO.searchTeam(teamSearchInfo);
             JSONHandler.sendJSON(jsonObject,response);
+            System.out.println("搜索团队");
+            System.out.println(jsonObject);
             return "success";
         }catch(Exception e){
             e.printStackTrace();
