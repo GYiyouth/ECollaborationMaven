@@ -25,25 +25,36 @@ public class TaskDTO {
             this.setId(taskVO.getId());
             this.setTitle(taskVO.getTitle());
             this.setContent(taskVO.getContent());
+            System.out.println("-----");
             if(taskVO.getCreatorTeacherVO()!=null) {
                 this.setCreatorTeacherVOId(taskVO.getCreatorTeacherVO().getId());
             }
-            this.setCreateDate(taskVO.getCreateDate());
-            this.setModifyDate(taskVO.getModifyDate());
-            this.setBeginDate(taskVO.getBeginDate());
-            this.setTargetDate(taskVO.getTargetDate());
-            if(!taskVO.getProjectVOSet().isEmpty()){
-                Set<ProjectVO> projectVOSet = taskVO.getProjectVOSet();
-                Set<Integer> projectVOIdSet = new HashSet<>();
-                for(ProjectVO projectVO: projectVOSet){
-                    projectVOIdSet.add(projectVO.getId());
-                }
-            }else{
-                this.projectVOIdSet = new HashSet<>();
+            if(taskVO.getCreateDate()!=null) {
+                this.setCreateDate(taskVO.getCreateDate());
             }
+            if(taskVO.getModifyDate()!=null) {
+                this.setModifyDate(taskVO.getModifyDate());
+            }
+            if(taskVO.getBeginDate()!=null) {
+                this.setBeginDate(taskVO.getBeginDate());
+            }
+            if(taskVO.getTargetDate()!=null) {
+                this.setTargetDate(taskVO.getTargetDate());
+            }
+//            if(taskVO.getProjectVOSet()!=null&&!taskVO.getProjectVOSet().isEmpty()){
+//                Set<ProjectVO> projectVOSet = taskVO.getProjectVOSet();
+//                Set<Integer> projectVOIdSet = new HashSet<>();
+//                for(ProjectVO projectVO: projectVOSet){
+//                    projectVOIdSet.add(projectVO.getId());
+//                }
+//                this.setProjectVOIdSet(projectVOIdSet);
+//            }else{
+//                this.projectVOIdSet = new HashSet<>();
+//            }
         }else{
             System.out.println("taskVO is null!!");
         }
+
     }
 
     @Override

@@ -150,6 +150,10 @@
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
+
+        <!-- 老师获取他指导所有项目的所有任务 -->
+        <!-- ArrayList<ArrayList<TaskDTO> taskBeans -->
+        <action name="getMyTaskByTeacher" class="action.com.task.GetMyTaskByTeacherAction"/>
     </package>
 
     <package name="message" extends="struts-default">
