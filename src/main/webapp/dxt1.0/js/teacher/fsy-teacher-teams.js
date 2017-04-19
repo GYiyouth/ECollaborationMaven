@@ -17,7 +17,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a name="teamId" href="student-team-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+        var domP = '<a name="team" href="teacher-team-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].teamName+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].description + '</p>';
         domP += '</a>';
@@ -60,6 +60,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         }
 
     })
+
     // 更新domBox显示内容
     function changeHtml(domBox, currentNum) {
         domBox.innerHTML = '';
@@ -71,7 +72,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a name="teamId" href="student-team-info.html" class="list-group-item" title='+arrJsonCurrent.id+'>';
+            var domP = '<a name="team" href="teacher-team-info.html" class="list-group-item" title='+arrJsonCurrent.id+'>';
             domP += '<h4>'+arrJsonCurrent.teamName+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.description + '</p>';
             domP += '</a>';
@@ -79,58 +80,33 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         }
     }
 }
-function submitSearchForm(){
+function getTeamInfo() {
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            JObject=JSON.parse(xhr.responseText);
+            var JObject=JSON.parse(xhr.responseText);
+            var myTeams=JObject.teamBeans;
+            showTeams(myTeams);
+            setclick();
         }else{
-            alert("请重新登录");
+            alert("请刷新页面");
         }
     }
-    var teamSearchInfo=$("#searchInfo").val();
-    var url="searchTeam?"+encodeURIComponent("teamSearchInfo")+"="+encodeURIComponent(teamSearchInfo);
-    xhr.open("get",url,false);
+    xhr.open("get","getTeamsByTeacher",false);
     xhr.send();
 }
-function showResult(JObject){
-    var teamList=JObject.teamBeans;
-    var $showDiv=$("#formshowDiv");
-    $showDiv.empty();
-    var str=
-        '<div class="container">'
-        +'<h3>搜索结果</h3>'
-        +'<section id="domBox" class="list-group"></section>'+ '<ul class="pager">'
-        +'<li><a href="javascript:;" id="preDom">上一页</a></li>'
-        +'<li id="list"></li>'
-        +'<li><a href="javascript:;" id="nextDom">下一页</a></li>'
-        +'</ul>'
-        +'</div>'
-    $showDiv.html(str);
+function showTeams(arrJson) {
     var domBox=document.getElementById("domBox");
     var domList=document.getElementById("list");
     var preDom=document.getElementById("preDom");
     var nextDom=document.getElementById("nextDom");
     var each=5;
-    paging(domBox,"current",domList,each,preDom,nextDom,teamList);
-    setclick();
+    paging(domBox,"showred",domList,each,preDom,nextDom,arrJson);
 }
 function setclick(){
-    $("a[name=teamId]").click(function(){
+    $("a[name=team]").click(function(){
         var teamId = $(this).attr("title");
         sessionStorage.setItem("teamId",teamId);
     });
 }
-var JObject;
-$(function(){
-    $("#searchButton").click(function(event){
-        var info=$("#searchInfo").val();
-        if(info==""){
-            return false;
-        }else{
-            event.preventDefault();
-            submitSearchForm();
-            showResult(JObject);
-        }
-    });
-});
+$(document).ready(getTeamInfo);

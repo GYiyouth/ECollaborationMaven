@@ -610,4 +610,13 @@ public class TeamDAO {
             return (ArrayList<TeamVO>) hibernateTemplate.find("select st.teamVO from StudentTeamVO st where st.studentVO = ?  and st.leaderFlag = "+ 1,studentVO);
         }
     }
+
+
+//    public ArrayList<TeamVO> getTeamsByTeacher(TeacherVO teacherVO) throws Exception{
+//        if(teacherVO == null){
+//            throw new NullPointerException("teacherVO is null!!---"+this.getClass().getName()+"----getTeamsByTeacher()");
+//        }else{
+//            return hibernateTemplate.find("")
+//        }
+//    }
 }

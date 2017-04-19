@@ -17,7 +17,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         if (arrJson[i] == null) {
             break;
         }
-        var domP = '<a name="teamId" href="student-team-info.html" class="list-group-item" title='+arrJson[i].id+'>';
+        var domP = '<a name="teamId" href="teacher-team-info.html" class="list-group-item" title='+arrJson[i].id+'>';
         domP += '<h4>'+arrJson[i].teamName+'</h4>';
         domP += '<p class="list-group-item-text">' + arrJson[i].description + '</p>';
         domP += '</a>';
@@ -71,7 +71,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
             if (arrJsonCurrent == null) {
                 break;
             }
-            var domP = '<a name="teamId" href="student-team-info.html" class="list-group-item" title='+arrJsonCurrent.id+'>';
+            var domP = '<a name="teamId" href="teacher-team-info.html" class="list-group-item" title='+arrJsonCurrent.id+'>';
             domP += '<h4>'+arrJsonCurrent.teamName+'</h4>'
             domP += '<p class="list-group-item-text">' + arrJsonCurrent.description + '</p>';
             domP += '</a>';
@@ -83,6 +83,7 @@ function submitSearchForm(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            alert(xhr.responseText);
             JObject=JSON.parse(xhr.responseText);
         }else{
             alert("请重新登录");
