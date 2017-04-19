@@ -182,6 +182,7 @@
         <action name="createAccessType" class="action.com.access.CreateAccessTypeAction" method="execute">
 
         </action>
+        <action name="addAccessToStudent" class="action.com.access.AddAccessToStudentAction"/>
     </package>
 
     <package name="user" extends="struts-default">

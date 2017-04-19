@@ -133,6 +133,11 @@ public class AccessScoreDAO {
     }
 
 
+    /**
+     * 添加个人评价得分
+     * @param studentScoreVOS
+     * @throws Exception
+     */
     public void addAccessAcore(ArrayList<StudentScoreVO> studentScoreVOS) throws Exception{
         if(studentScoreVOS == null){
             throw new NullPointerException("studentScoreVOS is null---"+this.getClass().getName()+"---addAccessToStudentAction()");
@@ -140,6 +145,20 @@ public class AccessScoreDAO {
             for(StudentScoreVO studentScoreVO:studentScoreVOS){
                 hibernateTemplate.save(studentScoreVO);
             }
+        }
+    }
+
+    /**
+     * 获得项目得分的ProjectAccessTypeVO
+     * @param typeId
+     * @return
+     * @throws Exception
+     */
+    public ProjectAccessTypeVO getProjectAccessTypeVOByTypeId(Integer typeId) throws Exception{
+        if(typeId == null){
+            throw new  NullPointerException("typeId is null ---"+this.getClass().getName()+"----getProjectAccessTypeVOByTypeId()");
+        }else{
+            return hibernateTemplate.get(ProjectAccessTypeVO.class,typeId);
         }
     }
 }
