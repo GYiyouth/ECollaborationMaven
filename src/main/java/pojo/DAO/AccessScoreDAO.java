@@ -133,4 +133,13 @@ public class AccessScoreDAO {
     }
 
 
+    public void addAccessAcore(ArrayList<StudentScoreVO> studentScoreVOS) throws Exception{
+        if(studentScoreVOS == null){
+            throw new NullPointerException("studentScoreVOS is null---"+this.getClass().getName()+"---addAccessToStudentAction()");
+        }else{
+            for(StudentScoreVO studentScoreVO:studentScoreVOS){
+                hibernateTemplate.save(studentScoreVO);
+            }
+        }
+    }
 }
