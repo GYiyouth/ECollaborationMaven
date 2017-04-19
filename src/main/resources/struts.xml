@@ -178,5 +178,9 @@
         </action>
     </package>
 
+    <package name="user" extends="struts-default">
+        <action name="upLoadPhotos" class="action.com.User.UploadPhotoAction" method="execute"/>
+    </package>
+
 
 </struts>
