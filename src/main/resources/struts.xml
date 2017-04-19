@@ -25,6 +25,8 @@
 
     <package name="team" extends="struts-default">
 
+        <!-- 老师获取他管理的所有团队 -->
+        <action name="getTeamsByTeacher" class="action.com.team.GetTeamsByTeacherAction"/>
         <action name="createTeam" class="action.com.team.CreateTeamAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
