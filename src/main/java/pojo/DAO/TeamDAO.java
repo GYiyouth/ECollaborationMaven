@@ -598,6 +598,11 @@ public class TeamDAO {
     }
 
 
+    /**
+     * 获得我是组长的所有团队信息
+     * @param studentVO
+     * @return
+     */
     public ArrayList<TeamVO> getMyManageTeamsByStudentId(StudentVO studentVO){
         if(studentVO == null){
             throw new NullPointerException("ERROR:studentVO is null!!!---" + this.getClass() + "---getMyManageTeamsByStudentId()");

@@ -6,12 +6,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.*;
 import pojo.valueObject.DTO.PlanDTO;
+import pojo.valueObject.DTO.ProjectDTO;
 import pojo.valueObject.DTO.StudentDTO;
 import pojo.valueObject.DTO.TeamDTO;
-import pojo.valueObject.domain.PlanVO;
-import pojo.valueObject.domain.StudentVO;
-import pojo.valueObject.domain.TeamVO;
-import pojo.valueObject.domain.UserVO;
+import pojo.valueObject.domain.*;
 import tool.BeanFactory;
 import tool.Time;
 
@@ -209,6 +207,15 @@ public class TeamBO {
 //            TeamDAO teamDAO = BeanFactory.getApplicationContext().getBean("teamDAO", TeamDAO.class);
             try {
                 TeamVO teamVO = teamDAO.getTeamVOByTeamId(teamId);
+                ArrayList<ProjectVO> projectVOS = projectDAO.getProjectByTeam(teamVO);
+                ArrayList<ProjectDTO> projectDTOs = BeanFactory.getBean("arrayList",ArrayList.class);
+                if (projectVOS != null){
+                    for(ProjectVO projectVO:projectVOS){
+                        ProjectDTO projectDTO = BeanFactory.getBean("projectDTO",ProjectDTO.class);
+                        projectDTO.clone(projectVO);
+                        projectDTOs.add(projectDTO);
+                    }
+                }
                 if (teamVO == null) {
                     System.out.println("Error:teamVO is null---" + this.getClass() + "---getTeamInfoByTeamId()");
                     return null;
@@ -218,6 +225,7 @@ public class TeamBO {
                     teamDTO.clone(teamVO);
                     jsonObject.put("result", "success");
                     jsonObject.put("teamBean", teamDTO);
+                    jsonObject.put("projectBean",projectDTOs);
                     return jsonObject;
                 }
             }catch (Exception e){
