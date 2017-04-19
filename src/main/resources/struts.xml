@@ -25,6 +25,8 @@
 
     <package name="team" extends="struts-default">
 
+        <!-- 根据项目获取团队信息 -->
+        <action name="getTeamsByProject" class="action.com.team.GetTeamsByProjectAction"/>
         <!-- App老师获得他管理的所有团队(包括团队信息) -->
         <action name="appGetTeamsByTeacher" class="action.com.team.AppGetTeamsByTeacherAction"/>
         <!-- 老师获取他管理的所有团队 -->

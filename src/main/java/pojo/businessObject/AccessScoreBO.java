@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.AccessScoreDAO;
 import pojo.DAO.ProjectDAO;
 import pojo.DAO.TeamDAO;
-import pojo.valueObject.assist.ProjectAccessTypeVO;
-import pojo.valueObject.assist.StudentScoreVO;
-import pojo.valueObject.assist.StudentTeamVO;
-import pojo.valueObject.assist.TeamProjectVO;
+import pojo.valueObject.assist.*;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeamVO;
@@ -37,12 +34,13 @@ public class AccessScoreBO {
 
     /**
      * 添加考核条目
+     *
      * @param type
      * @param projectVOList
      * @throws Exception
      */
-    public void addProjectAccessType(ArrayList<String> type, ArrayList<Integer> projectVOList) throws Exception{
-        if (type == null || type.size() == 0 || projectVOList == null || projectVOList.size() == 0){
+    public void addProjectAccessType(ArrayList<String> type, ArrayList<Integer> projectVOList) throws Exception {
+        if (type == null || type.size() == 0 || projectVOList == null || projectVOList.size() == 0) {
             throw new NullPointerException("typeList, projectVOList = null");
         }
 
@@ -52,11 +50,12 @@ public class AccessScoreBO {
 
     /**
      * 根据某一个评价条目，获取该条目下,该团队的学生的分数
+     *
      * @param typeId
      * @return
      */
-    private HashMap getStudentsScore(Integer typeId, Integer teamId) throws Exception{
-        if (typeId == null || teamId == null){
+    private HashMap getStudentsScore(Integer typeId, Integer teamId) throws Exception {
+        if (typeId == null || teamId == null) {
             throw new NullPointerException("id == null || teamId == null");
         }
 
@@ -77,7 +76,7 @@ public class AccessScoreBO {
 
             List<StudentVO> studentVOList = new ArrayList<>();
             List<TeamVO> teamVOList = new ArrayList<>();
-            while (forTeam.hasNext()){
+            while (forTeam.hasNext()) {
                 TeamProjectVO teamProjectVO = (TeamProjectVO) forTeam.next();
                 teamVOList.add(teamProjectVO.getTeamVO());
             }//teamVOList拿到
@@ -91,14 +90,14 @@ public class AccessScoreBO {
                     .list();
 
             Iterator iterator = studentVOList.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 StudentScoreVO studentScoreVO = (StudentScoreVO) iterator.next();
                 hashMap.put(studentScoreVO.getStudentVO(), studentScoreVO.getScore());
             }
 
             return hashMap;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
@@ -107,12 +106,13 @@ public class AccessScoreBO {
     /**
      * 获取一个团队项目下的所有人的个人评分
      * index, 0是评价VOList，1是学生VO List，2~n是StudentScoreVO List
+     *
      * @param projectId
      * @param teamId
      * @return
      * @throws Exception
      */
-    public ArrayList<List> getAccess(Integer projectId, Integer teamId) throws Exception{
+    public ArrayList<List> getAccess(Integer projectId, Integer teamId) throws Exception {
         ProjectVO projectVO = projectDAO.getProjectVO(projectId);
 
         //取所有评价的VO
@@ -124,9 +124,23 @@ public class AccessScoreBO {
         result.add(projectAccessTypeVOS);
         result.add(studentVOS);
 
-        for (StudentVO studentVO : studentVOS){
+        for (StudentVO studentVO : studentVOS) {
             result.add(accessScoreDAO.getStudentScoreVOList(studentVO, projectAccessTypeVOS));
         }
         return result;
+    }
+
+
+    public String addAccessToStudentAction(ArrayList<StudentVO> studentVOS, ArrayList<ProjectAccessTypeVO> projectAccessTypeVOS, ArrayList<Integer> scores) throws Exception {
+        if (studentVOS == null || projectAccessTypeVOS == null || scores == null) {
+            throw new NullPointerException("studentVOS/projectAccessTypeVOS/scores is null---" + this.getClass().getName() + "---addAccessToStudentAction()");
+        } else {
+            ArrayList<StudentScoreVO> studentScoreVOS = BeanFactory.getBean("arrayList", ArrayList.class);
+
+            for (int i = 0; i < studentVOS.size(); i++) {
+                StudentScoreVO studentScoreVO = BeanFactory.getBean("studentScoreVO", StudentScoreVO.class);
+            }
+        }
+        return null;
     }
 }

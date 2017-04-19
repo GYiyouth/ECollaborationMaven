@@ -457,7 +457,18 @@ public class TeamBO {
     }
 
 
-    public void getTeamsByTeacher(TeacherVO teacherVO){
+    /**
+     * 根据项目获取团队
+     * @param projectVO
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<TeamVO> getTeamsByProject(ProjectVO projectVO) throws Exception{
+        if(projectVO == null){
+            throw new NullPointerException("projectVo is null ---"+this.getClass().getName()+"----getTeamsByProject()");
+        }else{
+            return (ArrayList<TeamVO>) teamDAO.getTeamVOByProjectVO(projectVO);
+        }
 
     }
 }
