@@ -26,7 +26,7 @@ public class AppGetTeamsByTeacherAction extends BaseAction{
             TeamDAO teamDAO = BeanFactory.getBean("teamDAO", TeamDAO.class);
             ArrayList<ProjectVO> projectVOS = projectDAO.getTeacherProjectVOList(teacherVO);
             ArrayList<TeamDTO> teamDTOS = BeanFactory.getBean("arrayList", ArrayList.class);
-            ArrayList teamStudentList = BeanFactory.getBean("arrayList",ArrayList.class);
+            ArrayList<ArrayList> studentDTOList = BeanFactory.getBean("arrayList",ArrayList.class);
             if (projectVOS != null)  {
                 for (ProjectVO projectVO : projectVOS) {
                     ArrayList<TeamVO> teamVOS = (ArrayList<TeamVO>) teamDAO.getTeamVOByProjectVO(projectVO);
@@ -51,8 +51,7 @@ public class AppGetTeamsByTeacherAction extends BaseAction{
                                 }
                                 teamDTO.clone(teamVO);
                                 teamDTOS.add(teamDTO);
-                                teamStudentList.add(teamDTO);
-                                teamStudentList.add(studentDTOS);
+                                studentDTOList.add(studentDTOS);
                             }
                         }
 
@@ -61,7 +60,8 @@ public class AppGetTeamsByTeacherAction extends BaseAction{
                 }
             }
             jsonObject.put("result", "success");
-            jsonObject.put("teamBeans", teamStudentList);
+            jsonObject.put("teamBeans", teamDTOS);
+            jsonObject.put("studentBeans", studentDTOList);
             JSONHandler.sendJSON(jsonObject, response);
             return "success";
         }catch(Exception e){
