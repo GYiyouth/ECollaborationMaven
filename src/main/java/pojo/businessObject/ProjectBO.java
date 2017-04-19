@@ -338,4 +338,25 @@ public class ProjectBO {
 
     }
 
+
+//    public TeamProjectVO getTeamProjectByTeamAndProject(TeamVO teamVO, ProjectVO projectVO){
+//        if(teamVO == null || projectVO == null){
+//            throw new NullPointerException("projectVO/teamVO is null ---"+this.getClass().getName() +"----getTeamProjectByTeamAndProject()");
+//        }else{
+//            List<TeamProjectVO> list =
+//        }
+//        return null;
+//    }
+
+
+    public ArrayList<ProjectVO> getTeacherProjectList(TeacherVO teacherVO) throws Exception {
+        if(teacherVO == null){
+            throw new NullPointerException("teacherVO is null ---"+this.getClass().getName()+"----getTeacherProjectList()");
+        }else{
+            return projectDAO.getTeacherProjectVOList(teacherVO);
+        }
+
+    }
+
+
 }
