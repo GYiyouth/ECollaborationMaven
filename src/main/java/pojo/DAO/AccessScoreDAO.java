@@ -32,16 +32,24 @@ public class AccessScoreDAO {
      * 添加评价种类
      * 忘了考虑百分比
      * @param typeNames
-     * @param projectVOList
+     * @param projectIdList
      * @throws Exception
      */
     public void addProjectAccessType(
-            ArrayList<String>typeNames, ArrayList<ProjectVO> projectVOList
+            ArrayList<String>typeNames, ArrayList<Integer> projectIdList
             ) throws Exception{
 
 
 
         try{
+            ArrayList<ProjectVO> projectVOList = new ArrayList<>();
+            for (Integer id : projectIdList){
+                ProjectVO projectVO = hibernateTemplate.get(ProjectVO.class, id);
+                if (projectVO != null) {
+                    projectVOList.add(projectVO);
+                }
+            }
+
             Iterator iterator = projectVOList.iterator();
 
             //嵌套遍历完成插入

@@ -169,6 +169,9 @@
         <action name="getAccess" class="action.com.access.GetAccessAction" method="execute">
 
         </action>
+        <action name="createAccessType" class="action.com.access.CreateAccessTypeAction" method="execute">
+
+        </action>
     </package>
 
 
