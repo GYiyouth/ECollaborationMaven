@@ -4,10 +4,16 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import pojo.valueObject.assist.ProjectAccessTypeVO;
+import pojo.valueObject.assist.StudentScoreVO;
 import pojo.valueObject.domain.ProjectVO;
+import pojo.valueObject.domain.StudentVO;
 import tool.BeanFactory;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +22,10 @@ import java.util.List;
  * 打分／评价相关的方法
  * Created by geyao on 2017/3/2.
  */
+@Repository
 public class AccessScoreDAO {
-
+    @Autowired
+    private HibernateTemplate hibernateTemplate;
 
 
     /**
@@ -31,9 +39,7 @@ public class AccessScoreDAO {
             ArrayList<String>typeNames, ArrayList<ProjectVO> projectVOList
             ) throws Exception{
 
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+
 
         try{
             Iterator iterator = projectVOList.iterator();
@@ -48,18 +54,17 @@ public class AccessScoreDAO {
                             BeanFactory.getBean("projectAccessTypeVO", ProjectAccessTypeVO.class);
                     projectAccessTypeVO.setProjectVO(projectVO);
                     projectAccessTypeVO.setType(typeName);
-                    session.save(projectAccessTypeVO);
+                    hibernateTemplate.save(projectAccessTypeVO);
                     i++;
                     if (i >= 20){
-                        session.flush();
+                        hibernateTemplate.flush();
                         i = 0;
                     }
                 }
             }
 
-            transaction.commit();
         }catch (Exception e){
-            transaction.rollback();
+
             e.printStackTrace();
             throw e;
         }
@@ -71,24 +76,23 @@ public class AccessScoreDAO {
      * @return
      * @throws Exception
      */
-    public ArrayList<String> getTypeListByProject(ProjectVO projectVO) throws Exception{
+    public ArrayList<ProjectAccessTypeVO> getTypeListByProject(ProjectVO projectVO) throws Exception{
         if (projectVO == null){
             throw new NullPointerException("projectVO == null");
         }
-        ArrayList<String> arrayList = new ArrayList<>();
-        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        ArrayList<ProjectAccessTypeVO> arrayList = new ArrayList<>();
+
+//        Transaction transaction = session.beginTransaction();
 
         try{
-            List list = session.createCriteria(ProjectAccessTypeVO.class)
-                    .add(Restrictions.eq("projectVO", projectVO))
-                    .list();
-            transaction.commit();
+            List list =
+                    hibernateTemplate.find("from ProjectAccessTypeVO  p where  p.projectVO.id = ? ",
+                            projectVO.getId());
+//            transaction.commit();
             Iterator iterator = list.iterator();
             while (iterator.hasNext()){
                 ProjectAccessTypeVO projectAccessTypeVO = (ProjectAccessTypeVO) iterator.next();
-                arrayList.add(projectAccessTypeVO.getType());
+                arrayList.add(projectAccessTypeVO);
             }
             return arrayList;
         }catch (Exception e) {
@@ -96,4 +100,29 @@ public class AccessScoreDAO {
             throw e;
         }
     }
+
+    /**
+     * 获取一个学生在特定评价种类下的分数
+     * @param studentVO
+     * @param projectAccessTypeVOS
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<StudentScoreVO> getStudentScoreVOList(
+            StudentVO studentVO, ArrayList<ProjectAccessTypeVO> projectAccessTypeVOS
+    ) throws Exception{
+        ArrayList<StudentScoreVO> studentScoreVOS = new ArrayList<>();
+        //按照顺序遍历评价的种类，添加学生的分数
+        for (ProjectAccessTypeVO p : projectAccessTypeVOS){
+            StudentScoreVO studentScoreVO;
+            ArrayList<StudentScoreVO> list = (ArrayList<StudentScoreVO>)
+                    hibernateTemplate.find("from StudentScoreVO  s where s.projectAccessTypeVO.id = ? " +
+                            "and  s.studentVO.id = ?", p.getId(), studentVO.getId());
+            if (list.size() > 0)
+                studentScoreVOS.add(list.get(0));
+        }
+        return studentScoreVOS;
+    }
+
+
 }

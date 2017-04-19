@@ -246,7 +246,7 @@ public class TeamDAO {
             return null;
         }else{
             ArrayList<StudentVO> arrayList = new ArrayList<>();
-            String hql = "select StudentVO from StudentTeamVO as st where st.teamVO.id = ? order by leaderFlag DESC";
+            String hql = "select st.studentVO from StudentTeamVO as st where st.teamVO.id = ? order by leaderFlag DESC";
             arrayList = (ArrayList<StudentVO>)
                     hibernateTemplate.find(hql, teamId);
             return arrayList;

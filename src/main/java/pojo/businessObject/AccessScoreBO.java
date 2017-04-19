@@ -4,7 +4,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.DAO.AccessScoreDAO;
+import pojo.DAO.ProjectDAO;
+import pojo.DAO.TeamDAO;
 import pojo.valueObject.assist.ProjectAccessTypeVO;
 import pojo.valueObject.assist.StudentScoreVO;
 import pojo.valueObject.assist.StudentTeamVO;
@@ -19,7 +25,15 @@ import java.util.*;
 /**
  * Created by geyao on 2017/3/2.
  */
+@Service
+@Transactional
 public class AccessScoreBO {
+    @Autowired
+    private ProjectDAO projectDAO;
+    @Autowired
+    private TeamDAO teamDAO;
+    @Autowired
+    private AccessScoreDAO accessScoreDAO;
 
     /**
      * 添加考核条目
@@ -41,7 +55,7 @@ public class AccessScoreBO {
      * @param typeId
      * @return
      */
-    public HashMap getStudentsScore(Integer typeId, Integer teamId) throws Exception{
+    private HashMap getStudentsScore(Integer typeId, Integer teamId) throws Exception{
         if (typeId == null || teamId == null){
             throw new NullPointerException("id == null || teamId == null");
         }
@@ -88,5 +102,31 @@ public class AccessScoreBO {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    /**
+     * 获取一个团队项目下的所有人的个人评分
+     * index, 0是评价VOList，1是学生VO List，2~n是StudentScoreVO List
+     * @param projectId
+     * @param teamId
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<List> getAccess(Integer projectId, Integer teamId) throws Exception{
+        ProjectVO projectVO = projectDAO.getProjectVO(projectId);
+
+        //取所有评价的VO
+        ArrayList<ProjectAccessTypeVO> projectAccessTypeVOS = accessScoreDAO.getTypeListByProject(projectVO);
+
+        ArrayList<StudentVO> studentVOS = teamDAO.getStudentVOSByTeamId(teamId);
+        ArrayList<List> result = new ArrayList<>();
+
+        result.add(projectAccessTypeVOS);
+        result.add(studentVOS);
+
+        for (StudentVO studentVO : studentVOS){
+            result.add(accessScoreDAO.getStudentScoreVOList(studentVO, projectAccessTypeVOS));
+        }
+        return result;
     }
 }

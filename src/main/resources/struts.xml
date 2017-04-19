@@ -165,5 +165,11 @@
         </action>
     </package>
 
+    <package name="access" extends="struts-default">
+        <action name="getAccess" class="action.com.access.GetAccessAction" method="execute">
+
+        </action>
+    </package>
+
 
 </struts>
