@@ -303,6 +303,12 @@ public class ProjectDAO {
         }
     }
 
+    /**
+     * 获取项目的github地址
+     * @param githubURL
+     * @return
+     * @throws Exception
+     */
     public ProjectVO getByGithubURL(String githubURL) throws Exception {
         if (githubURL == null || githubURL.equals("")) {
             throw new SQLException("githubURL输入异常" + this.getClass() + "getByGithubURL()");
@@ -480,4 +486,18 @@ public class ProjectDAO {
         return null;
     }
 
+
+    /**
+     * 获取团队接的所有项目
+     * @param teamVO
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<ProjectVO> getProjectByTeam(TeamVO teamVO) throws Exception{
+        if(teamVO == null){
+            throw new NullPointerException("teamVO is null---"+this.getClass().getName()+"----getProjectByTeam()");
+        }else{
+            return (ArrayList<ProjectVO>) hibernateTemplate.find("select tp.projectVO from TeamProjectVO tp where tp.teamVO = ?",teamVO);
+        }
+    }
 }

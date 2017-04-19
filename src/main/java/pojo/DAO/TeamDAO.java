@@ -492,18 +492,15 @@ public class TeamDAO {
                         teamSearchResult.put(teamVO.getId(), 1);
                     }
                 }
-
                 //排序
                 teamSearchResult = MapSort.sortMap(teamSearchResult);
                 for (Integer key : teamSearchResult.keySet()) {
                     TeamVO teamVO = teamDAO.getTeamVOByTeamId(key);
+                    System.out.println("key："+key);
+                    System.out.println("teamSearchResult:"+teamSearchResult.get(key));
                     teamVOS.add(teamVO);
                 }
-                Set<TeamVO> teamVOSet = new HashSet<>();
-                teamVOSet.addAll(teamVOS);
-                ArrayList<TeamVO> teamVOS2 = new ArrayList<>();
-                teamVOS2.addAll(teamVOSet);
-                return teamVOS2;
+                return teamVOS;
             }catch (Exception e){
                 e.printStackTrace();
                 throw e;
@@ -601,6 +598,11 @@ public class TeamDAO {
     }
 
 
+    /**
+     * 获得我是组长的所有团队信息
+     * @param studentVO
+     * @return
+     */
     public ArrayList<TeamVO> getMyManageTeamsByStudentId(StudentVO studentVO){
         if(studentVO == null){
             throw new NullPointerException("ERROR:studentVO is null!!!---" + this.getClass() + "---getMyManageTeamsByStudentId()");
