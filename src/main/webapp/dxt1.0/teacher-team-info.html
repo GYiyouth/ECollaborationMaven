@@ -23,74 +23,121 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right" style="margin-top:0">
-                <li ><a href="teacher-projects.html"><span class="glyphicon glyphicon-home"></span> 已有项目</a></li>
-                <li class="active"><a href="teacher-teams.html"><span class="glyphicon glyphicon-list"></span> 团队管理</a></li>
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> 已有项目</a></li>
+                <li><a href="teacher-teams.html"><span class="glyphicon glyphicon-list"></span> 团队管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-fire"></span> 发布</a></li>
-                <li><a href="teacher-selfcenter-main.html"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                <li><a href="teacher-selfcenter-main.html"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
                 <li><a href="project-platform-teacher.html"><span class="glyphicon glyphicon-question-sign"></span> 项目平台</a></li>
+                <li><a href="teacher-search.html"><span class="glyphicon glyphicon-question-sign"></span> 搜索项目</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <br><br><br><br><br><br>
 
+<div id="div1">
+
+</div>
 <div class="container">
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">团队名称</a>
-            </h4>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion" name="teamName">团队名称</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse ">
+                <div id="teamName" class="panel-body">
+                    Ecollaboration
+                </div>
+            </div>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse ">
-            <div class="panel-body">
-                ustcwings
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion" name="memberMax">团队成员上限</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse ">
+                <div id="memberMax"class="panel-body">
+                    3
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion" name="createDate">创建日期</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse ">
+                <div id="createDate" class="panel-body">
+                    2016.07.07
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion" name="description">团队相关介绍</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse ">
+                <div id="description" class="panel-body">
+                    这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍这里是团队相关介绍
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#collapseFive" data-toggle="collapse" data-parent="#accordion" name="eamProjects">团队项目</a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse ">
+                <div id="teamProjects" class="panel-body">
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">团队成员</a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse ">
-            <div class="panel-body">
-                葛尧
-                耿瑞
-                丁晓天
-                范粟瑜
+    <a data-toggle="modal" data-target="#myModal" >
+        <button type="submit" class="btn btn-default" value="对团队成员打分">对团队成员打分</button>
+    </a>
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        对项目成员打分
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <p align="center">
+                        <textarea class="form-control" rows=6 readonly="true" />
+                        评分规则1,
+                        评分规则2,
+                        评分规则3...
+                        </textarea>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <p align="center">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal" onclick="javascript:window.location.href='teacher-personScore.html'">
+                            确定
+                        </button>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">团队项目</a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse ">
-            <div class="panel-body">
-                Ecollaboration
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a href="#collapseFour" data-toggle="collapse" data-parent="#accordion">团队相关介绍</a>
-            </h4>
-        </div>
-        <div id="collapseFour" class="panel-collapse collapse ">
-            <div class="panel-body">
-                本项目旨在建设一个校园工程实践中心
-            </div>
-        </div>
-    </div>
-</div>
-    <input type="button" value="返回" class="btn btn-default"
-           onclick="javascript:window.location.href='teacher-teams.html'">
-</div>
 </div>
 
 <footer id="footer">
@@ -107,5 +154,11 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $("#div1").html(sessionStorage.getItem("teamId"));
+    })
+</script>
+<script src="js/teacher/fsy-teacher-team-info.js"></script>
 </body>
 </html>
