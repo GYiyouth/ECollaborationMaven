@@ -9,7 +9,6 @@ function submitform(){
             var result=JObject.result;
             if(result=="success"){
                 alert("新建项目成功")
-                alert(xhr.status);
             }else{
                 alert("新建项目失败")
             }
@@ -19,8 +18,10 @@ function submitform(){
     }
     xhr.open("post","addProjectAction",false);
     var form=document.getElementById("newProForm");
+    var formData=new FormData(form);
+    formData.append("priority","1");
     if($("#newProForm").valid()){
-        xhr.send(new FormData(form));
+        xhr.send(formData);
     }else{
         return false;
     }
