@@ -5,6 +5,7 @@ function getInfo() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+            alert(xhr.responseText);
             var JObject=JSON.parse(xhr.responseText);
             var teamInfo=JObject.teamBean;
             var projectInfo=JObject.projectBean;

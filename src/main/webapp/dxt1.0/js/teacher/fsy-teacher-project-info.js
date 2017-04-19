@@ -30,7 +30,6 @@ function getTeam() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
-            alert(xhr.responseText);
             var JObject=JSON.parse(xhr.responseText);
             var myteam=JObject.teamBeans;
             showTeam(myteam);
@@ -53,5 +52,27 @@ function showTeam(myteam){
         }
     }
 }
+function releaseTask() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+            var JObject=JSON.parse(xhr.responseText);
+            var result=JObject.result;
+            if(result=="success"){
+                alert("提交成功");
+            }else{
+                alert("提交失败");
+            }
+        } else {
+            alert("请刷新页面");
+        }
+    }
+    xhr.open("post","createTask", false);
+    var releaseForm=document.getElementById("releaseForm");
+    var releaseFD=new FormData(releaseForm);
+    releaseFD.append("projectId",sessionStorage.getItem("itemId"));
+    xhr.send(releaseFD);
+}
 $(document).ready(getInfo);
 $("#teamButton").click(getTeam);
+$("#releaseButton").click(releaseTask);

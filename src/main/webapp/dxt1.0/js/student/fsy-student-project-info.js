@@ -84,6 +84,7 @@ function addURLParam(url,name,value) {
     url+=encodeURIComponent(name)+"="+encodeURIComponent(value);
     return url;
 }
+
 $(document).ready(getInfo);
 $("#applyButton").click(getTeam);
 $("#applyItemButton").click(applyItem);

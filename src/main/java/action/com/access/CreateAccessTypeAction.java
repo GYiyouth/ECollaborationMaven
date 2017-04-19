@@ -26,23 +26,22 @@ public class CreateAccessTypeAction extends AbstractAction{
     public String execute() throws Exception{
         System.out.println(typeNames);
         JSONObject jsonObject = BeanFactory.getJSONO();
-        jsonObject.put("typeNames", typeNames);
+
+
+        ArrayList<Integer> projectIds = new ArrayList<>();
+        for (Integer id : this.getProjectIds()){
+            projectIds.add(id);
+        }
+        ArrayList<String> typeNames = new ArrayList<>();
+        for (String names : this.getTypeNames()){
+            typeNames.add(names);
+        }
+        accessScoreBO.addProjectAccessType(typeNames, projectIds);
+        jsonObject.put("result", "success");
         JSONHandler.sendJSON(jsonObject, response);
-        return null;
-//        ArrayList<Integer> projectIds = new ArrayList<>();
-//        for (Integer id : this.getProjectIds()){
-//            projectIds.add(id);
-//        }
-//        ArrayList<String> typeNames = new ArrayList<>();
-//        for (String names : this.getTypeNames()){
-//            typeNames.add(names);
-//        }
-//        accessScoreBO.addProjectAccessType(typeNames, projectIds);
-//        jsonObject.put("result", "success");
-//        JSONHandler.sendJSON(jsonObject, response);
-//        System.out.println("创建评价标准");
-//        System.out.println(jsonObject);
-//        return "success";
+        System.out.println("创建评价标准");
+        System.out.println(jsonObject);
+        return "success";
 
     }
 

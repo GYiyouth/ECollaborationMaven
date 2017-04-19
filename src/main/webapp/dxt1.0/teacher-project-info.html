@@ -108,58 +108,55 @@
                 <a data-toggle="modal" data-target="#myModal" >
                     <button type="submit" class="btn btn-default" value="发布任务">发布任务</button>
                 </a>
-
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>×</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    任务信息
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <p align="center">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-5 col-md-offset-1">
-                                <p class="text-muted">任务名称</p>
-                                <input type="text" class="form-control" name="title">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-5 col-md-offset-1">
-                                <p class="text-muted">任务内容</p>
-                                <input type="text" class="form-control" name="content">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-5 col-md-offset-1">
-                                <p class="text-muted">截止日期</p>
-                                <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                            </div>
-                        </div>
-                    </div>
+<form id="releaseForm">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        任务信息
+                    </h4>
                 </div>
-
-
-                <div class="modal-footer">
+                <div class="modal-body">
                     <p align="center">
-                        <button type="button" class="btn btn-default"
-                                data-dismiss="modal">
-                            确定
-                        </button>
-                    </p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">任务名称</p>
+                    <input type="text" class="form-control" name="title">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">任务内容</p>
+                    <input type="text" class="form-control" name="content">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <p class="text-muted">截止日期</p>
+                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
                 </div>
             </div>
         </div>
     </div>
+                <div class="modal-footer">
+                    <p align="center">
+                        <button id="releaseButton" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
 </div>
 <br>
 
