@@ -492,18 +492,15 @@ public class TeamDAO {
                         teamSearchResult.put(teamVO.getId(), 1);
                     }
                 }
-
                 //排序
                 teamSearchResult = MapSort.sortMap(teamSearchResult);
                 for (Integer key : teamSearchResult.keySet()) {
                     TeamVO teamVO = teamDAO.getTeamVOByTeamId(key);
+                    System.out.println("key："+key);
+                    System.out.println("teamSearchResult:"+teamSearchResult.get(key));
                     teamVOS.add(teamVO);
                 }
-                Set<TeamVO> teamVOSet = new HashSet<>();
-                teamVOSet.addAll(teamVOS);
-                ArrayList<TeamVO> teamVOS2 = new ArrayList<>();
-                teamVOS2.addAll(teamVOSet);
-                return teamVOS2;
+                return teamVOS;
             }catch (Exception e){
                 e.printStackTrace();
                 throw e;

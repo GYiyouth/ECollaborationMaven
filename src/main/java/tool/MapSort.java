@@ -3,29 +3,30 @@ package tool;
 import java.util.*;
 
 /**
- * Created by Administrator on 2017/3/3.
+ * Created by GR on 2017/3/3.
  */
-public class MapSort {
+public class MapSort{
 
     /**
      * map<Integer,Integer>按照value降序
-     * @param oldMap
+     *
+     * @param map
      * @return
      */
-    public static Map sortMap(Map oldMap) {
-        ArrayList<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(oldMap.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-
-            @Override
-            public int compare(Map.Entry<Integer, Integer> arg0,
-                               Map.Entry<Integer, Integer> arg1) {
-                return arg1.getValue() - arg0.getValue();
+    public static <K, V extends Comparable<? super V>> Map<K, V>
+    sortMap(Map<K, V> map) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<Map.Entry<K, V>>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o2.getValue()).compareTo(o1.getValue());
             }
         });
-        Map newMap = new LinkedHashMap();
-        for (int i = 0; i < list.size(); i++) {
-            newMap.put(list.get(i).getKey(), list.get(i).getValue());
+
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
         }
-        return newMap;
+        return result;
     }
 }
