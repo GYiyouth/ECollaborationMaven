@@ -162,12 +162,12 @@
               <version>2.2</version>
               <configuration>
 
-                  <url>http://128.199.132.67:8080/manager/text</url>
+                  <url>http://123.206.102.231:8080/manager/text</url>
                   <!--<server>tomcat7</server>-->
-                  <username>root</username>
-                  <password>123456</password>
+                  <username>admin</username>
+                  <password>password</password>
                   <update>true</update>
-                  <path>/ec</path>
+                  <path>/</path>
 
               </configuration>
 

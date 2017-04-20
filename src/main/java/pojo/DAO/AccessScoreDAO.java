@@ -96,6 +96,7 @@ public class AccessScoreDAO {
             List list =
                     hibernateTemplate.find("from ProjectAccessTypeVO  p where  p.projectVO.id = ? ",
                             projectVO.getId());
+
 //            transaction.commit();
             Iterator iterator = list.iterator();
             while (iterator.hasNext()){
