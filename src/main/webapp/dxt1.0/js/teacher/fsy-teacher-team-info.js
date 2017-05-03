@@ -9,6 +9,7 @@ function getInfo() {
             var JObject=JSON.parse(xhr.responseText);
             var teamInfo=JObject.teamBean;
             var projectInfo=JObject.projectBean;
+            projectBean=JObject.projectBean;
             setInfo(teamInfo,projectInfo);
             setclick();
         } else {
@@ -58,31 +59,44 @@ function clearCount() {
     var inite=
         '<div class="row" >'
         +'<div class="col-md-2  col-md-offset-0.5">'
+        +'<p class="text-muted">'+'选择项目'+'</p>'
+        +'</div>'
+        +'<div class="col-md-2 ">';
+    projectBean.forEach(function (p1, p2, p3) {
+        inite+= '<input type="radio" name="projectIds" value='+p1.id+'>'+'项目-'+p1.name
+    })
+    inite+=
+        '</div>'
+        +'</div>';
+    inite+=
+        '<div class="row" >'
+        +'<div class="col-md-2  col-md-offset-0.5">'
         +'<p class="text-muted">'+"评价规则1"+'</p>'
         +'</div>'
         +'<div class="col-md-2 ">'
         +'<input type="text" class="form-control" name="typeNames" id='+"typeNames1"+'>'
         +'</div>'
-        +'</div>'
+        +'</div>';
     $("#ruleDiv").html(inite);
 }
 function submitRules() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
-            var JObject=JSON.parse(xhr.responseText);
-            var typeNames=JObject.typeNames;
-            sessionStorage.setItem("typeNames",typeNames);
             window.open("teacher-personScore.html","_self");
         } else {
+            alert(xhr.status);
             alert("请刷新页面");
         }
     }
     xhr.open("post","createAccessType", false);
     var rulesForm=document.getElementById("rulesForm");
+    var projectId=$("input[name=projectIds]:checked").attr("value");
+    sessionStorage.setItem("projectId",projectId);
     xhr.send(new FormData(rulesForm));
 }
 var clicknumber=2;
+var projectBean=[];
 $(document).ready(getInfo);
 $("#scoreButton").click(clearCount);
 $("#addButton").click(addRule);

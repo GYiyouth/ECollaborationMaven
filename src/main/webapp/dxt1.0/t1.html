@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tbody id="bodycontent">
+    <tr class="trClass">
+        <td name="studentId-5">gengrui</td>
+        <td contenteditable="true" name="11">undefined</td>
+        <td ccontenteditable="true" name="22">undefined</td>
+        <td contenteditable="true" name="33">0</td>
+        <td ccontenteditable="true" name="44">0</td>
+    </tr>
+    <tr class="trClass">
+        <td name="studentId-6">gengrui</td>
+        <td class="typeid" contenteditable="true" name="11">undefined</td>
+        <td class="typeid" contenteditable="true" name="22">undefined</td>
+        <td class="typeid" contenteditable="true" name="33">0</td>
+        <td class="typeid" contenteditable="true" name="44">0</td>
+    </tr>
+    </tbody>
+</table>
+<script src="js/jquery.min.js"></script>
+<script>
+    $(function () {
+        var jsonstr='[';
+        $("table tbody tr").each(function () {
+            var copystr='';
+            $(this).find("td").each(function () {
+                var namestr=$(this).attr("name");
+                if(namestr.slice(0,7)=="student"){
+                    copystr='{'+'\"studentId\":'+namestr.slice(10)+',';
+                }else{
+                    jsonstr+=copystr;
+                    jsonstr+='\"typeId\":'+'\"'+namestr+'\"'+',';
+                    jsonstr+='\"score\":'+'\"'+$(this).text()+'\"';
+                    jsonstr+='},';
+                }
+            })
+        })
+        jsonstr+=']';
+        alert(jsonstr);
+    })
+</script>
+</body>
+</html>
