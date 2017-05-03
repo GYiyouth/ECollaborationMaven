@@ -24,6 +24,8 @@ public class CreateAccessTypeAction extends AbstractAction{
     private AccessScoreBO accessScoreBO;
 
     public String execute() throws Exception{
+        if (typeNames.length == 0)
+            return null;
         System.out.println(typeNames);
         JSONObject jsonObject = BeanFactory.getJSONO();
 
