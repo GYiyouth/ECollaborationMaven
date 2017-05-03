@@ -58,6 +58,8 @@ public class GetAccessAction extends AbstractAction {
         int studentNum = rowData.size() - 2;
         jsonObject.put("studentNum", studentNum);
 
+        ArrayList<StudentScoreDTO> totalScore = new ArrayList<>();
+
         //评价分数
         //分别处理每个学生
         for (int i = 0 ; i < studentNum; i++ ){
@@ -70,9 +72,11 @@ public class GetAccessAction extends AbstractAction {
                 studentScoreDTOS.add(studentScoreDTO);
             }
             jsonObject.put("studentScore" + i, studentScoreDTOS);
+            totalScore.addAll(studentScoreDTOS);
         }
 
         jsonObject.put("result", "success");
+        jsonObject.put("studentScore", studentDTOS);
         JSONHandler.sendJSON(jsonObject, response);
         System.out.println("获取评价");
         System.out.println(jsonObject);
