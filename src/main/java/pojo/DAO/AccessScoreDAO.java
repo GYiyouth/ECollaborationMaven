@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.valueObject.assist.ProjectAccessTypeVO;
 import pojo.valueObject.assist.StudentScoreVO;
 import pojo.valueObject.domain.ProjectVO;
@@ -23,6 +24,7 @@ import java.util.List;
  * Created by geyao on 2017/3/2.
  */
 @Repository
+@Transactional
 public class AccessScoreDAO {
     @Autowired
     private HibernateTemplate hibernateTemplate;
@@ -50,12 +52,13 @@ public class AccessScoreDAO {
                 }
             }
 
-            Iterator iterator = projectVOList.iterator();
+//            Iterator iterator = projectVOList.iterator();
 
             //嵌套遍历完成插入
             int i = 0; // 20个写入一次
             for (String typeName: typeNames
                  ) {
+                Iterator iterator = projectVOList.iterator();
                 while (iterator.hasNext()){
                     ProjectVO projectVO = (ProjectVO) iterator.next();
                     ProjectAccessTypeVO projectAccessTypeVO =
