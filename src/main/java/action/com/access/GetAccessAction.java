@@ -58,7 +58,7 @@ public class GetAccessAction extends AbstractAction {
         int studentNum = rowData.size() - 2;
         jsonObject.put("studentNum", studentNum);
 
-        ArrayList<StudentScoreDTO> totalScore = new ArrayList<>();
+        ArrayList<List> totalScore = new ArrayList<>();
 
         //评价分数
         //分别处理每个学生
@@ -72,7 +72,7 @@ public class GetAccessAction extends AbstractAction {
                 studentScoreDTOS.add(studentScoreDTO);
             }
             jsonObject.put("studentScore" + i, studentScoreDTOS);
-            totalScore.addAll(studentScoreDTOS);
+            totalScore.add(studentScoreDTOS);
         }
 
         jsonObject.put("result", "success");
