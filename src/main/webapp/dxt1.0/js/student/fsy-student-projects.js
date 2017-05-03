@@ -5,8 +5,10 @@ function getInfo(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            alert("Welcome!")
             var reqJson=JSON.parse(xhr.responseText);
             var myProJson=reqJson.schoolProjectDTOList;
+            sessionStorage.setItem("projectId",myProJson[0].id);
             setMyProInfo(myProJson);
             var intProJson=reqJson.interestProjectDTOList;
             var domBox=document.getElementById("domBox");
@@ -55,7 +57,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
     }
     // 初始化当前页面对象
     var preDom = domList.children[0];
-    preDom.className = addclass;
+    // preDom.className = addclass;
 
     // 切换页响应事件
     domList.addEventListener('click', function (e) {
@@ -89,7 +91,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         domBox.innerHTML = '';
         preDom.className = '';
         preDom = domList.children[currentNum];
-        preDom.className=addclass;
+        // preDom.className=addclass;
         for (var i = 0; i < each; i++) {
             var arrJsonCurrent = arrJson[(currentNum * each) + i];
             if (arrJsonCurrent == null) {
@@ -111,6 +113,8 @@ function setMyProInfo(myProJson) {
     var status=document.getElementById('status');
     var teacherVOId=document.getElementById('teacherVOId');
     var teamVOIdSet=document.getElementById('teamVOIdSet');
+    var itemName=document.getElementById("itemName");
+    itemName.innerHTML=myProJson[0].name;
     number.innerHTML='成员人数 :'+myProJson[0].teamVOIdSet.length;
     createDate.innerHTML='创建日期 :'+myProJson[0].createDate;
     keyWord.innerHTML='关键字 :'+myProJson[0].keyWord;
@@ -122,7 +126,29 @@ function setMyProInfo(myProJson) {
     }
 
 }
+function getTask() {
+    var xhr=new XMLHttpRequest();
+    xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
 
+            var JObject=JSON.parse(xhr.responseText);
+            var contentList=JObject.TaskBeans;
+            var str='';
+            for(var i=0;i<contentList.length;i++){
+                str+='创建日期：'+contentList[i].createDate+'<br>'
+                +'截止日期：'+contentList[i].targetDate+'<br>'
+                +'内容：'+contentList[i].content+'<br>'
+            }
+            $("#task").html(str);
+        }else{
+            alert("请刷新页面");
+        }
+    }
+    var taskInfo=new FormData();
+    taskInfo.append("projectId",sessionStorage.getItem("projectId"));
+    xhr.open("post","getMyTask",false);
+    xhr.send(taskInfo);
+}
 function setclick(){
     $("a[name=itemDom]").click(function(){
         var itemId = $(this).attr("title");
@@ -130,3 +156,4 @@ function setclick(){
     });
 }
 $(document).ready(getInfo);
+$(document).ready(getTask);

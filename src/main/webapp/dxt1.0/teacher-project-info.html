@@ -113,71 +113,46 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>×</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        任务信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <p align="center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">任务名称</p>
-                    <input type="text" class="form-control" name="title">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">任务内容</p>
-                    <input type="text" class="form-control" name="content">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <p class="text-muted">截止日期</p>
-                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 ">
-                    <p class="text-muted">创建日期</p >
-                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 ">
-                    <p class="text-muted">开始日期</p >
-                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 ">
-                    <p class="text-muted">项目ID</p >
-                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 ">
-                    <p class="text-muted">截止日期</p >
-                    <input type="text" class="form-control" name="targetDate" id="datetimepicker">
-                </div>
-            </div>
-        </div>
+                    <div class="container">
+                        <div class="row" >
+                            <div class="col-md-5  ">
+                                <p class="text-muted">任务名称</p>
+                                <input type="text" class="form-control" name="title">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 ">
+                                <p class="text-muted">任务内容</p>
+                                <input type="text" class="form-control" name="content">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 ">
+                                <p class="text-muted">创建日期</p>
+                                <input type="text" class="form-control" name="createDate" id="datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 ">
+                                <p class="text-muted">开始日期</p>
+                                <input type="text" class="form-control" name="beginDate" id="datetimepicker2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 ">
+                                <p class="text-muted">截止日期</p>
+                                <input type="text" class="form-control" name="targetDate" id="datetimepicker3">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <p align="center">
@@ -209,6 +184,16 @@
 <script type="text/javascript" src="js/bootstrap-datetimepicker.fr.js"></script>
 <script type="text/javascript">
     $('#datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'      /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+    });
+</script>
+<script type="text/javascript">
+    $('#datetimepicker2').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii'      /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+    });
+</script>
+<script type="text/javascript">
+    $('#datetimepicker3').datetimepicker({
         format: 'yyyy-mm-dd hh:ii'      /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
     });
 </script>
