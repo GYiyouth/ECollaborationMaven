@@ -146,17 +146,20 @@ public class AccessScoreDAO {
      * @throws Exception
      */
     public void addAccessAcore(ArrayList<StudentScoreVO> studentScoreVOS) throws Exception {
-        StudentScoreVO studentScoreVO2 = BeanFactory.getBean("studentScoreVO",StudentScoreVO.class);
+//        StudentScoreVO studentScoreVO2 = BeanFactory.getBean("studentScoreVO",StudentScoreVO.class);
         if (studentScoreVOS == null) {
             throw new NullPointerException("studentScoreVOS is null---" + this.getClass().getName() + "---addAccessToStudentAction()");
         } else {
             for (StudentScoreVO studentScoreVO : studentScoreVOS) {
-                ArrayList<StudentScoreVO> studentScoreVOS2 = (ArrayList<StudentScoreVO>) hibernateTemplate.find("from StudentScoreVO ss where ss.projectAccessTypeVO = ? and ss.studentVO = ?", studentScoreVO.getProjectAccessTypeVO(), studentScoreVO.getStudentVO());
-                if (studentScoreVOS2 == null||studentScoreVOS2.size()==0) {
+                ArrayList<StudentScoreVO> studentScoreVOS2 = (ArrayList<StudentScoreVO>) hibernateTemplate.find("select ss from StudentScoreVO ss where ss.projectAccessTypeVO.id = ? and ss.studentVO.id = ?", studentScoreVO.getProjectAccessTypeVO().getId(), studentScoreVO.getStudentVO().getId());
+                if(studentScoreVOS2 == null||studentScoreVOS2.size()==0){
+                    System.out.println("空");
                     hibernateTemplate.save(studentScoreVO);
                 }else{
-                    studentScoreVO.setId(studentScoreVOS2.get(0).getId());
-                    hibernateTemplate.update(studentScoreVO);
+                    if(studentScoreVOS2.get(0).getScore()!=studentScoreVO.getScore()){
+                        studentScoreVOS2.get(0).setScore(studentScoreVO.getScore());
+                        hibernateTemplate.update(studentScoreVOS2.get(0));
+                    }
                 }
             }
         }
