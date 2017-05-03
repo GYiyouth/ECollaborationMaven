@@ -152,10 +152,9 @@ public class AccessScoreDAO {
         } else {
             for (StudentScoreVO studentScoreVO : studentScoreVOS) {
                 ArrayList<StudentScoreVO> studentScoreVOS2 = (ArrayList<StudentScoreVO>) hibernateTemplate.find("from StudentScoreVO ss where ss.projectAccessTypeVO = ? and ss.studentVO = ?", studentScoreVO.getProjectAccessTypeVO(), studentScoreVO.getStudentVO());
-                if (studentScoreVOS2 == null) {
+                if (studentScoreVOS2 == null||studentScoreVOS2.size()==0) {
                     hibernateTemplate.save(studentScoreVO);
                 }else{
-
                     studentScoreVO.setId(studentScoreVOS2.get(0).getId());
                     hibernateTemplate.update(studentScoreVO);
                 }
