@@ -76,7 +76,7 @@ public class GetAccessAction extends AbstractAction {
         }
 
         jsonObject.put("result", "success");
-        jsonObject.put("studentScore", studentDTOS);
+        jsonObject.put("studentScore", totalScore);
         JSONHandler.sendJSON(jsonObject, response);
         System.out.println("获取评价");
         System.out.println(jsonObject);
