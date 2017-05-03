@@ -151,11 +151,12 @@ public class AccessScoreDAO {
             throw new NullPointerException("studentScoreVOS is null---" + this.getClass().getName() + "---addAccessToStudentAction()");
         } else {
             for (StudentScoreVO studentScoreVO : studentScoreVOS) {
-                studentScoreVO2 = (StudentScoreVO) hibernateTemplate.find("from StudentScoreVO ss where ss.projectAccessTypeVO = ? and ss.studentVO = ?", studentScoreVO.getProjectAccessTypeVO(), studentScoreVO.getStudentVO()).get(0);
-                if (studentScoreVO2 == null) {
+                ArrayList<StudentScoreVO> studentScoreVOS2 = (ArrayList<StudentScoreVO>) hibernateTemplate.find("from StudentScoreVO ss where ss.projectAccessTypeVO = ? and ss.studentVO = ?", studentScoreVO.getProjectAccessTypeVO(), studentScoreVO.getStudentVO());
+                if (studentScoreVOS2 == null) {
                     hibernateTemplate.save(studentScoreVO);
                 }else{
-                    studentScoreVO.setId(studentScoreVO2.getId());
+
+                    studentScoreVO.setId(studentScoreVOS2.get(0).getId());
                     hibernateTemplate.update(studentScoreVO);
                 }
             }
