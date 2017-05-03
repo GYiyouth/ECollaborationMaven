@@ -35,17 +35,17 @@ public class AccessScoreBO {
     /**
      * 添加考核条目
      *
-     * @param type
+     * @param types
      * @param projectVOList
      * @throws Exception
      */
-    public void addProjectAccessType(ArrayList<String> type, ArrayList<Integer> projectVOList) throws Exception {
-        if (type == null || type.size() == 0 || projectVOList == null || projectVOList.size() == 0) {
+    public void addProjectAccessType(ArrayList<String> types, ArrayList<Integer> projectVOList) throws Exception {
+        if (types == null || types.size() == 0 || projectVOList == null || projectVOList.size() == 0) {
             throw new NullPointerException("typeList, projectVOList = null");
         }
 
         AccessScoreDAO accessScoreDAO = BeanFactory.getBean("accessScoreDAO", AccessScoreDAO.class);
-        accessScoreDAO.addProjectAccessType(type, projectVOList);
+        accessScoreDAO.addProjectAccessType(types, projectVOList);
     }
 
     /**
