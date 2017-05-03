@@ -52,12 +52,13 @@ public class AccessScoreDAO {
                 }
             }
 
-            Iterator iterator = projectVOList.iterator();
+//            Iterator iterator = projectVOList.iterator();
 
             //嵌套遍历完成插入
             int i = 0; // 20个写入一次
             for (String typeName: typeNames
                  ) {
+                Iterator iterator = projectVOList.iterator();
                 while (iterator.hasNext()){
                     ProjectVO projectVO = (ProjectVO) iterator.next();
                     ProjectAccessTypeVO projectAccessTypeVO =
