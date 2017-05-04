@@ -101,7 +101,7 @@ public class AddProjectAction implements SessionAware, ServletRequestAware, Serv
             jsonObject.put("projectBean", projectDTO);
             jsonObject.put("result", "success");
             JSONHandler.sendJSON(jsonObject, response);
-            System.out.println("创建团队");
+            System.out.println("创建项目");
             System.out.println(jsonObject);
             return "success";
         }catch (Exception e){

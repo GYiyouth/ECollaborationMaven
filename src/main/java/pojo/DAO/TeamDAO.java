@@ -404,6 +404,7 @@ public class TeamDAO {
                         }
                         applicationVO.getAffectedUserVO().setNewsFlag(newsFlag);
                         hibernateTemplate.update(applicationVO.getAffectedUserVO());
+                        hibernateTemplate.delete( applicationVO );
 //                        transaction.commit();
                         return "success";
                     }

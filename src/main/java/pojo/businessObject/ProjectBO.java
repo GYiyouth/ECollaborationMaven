@@ -316,6 +316,7 @@ public class ProjectBO {
             }
             // 2. 删除申请表记录
             applicationDAO.deleteApplication(applicationVO);
+            System.out.println("删除了");
             // 3. 删除申请的消息
             messageDAO.deleteMessage(applicationVO.getMessageVO());
 
