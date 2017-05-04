@@ -6,6 +6,7 @@ function getInfo(){
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             alert(xhr.responseText);
+
         }else{
             alert("请刷新页面");
         }
