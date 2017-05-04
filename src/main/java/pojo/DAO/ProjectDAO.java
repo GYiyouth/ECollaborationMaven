@@ -17,10 +17,7 @@ import tool.Time;
 
 import javax.print.DocFlavor;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by geyao on 2017/3/1.
@@ -109,14 +106,25 @@ public class ProjectDAO {
         if (studentVO == null)
             throw new NullPointerException("studentVO == null");
 
-        return (ArrayList<ProjectVO>)
+        List<ProjectVO> list1 =  (ArrayList<ProjectVO>)
                 hibernateTemplate.find(
-                        "select tp.projectVO , p from  TeamProjectVO  tp, ProjectVO  p" +
+                        "select tp.projectVO  from  TeamProjectVO  tp" +
                                 " where tp.teamVO in (" +
                                 " select st.teamVO from StudentTeamVO st " +
-                                " where st.studentVO.id = " + studentVO.getId() + ") " +
-                                "and  p.creatorUserVO.id = ?", studentVO.getId()
+                                " where st.studentVO.id = " + studentVO.getId() + ") "
                 );
+        List<ProjectVO> list2 = (ArrayList<ProjectVO>)
+                hibernateTemplate.find(
+                        "from  ProjectVO  p " +
+                                " where p.creatorUserVO.id = ?", studentVO.getId()
+                );
+
+        Set set = new HashSet();
+        set.addAll(list1);
+        set.addAll(list2);
+        ArrayList<ProjectVO> list = new ArrayList<>();
+        list.addAll(set);
+        return list;
 
 //        ArrayList<ProjectVO> arrayList = new ArrayList<>();
 //        SessionFactory sessionFactory = BeanFactory.getSessionFactory();
