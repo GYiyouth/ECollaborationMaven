@@ -38,4 +38,19 @@ function setclick(){
         sessionStorage.setItem("itemId",itemId);
     });
 }
-$(document).ready(getInfo)
+function applyTeam() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+            alert("申请成功");
+        } else {
+            alert("请刷新页面");
+        }
+    }
+    var applyInfo=new FormData();
+    applyInfo.append("teamId",sessionStorage.getItem("teamId"));
+    xhr.open("post","applyJoinTeam", false);
+    xhr.send(applyInfo);
+}
+$(document).ready(getInfo);
+$("#applyTeamButton").click(applyTeam);
