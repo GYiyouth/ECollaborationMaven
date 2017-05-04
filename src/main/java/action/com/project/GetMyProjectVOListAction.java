@@ -103,6 +103,8 @@ public class GetMyProjectVOListAction implements SessionAware, ServletRequestAwa
                     "interestProjectDTOList",
                     "otherProjectDTOList"
             };
+            System.out.println("interest ---  ");
+            System.out.println(interestProjectDTOList);
             jsonObject.put("result", "success");
             jsonObject.put(jsonProperty[0], schoolProjectDTOList);
             jsonObject.put(jsonProperty[1], interestProjectDTOList);

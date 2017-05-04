@@ -37,7 +37,8 @@ public class UserDAO {
 //    private HibernateTemplate hibernateTemplate;
 
     public UserVO getUser(int id){
-        return sessionFactory.getCurrentSession().get(UserVO.class, 1);
+        return hibernateTemplate.get(UserVO.class, id);
+//        return sessionFactory.getCurrentSession().get(UserVO.class, 1);
     }
 
     /**
