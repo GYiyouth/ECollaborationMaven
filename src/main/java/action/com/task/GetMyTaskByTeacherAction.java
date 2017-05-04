@@ -8,6 +8,7 @@ import pojo.valueObject.DTO.TaskDTO;
 import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.TaskVO;
 import pojo.valueObject.domain.TeacherVO;
+import pojo.valueObject.domain.UserVO;
 import tool.BeanFactory;
 import tool.JSONHandler;
 
@@ -21,12 +22,14 @@ public class GetMyTaskByTeacherAction  extends BaseAction{
     @Override
     public String execute() throws Exception {
         try {
-            TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
+            String role = session.get("role").toString();
+            UserVO userVO = (UserVO) session.get(role + "VO");
+//            TeacherVO teacherVO = (TeacherVO) session.get("teacherVO");
             ProjectBO projectBO = BeanFactory.getBean("projectBO", ProjectBO.class);
             TaskDAO taskDAO = BeanFactory.getBean("taskDAO", TaskDAO.class);
 //            Integer grade = 2016;
             ArrayList allProjectTaskVOS = new ArrayList<>();
-            ArrayList<ProjectVO> projectVOS = projectBO.getTeacherProjectList(teacherVO);
+            ArrayList<ProjectVO> projectVOS = projectBO.getTeacherProjectList(userVO);
             if (projectVOS != null) {
                 for (ProjectVO projectVO : projectVOS) {
 //                    ProjectDTO projectDTO = BeanFactory.getBean("projectDTO",ProjectDTO.class);

@@ -349,7 +349,7 @@ public class ProjectBO {
 //    }
 
 
-    public ArrayList<ProjectVO> getTeacherProjectList(TeacherVO teacherVO) throws Exception {
+    public ArrayList<ProjectVO> getTeacherProjectList(UserVO teacherVO) throws Exception {
         if(teacherVO == null){
             throw new NullPointerException("teacherVO is null ---"+this.getClass().getName()+"----getTeacherProjectList()");
         }else{
