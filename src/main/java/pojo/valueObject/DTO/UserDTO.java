@@ -3,13 +3,16 @@ package pojo.valueObject.DTO;
 import pojo.valueObject.domain.MessageVO;
 import pojo.valueObject.domain.UserVO;
 
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by geyao on 2017/2/23.
  */
+
 public class UserDTO {
+
 
     private Integer id;
     private String schoolId;

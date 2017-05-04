@@ -4,13 +4,16 @@ import pojo.valueObject.domain.ProjectVO;
 import pojo.valueObject.domain.StudentVO;
 import pojo.valueObject.domain.TeamVO;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by GR on 2017/2/24.
  */
+
 public class TeamDTO {
+
     private Integer id;
     private String teamName;
     private Integer creatorId;
@@ -18,7 +21,9 @@ public class TeamDTO {
     private Integer memberMax;
     private String description;
 
+
     private Set<Integer> projectVOIdSet;
+
     private Set<Integer> studentVOIdSet;
 
     public void clone(TeamVO teamVO){

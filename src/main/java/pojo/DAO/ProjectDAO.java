@@ -73,13 +73,13 @@ public class ProjectDAO {
      * @return
      * @throws Exception
      */
-    public ArrayList<ProjectVO> getTeacherProjectVOList(TeacherVO teacherVO) throws Exception {
+    public ArrayList<ProjectVO> getTeacherProjectVOList(UserVO teacherVO) throws Exception {
         if (teacherVO == null) {
             throw new SQLException("teacherVO输入异常");
         }
         return (ArrayList<ProjectVO>)
                 hibernateTemplate.findByNamedParam(
-                        "select p from  ProjectVO p where p.teacherVO.id = :id", "id", teacherVO.getId()
+                        "select p from  ProjectVO p where p.teacherVO.id = :id or p.creatorUserVO.id = :id", "id", teacherVO.getId()
                 );
     }
 
@@ -115,7 +115,7 @@ public class ProjectDAO {
                 );
         List<ProjectVO> list2 = (ArrayList<ProjectVO>)
                 hibernateTemplate.find(
-                        "from  ProjectVO  p " +
+                        "select p from  ProjectVO  p " +
                                 " where p.creatorUserVO.id = ?", studentVO.getId()
                 );
 

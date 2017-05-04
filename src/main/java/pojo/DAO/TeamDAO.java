@@ -39,7 +39,7 @@ public class TeamDAO {
      */
     public TeamVO createTeam(TeamVO teamVO, StudentVO studentVO) throws Exception{
         hibernateTemplate.save(teamVO);
-        StudentTeamVO studentTeamVO = BeanFactory.getBean("studentTeamVO",StudentTeamVO.class);
+        StudentTeamVO studentTeamVO = new StudentTeamVO();
         studentTeamVO.setStudentVO(studentVO);
         studentTeamVO.setTeamVO(teamVO);
         studentTeamVO.setLeaderFlag(true);
