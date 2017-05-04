@@ -288,7 +288,7 @@ public class TeamDAO {
             System.out.println("ERROR:applicationId is null!!!---"+this.getClass()+"---acceptJoinApplication()");
             return "fail";
         }else{
-            StudentTeamVO studentTeamVO = BeanFactory.getApplicationContext().getBean("studentTeamVO",StudentTeamVO.class);
+            StudentTeamVO studentTeamVO = new StudentTeamVO();
 //            SessionFactory sessionFactory = BeanFactory.getSessionFactory();
 //            Session session = sessionFactory.openSession();
 //            Transaction transaction = session.beginTransaction();
@@ -307,7 +307,7 @@ public class TeamDAO {
                     }else {
                         applicationVO.setResult("已处理");
                         applicationVO.setHandleTime(Time.getCurrentTime());
-                        hibernateTemplate.update(applicationVO);
+                        hibernateTemplate.delete(applicationVO);
 
                         studentTeamVO.setStudentVO(studentVO);
                         studentTeamVO.setTeamVO(teamVO);

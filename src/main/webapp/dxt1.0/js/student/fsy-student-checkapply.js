@@ -24,10 +24,10 @@ function showApply(applicationDTOList,name) {
     for(var i=0;i<applicationDTOList.length;i++){
         var applyName=name[i];
         htmlStr+='<li class="list-group-item" name="applyItem">'+'申请时间:'+applicationDTOList[i].createdTime
-                +'申请项目:'+applyName[0]+'申请人:'+applyName[3]
-                +'<button name="apply" style=" float:right" type="button" id='+applicationDTOList[i].id+'>'+'同意'+'</button>'
-                +'<button name="disapply" style=" float:right" type="button" id='+applicationDTOList[i].id+'>'+'拒绝'+'</button>'
-                +'</li>'
+            +'申请团队:'+applyName[1]+'申请人:'+applyName[3]
+            +'<button name="apply" style=" float:right" type="button" id='+applicationDTOList[i].id+'>'+'同意'+'</button>'
+            +'<button name="disapply" style=" float:right" type="button" id='+applicationDTOList[i].id+'>'+'拒绝'+'</button>'
+            +'</li>'
     }
     $("#applyList").html(htmlStr);
 }
@@ -44,7 +44,7 @@ function setapplyclick(){
         }
         var applyDate=new FormData();
         applyDate.append("applicationId",applyId)
-        xhra.open("post", "acceptApplication", false);
+        xhra.open("post", "acceptJoinApplication", false);
         xhra.send(applyDate);
     });
 }
@@ -61,7 +61,7 @@ function setdisapplyclick(){
         }
         var disapplyDate=new FormData();
         disapplyDate.append("applicationId",applyId)
-        xhrd.open("post", "refuseApplication", false);
+        xhrd.open("post", "refuseJoinApplication", false);
         xhrd.send(disapplyDate);
     });
 }

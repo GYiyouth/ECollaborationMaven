@@ -18,6 +18,7 @@ public class RefuseApplicationAction extends BaseAction{
     @Override
     public String execute() throws Exception {
         try{
+            System.out.println(this.getClass());
             ProjectBO projectBO = BeanFactory.getBean("projectBO",ProjectBO.class);
             System.out.println("applicationId"+applicationId);
             projectBO.refuseApplyProjectApplication(applicationId);
@@ -27,6 +28,7 @@ public class RefuseApplicationAction extends BaseAction{
             System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
+            e.printStackTrace();
             JSONHandler.sendJSON(jsonObject, response);
             return "fail";
         }

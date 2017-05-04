@@ -267,6 +267,8 @@ public class ProjectBO {
         }else{
             MessageDAO messageDAO = BeanFactory.getBean("messageDAO",MessageDAO.class);
             ApplicationVO applicationVO = applicationDAO.getApplicationVOById(applicationId);
+            if(applicationVO == null)
+                return;
             MessageReceiverVO messageReceiverVO = messageDAO.getMessageReceiverVOByMessageVOAndReceiverVO(applicationVO.getMessageVO(),applicationVO.getHandlerUserVO());
             if(messageReceiverVO!=null){
                 // 1. 删除消息-接受表中记录

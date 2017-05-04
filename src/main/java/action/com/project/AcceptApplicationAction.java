@@ -21,6 +21,7 @@ public class AcceptApplicationAction extends BaseAction{
     public String execute() throws Exception {
         JSONObject jsonObject = BeanFactory.getJSONO();
         try{
+            System.out.println(this.getClass());
             ProjectBO projectBO = BeanFactory.getBean("projectBO",ProjectBO.class);
             System.out.println("applicationId"+applicationId);
             projectBO.acceptApplyProjectApplication(applicationId);
@@ -30,6 +31,7 @@ public class AcceptApplicationAction extends BaseAction{
             System.out.println(jsonObject);
             return "success";
         }catch (Exception e){
+            e.printStackTrace();
             JSONHandler.sendJSON(jsonObject, response);
             return "fail";
         }
