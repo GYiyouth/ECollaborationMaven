@@ -111,10 +111,11 @@ public class ProjectDAO {
 
         return (ArrayList<ProjectVO>)
                 hibernateTemplate.find(
-                        "select tp.projectVO from  TeamProjectVO  tp " +
+                        "select tp.projectVO , p from  TeamProjectVO  tp, ProjectVO  p" +
                                 " where tp.teamVO in (" +
                                 " select st.teamVO from StudentTeamVO st " +
-                                " where st.studentVO.id = " + studentVO.getId() + ")"
+                                " where st.studentVO.id = " + studentVO.getId() + ") " +
+                                "and  p.creatorUserVO.id = ?", studentVO.getId()
                 );
 
 //        ArrayList<ProjectVO> arrayList = new ArrayList<>();
