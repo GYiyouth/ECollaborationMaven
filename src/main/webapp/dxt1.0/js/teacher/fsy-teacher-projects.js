@@ -1,24 +1,13 @@
 /**
  * Created by fansuyu on 2017/3/31.
  */
-function addLoadEvent(func){
-    var oldonload=window.onload;
-    if(typeof window.onload !='function'){
-        window.onload=func;
-    }else{
-        window.onload=function(){
-            oldonload();
-            func();
-        }
-    }
-}
 function getInfo(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
             var myProJson=JSON.parse(xhr.responseText);
             var oldProJson=myProJson.oldProjects;
-            var nowProJson=myProJson.oldProjects;
+            var nowProJson=myProJson.nowProjects;
             var oldDomBox=document.getElementById("old-domBox");
             var oldDomList=document.getElementById("old-list");
             var oldPreDom=document.getElementById("old-preDom");
@@ -68,7 +57,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
     }
     // 初始化当前页面对象
     var preDom = domList.children[0];
-    preDom.className = addclass;
+    // preDom.className = addclass;
 
     // 切换页响应事件
     domList.addEventListener('click', function (e) {
@@ -102,7 +91,7 @@ function paging(domBox,addclass,domList,each,pagePreDom,pageNextDom,arrJson)
         domBox.innerHTML = '';
         preDom.className = '';
         preDom = domList.children[currentNum];
-        preDom.className=addclass;
+        // preDom.className=addclass;
         for (var i = 0; i < each; i++) {
             var arrJsonCurrent = arrJson[(currentNum * each) + i];
             if (arrJsonCurrent == null) {

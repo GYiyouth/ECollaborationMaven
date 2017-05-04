@@ -37,7 +37,7 @@ function setapplyclick(){
         var xhra = new XMLHttpRequest();
         xhra.onload = function () {
             if (xhra.status >= 200 && xhra.status < 300 || xhra.status == 304) {
-                alert(xhra.responseText);
+                window.open("teacher-checkapply.html","_self");
             } else {
                 alert("请刷新页面");
             }
@@ -54,7 +54,7 @@ function setdisapplyclick(){
         var xhrd = new XMLHttpRequest();
         xhrd.onload=function () {
             if (xhrd.status >= 200 && xhrd.status < 300 || xhrd.status == 304) {
-                alert(xhrd.responseText);
+                window.open("teacher-checkapply.html","_self");
             } else {
                 alert("请刷新页面");
             }

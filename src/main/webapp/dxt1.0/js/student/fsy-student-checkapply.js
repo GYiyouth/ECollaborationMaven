@@ -5,7 +5,6 @@ function getInfo(){
     var xhr=new XMLHttpRequest();
     xhr.onload=function(){
         if(xhr.status>=200&&xhr.status<300||xhr.status==304){
-            alert(xhr.responseText);
             var JObject=JSON.parse(xhr.responseText);
             var applicationDTOList=JObject.applicationDTOList;
             var name=JObject.name;
@@ -37,7 +36,7 @@ function setapplyclick(){
         var xhra = new XMLHttpRequest();
         xhra.onload = function () {
             if (xhra.status >= 200 && xhra.status < 300 || xhra.status == 304) {
-                alert(xhra.responseText);
+                window.open("student-checkapply.html","_self");
             } else {
                 alert("请刷新页面");
             }
@@ -54,7 +53,7 @@ function setdisapplyclick(){
         var xhrd = new XMLHttpRequest();
         xhrd.onload=function () {
             if (xhrd.status >= 200 && xhrd.status < 300 || xhrd.status == 304) {
-                alert(xhrd.responseText);
+                window.open("student-checkapply.html","_self");
             } else {
                 alert("请刷新页面");
             }
